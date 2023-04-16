@@ -63,5 +63,13 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'logged_in' => \App\Http\Middleware\LoggedInStatusCheck::class,
+        'disable_back_button' => \App\Http\Middleware\DisableBackButton::class,
+        'compro' => \App\Http\Middleware\ComproSessionCheck::class,
+        'eproc' => \App\Http\Middleware\EprocSessionCheck::class,
+        'superadmin' => \App\Http\Middleware\SuperAdminCheck::class,
+        'admin' => \App\Http\Middleware\AdminCheck::class,
+        'creator' => \App\Http\Middleware\CreatorCheck::class,
+        'helpdesk' => \App\Http\Middleware\HelpDeskCheck::class,
     ];
 }

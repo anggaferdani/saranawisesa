@@ -20,8 +20,32 @@ class RedirectIfAuthenticated
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+            if(session()->has('compro')){
+                if(Auth::guard($guard)->check() && Auth::user()->level == 'superadmin'){
+                    return redirect()->route('compro.superadmin.dashboard');
+                }elseif(Auth::guard($guard)->check() && Auth::user()->level == 'admin'){
+                    return redirect()->route('compro.admin.dashboard');
+                }elseif(Auth::guard($guard)->check() && Auth::user()->level == 'creator'){
+                    return redirect()->route('compro.creator.dashboard');
+                }elseif(Auth::guard($guard)->check() && Auth::user()->level == 'helpdesk'){
+                    return redirect()->route('compro.helpdesk.dashboard');
+                }else{
+                    return back()->route('compro.login');
+                }
+            }else{
+                return back()->route('compro.login');
+            }
+
+            if(session()->has('eproc')){
+                if(Auth::guard($guard)->check() && Auth::user()->level == 'superadmin'){
+                    return redirect()->route('eproc.superadmin.dashboard');
+                }elseif(Auth::guard($guard)->check() && Auth::user()->level == 'admin'){
+                    return redirect()->route('eproc.admin.dashboard');
+                }else{
+                    return back()->route('eproc.login');
+                }
+            }else{
+                return back()->route('eproc.login');
             }
         }
 
