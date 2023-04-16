@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AkunController;
 use App\Http\Controllers\EprocController;
 use App\Http\Controllers\ComproController;
 

@@ -11,6 +11,8 @@
       @if(Session::has('compro'))
         @if(auth()->user()->level == 'superadmin')
           <li><a class="nav-link" href="{{ route('compro.superadmin.dashboard') }}"><i class="far fa-square"></i><span>Dashboard</span></a></li>
+          <li class="menu-header">Menu</li>
+          <li><a class="nav-link" href="{{ route('compro.superadmin.akun.index') }}"><i class="far fa-square"></i><span>Akun</span></a></li>
         @endif
         @if(auth()->user()->level == 'admin')
           <li><a class="nav-link" href="{{ route('compro.admin.dashboard') }}"><i class="far fa-square"></i><span>Dashboard</span></a></li>
@@ -25,6 +27,8 @@
       @if(Session::has('eproc'))
         @if(auth()->user()->level == 'superadmin')
           <li><a class="nav-link" href="{{ route('eproc.superadmin.dashboard') }}"><i class="far fa-square"></i><span>Dashboard</span></a></li>
+          <li class="menu-header">Menu</li>
+          <li><a class="nav-link" href="{{ route('eproc.superadmin.akun.index') }}"><i class="far fa-square"></i><span>Akun</span></a></li>
         @endif
         @if(auth()->user()->level == 'admin')
           <li><a class="nav-link" href="{{ route('eproc.admin.dashboard') }}"><i class="far fa-square"></i><span>Dashboard</span></a></li>
