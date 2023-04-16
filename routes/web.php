@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\EprocController;
 use App\Http\Controllers\ComproController;
+use App\Http\Controllers\ProfilePerusahaanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,12 +30,18 @@ Route::prefix('compro')->name('compro.')->group(function(){
     Route::middleware(['auth:web', 'disable_back_button', 'compro', 'superadmin'])->group(function(){
       Route::get('/dashboard', function(){return view('pages.dashboard');})->name('dashboard');
       Route::resource('akun', AkunController::class);
+      Route::get('profile-perusahaan', [ProfilePerusahaanController::class, 'index'])->name('profile-perusahaan.index');
+      Route::get('profile-perusahaan/{id}/edit', [ProfilePerusahaanController::class, 'edit'])->name('profile-perusahaan.edit');
+      Route::put('profile-perusahaan/{id}', [ProfilePerusahaanController::class, 'update'])->name('profile-perusahaan.update');
     });
   });
 
   Route::prefix('admin')->name('admin.')->group(function(){
     Route::middleware(['auth:web', 'disable_back_button', 'compro', 'admin'])->group(function(){
       Route::get('/dashboard', function(){return view('pages.dashboard');})->name('dashboard');
+      Route::get('profile-perusahaan', [ProfilePerusahaanController::class, 'index'])->name('profile-perusahaan.index');
+      Route::get('profile-perusahaan/{id}/edit', [ProfilePerusahaanController::class, 'edit'])->name('profile-perusahaan.edit');
+      Route::put('profile-perusahaan/{id}', [ProfilePerusahaanController::class, 'update'])->name('profile-perusahaan.update');
     });
   });
 

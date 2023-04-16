@@ -13,9 +13,12 @@
           <li><a class="nav-link" href="{{ route('compro.superadmin.dashboard') }}"><i class="far fa-square"></i><span>Dashboard</span></a></li>
           <li class="menu-header">Menu</li>
           <li><a class="nav-link" href="{{ route('compro.superadmin.akun.index') }}"><i class="far fa-square"></i><span>Akun</span></a></li>
+          <li><a class="nav-link" href="{{ route('compro.superadmin.profile-perusahaan.index') }}"><i class="far fa-square"></i><span>Profile Perusahaan</span></a></li>
         @endif
         @if(auth()->user()->level == 'admin')
           <li><a class="nav-link" href="{{ route('compro.admin.dashboard') }}"><i class="far fa-square"></i><span>Dashboard</span></a></li>
+          <li class="menu-header">Menu</li>
+          <li><a class="nav-link" href="{{ route('compro.admin.profile-perusahaan.index') }}"><i class="far fa-square"></i><span>Profile Perusahaan</span></a></li>
         @endif
         @if(auth()->user()->level == 'creator')
           <li><a class="nav-link" href="{{ route('compro.creator.dashboard') }}"><i class="far fa-square"></i><span>Dashboard</span></a></li>
