@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class EprocController extends Controller
 {
     public function login(){
-        return view('pages.eproc.authentications.login');
+        return view('pages.authentications.eproc.login');
     }
 
     public $email, $password;

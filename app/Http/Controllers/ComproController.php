@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class ComproController extends Controller
 {
     public function login(){
-        return view('pages.compro.authentications.login');
+        return view('pages.authentications.compro.login');
     }
 
     public $email, $password;
