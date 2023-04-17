@@ -7,6 +7,7 @@ use App\Http\Controllers\EprocController;
 use App\Http\Controllers\ComproController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\DireksiController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\KomisarisController;
@@ -116,6 +117,8 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       // profile
       Route::get('profile', [Controller::class, 'profile'])->name('profile');
       Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
+      // Berita
+      Route::resource('berita', BeritaController::class);
     });
   });
 
@@ -125,6 +128,8 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       // profile
       Route::get('profile', [Controller::class, 'profile'])->name('profile');
       Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
+      // Berita
+      Route::resource('berita', BeritaController::class);
     });
   });
 });
