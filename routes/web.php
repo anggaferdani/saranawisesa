@@ -9,6 +9,7 @@ use App\Http\Controllers\DireksiController;
 use App\Http\Controllers\KomisarisController;
 use App\Http\Controllers\PortofolioController;
 use App\Http\Controllers\ProfilePerusahaanController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SurveyController;
 
 /*
@@ -44,6 +45,10 @@ Route::prefix('compro')->name('compro.')->group(function(){
       Route::resource('komisaris', KomisarisController::class);
       Route::get('survey', [SurveyController::class, 'index'])->name('survey.index');
       Route::get('survey/{id}', [SurveyController::class, 'show'])->name('survey.show');
+      // setting
+      Route::get('setting', [SettingController::class, 'index'])->name('setting.index');
+      Route::get('setting/{id}/edit', [SettingController::class, 'edit'])->name('setting.edit');
+      Route::put('setting/{id}', [SettingController::class, 'update'])->name('setting.update');
     });
   });
 
@@ -59,6 +64,10 @@ Route::prefix('compro')->name('compro.')->group(function(){
       Route::resource('komisaris', KomisarisController::class);
       Route::get('survey', [SurveyController::class, 'index'])->name('survey.index');
       Route::get('survey/{id}', [SurveyController::class, 'show'])->name('survey.show');
+      // setting
+      Route::get('setting', [SettingController::class, 'index'])->name('setting.index');
+      Route::get('setting/{id}/edit', [SettingController::class, 'edit'])->name('setting.edit');
+      Route::put('setting/{id}', [SettingController::class, 'update'])->name('setting.update');
     });
   });
 

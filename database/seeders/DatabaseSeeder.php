@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Survey;
+use App\Models\Setting;
 use Illuminate\Database\Seeder;
 use App\Models\ProfilePerusahaan;
 
@@ -44,8 +45,19 @@ class DatabaseSeeder extends Seeder
             'level' => 'helpdesk',
         ]);
 
+        Setting::create([
+            'nama_perusahaan' => 'PT SARANAWISESA PROPERINDO',
+            'no_telepon_perusahaan' => '(021)83794770',
+            'email_perusahaan' => 'info@saranawisesa.co.id',
+            'alamat_perusahaan' => 'Gedung Sarana Square Lt. 5 Jl. Tebet Barat IV No. 20, Tebet, Jakarta Selatan, Daerah Khusus Ibukota Jakarta.',
+            'instagram' => 'nullable',
+            'facebook' => 'nullable',
+            'twitter' => 'nullable',
+            'youtube' => 'nullable',
+        ]);
+
         ProfilePerusahaan::create([
-            'sejarah_perusahaan' => 'PT.SARANAWISESA PROPERINDO adalah anak perusahaan Perumda Pembangunan Sarana Jaya ( BUMD milik Pemerintah Provinsi DKI Jakarta ) berdiri sejak tanggal 3 Februari 1993 yang bergerak dibidang Property. Seiring dengan perkembangan perusahaan yang semakin pesat maka kami melakukan diversifikasi usaha dengan mengembangkan bisnis baru di bidang Sarana Parkir, Management Properti, Agen Properti, Supplier serta Interior & Landscape.',
+            'sejarah_perusahaan' => 'PT SARANAWISESA PROPERINDO adalah anak perusahaan Perumda Pembangunan Sarana Jaya ( BUMD milik Pemerintah Provinsi DKI Jakarta ) berdiri sejak tanggal 3 Februari 1993 yang bergerak dibidang Property. Seiring dengan perkembangan perusahaan yang semakin pesat maka kami melakukan diversifikasi usaha dengan mengembangkan bisnis baru di bidang Sarana Parkir, Management Properti, Agen Properti, Supplier serta Interior & Landscape.',
             'visi' => 'Menjadi Perusahaan Pengembang yang Terkemuka dan Berkelanjutan di Indonesia',
             'misi' => 'Mengembangkan bisnis properti yang mendukung strategi dan program kerja Pemerintah Provinsi Daerah Khusus Ibukota Jakarta# Menjalin kemitraan strategis untuk menciptakan nilai (value creation) produk dan jasa yang dapat memberikan manfaat kepada masyarakat luas# Berperan aktif dalam mendorong pembangunan kawasan di perkotaan',
         ]);
