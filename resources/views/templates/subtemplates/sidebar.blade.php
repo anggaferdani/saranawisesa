@@ -18,6 +18,7 @@
           <li><a class="nav-link" href="{{ route('compro.superadmin.artikel.index') }}"><i class="far fa-square"></i><span>Artikel</span></a></li>
           <li><a class="nav-link" href="{{ route('compro.superadmin.direksi.index') }}"><i class="far fa-square"></i><span>Direksi</span></a></li>
           <li><a class="nav-link" href="{{ route('compro.superadmin.komisaris.index') }}"><i class="far fa-square"></i><span>Komisaris</span></a></li>
+          <li><a class="nav-link" href="{{ route('compro.superadmin.survey.index') }}"><i class="far fa-square"></i><span>Survey</span></a></li>
         @endif
         @if(auth()->user()->level == 'admin')
           <li><a class="nav-link" href="{{ route('compro.admin.dashboard') }}"><i class="far fa-square"></i><span>Dashboard</span></a></li>
@@ -27,6 +28,7 @@
           <li><a class="nav-link" href="{{ route('compro.admin.artikel.index') }}"><i class="far fa-square"></i><span>Artikel</span></a></li>
           <li><a class="nav-link" href="{{ route('compro.admin.direksi.index') }}"><i class="far fa-square"></i><span>Direksi</span></a></li>
           <li><a class="nav-link" href="{{ route('compro.admin.komisaris.index') }}"><i class="far fa-square"></i><span>Komisaris</span></a></li>
+          <li><a class="nav-link" href="{{ route('compro.admin.survey.index') }}"><i class="far fa-square"></i><span>Survey</span></a></li>
         @endif
         @if(auth()->user()->level == 'creator')
           <li><a class="nav-link" href="{{ route('compro.creator.dashboard') }}"><i class="far fa-square"></i><span>Dashboard</span></a></li>
@@ -34,6 +36,8 @@
         @endif
         @if(auth()->user()->level == 'helpdesk')
           <li><a class="nav-link" href="{{ route('compro.helpdesk.dashboard') }}"><i class="far fa-square"></i><span>Dashboard</span></a></li>
+          <li class="menu-header">Menu</li>
+          <li><a class="nav-link" href="{{ route('compro.helpdesk.survey.index') }}"><i class="far fa-square"></i><span>Survey</span></a></li>
         @endif
       @endif
       @if(Session::has('eproc'))

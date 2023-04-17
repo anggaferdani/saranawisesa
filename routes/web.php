@@ -9,6 +9,7 @@ use App\Http\Controllers\DireksiController;
 use App\Http\Controllers\KomisarisController;
 use App\Http\Controllers\PortofolioController;
 use App\Http\Controllers\ProfilePerusahaanController;
+use App\Http\Controllers\SurveyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,8 @@ Route::prefix('compro')->name('compro.')->group(function(){
       Route::resource('artikel', ArtikelController::class);
       Route::resource('direksi', DireksiController::class);
       Route::resource('komisaris', KomisarisController::class);
+      Route::get('survey', [SurveyController::class, 'index'])->name('survey.index');
+      Route::get('survey/{id}', [SurveyController::class, 'show'])->name('survey.show');
     });
   });
 
@@ -54,6 +57,8 @@ Route::prefix('compro')->name('compro.')->group(function(){
       Route::resource('artikel', ArtikelController::class);
       Route::resource('direksi', DireksiController::class);
       Route::resource('komisaris', KomisarisController::class);
+      Route::get('survey', [SurveyController::class, 'index'])->name('survey.index');
+      Route::get('survey/{id}', [SurveyController::class, 'show'])->name('survey.show');
     });
   });
 
@@ -67,6 +72,8 @@ Route::prefix('compro')->name('compro.')->group(function(){
   Route::prefix('helpdesk')->name('helpdesk.')->group(function(){
     Route::middleware(['auth:web', 'disable_back_button', 'compro', 'helpdesk'])->group(function(){
       Route::get('/dashboard', function(){return view('pages.dashboard');})->name('dashboard');
+      Route::get('survey', [SurveyController::class, 'index'])->name('survey.index');
+      Route::get('survey/{id}', [SurveyController::class, 'show'])->name('survey.show');
     });
   });
 });
