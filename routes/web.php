@@ -6,6 +6,7 @@ use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\EprocController;
 use App\Http\Controllers\ComproController;
 use App\Http\Controllers\DireksiController;
+use App\Http\Controllers\KomisarisController;
 use App\Http\Controllers\PortofolioController;
 use App\Http\Controllers\ProfilePerusahaanController;
 
@@ -39,6 +40,7 @@ Route::prefix('compro')->name('compro.')->group(function(){
       Route::resource('portofolio', PortofolioController::class);
       Route::resource('artikel', ArtikelController::class);
       Route::resource('direksi', DireksiController::class);
+      Route::resource('komisaris', KomisarisController::class);
     });
   });
 
@@ -51,6 +53,7 @@ Route::prefix('compro')->name('compro.')->group(function(){
       Route::resource('portofolio', PortofolioController::class);
       Route::resource('artikel', ArtikelController::class);
       Route::resource('direksi', DireksiController::class);
+      Route::resource('komisaris', KomisarisController::class);
     });
   });
 
