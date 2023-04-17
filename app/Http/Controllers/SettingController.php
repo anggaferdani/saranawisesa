@@ -23,7 +23,7 @@ class SettingController extends Controller
         $request->validate([
             'nama_perusahaan' => 'required',
             'no_telepon_perusahaan' => 'required',
-            'email_perusahaan' => 'required',
+            'email_perusahaan' => 'required|email',
             'alamat_perusahaan' => 'required',
             'instagram' => 'required',
             'facebook' => 'required',

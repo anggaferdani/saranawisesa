@@ -55,7 +55,7 @@ class AkunController extends Controller
 
         $request->validate([
             'nama_panjang' => 'required',
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email',
         ]);
         
         $akun->update([

@@ -23,6 +23,7 @@ class Controller extends BaseController
         $request->validate([
             'nama_panjang' => 'required',
             'email' => 'required|email',
+            'password' => 'nullable|min:8',
         ]);
 
         if($request->password){
