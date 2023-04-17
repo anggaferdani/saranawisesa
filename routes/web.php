@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AkunController;
+use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\EprocController;
 use App\Http\Controllers\ComproController;
 use App\Http\Controllers\PortofolioController;
@@ -35,6 +36,7 @@ Route::prefix('compro')->name('compro.')->group(function(){
       Route::get('profile-perusahaan/{id}/edit', [ProfilePerusahaanController::class, 'edit'])->name('profile-perusahaan.edit');
       Route::put('profile-perusahaan/{id}', [ProfilePerusahaanController::class, 'update'])->name('profile-perusahaan.update');
       Route::resource('portofolio', PortofolioController::class);
+      Route::resource('artikel', ArtikelController::class);
     });
   });
 
@@ -45,12 +47,14 @@ Route::prefix('compro')->name('compro.')->group(function(){
       Route::get('profile-perusahaan/{id}/edit', [ProfilePerusahaanController::class, 'edit'])->name('profile-perusahaan.edit');
       Route::put('profile-perusahaan/{id}', [ProfilePerusahaanController::class, 'update'])->name('profile-perusahaan.update');
       Route::resource('portofolio', PortofolioController::class);
+      Route::resource('artikel', ArtikelController::class);
     });
   });
 
   Route::prefix('creator')->name('creator.')->group(function(){
     Route::middleware(['auth:web', 'disable_back_button', 'compro', 'creator'])->group(function(){
       Route::get('/dashboard', function(){return view('pages.dashboard');})->name('dashboard');
+      Route::resource('artikel', ArtikelController::class);
     });
   });
 
