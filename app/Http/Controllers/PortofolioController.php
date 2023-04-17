@@ -42,7 +42,7 @@ class PortofolioController extends Controller
         if(auth()->user()->level == 'superadmin'){
             return redirect()->route('compro.superadmin.portofolio.index')->with('success', 'Berhasil ditambahkan pada : '.$portofolio->created_at);
         }elseif(auth()->user()->level == 'admin'){
-            return redirect()->route('eproc.superadmin.portofolio.index')->with('success', 'Berhasil ditambahkan pada : '.$portofolio->created_at);
+            return redirect()->route('compro.admin.portofolio.index')->with('success', 'Berhasil ditambahkan pada : '.$portofolio->created_at);
         }
     }
 
@@ -95,7 +95,7 @@ class PortofolioController extends Controller
         if(auth()->user()->level == 'superadmin'){
             return redirect()->route('compro.superadmin.portofolio.index')->with('success', 'Berhasil dihapus pada : '.$portofolio->created_at);
         }elseif(auth()->user()->level == 'admin'){
-            return redirect()->route('eproc.superadmin.portofolio.index')->with('success', 'Berhasil dihapus pada : '.$portofolio->created_at);
+            return redirect()->route('compro.admin.portofolio.index')->with('success', 'Berhasil dihapus pada : '.$portofolio->created_at);
         }
     }
 }
