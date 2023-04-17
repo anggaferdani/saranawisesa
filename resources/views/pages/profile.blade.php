@@ -10,6 +10,11 @@
 @section('content')
 <div class="row">
   <div class="col-12">
+
+    @if(Session::get('success'))
+      <div class="alert alert-primary">{{ Session::get('success') }}</div>
+    @endif
+
     <div class="card">
       <div class="card-body">
         @if(Session::has('compro'))
