@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\EprocController;
 use App\Http\Controllers\ComproController;
+use App\Http\Controllers\PortofolioController;
 use App\Http\Controllers\ProfilePerusahaanController;
 
 /*
@@ -33,6 +34,7 @@ Route::prefix('compro')->name('compro.')->group(function(){
       Route::get('profile-perusahaan', [ProfilePerusahaanController::class, 'index'])->name('profile-perusahaan.index');
       Route::get('profile-perusahaan/{id}/edit', [ProfilePerusahaanController::class, 'edit'])->name('profile-perusahaan.edit');
       Route::put('profile-perusahaan/{id}', [ProfilePerusahaanController::class, 'update'])->name('profile-perusahaan.update');
+      Route::resource('portofolio', PortofolioController::class);
     });
   });
 
@@ -42,6 +44,7 @@ Route::prefix('compro')->name('compro.')->group(function(){
       Route::get('profile-perusahaan', [ProfilePerusahaanController::class, 'index'])->name('profile-perusahaan.index');
       Route::get('profile-perusahaan/{id}/edit', [ProfilePerusahaanController::class, 'edit'])->name('profile-perusahaan.edit');
       Route::put('profile-perusahaan/{id}', [ProfilePerusahaanController::class, 'update'])->name('profile-perusahaan.update');
+      Route::resource('portofolio', PortofolioController::class);
     });
   });
 
