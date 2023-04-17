@@ -53,30 +53,30 @@
                 <td>Action</td>
               </tr>
               <?php $id = 0; ?>
-              @foreach ($komisaris as $komisariss)
-                @if($komisariss->status_aktif == 'aktif')
+              @foreach ($komisaris as $komisaris)
+                @if($komisaris->status_aktif == 'aktif')
                   <?php $id++; ?>
                   <tr>
                     <td>{{ $id }}</td>
-                    <td>{{ $komisariss->nama_komisaris }}</td>
-                    <td>{{ $komisariss->jabatan_komisaris }}</td>
-                    <td><img src="/komisaris/{{ $komisariss->komisaris }}" alt="" width="100px"></td>
+                    <td>{{ $komisaris->nama_komisaris }}</td>
+                    <td>{{ $komisaris->jabatan_komisaris }}</td>
+                    <td><img src="/komisaris/{{ $komisaris->komisaris }}" alt="" width="100px"></td>
                     <td>
                       @if(auth()->user()->level == 'superadmin')
-                        <form action="{{ route('compro.superadmin.komisaris.destroy', $komisariss->id) }}" method="POST">
+                        <form action="{{ route('compro.superadmin.komisaris.destroy', $komisaris->id) }}" method="POST">
                           @csrf
                           @method('DELETE')
-                          <a href="{{ route('compro.superadmin.komisaris.show', $komisariss->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                          <a href="{{ route('compro.superadmin.komisaris.edit', $komisariss->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
+                          <a href="{{ route('compro.superadmin.komisaris.show', $komisaris->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                          <a href="{{ route('compro.superadmin.komisaris.edit', $komisaris->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
                           <button type="submit" class="btn btn-icon btn-danger"><i class="fa fa-trash"></i></button>
                         </form>
                       @endif
                       @if(auth()->user()->level == 'admin')
-                        <form action="{{ route('compro.admin.komisaris.destroy', $komisariss->id) }}" method="POST">
+                        <form action="{{ route('compro.admin.komisaris.destroy', $komisaris->id) }}" method="POST">
                           @csrf
                           @method('DELETE')
-                          <a href="{{ route('compro.admin.komisaris.show', $komisariss->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                          <a href="{{ route('compro.admin.komisaris.edit', $komisariss->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
+                          <a href="{{ route('compro.admin.komisaris.show', $komisaris->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                          <a href="{{ route('compro.admin.komisaris.edit', $komisaris->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
                           <button type="submit" class="btn btn-icon btn-danger"><i class="fa fa-trash"></i></button>
                         </form>
                       @endif
