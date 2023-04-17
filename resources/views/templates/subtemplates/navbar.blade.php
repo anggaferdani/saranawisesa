@@ -199,11 +199,33 @@
         <div class="dropdown-title">Signed in as {{ auth()->user()->nama_panjang }}</div>
         <div class="dropdown-divider"></div>
         @if(Session::has('compro'))
+          @if(auth()->user()->level == 'superadmin')
+            <a href="{{ route('compro.superadmin.profile') }}" class="dropdown-item has-icon">
+          @endif
+          @if(auth()->user()->level == 'admin')
+            <a href="{{ route('compro.admin.profile') }}" class="dropdown-item has-icon">
+          @endif
+          @if(auth()->user()->level == 'creator')
+            <a href="{{ route('compro.creator.profile') }}" class="dropdown-item has-icon">
+          @endif
+          @if(auth()->user()->level == 'helpdesk')
+            <a href="{{ route('compro.helpdesk.profile') }}" class="dropdown-item has-icon">
+          @endif
+            <i class="fas fa-sign-out-alt"></i> Profile
+          </a>
           <a href="{{ route('compro.logout') }}" class="dropdown-item has-icon text-danger">
             <i class="fas fa-sign-out-alt"></i> Logout
           </a>
         @endif
         @if(Session::has('eproc'))
+          @if(auth()->user()->level == 'superadmin')
+            <a href="{{ route('eproc.superadmin.profile') }}" class="dropdown-item has-icon">
+          @endif
+          @if(auth()->user()->level == 'admin')
+            <a href="{{ route('eproc.admin.profile') }}" class="dropdown-item has-icon">
+          @endif
+            <i class="fas fa-sign-out-alt"></i> Profile
+          </a>
           <a href="{{ route('eproc.logout') }}" class="dropdown-item has-icon text-danger">
             <i class="fas fa-sign-out-alt"></i> Logout
           </a>

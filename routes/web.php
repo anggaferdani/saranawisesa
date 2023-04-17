@@ -1,16 +1,17 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AkunController;
-use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\EprocController;
 use App\Http\Controllers\ComproController;
+use App\Http\Controllers\SurveyController;
+use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\DireksiController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\KomisarisController;
 use App\Http\Controllers\PortofolioController;
 use App\Http\Controllers\ProfilePerusahaanController;
-use App\Http\Controllers\SettingController;
-use App\Http\Controllers\SurveyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,9 @@ Route::prefix('compro')->name('compro.')->group(function(){
       Route::get('setting', [SettingController::class, 'index'])->name('setting.index');
       Route::get('setting/{id}/edit', [SettingController::class, 'edit'])->name('setting.edit');
       Route::put('setting/{id}', [SettingController::class, 'update'])->name('setting.update');
+      // profile
+      Route::get('profile', [Controller::class, 'profile'])->name('profile');
+      Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
     });
   });
 
@@ -68,6 +72,9 @@ Route::prefix('compro')->name('compro.')->group(function(){
       Route::get('setting', [SettingController::class, 'index'])->name('setting.index');
       Route::get('setting/{id}/edit', [SettingController::class, 'edit'])->name('setting.edit');
       Route::put('setting/{id}', [SettingController::class, 'update'])->name('setting.update');
+      // profile
+      Route::get('profile', [Controller::class, 'profile'])->name('profile');
+      Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
     });
   });
 
@@ -75,6 +82,9 @@ Route::prefix('compro')->name('compro.')->group(function(){
     Route::middleware(['auth:web', 'disable_back_button', 'compro', 'creator'])->group(function(){
       Route::get('/dashboard', function(){return view('pages.dashboard');})->name('dashboard');
       Route::resource('artikel', ArtikelController::class);
+      // profile
+      Route::get('profile', [Controller::class, 'profile'])->name('profile');
+      Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
     });
   });
 
@@ -83,6 +93,9 @@ Route::prefix('compro')->name('compro.')->group(function(){
       Route::get('/dashboard', function(){return view('pages.dashboard');})->name('dashboard');
       Route::get('survey', [SurveyController::class, 'index'])->name('survey.index');
       Route::get('survey/{id}', [SurveyController::class, 'show'])->name('survey.show');
+      // profile
+      Route::get('profile', [Controller::class, 'profile'])->name('profile');
+      Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
     });
   });
 });
@@ -100,12 +113,18 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
     Route::middleware(['auth:web', 'disable_back_button', 'eproc', 'superadmin'])->group(function(){
       Route::get('/dashboard', function(){return view('pages.dashboard');})->name('dashboard');
       Route::resource('akun', AkunController::class);
+      // profile
+      Route::get('profile', [Controller::class, 'profile'])->name('profile');
+      Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
     });
   });
 
   Route::prefix('admin')->name('admin.')->group(function(){
     Route::middleware(['auth:web', 'disable_back_button', 'eproc', 'admin'])->group(function(){
       Route::get('/dashboard', function(){return view('pages.dashboard');})->name('dashboard');
+      // profile
+      Route::get('profile', [Controller::class, 'profile'])->name('profile');
+      Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
     });
   });
 });
