@@ -32,6 +32,7 @@
         @endif
         @if(auth()->user()->level == 'creator')
           <li><a class="nav-link" href="{{ route('compro.creator.dashboard') }}"><i class="far fa-square"></i><span>Dashboard</span></a></li>
+          <li class="menu-header">Menu</li>
           <li><a class="nav-link" href="{{ route('compro.creator.artikel.index') }}"><i class="far fa-square"></i><span>Artikel</span></a></li>
         @endif
         @if(auth()->user()->level == 'helpdesk')
