@@ -122,6 +122,9 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::get('profile', [Controller::class, 'profile'])->name('profile');
       Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
       Route::resource('berita', BeritaController::class);
+      Route::get('export', [BeritaController::class, 'export'])->name('export');
+      Route::post('import', [BeritaController::class, 'import'])->name('import');
+      Route::get('pdf', [BeritaController::class, 'pdf'])->name('pdf');
       Route::resource('management-pengadaan', ManagementPengadaanController::class);
     });
   });
@@ -132,6 +135,9 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::get('profile', [Controller::class, 'profile'])->name('profile');
       Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
       Route::resource('berita', BeritaController::class);
+      Route::get('export', [BeritaController::class, 'export'])->name('export');
+      Route::post('import', [BeritaController::class, 'import'])->name('import');
+      Route::get('pdf', [BeritaController::class, 'pdf'])->name('pdf');
       Route::resource('management-pengadaan', ManagementPengadaanController::class);
     });
   });

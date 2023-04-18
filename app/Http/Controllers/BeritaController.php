@@ -2,11 +2,46 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\BeritaExport;
+use App\Imports\BeritaImport;
 use App\Models\Berita;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BeritaController extends Controller
 {
+    public function export(){
+        return Excel::download(new BeritaExport, 'berita.xlsx');
+    }
+
+    public function import(Request $request){
+        $file = $request->file('file');
+        $nama_file = $file->getClientOriginalName();
+        $file->move('berita/import', $nama_file);
+
+        Excel::import(new BeritaImport, public_path('/berita/import/'.$nama_file));
+        
+        if(auth()->user()->level == 'superadmin'){
+            return redirect()->route('eproc.superadmin.berita.index')->with('success', 'Berhasil ditambahkan kedalam database');
+        }elseif(auth()->user()->level == 'admin'){
+            return redirect()->route('eproc.admin.berita.index')->with('success', 'Berhasil ditambahkan kedalam database');
+        }
+    }
+
+    public function pdf(){
+        $berita = Berita::all();
+        $array = [
+            'title' => 'Berita',
+            'date' => date('Y/m/d'),
+            'berita' => $berita,
+        ];
+
+        $pdf = PDF::loadView('pages.berita.pdf', $array);
+        $pdf->set_paper("A4", "potrait");
+        return $pdf->download('berita.pdf');
+    }
+
     public function index(){
         $berita = Berita::all();
         return view('pages.berita.index', compact('berita'));
