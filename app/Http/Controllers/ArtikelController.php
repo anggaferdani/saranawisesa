@@ -3,10 +3,47 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artikel;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use App\Exports\ArtikelExport;
+use App\Imports\ArtikelImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ArtikelController extends Controller
 {
+    public function export(){
+        return Excel::download(new ArtikelExport, 'artikel.xlsx');
+    }
+
+    public function import(Request $request){
+        $file = $request->file('file');
+        $nama_file = $file->getClientOriginalName();
+        $file->move('artikel/import', $nama_file);
+
+        Excel::import(new ArtikelImport, public_path('/artikel/import/'.$nama_file));
+        
+        if(auth()->user()->level == 'superadmin'){
+            return redirect()->route('compro.superadmin.artikel.index')->with('success', 'Berhasil ditambahkan kedalam database');
+        }elseif(auth()->user()->level == 'admin'){
+            return redirect()->route('compro.admin.artikel.index')->with('success', 'Berhasil ditambahkan kedalam database');
+        }elseif(auth()->user()->level == 'creator'){
+            return redirect()->route('compro.creator.artikel.index')->with('success', 'Berhasil ditambahkan kedalam database');
+        }
+    }
+
+    public function pdf(){
+        $artikel = Artikel::all();
+        $array = [
+            'title' => 'Artikel',
+            'date' => date('Y/m/d'),
+            'artikel' => $artikel,
+        ];
+
+        $pdf = PDF::loadView('pages.artikel.pdf', $array);
+        $pdf->set_paper("A4", "potrait");
+        return $pdf->download('artikel.pdf');
+    }
+
     public function index(){
         $artikel = Artikel::all();
         return view('pages.artikel.index', compact('artikel'));

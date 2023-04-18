@@ -8,6 +8,11 @@
 </div>
 @endsection
 @section('content')
+<style>
+  .modal-backdrop{
+    display: none;
+  }
+</style>
 <div class="row">
   <div class="col-12">
     
@@ -24,9 +29,21 @@
         <div class="float-left">
           @if(auth()->user()->level == 'superadmin')
             <a href="{{ route('compro.superadmin.artikel.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+            <a href="{{ route('compro.superadmin.export') }}" class="btn btn-success"><i class="fas fa-file-download"></i></a>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-file-upload"></i></button>
+            <a href="{{ route('compro.superadmin.pdf') }}" class="btn btn-danger"><i class="fas fa-file-alt"></i></a>
           @endif
           @if(auth()->user()->level == 'admin')
             <a href="{{ route('compro.admin.artikel.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+            <a href="{{ route('compro.admin.export') }}" class="btn btn-success"><i class="fas fa-file-download"></i></a>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-file-upload"></i></button>
+            <a href="{{ route('compro.admin.pdf') }}" class="btn btn-danger"><i class="fas fa-file-alt"></i></a>
+          @endif
+          @if(auth()->user()->level == 'creator')
+            <a href="{{ route('compro.creator.artikel.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+            <a href="{{ route('compro.creator.export') }}" class="btn btn-success"><i class="fas fa-file-download"></i></a>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-file-upload"></i></button>
+            <a href="{{ route('compro.creator.pdf') }}" class="btn btn-danger"><i class="fas fa-file-alt"></i></a>
           @endif
         </div>
         <div class="float-right">
@@ -54,6 +71,7 @@
               </tr>
               <?php $id = 0; ?>
               @foreach ($artikel as $artikels)
+              <?php $id = 0; ?>
                 @if($artikels->status_aktif == 'aktif')
                   <?php $id++; ?>
                   <tr>
@@ -96,6 +114,39 @@
             </tbody>
           </table>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Import</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        @if(auth()->user()->level == 'superadmin')
+          <form method="POST" action="{{ route('compro.superadmin.import') }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
+        @endif
+        @if(auth()->user()->level == 'admin')
+          <form method="POST" action="{{ route('compro.admin.import') }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
+        @endif
+        @if(auth()->user()->level == 'creator')
+          <form method="POST" action="{{ route('compro.creator.import') }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
+        @endif
+          @csrf
+          <div class="form-group">
+            <label for="file">File</label>
+            <input id="file" type="file" class="form-control" name="file">
+            @error('file')<div class="text-danger">{{ $message }}</div>@enderror
+          </div>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
       </div>
     </div>
   </div>
