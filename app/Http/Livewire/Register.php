@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\User;
 use App\Models\Perusahaan;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -10,9 +9,6 @@ use Livewire\WithFileUploads;
 class Register extends Component
 {
     use WithFileUploads;
-    public $nama_panjang;
-    public $email;
-    public $password;
     public $nama_perusahaan;
     public $nib;
     public $dokumen_pendukung;
@@ -53,13 +49,10 @@ class Register extends Component
     public function validateData(){
         if($this->currentStep == 1){
             $this->validate([
-                'nama_panjang' => 'required|string',
-                'email' => 'required|email|unique:users,email',
-                'password' => 'required|min:8',
+                'nama_perusahaan' => 'required|string',
             ]);
         }elseif($this->currentStep == 2){
             $this->validate([
-                'nama_perusahaan' => 'required|string',
                 'nib' => 'required',
                 'alamat_perusahaan' => 'required|string',
             ]);
@@ -84,16 +77,7 @@ class Register extends Component
         $upload_dokumen = $this->dokumen_pendukung->storeAs('dokumen_pendukung', $nama_dokumen_pendukung);
 
         if($upload_dokumen){
-            $input_array_users = array(
-                'nama_panjang' => $this->nama_panjang,
-                'email' => $this->email,
-                'password' => $this->password,
-            );
-            
-            $user = User::create($input_array_users);
-
-            $input_array_perusahaans = array(
-                'user_id' => $user->id,
+            $perusahaan = array(
                 'nama_perusahaan' => $this->nama_perusahaan,
                 'nib' => $this->nib,
                 'dokumen_pendukung' => $nama_dokumen_pendukung,
@@ -102,9 +86,10 @@ class Register extends Component
                 'alamat_perusahaan' => $this->alamat_perusahaan,
             );
 
-            Perusahaan::create($input_array_perusahaans);
+            Perusahaan::create($perusahaan);
             $this->reset();
             $this->currentStep = 1;
+            // return redirect()->route('eproc.register');
         }
     }
 }

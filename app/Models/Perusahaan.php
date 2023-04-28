@@ -17,7 +17,6 @@ class Perusahaan extends Model
 
     protected $fillable = [
         'id',
-        'user_id',
         'nama_perusahaan',
         'nib',
         'dokumen_pendukung',
@@ -38,9 +37,5 @@ class Perusahaan extends Model
         static::saving(function($model){
             $model->updated_by = Auth::id();
         });
-    }
-
-    public function users(){
-        return $this->belongsTo(User::class, 'user_id');
     }
 }

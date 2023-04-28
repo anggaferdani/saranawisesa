@@ -48,8 +48,4 @@ class User extends Authenticatable
             $model->updated_by = Auth::id();
         });
     }
-
-    public function perusahaans(){
-        return $this->hasMany(Perusahaan::class);
-    }
 }
