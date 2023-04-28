@@ -1,10 +1,10 @@
 @extends('templates.pages')
 @section('title')
 @section('header')
-<h1>Management Pengadaan</h1>
+<h1>Lelang</h1>
 <div class="section-header-breadcrumb">
   <div class="breadcrumb-item"><a href="#">Dashboard</a></div>
-  <div class="breadcrumb-item active"><a href="#">Management Pengadaan</a></div>
+  <div class="breadcrumb-item active"><a href="#">Lelang</a></div>
 </div>
 @endsection
 @section('content')
@@ -23,10 +23,10 @@
       <div class="card-body">
         <div class="float-left">
           @if(auth()->user()->level == 'superadmin')
-            <a href="{{ route('eproc.superadmin.management-pengadaan.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+            <a href="{{ route('eproc.superadmin.lelang.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
           @endif
           @if(auth()->user()->level == 'admin')
-            <a href="{{ route('eproc.admin.management-pengadaan.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+            <a href="{{ route('eproc.admin.lelang.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
           @endif
         </div>
         <div class="float-right">
@@ -47,44 +47,44 @@
             <tbody>
               <tr>
                 <td>No</td>
-                <td>Kode Pengadaan</td>
-                <td>Nama Pengadaan</td>
+                <td>Kode Lelang</td>
+                <td>Nama Lelang</td>
                 <td>HPS</td>
-                <td>Tgl Akhir Pengadaan</td>
+                <td>Tgl Akhir Lelang</td>
                 <td>Action</td>
               </tr>
               <?php $id = 0; ?>
-              @foreach ($pengadaan as $pengadaans)
-                @if($pengadaans->status_aktif == 'aktif')
+              @foreach ($lelang as $lelangs)
+                @if($lelangs->status_aktif == 'aktif')
                   <?php $id++; ?>
                   <tr>
                     <td>{{ $id }}</td>
-                    <td>{{ $pengadaans->kode_pengadaan }}</td>
-                    <td>{{ $pengadaans->nama_pengadaan }}</td>
-                    <td>{{ 'Rp. '.strrev(implode('.', str_split(strrev(strval($pengadaans->hps)), 3))) }}</td>
+                    <td>{{ $lelangs->kode_lelang }}</td>
+                    <td>{{ $lelangs->nama_lelang }}</td>
+                    <td>{{ 'Rp. '.strrev(implode('.', str_split(strrev(strval($lelangs->hps)), 3))) }}</td>
                     <td>
-                      @if(now()->toDateTimeString() > $pengadaans->tanggal_akhir_pengadaan)
-                        <div class="badge badge-danger">{{ $pengadaans->tanggal_akhir_pengadaan }}</div>
+                      @if(now()->toDateTimeString() > $lelangs->tanggal_akhir_lelang)
+                        <div class="badge badge-danger">{{ $lelangs->tanggal_akhir_lelang }}</div>
                       @else
-                        {{ $pengadaans->tanggal_akhir_pengadaan }}
+                        {{ $lelangs->tanggal_akhir_lelang }}
                       @endif
                     </td>
                     <td>
                       @if(auth()->user()->level == 'superadmin')
-                        <form action="{{ route('eproc.superadmin.management-pengadaan.destroy', $pengadaans->id) }}" method="POST">
+                        <form action="{{ route('eproc.superadmin.lelang.destroy', $lelangs->id) }}" method="POST">
                           @csrf
                           @method('DELETE')
-                          <a href="{{ route('eproc.superadmin.management-pengadaan.show', $pengadaans->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                          <a href="{{ route('eproc.superadmin.management-pengadaan.edit', $pengadaans->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
+                          <a href="{{ route('eproc.superadmin.lelang.show', $lelangs->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                          <a href="{{ route('eproc.superadmin.lelang.edit', $lelangs->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
                           <button type="submit" class="btn btn-icon btn-danger"><i class="fa fa-trash"></i></button>
                         </form>
                       @endif
                       @if(auth()->user()->level == 'admin')
-                        <form action="{{ route('eproc.admin.management-pengadaan.destroy', $pengadaans->id) }}" method="POST">
+                        <form action="{{ route('eproc.admin.lelang.destroy', $lelangs->id) }}" method="POST">
                           @csrf
                           @method('DELETE')
-                          <a href="{{ route('eproc.admin.management-pengadaan.show', $pengadaans->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                          <a href="{{ route('eproc.admin.management-pengadaan.edit', $pengadaans->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
+                          <a href="{{ route('eproc.admin.lelang.show', $lelangs->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                          <a href="{{ route('eproc.admin.lelang.edit', $lelangs->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
                           <button type="submit" class="btn btn-icon btn-danger"><i class="fa fa-trash"></i></button>
                         </form>
                       @endif

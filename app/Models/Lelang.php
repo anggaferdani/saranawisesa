@@ -6,22 +6,21 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Pengadaan extends Model
+class Lelang extends Model
 {
     use HasFactory;
 
-    protected $table = 'pengadaans';
+    protected $table = 'lelangs';
 
     protected $primaryKey = 'id';
 
     protected $fillable = [
         'id',
-        'kode_pengadaan',
-        'nama_pengadaan',
-        'jenis_pengadaan',
+        'kode_lelang',
+        'nama_lelang',
         'hps',
-        'tanggal_mulai_pengadaan',
-        'tanggal_akhir_pengadaan',
+        'tanggal_mulai_lelang',
+        'tanggal_akhir_lelang',
         'status_aktif',
         'created_by',
         'updated_by',

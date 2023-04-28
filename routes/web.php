@@ -11,6 +11,7 @@ use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\DireksiController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\KomisarisController;
+use App\Http\Controllers\LelangController;
 use App\Http\Controllers\ManagementPengadaanController;
 use App\Http\Controllers\PortofolioController;
 use App\Http\Controllers\ProfilePerusahaanController;
@@ -126,7 +127,7 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::get('export', [BeritaController::class, 'export'])->name('export');
       Route::post('import', [BeritaController::class, 'import'])->name('import');
       Route::get('pdf', [BeritaController::class, 'pdf'])->name('pdf');
-      Route::resource('management-pengadaan', ManagementPengadaanController::class);
+      Route::resource('lelang', LelangController::class);
     });
   });
 
@@ -139,7 +140,7 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::get('export', [BeritaController::class, 'export'])->name('export');
       Route::post('import', [BeritaController::class, 'import'])->name('import');
       Route::get('pdf', [BeritaController::class, 'pdf'])->name('pdf');
-      Route::resource('management-pengadaan', ManagementPengadaanController::class);
+      Route::resource('lelang', LelangController::class);
     });
   });
 });
