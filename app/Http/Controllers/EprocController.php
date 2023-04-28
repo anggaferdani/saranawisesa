@@ -59,6 +59,10 @@ class EprocController extends Controller
         }
     }
 
+    public function register(){
+        return view('pages.authentications.eproc.register');
+    }
+
     public function logout(){
         if(session()->has('eproc')){
             session()->forget('eproc');

@@ -113,6 +113,7 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::post('/postlogin', [EprocController::class, 'postlogin'])->name('postlogin');
     });
     Route::get('/logout', [EprocController::class, 'logout'])->name('logout');
+    Route::get('/register', [EprocController::class, 'register'])->name('register');
   });
 
   Route::prefix('superadmin')->name('superadmin.')->group(function(){
