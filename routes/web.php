@@ -4,17 +4,18 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\EprocController;
+use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\ComproController;
+use App\Http\Controllers\LelangController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\ArtikelController;
-use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\DireksiController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\KomisarisController;
-use App\Http\Controllers\LelangController;
-use App\Http\Controllers\ManagementPengadaanController;
 use App\Http\Controllers\PortofolioController;
+use App\Http\Controllers\JadwalLelangController;
 use App\Http\Controllers\ProfilePerusahaanController;
+use App\Http\Controllers\ManagementPengadaanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -128,6 +129,13 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::post('import', [BeritaController::class, 'import'])->name('import');
       Route::get('pdf', [BeritaController::class, 'pdf'])->name('pdf');
       Route::resource('lelang', LelangController::class);
+      Route::get('lelang/{lelang_id}/jadwal-lelang', [JadwalLelangController::class, 'index'])->name('jadwal-lelang.index');
+      Route::get('lelang/{lelang_id}/jadwal-lelang/create', [JadwalLelangController::class, 'create'])->name('jadwal-lelang.create');
+      Route::post('lelang/{lelang_id}/jadwal-lelang/store', [JadwalLelangController::class, 'store'])->name('jadwal-lelang.store');
+      Route::get('lelang/{lelang_id}/jadwal-lelang/{id}', [JadwalLelangController::class, 'show'])->name('jadwal-lelang.show');
+      Route::get('lelang/{lelang_id}/jadwal-lelang/{id}/edit', [JadwalLelangController::class, 'edit'])->name('jadwal-lelang.edit');
+      Route::put('lelang/{lelang_id}/jadwal-lelang/{id}', [JadwalLelangController::class, 'update'])->name('jadwal-lelang.update');
+      Route::delete('lelang/{lelang_id}/jadwal-lelang/{id}', [JadwalLelangController::class, 'destroy'])->name('jadwal-lelang.destroy');
     });
   });
 
@@ -141,6 +149,13 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::post('import', [BeritaController::class, 'import'])->name('import');
       Route::get('pdf', [BeritaController::class, 'pdf'])->name('pdf');
       Route::resource('lelang', LelangController::class);
+      Route::get('lelang/{lelang_id}/jadwal-lelang', [JadwalLelangController::class, 'index'])->name('jadwal-lelang.index');
+      Route::get('lelang/{lelang_id}/jadwal-lelang/create', [JadwalLelangController::class, 'create'])->name('jadwal-lelang.create');
+      Route::post('lelang/{lelang_id}/jadwal-lelang/store', [JadwalLelangController::class, 'store'])->name('jadwal-lelang.store');
+      Route::get('lelang/{lelang_id}/jadwal-lelang/{id}', [JadwalLelangController::class, 'show'])->name('jadwal-lelang.show');
+      Route::get('lelang/{lelang_id}/jadwal-lelang/{id}/edit', [JadwalLelangController::class, 'edit'])->name('jadwal-lelang.edit');
+      Route::put('lelang/{lelang_id}/jadwal-lelang/{id}', [JadwalLelangController::class, 'update'])->name('jadwal-lelang.update');
+      Route::delete('lelang/{lelang_id}/jadwal-lelang/{id}', [JadwalLelangController::class, 'destroy'])->name('jadwal-lelang.destroy');
     });
   });
 });

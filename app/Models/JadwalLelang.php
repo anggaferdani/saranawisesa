@@ -2,26 +2,24 @@
 
 namespace App\Models;
 
-use App\Models\JadwalLelang;
-use App\Models\LampiranPengadaan;
+use App\Models\Lelang;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\AdditionalLampiranPengadaan;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Lelang extends Model
+class JadwalLelang extends Model
 {
     use HasFactory;
 
-    protected $table = 'lelangs';
+    protected $table = 'jadwal_lelangs';
 
     protected $primaryKey = 'id';
 
     protected $fillable = [
         'id',
-        'kode_lelang',
+        'lelang_id',
+        'tanggal_maksimal_lelang',
         'nama_lelang',
-        'hps',
         'tanggal_mulai_lelang',
         'tanggal_akhir_lelang',
         'status_aktif',
@@ -40,15 +38,7 @@ class Lelang extends Model
         });
     }
 
-    public function jadwal_lelangs(){
-        return $this->hasMany(JadwalLelang::class);
-    }
-
-    public function lampiran_pengadaans(){
-        return $this->hasMany(LampiranPengadaan::class);
-    }
-
-    public function additional_lampiran_pengadaans(){
-        return $this->hasMany(AdditionalLampiranPengadaan::class);
+    public function lelangs(){
+        return $this->belongsTo(Lelang::class, 'lelang_id');
     }
 }

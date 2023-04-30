@@ -33,7 +33,7 @@
           <form>
             <div class="input-group">
               <input type="text" class="form-control" placeholder="Search">
-              <div class="input-group-append">                                            
+              <div class="input-group-append">
                 <button class="btn btn-primary"><i class="fas fa-search"></i></button>
               </div>
             </div>
@@ -76,6 +76,7 @@
                           @method('DELETE')
                           <a href="{{ route('eproc.superadmin.lelang.show', $lelangs->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
                           <a href="{{ route('eproc.superadmin.lelang.edit', $lelangs->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
+                          <a href="{{ route('eproc.superadmin.jadwal-lelang.index', $lelangs->id) }}" class="btn btn-icon btn-warning"><i class="fa fa-calendar"></i></a>
                           <button type="submit" class="btn btn-icon btn-danger"><i class="fa fa-trash"></i></button>
                         </form>
                       @endif
@@ -85,6 +86,7 @@
                           @method('DELETE')
                           <a href="{{ route('eproc.admin.lelang.show', $lelangs->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
                           <a href="{{ route('eproc.admin.lelang.edit', $lelangs->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
+                          <a href="{{ route('eproc.admin.jadwal-lelang.index', $lelangs->id) }}" class="btn btn-icon btn-warning"><i class="fa fa-calendar"></i></a>
                           <button type="submit" class="btn btn-icon btn-danger"><i class="fa fa-trash"></i></button>
                         </form>
                       @endif
