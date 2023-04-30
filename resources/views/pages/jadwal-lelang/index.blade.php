@@ -77,7 +77,7 @@
                           @method('DELETE')
                           <a href="{{ route('eproc.superadmin.jadwal-lelang.show', ['id' => $jadwal_lelangs->id, 'lelang_id' => $lelang->id]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
                           <a href="{{ route('eproc.superadmin.jadwal-lelang.edit', ['id' => $jadwal_lelangs->id, 'lelang_id' => $lelang->id]) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
-                          <button type="submit" class="btn btn-icon btn-danger"><i class="fa fa-trash"></i></button>
+                          <button type="button" class="btn btn-icon btn-danger delete" data-id="{{ $jadwal_lelangs->id }}"><i class="fa fa-trash"></i></button>
                         </form>
                       @endif
                       @if(auth()->user()->level == 'admin')
@@ -86,7 +86,7 @@
                           @method('DELETE')
                           <a href="{{ route('eproc.admin.jadwal-lelang.show', ['id' => $jadwal_lelangs->id, 'lelang_id' => $lelang->id]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
                           <a href="{{ route('eproc.admin.jadwal-lelang.edit', ['id' => $jadwal_lelangs->id, 'lelang_id' => $lelang->id]) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
-                          <button type="submit" class="btn btn-icon btn-danger"><i class="fa fa-trash"></i></button>
+                          <button type="button" class="btn btn-icon btn-danger delete" data-id="{{ $jadwal_lelangs->id }}"><i class="fa fa-trash"></i></button>
                         </form>
                       @endif
                     </td>

@@ -86,7 +86,7 @@
                           @method('DELETE')
                           <a href="{{ route('compro.superadmin.artikel.show', $artikels->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
                           <a href="{{ route('compro.superadmin.artikel.edit', $artikels->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
-                          <button type="submit" class="btn btn-icon btn-danger"><i class="fa fa-trash"></i></button>
+                          <button type="button" class="btn btn-icon btn-danger delete" data-id="{{ $artikes->id }}"><i class="fa fa-trash"></i></button>
                         </form>
                       @endif
                       @if(auth()->user()->level == 'admin')
@@ -95,7 +95,7 @@
                           @method('DELETE')
                           <a href="{{ route('compro.admin.artikel.show', $artikels->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
                           <a href="{{ route('compro.admin.artikel.edit', $artikels->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
-                          <button type="submit" class="btn btn-icon btn-danger"><i class="fa fa-trash"></i></button>
+                          <button type="button" class="btn btn-icon btn-danger delete" data-id="{{ $artikes->id }}"><i class="fa fa-trash"></i></button>
                         </form>
                       @endif
                       @if(auth()->user()->level == 'creator')
@@ -104,7 +104,7 @@
                           @method('DELETE')
                           <a href="{{ route('compro.creator.artikel.show', $artikels->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
                           <a href="{{ route('compro.creator.artikel.edit', $artikels->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
-                          <button type="submit" class="btn btn-icon btn-danger"><i class="fa fa-trash"></i></button>
+                          <button type="button" class="btn btn-icon btn-danger delete" data-id="{{ $artikes->id }}"><i class="fa fa-trash"></i></button>
                         </form>
                       @endif
                     </td>

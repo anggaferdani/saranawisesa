@@ -68,7 +68,7 @@
                           @method('DELETE')
                           <a href="{{ route('compro.superadmin.komisaris.show', $komisaris->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
                           <a href="{{ route('compro.superadmin.komisaris.edit', $komisaris->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
-                          <button type="submit" class="btn btn-icon btn-danger"><i class="fa fa-trash"></i></button>
+                          <button type="button" class="btn btn-icon btn-danger delete" data-id="{{ $komisaris->id }}"><i class="fa fa-trash"></i></button>
                         </form>
                       @endif
                       @if(auth()->user()->level == 'admin')
@@ -77,7 +77,7 @@
                           @method('DELETE')
                           <a href="{{ route('compro.admin.komisaris.show', $komisaris->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
                           <a href="{{ route('compro.admin.komisaris.edit', $komisaris->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
-                          <button type="submit" class="btn btn-icon btn-danger"><i class="fa fa-trash"></i></button>
+                          <button type="button" class="btn btn-icon btn-danger delete" data-id="{{ $komisaris->id }}"><i class="fa fa-trash"></i></button>
                         </form>
                       @endif
                     </td>

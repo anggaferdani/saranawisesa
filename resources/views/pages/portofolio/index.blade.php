@@ -66,7 +66,7 @@
                           @method('DELETE')
                           <a href="{{ route('compro.superadmin.portofolio.show', $portofolios->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
                           <a href="{{ route('compro.superadmin.portofolio.edit', $portofolios->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
-                          <button type="submit" class="btn btn-icon btn-danger"><i class="fa fa-trash"></i></button>
+                          <button type="button" class="btn btn-icon btn-danger delete" data-id="{{ $portofolios->id }}"><i class="fa fa-trash"></i></button>
                         </form>
                       @endif
                       @if(auth()->user()->level == 'admin')
@@ -75,7 +75,7 @@
                           @method('DELETE')
                           <a href="{{ route('compro.admin.portofolio.show', $portofolios->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
                           <a href="{{ route('compro.admin.portofolio.edit', $portofolios->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
-                          <button type="submit" class="btn btn-icon btn-danger"><i class="fa fa-trash"></i></button>
+                          <button type="button" class="btn btn-icon btn-danger delete" data-id="{{ $portofolios->id }}"><i class="fa fa-trash"></i></button>
                         </form>
                       @endif
                     </td>

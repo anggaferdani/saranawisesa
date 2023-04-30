@@ -58,6 +58,30 @@
   <script src="{{ asset('assets/js/stisla.js') }}"></script>
   
   <!-- JS Libraies -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script type="text/javascript">
+    $('.delete').click(function(){
+      var id = $(this).attr('data-id');
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "Are you sure you want to delete id : "+id+"?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#6777ef',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $(this).closest("form").submit();
+          Swal.fire(
+            'Deleted!',
+            'You have successfully deleted.',
+            'success'
+          )
+        }
+      })
+    })
+  </script>
 
   <!-- Page Specific JS File -->
   

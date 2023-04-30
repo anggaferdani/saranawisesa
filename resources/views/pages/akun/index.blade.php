@@ -79,7 +79,7 @@
                             @method('DELETE')
                             <a href="{{ route('compro.superadmin.akun.show', $akuns->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
                             <a href="{{ route('compro.superadmin.akun.edit', $akuns->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
-                            <button type="submit" class="btn btn-icon btn-danger"><i class="fa fa-trash"></i></button>
+                            <button type="button" class="btn btn-icon btn-danger delete" data-id="{{ $akuns->id }}"><i class="fa fa-trash"></i></button>
                           </form>
                         </td>
                       </tr>
@@ -103,7 +103,7 @@
                             @method('DELETE')
                             <a href="{{ route('eproc.superadmin.akun.show', $akuns->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
                             <a href="{{ route('eproc.superadmin.akun.edit', $akuns->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
-                            <button type="submit" class="btn btn-icon btn-danger"><i class="fa fa-trash"></i></button>
+                            <button type="button" class="btn btn-icon btn-danger delete" data-id="{{ $akuns->id }}"><i class="fa fa-trash"></i></button>
                           </form>
                         </td>
                       </tr>
