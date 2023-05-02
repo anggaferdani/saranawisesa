@@ -16,10 +16,10 @@
         <p>{{ $lelang->kode_lelang }}</p>
         <div>Nama Lelang :</div>
         <p>{{ $lelang->nama_lelang }}</p>
-        <div>Jenis Lelang :</div>
-        <p>{{ $lelang->jenis_lelang }}</p>
-        <div>HPS :</div>
-        <p>{{ 'Rp. '.strrev(implode('.', str_split(strrev(strval($lelang->hps)), 3))) }}</p>
+        <div>Rencana Umum Pengadaan :</div>
+        <p>{{ $lelang->rencana_umum_pengadaan }}</p>
+        <div>Uraian Singkat Pekerjaan :</div>
+        <p>{{ $lelang->urian_singkat_pekerjaan }}</p>
         <div>Tanggal Mulai Lelang :</div>
         <p>{{ $lelang->tanggal_mulai_lelang }}</p>
         <div>Tanggal Akhir Lelang :</div>
@@ -28,6 +28,30 @@
         @else
           <p>{{ $lelang->tanggal_akhir_lelang }}</p>
         @endif
+        <div>Tahap Lelang Saat Ini :</div>
+        <p>{{ $lelang->tahap_lelang_saat_ini }}</p>
+        <div>K/L/PD :</div>
+        <p>{{ $lelang->klpd }}</p>
+        <div>Satuan Kerja :</div>
+        <p>{{ $lelang->satuan_kerja }}</p>
+        <div>Metode Pengadaan :</div>
+        <p>{{ $lelang->metode_pengadaan }}</p>
+        <div>Jenis Lelang :</div>
+        <p>{{ $lelang->jenis_pengadaans->jenis_pengadaan }}</p>
+        <div>Tahun Anggaran :</div>
+        <p>{{ $lelang->tahun_anggaran }}</p>
+        <div>Nilai Pagu Paket :</div>
+        <p>{{ $lelang->nilai_pagu_paket }}</p>
+        <div>Jenis Kontrak :</div>
+        <p>{{ $lelang->jenis_kontrak }}</p>
+        <div>Lokasi Pekerjaan :</div>
+        <p>{{ $lelang->lokasi_pekerjaan }}</p>
+        <div>Bobot Teknis :</div>
+        <p>{{ $lelang->bobot_teknis }}</p>
+        <div>HPS :</div>
+        <p>{{ 'Rp. '.strrev(implode('.', str_split(strrev(strval($lelang->hps)), 3))) }}</p>
+        <div>Syarat Kualifikasi :</div>
+        <p>{{ $lelang->syarat_kualifikasi }}</p>
         <div>Additional Lampiran Pengadaan :</div>
         <ul>
           @foreach ($lelang->additional_lampiran_pengadaans as $additional_lampiran_pengadaans)

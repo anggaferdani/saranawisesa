@@ -33,4 +33,8 @@ class JenisPengadaan extends Model
             $model->updated_by = Auth::id();
         });
     }
+
+    public function lelangs(){
+        return $this->hasMany(Lelang::class);
+    }
 }

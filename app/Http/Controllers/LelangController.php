@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AdditionalLampiranPengadaan;
+use App\Models\JenisPengadaan;
 use App\Models\Lelang;
 use Illuminate\Http\Request;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
@@ -15,26 +16,53 @@ class LelangController extends Controller
     }
 
     public function create(){
-        return view('pages.lelang.create');
+        $jenis_pengadaan = JenisPengadaan::all();
+        return view('pages.lelang.create', compact('jenis_pengadaan'));
     }
 
     public function store(Request $request){
         $request->validate([
             'nama_lelang' => 'required',
-            'hps' => 'required',
+            'rencana_umum_pengadaan' => 'required',
+            'urian_singkat_pekerjaan' => 'required',
             'tanggal_mulai_lelang' => 'required|after:yesterday',
             'tanggal_akhir_lelang' => 'required|after:yesterday',
+            'tahap_lelang_saat_ini' => 'required',
+            'klpd' => 'required',
+            'satuan_kerja' => 'required',
+            'jenis_pengadaan_id' => 'required',
+            'metode_pengadaan' => 'required',
+            'tahun_anggaran' => 'required',
+            'nilai_pagu_paket' => 'required',
+            'jenis_kontrak' => 'required',
+            'lokasi_pekerjaan' => 'required',
+            'bobot_teknis' => 'required',
+            'hps' => 'required',
+            'syarat_kualifikasi' => 'required',
         ]);
         
-        $id_generator = ['table' => 'lelangs', 'field' => 'kode_lelang', 'length' => 10, 'prefix' => 'pen'];
+        $id_generator = ['table' => 'lelangs', 'field' => 'kode_lelang', 'length' => 10, 'prefix' => 'PEN'];
         $kode_lelang = IdGenerator::generate($id_generator);
 
         $input_array_lelang = array(
             'kode_lelang' => $kode_lelang,
             'nama_lelang' => $request['nama_lelang'],
-            'hps' => $request['hps'],
+            'rencana_umum_pengadaan' => $request['rencana_umum_pengadaan'],
+            'urian_singkat_pekerjaan' => $request['urian_singkat_pekerjaan'],
             'tanggal_mulai_lelang' => $request['tanggal_mulai_lelang'],
             'tanggal_akhir_lelang' => $request['tanggal_akhir_lelang'],
+            'tahap_lelang_saat_ini' => $request['tahap_lelang_saat_ini'],
+            'klpd' => $request['klpd'],
+            'satuan_kerja' => $request['satuan_kerja'],
+            'jenis_pengadaan_id' => $request['jenis_pengadaan_id'],
+            'metode_pengadaan' => $request['metode_pengadaan'],
+            'tahun_anggaran' => $request['tahun_anggaran'],
+            'nilai_pagu_paket' => $request['nilai_pagu_paket'],
+            'jenis_kontrak' => $request['jenis_kontrak'],
+            'lokasi_pekerjaan' => $request['lokasi_pekerjaan'],
+            'bobot_teknis' => $request['bobot_teknis'],
+            'hps' => $request['hps'],
+            'syarat_kualifikasi' => $request['syarat_kualifikasi'],
         );
 
         $lelang = Lelang::create($input_array_lelang);
@@ -55,14 +83,15 @@ class LelangController extends Controller
     }
 
     public function show($id){
-        $lelang = Lelang::with('additional_lampiran_pengadaans')->find($id);
+        $lelang = Lelang::with('additional_lampiran_pengadaans', 'jenis_pengadaans')->find($id);
         return view('pages.lelang.show', compact('lelang'));
     }
 
     public function edit($id){
         $lelang = Lelang::find($id);
+        $jenis_pengadaan = JenisPengadaan::all();
         $additional_lampiran_pengadaan = AdditionalLampiranPengadaan::where('lelang_id', $id)->first();
-        return view('pages.lelang.edit', compact('lelang', 'additional_lampiran_pengadaan'));
+        return view('pages.lelang.edit', compact('lelang', 'jenis_pengadaan', 'additional_lampiran_pengadaan'));
     }
 
     public function update(Request $request, $id){
@@ -70,16 +99,42 @@ class LelangController extends Controller
 
         $request->validate([
             'nama_lelang' => 'required',
-            'hps' => 'required',
+            'rencana_umum_pengadaan' => 'required',
+            'urian_singkat_pekerjaan' => 'required',
             'tanggal_mulai_lelang' => 'required',
             'tanggal_akhir_lelang' => 'required',
+            'tahap_lelang_saat_ini' => 'required',
+            'klpd' => 'required',
+            'satuan_kerja' => 'required',
+            'jenis_pengadaan_id' => 'required',
+            'metode_pengadaan' => 'required',
+            'tahun_anggaran' => 'required',
+            'nilai_pagu_paket' => 'required',
+            'jenis_kontrak' => 'required',
+            'lokasi_pekerjaan' => 'required',
+            'bobot_teknis' => 'required',
+            'hps' => 'required',
+            'syarat_kualifikasi' => 'required',
         ]);
         
         $lelang->update([
             'nama_lelang' => $request->nama_lelang,
-            'hps' => $request->hps,
+            'rencana_umum_pengadaan' => $request->rencana_umum_pengadaan,
+            'urian_singkat_pekerjaan' => $request->urian_singkat_pekerjaan,
             'tanggal_mulai_lelang' => $request->tanggal_mulai_lelang,
             'tanggal_akhir_lelang' => $request->tanggal_akhir_lelang,
+            'tahap_lelang_saat_ini' => $request->tahap_lelang_saat_ini,
+            'klpd' => $request->klpd,
+            'satuan_kerja' => $request->satuan_kerja,
+            'jenis_pengadaan_id' => $request->jenis_pengadaan_id,
+            'metode_pengadaan' => $request->metode_pengadaan,
+            'tahun_anggaran' => $request->tahun_anggaran,
+            'nilai_pagu_paket' => $request->nilai_pagu_paket,
+            'jenis_kontrak' => $request->jenis_kontrak,
+            'lokasi_pekerjaan' => $request->lokasi_pekerjaan,
+            'bobot_teknis' => $request->bobot_teknis,
+            'hps' => $request->hps,
+            'syarat_kualifikasi' => $request->syarat_kualifikasi,
         ]);
 
         $lelang->additional_lampiran_pengadaans()->update([
