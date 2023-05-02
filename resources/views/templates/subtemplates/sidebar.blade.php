@@ -52,6 +52,7 @@
           <li class="dropdown">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="far fa-square"></i><span>Man Pengadaan</span></a>
             <ul class="dropdown-menu" style="display: block;">
+              <li><a class="nav-link" href="{{ route('eproc.superadmin.jenis-pengadaan.index') }}">Jenis Pengadaan</a></li>
               <li><a class="nav-link" href="{{ route('eproc.superadmin.lelang.index') }}">Lelang</a></li>
               <li><a class="nav-link" href="penunjukan-langsung.html">Penunjukan Langsung</a></li>
             </ul>
@@ -64,6 +65,7 @@
           <li class="dropdown">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="far fa-square"></i><span>Man Pengadaan</span></a>
             <ul class="dropdown-menu" style="display: block;">
+              <li><a class="nav-link" href="{{ route('eproc.admin.jenis-pengadaan.index') }}">Jenis Pengadaan</a></li>
               <li><a class="nav-link" href="{{ route('eproc.admin.lelang.index') }}">Lelang</a></li>
               <li><a class="nav-link" href="penunjukan-langsung.html">Penunjukan Langsung</a></li>
             </ul>

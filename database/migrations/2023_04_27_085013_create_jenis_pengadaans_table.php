@@ -11,14 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pengadaans', function (Blueprint $table) {
+        Schema::create('jenis_pengadaans', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_pengadaan');
-            $table->string('nama_pengadaan');
             $table->string('jenis_pengadaan');
-            $table->bigInteger('hps');
-            $table->date('tanggal_mulai_pengadaan');
-            $table->date('tanggal_akhir_pengadaan');
             $table->enum('status_aktif', ['aktif', 'tidak_aktif'])->default('aktif');
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
@@ -31,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pengadaans');
+        Schema::dropIfExists('jenis_pengadaans');
     }
 };
