@@ -29,12 +29,12 @@ class LampiranPengadaan extends Model
 
     protected static function booted(){
         static::creating(function($model){
-            $model->created_by = Auth::user()->email;
-            $model->updated_by = Auth::user()->email;
+            $model->created_by = Auth::id();
+            $model->updated_by = Auth::id();
         });
 
         static::saving(function($model){
-            $model->updated_by = Auth::user()->email;
+            $model->updated_by = Auth::id();
         });
     }
 
