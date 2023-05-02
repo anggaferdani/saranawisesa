@@ -10,12 +10,12 @@ use App\Http\Controllers\LelangController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\DireksiController;
+use App\Http\Controllers\Pages\ComproController as Compro;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\KomisarisController;
 use App\Http\Controllers\PortofolioController;
 use App\Http\Controllers\JadwalLelangController;
 use App\Http\Controllers\ProfilePerusahaanController;
-use App\Http\Controllers\ManagementPengadaanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +27,11 @@ use App\Http\Controllers\ManagementPengadaanController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/', [Compro::class, 'index'])->name('index');
+Route::get('/profile-perusahaan', [Compro::class, 'profile_perusahaan'])->name('profile-perusahaan');
+Route::get('/artikel/{id}', [Compro::class, 'artikel'])->name('artikel');
+Route::get('/portofolio/{id}', [Compro::class, 'portofolio'])->name('portofolio');
 
 Route::prefix('compro')->name('compro.')->group(function(){
   Route::middleware(['web'])->group(function(){
