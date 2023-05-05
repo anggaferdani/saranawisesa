@@ -50,6 +50,7 @@ class LelangController extends Controller
             'lokasi_pekerjaan' => $request['lokasi_pekerjaan'],
             'hps' => $hps,
             'syarat_kualifikasi' => $request['syarat_kualifikasi'],
+            'status_pengadaan' => 'lelang',
         );
 
         $lelang = Lelang::create($input_array_lelang);

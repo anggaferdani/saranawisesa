@@ -55,7 +55,7 @@
               </tr>
               <?php $id = 0; ?>
               @foreach ($lelang as $lelangs)
-                @if($lelangs->status_aktif == 'aktif')
+                @if($lelangs->status_aktif == 'aktif' and $lelangs->status_pengadaan == 'lelang')
                   <?php $id++; ?>
                   <tr>
                     <td>{{ $id }}</td>

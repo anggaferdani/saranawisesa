@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use App\Models\JadwalLelang;
 use App\Models\LampiranPengadaan;
 use Illuminate\Support\Facades\Auth;
@@ -30,6 +31,7 @@ class Lelang extends Model
         'lokasi_pekerjaan',
         'hps',
         'syarat_kualifikasi',
+        'status_pengadaan',
         'status_aktif',
         'created_by',
         'updated_by',
@@ -60,5 +62,9 @@ class Lelang extends Model
 
     public function jenis_pengadaans(){
         return $this->belongsTo(JenisPengadaan::class, 'jenis_pengadaan_id');
+    }
+
+    public function users(){
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Lelang;
 use App\Models\Perusahaan;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Auth;
@@ -47,5 +48,9 @@ class User extends Authenticatable
         static::saving(function($model){
             $model->updated_by = Auth::id();
         });
+    }
+
+    public function lelangs(){
+        return $this->hasMany(Lelang::class);
     }
 }

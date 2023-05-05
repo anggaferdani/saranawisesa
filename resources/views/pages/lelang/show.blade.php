@@ -35,7 +35,7 @@
         <div>HPS :</div>
         <p>{{ 'Rp. '.strrev(implode('.', str_split(strrev(strval($lelang->hps)), 3))) }}</p>
         <div>Syarat Kualifikasi :</div>
-        <p>{{ $lelang->syarat_kualifikasi }}</p>
+        <p>{!! $lelang->syarat_kualifikasi !!}</p>
         <div>Additional Lampiran Pengadaan :</div>
         <ul>
           @foreach ($lelang->additional_lampiran_pengadaans as $additional_lampiran_pengadaans)

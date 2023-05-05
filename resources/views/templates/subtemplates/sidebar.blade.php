@@ -54,7 +54,7 @@
             <ul class="dropdown-menu" style="display: block;">
               <li><a class="nav-link" href="{{ route('eproc.superadmin.jenis-pengadaan.index') }}">Jenis Pengadaan</a></li>
               <li><a class="nav-link" href="{{ route('eproc.superadmin.lelang.index') }}">Lelang</a></li>
-              <li><a class="nav-link" href="penunjukan-langsung.html">Penunjukan Langsung</a></li>
+              <li><a class="nav-link" href="{{ route('eproc.superadmin.penunjukan-langsung.index') }}">Penunjukan Langsung</a></li>
             </ul>
           </li>
         @endif
@@ -67,7 +67,7 @@
             <ul class="dropdown-menu" style="display: block;">
               <li><a class="nav-link" href="{{ route('eproc.admin.jenis-pengadaan.index') }}">Jenis Pengadaan</a></li>
               <li><a class="nav-link" href="{{ route('eproc.admin.lelang.index') }}">Lelang</a></li>
-              <li><a class="nav-link" href="penunjukan-langsung.html">Penunjukan Langsung</a></li>
+              <li><a class="nav-link" href="{{ route('eproc.admin.penunjukan-langsung.index') }}">Penunjukan Langsung</a></li>
             </ul>
           </li>
         @endif

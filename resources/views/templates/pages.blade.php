@@ -92,6 +92,8 @@
     }
   </script>
 
+  <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+
   <!-- Page Specific JS File -->
   
   <!-- Template JS File -->

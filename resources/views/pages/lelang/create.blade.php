@@ -24,7 +24,7 @@
             <select class="form-control" name="jenis_pengadaan_id">
               <option selected disabled>Pilih</option>
               @foreach ($jenis_pengadaan as $jenis_pengadaans)
-                @if($jenis_pengadaans->status_aktif = 'aktif')
+                @if($jenis_pengadaans->status_aktif == 'aktif')
                   <option value="{{ $jenis_pengadaans->id }}">{{ $jenis_pengadaans->jenis_pengadaan }}</option>
                 @endif
               @endforeach
@@ -68,7 +68,7 @@
           </div>
           <div class="form-group">
             <label for="syarat_kualifikasi">Syarat Kualifikasi</label>
-            <input id="syarat_kualifikasi" type="text" class="form-control" name="syarat_kualifikasi">
+            <textarea id="syarat_kualifikasi" class="form-control ckeditor" name="syarat_kualifikasi"></textarea>
             @error('syarat_kualifikasi')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           <div class="section-title mt-0">Additional Lampiran Pengadaan</div>
