@@ -83,6 +83,15 @@
     })
   </script>
 
+  <script type="text/javascript">
+    function formatNumber(input){
+      var num = input.value.replace(/[^0-9]/g, '');
+
+      var formattedNum = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(num);
+      input.value = formattedNum;
+    }
+  </script>
+
   <!-- Page Specific JS File -->
   
   <!-- Template JS File -->
