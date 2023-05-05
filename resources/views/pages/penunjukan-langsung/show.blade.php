@@ -17,7 +17,7 @@
         <div>Jenis Lelang :</div>
         <p>{{ $penunjukan_langsung->jenis_pengadaans->jenis_pengadaan }}</p>
         <div>Nama Perusahaan :</div>
-        <p>{{ $penunjukan_langsung->users->nama_panjang }}</p>
+        <p>{{ $penunjukan_langsung->perusahaans->nama_perusahaan }}</p>
         <div>Nama Lelang :</div>
         <p>{{ $penunjukan_langsung->nama_lelang }}</p>
         <div>Uraian Singkat Pekerjaan :</div>
@@ -38,15 +38,6 @@
         <p>{{ 'Rp. '.strrev(implode('.', str_split(strrev(strval($penunjukan_langsung->hps)), 3))) }}</p>
         <div>Syarat Kualifikasi :</div>
         <p>{!! $penunjukan_langsung->syarat_kualifikasi !!}</p>
-        <div>Additional Lampiran Pengadaan :</div>
-        <ul>
-          @foreach ($penunjukan_langsung->additional_lampiran_pengadaans as $additional_lampiran_pengadaans)
-            @if($additional_lampiran_pengadaans->nama_perusahaan == 'aktif')<li>Nama Perusahaan</li>@endif
-            @if($additional_lampiran_pengadaans->email_perusahaan == 'aktif')<li>Email Perusahaan</li>@endif
-            @if($additional_lampiran_pengadaans->alamat_perusahaan == 'aktif')<li>Alamat Perusahaan</li>@endif
-            @if($additional_lampiran_pengadaans->pengajuan_anggaran == 'aktif')<li>Pengajuan Anggaran</li>@endif
-          @endforeach
-        </ul>
         <div>Created At :</div>
         <p>{{ $penunjukan_langsung->created_at }}</p>
         <div>Updated At :</div>

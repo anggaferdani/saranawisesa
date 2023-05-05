@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\User;
 use App\Models\JadwalLelang;
 use App\Models\LampiranPengadaan;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +21,6 @@ class Lelang extends Model
         'id',
         'kode_lelang',
         'jenis_pengadaan_id',
-        'user_id',
         'nama_lelang',
         'urian_singkat_pekerjaan',
         'tanggal_mulai_lelang',
@@ -56,15 +54,11 @@ class Lelang extends Model
         return $this->hasMany(LampiranPengadaan::class);
     }
 
-    public function additional_lampiran_pengadaans(){
-        return $this->hasMany(AdditionalLampiranPengadaan::class);
-    }
-
     public function jenis_pengadaans(){
         return $this->belongsTo(JenisPengadaan::class, 'jenis_pengadaan_id');
     }
 
-    public function users(){
-        return $this->belongsTo(User::class, 'user_id');
+    public function perusahaans(){
+        return $this->hasMany(Perusahaan::class);
     }
 }

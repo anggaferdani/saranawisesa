@@ -2,30 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Lelang;
 use Illuminate\Http\Request;
 use App\Models\JenisPengadaan;
 use App\Models\AdditionalLampiranPengadaan;
+use App\Models\Perusahaan;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class PenunjukanLangsungController extends Controller
 {
     public function index(){
-        $penunjukan_langsung = Lelang::with('users')->get();
+        $penunjukan_langsung = Lelang::with('perusahaans')->get();
         return view('pages.penunjukan-langsung.index', compact('penunjukan_langsung'));
     }
 
     public function create(){
         $jenis_pengadaan = JenisPengadaan::all();
-        $user = User::all();
-        return view('pages.penunjukan-langsung.create', compact('jenis_pengadaan', 'user'));
+        $perusahaan = Perusahaan::all();
+        return view('pages.penunjukan-langsung.create', compact('jenis_pengadaan', 'perusahaan'));
     }
 
     public function store(Request $request){
         $request->validate([
             'jenis_pengadaan_id' => 'required',
-            'user_id' => 'required',
             'nama_lelang' => 'required',
             'urian_singkat_pekerjaan' => 'required',
             'tanggal_mulai_lelang' => 'required|after:yesterday',
@@ -45,7 +44,6 @@ class PenunjukanLangsungController extends Controller
         $input_array_penunjukan_langsung = array(
             'kode_lelang' => $kode_lelang,
             'jenis_pengadaan_id' => $request['jenis_pengadaan_id'],
-            'user_id' => $request['user_id'],
             'nama_lelang' => $request['nama_lelang'],
             'urian_singkat_pekerjaan' => $request['urian_singkat_pekerjaan'],
             'tanggal_mulai_lelang' => $request['tanggal_mulai_lelang'],
@@ -59,14 +57,6 @@ class PenunjukanLangsungController extends Controller
 
         $penunjukan_langsung = Lelang::create($input_array_penunjukan_langsung);
 
-        $additional = new AdditionalLampiranPengadaan();
-        $additional->lelang_id = $penunjukan_langsung->id;
-        if($request->has('nama_perusahaan')){ $additional->nama_perusahaan = $request->input('nama_perusahaan'); }else{ $additional->nama_perusahaan = 'tidak_aktif'; }
-        if($request->has('email_perusahaan')){ $additional->email_perusahaan = $request->input('email_perusahaan'); }else{ $additional->email_perusahaan = 'tidak_aktif'; }
-        if($request->has('alamat_perusahaan')){ $additional->alamat_perusahaan = $request->input('alamat_perusahaan'); }else{ $additional->alamat_perusahaan = 'tidak_aktif'; }
-        if($request->has('pengajuan_anggaran')){ $additional->pengajuan_anggaran = $request->input('pengajuan_anggaran'); }else{ $additional->pengajuan_anggaran = 'tidak_aktif'; }
-        $additional->save();
-
         if(auth()->user()->level == 'superadmin'){
             return redirect()->route('eproc.superadmin.penunjukan-langsung.index')->with('success', 'Berhasil ditambahkan pada : '.$penunjukan_langsung->created_at);
         }elseif(auth()->user()->level == 'admin'){
@@ -75,7 +65,7 @@ class PenunjukanLangsungController extends Controller
     }
 
     public function show($id){
-        $penunjukan_langsung = Lelang::with('additional_lampiran_pengadaans', 'jenis_pengadaans', 'users')->find($id);
+        $penunjukan_langsung = Lelang::with('additional_lampiran_pengadaans', 'jenis_pengadaans', 'perusahaans')->find($id);
         return view('pages.penunjukan-langsung.show', compact('penunjukan_langsung'));
     }
 
@@ -116,13 +106,6 @@ class PenunjukanLangsungController extends Controller
             'syarat_kualifikasi' => $request->syarat_kualifikasi,
         ]);
 
-        $penunjukan_langsung->additional_lampiran_pengadaans()->update([
-            'nama_perusahaan' => $request->nama_perusahaan,
-            'email_perusahaan' => $request->email_perusahaan,
-            'alamat_perusahaan' => $request->alamat_perusahaan,
-            'pengajuan_anggaran' => $request->pengajuan_anggaran,
-        ]);
-        
         if(auth()->user()->level == 'superadmin'){
             return redirect()->route('eproc.superadmin.penunjukan-langsung.index')->with('success', 'Berhasil dilakukan perubahan pada : '.$penunjukan_langsung->created_at);
         }elseif(auth()->user()->level == 'admin'){

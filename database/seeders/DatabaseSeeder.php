@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Artikel;
 use App\Models\Direksi;
+use App\Models\Perusahaan;
 use App\Models\Portofolio;
 use App\Models\User;
 use App\Models\Setting;
@@ -26,18 +27,16 @@ class DatabaseSeeder extends Seeder
             'level' => 'superadmin',
         ]);
 
-        User::create([
-            'nama_panjang' => 'Perusahaan0001',
-            'email' => 'perusahaan0001@gmail.com',
+        Perusahaan::create([
+            'nama_perusahaan' => 'Perusahaan0001',
+            'email_perusahaan' => 'perusahaan0001@gmail.com',
             'password' => bcrypt(12345678),
-            'level' => 'perusahaan',
         ]);
 
-        User::create([
-            'nama_panjang' => 'Perusahaan0002',
-            'email' => 'perusahaan0002@gmail.com',
+        Perusahaan::create([
+            'nama_perusahaan' => 'Perusahaan0002',
+            'email_perusahaan' => 'perusahaan0002@gmail.com',
             'password' => bcrypt(12345678),
-            'level' => 'perusahaan',
         ]);
 
         Setting::create([

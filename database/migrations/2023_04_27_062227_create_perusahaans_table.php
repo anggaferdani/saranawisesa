@@ -13,12 +13,10 @@ return new class extends Migration
     {
         Schema::create('perusahaans', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('lelang_id')->nullable();
             $table->string('nama_perusahaan');
-            $table->integer('nib');
-            $table->string('dokumen_pendukung');
-            $table->string('telepon_perusahaan');
             $table->string('email_perusahaan');
-            $table->text('alamat_perusahaan');
+            $table->string('password');
             $table->enum('status_aktif', ['aktif', 'tidak_aktif'])->default('aktif');
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();

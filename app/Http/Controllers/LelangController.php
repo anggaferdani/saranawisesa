@@ -55,14 +55,6 @@ class LelangController extends Controller
 
         $lelang = Lelang::create($input_array_lelang);
 
-        $additional = new AdditionalLampiranPengadaan();
-        $additional->lelang_id = $lelang->id;
-        if($request->has('nama_perusahaan')){ $additional->nama_perusahaan = $request->input('nama_perusahaan'); }else{ $additional->nama_perusahaan = 'tidak_aktif'; }
-        if($request->has('email_perusahaan')){ $additional->email_perusahaan = $request->input('email_perusahaan'); }else{ $additional->email_perusahaan = 'tidak_aktif'; }
-        if($request->has('alamat_perusahaan')){ $additional->alamat_perusahaan = $request->input('alamat_perusahaan'); }else{ $additional->alamat_perusahaan = 'tidak_aktif'; }
-        if($request->has('pengajuan_anggaran')){ $additional->pengajuan_anggaran = $request->input('pengajuan_anggaran'); }else{ $additional->pengajuan_anggaran = 'tidak_aktif'; }
-        $additional->save();
-
         if(auth()->user()->level == 'superadmin'){
             return redirect()->route('eproc.superadmin.lelang.index')->with('success', 'Berhasil ditambahkan pada : '.$lelang->created_at);
         }elseif(auth()->user()->level == 'admin'){
@@ -112,13 +104,6 @@ class LelangController extends Controller
             'syarat_kualifikasi' => $request->syarat_kualifikasi,
         ]);
 
-        $lelang->additional_lampiran_pengadaans()->update([
-            'nama_perusahaan' => $request->nama_perusahaan,
-            'email_perusahaan' => $request->email_perusahaan,
-            'alamat_perusahaan' => $request->alamat_perusahaan,
-            'pengajuan_anggaran' => $request->pengajuan_anggaran,
-        ]);
-        
         if(auth()->user()->level == 'superadmin'){
             return redirect()->route('eproc.superadmin.lelang.index')->with('success', 'Berhasil dilakukan perubahan pada : '.$lelang->created_at);
         }elseif(auth()->user()->level == 'admin'){

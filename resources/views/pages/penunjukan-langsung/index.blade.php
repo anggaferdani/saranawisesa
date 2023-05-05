@@ -62,7 +62,6 @@
                     <td>{{ $id }}</td>
                     <td>{{ $penunjukan_langsungs->kode_lelang }}</td>
                     <td>{{ $penunjukan_langsungs->nama_lelang }}</td>
-                    <td>{{ $penunjukan_langsungs->users->nama_panjang }}</td>
                     <td>{{ 'Rp. '.strrev(implode('.', str_split(strrev(strval($penunjukan_langsungs->hps)), 3))) }}</td>
                     <td>
                       @if(now()->toDateTimeString() > $penunjukan_langsungs->tanggal_akhir_lelang)
@@ -78,6 +77,7 @@
                           @method('DELETE')
                           <a href="{{ route('eproc.superadmin.penunjukan-langsung.show', $penunjukan_langsungs->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
                           <a href="{{ route('eproc.superadmin.penunjukan-langsung.edit', $penunjukan_langsungs->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
+                          <a href="{{ route('eproc.superadmin.jadwal-lelang.index', $penunjukan_langsungs->id) }}" class="btn btn-icon btn-primary"><i class="fa fa-calendar"></i></a>
                           <button type="button" class="btn btn-icon btn-danger delete" data-id="{{ $penunjukan_langsungs->id }}"><i class="fa fa-trash"></i></button>
                         </form>
                       @endif
@@ -87,6 +87,7 @@
                           @method('DELETE')
                           <a href="{{ route('eproc.admin.penunjukan-langsung.show', $penunjukan_langsungs->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
                           <a href="{{ route('eproc.admin.penunjukan-langsung.edit', $penunjukan_langsungs->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
+                          <a href="{{ route('eproc.admin.jadwal-lelang.index', $penunjukan_langsungs->id) }}" class="btn btn-icon btn-primary"><i class="fa fa-calendar"></i></a>
                           <button type="button" class="btn btn-icon btn-danger delete" data-id="{{ $penunjukan_langsungs->id }}"><i class="fa fa-trash"></i></button>
                         </form>
                       @endif
