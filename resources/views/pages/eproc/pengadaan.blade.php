@@ -17,11 +17,11 @@
       <h2>TERBARU</h2>
     </div>
 
-    <div class="container mt-5">
+    <div class="container my-5">
       <P>TENDER</P>
       @if (count($jenisPengadaansGroupByLelang))
-        @forelse ($jenisPengadaansGroupByLelang as $jenisPengadaan)
-        <a class="btn w-100 text-white" style="background-color: #0458B8;" href="#" role="button">{{ $jenisPengadaan->jenis_pengadaan }}</a>
+        @foreach ($jenisPengadaansGroupByLelang as $jenisPengadaan)
+        <a class="btn w-100 text-white" style="background-color: #0458B8; font-weight: bold" href="#" role="button">{{ $jenisPengadaan->jenis_pengadaan }}</a>
         <div class="row">
             <div class="col-md-12">
                 <table class="table mt-2">
@@ -42,23 +42,25 @@
                         <td>Approved</td>
                       </tr>
                       @empty
-                      {{--  --}}
+                      <tr>
+                        <td>No records found</td>
+                      </tr>
                       @endforelse
                     </tbody>
                 </table>
             </div>
         </div>
-        @empty
-        {{--  --}}
-        @endforelse
+        @endforeach
       @else
-      <div style="text-align: center;">Records not found</div>
+      <div style="border: 1px solid lightgrey; border-radius: 1rem; padding-block: 5rem; text-align: center;">Records not found</div>
       @endif
+
+      <hr>
 
       <P>NON TENDER</P>
       @if (count($jenisPengadaansGroupByLangsung))
         @forelse ($jenisPengadaansGroupByLangsung as $jenisPengadaan)
-        <a class="btn w-100 text-white" style="background-color: #920000;" href="#" role="button">{{ $jenisPengadaan->jenis_pengadaan }}</a>
+        <a class="btn w-100 text-white" style="background-color: #920000; font-weight: bold" href="#" role="button">{{ $jenisPengadaan->jenis_pengadaan }}</a>
         <div class="row">
             <div class="col-md-12">
                 <table class="table mt-2">
@@ -89,74 +91,8 @@
         {{--  --}}
         @endforelse
       @else
-      <div style="text-align: center;">Records not found</div>
+      <div style="border: 1px solid lightgrey; border-radius: 1rem; padding-block: 5rem; text-align: center;">Records not found</div>
       @endif
-
-        {{-- <P>TENDER</P>
-        @if($lelang)
-          @foreach($jenis_pengadaan as $jenis_pengadaans)
-          <a class="btn w-100 text-white" style="background-color: #0458B8;" href="#" role="button">{{ $jenis_pengadaans->jenis_pengadaan }}</a>
-          <div class="row">
-              <div class="col-md-12">
-                  <table class="table mt-2">
-                      <thead>
-                        <tr class="text-white" style="background-color: #0458B8;">
-                          <th scope="col">Kode</th>
-                          <th scope="col">Tanggal Berakhir</th>
-                          <th scope="col">Nama Paket</th>
-                          <th scope="col">Status</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        @foreach($jenis_pengadaans->lelangs as $lelangs)
-                          @if($lelangs->status_pengadaan == 'lelang')
-                          <tr>
-                            <td>{{ $lelangs->kode_lelang }}</td>
-                            <td>{{ $lelangs->tanggal_akhir_lelang }}</td>
-                            <td><a href="{{ route('eproc.detail-pengadaan', $lelangs->id) }}">{{ $lelangs->nama_lelang }}</a></td>
-                            <td>Approved</td>
-                          </tr>
-                          @endif
-                        @endforeach
-                      </tbody>
-                  </table>
-              </div>
-          </div>
-          @endforeach
-        @endif
-        
-        <P>NON TENDER</P>
-        @if($penunjukan_langsung)
-          @foreach($jenis_pengadaan as $jenis_pengadaans)
-          <a class="btn w-100 text-white" style="background-color: #920000;" href="#" role="button">{{ $jenis_pengadaans->jenis_pengadaan }}</a>
-          <div class="row">
-              <div class="col-md-12">
-                  <table class="table mt-2">
-                      <thead>
-                        <tr class="text-white" style="background-color: #920000;">
-                          <th scope="col">Kode</th>
-                          <th scope="col">Tanggal Berakhir</th>
-                          <th scope="col">Nama Paket</th>
-                          <th scope="col">Status</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        @foreach($jenis_pengadaans->lelangs as $lelangs)
-                          @if($lelangs->status_pengadaan == 'penunjukan_langsung')
-                          <tr>
-                            <td>{{ $lelangs->kode_lelang }}</td>
-                            <td>{{ $lelangs->tanggal_akhir_lelang }}</td>
-                            <td><a href="{{ route('eproc.detail-pengadaan', $lelangs->id) }}">{{ $lelangs->nama_lelang }}</a></td>
-                            <td>Approved</td>
-                          </tr>
-                          @endif
-                        @endforeach
-                      </tbody>
-                  </table>
-              </div>
-          </div>
-          @endforeach
-        @endif --}}
     </div>
 
     @include('templates.eproc.footer')

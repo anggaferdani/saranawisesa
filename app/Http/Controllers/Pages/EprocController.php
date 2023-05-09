@@ -27,8 +27,8 @@ class EprocController extends Controller
 
     public function pengadaan(){
         // Joy's
-        $jenisPengadaansGroupByLelang   = JenisPengadaan::with(["lelangs" => function ($query) { $query->where("status_pengadaan", "lelang"); }])->whereHas("lelangs", function ($query) { $query->where("id", "!=", null); })->get();
-        $jenisPengadaansGroupByLangsung = JenisPengadaan::with(["lelangs" => function ($query) { $query->where("status_pengadaan", "penunjukan_langsung"); }])->whereHas("lelangs", function ($query) { $query->where("id", "!=", null); })->get();
+        $jenisPengadaansGroupByLelang   = JenisPengadaan::with(["lelangs" => function ($query) { $query->where("status_pengadaan", "lelang"); }])->whereHas("lelangs", function ($query) { $query->where("status_pengadaan", "lelang"); })->get();
+        $jenisPengadaansGroupByLangsung = JenisPengadaan::with(["lelangs" => function ($query) { $query->where("status_pengadaan", "penunjukan_langsung"); }])->whereHas("lelangs", function ($query) { $query->where("status_pengadaan", "penunjukan_langsung"); })->get();
         
         // Angga's
         $profile_perusahaan = ProfilePerusahaan::first();
