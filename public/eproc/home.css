@@ -1,0 +1,136 @@
+nav{
+    z-index: 9999;
+}
+#menu__nav{
+    align-items: center;
+    justify-content: space-between;
+}
+.sub__menu{
+    gap: 1.25rem;
+}
+
+
+
+
+
+
+.circle-1{
+    position: absolute;
+    right: 0;
+    z-index: 1;
+}
+.circle-2{
+    position: absolute;
+    right: 0;
+    z-index: 2;
+}
+.circle-icon{
+    position: absolute;
+    right: 10rem;
+    top: 10rem;
+    z-index: 3;
+}
+.circle-3{
+    position: absolute;
+    top: 18rem;
+    right: 36rem;
+    z-index: 4;
+}
+.circle-4{
+    position: absolute;
+    top: 18.8rem;
+    right: 36.8rem;
+    z-index: 5;
+}
+.circle-5{
+    width: 7rem;
+    position: absolute;
+    left: 0;
+    top: 25rem;
+    z-index: 5;
+}
+.car-icon{
+    width: 9rem;
+    position: absolute;
+    left: 0;
+    top: 28rem;
+    z-index: 5;
+}
+#header{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#header h1{
+    color: #0458B8;
+}
+.btn-left{
+    background-color: #0458B8;
+}
+.btn-right{
+    background: none;
+    border: 1px solid grey;
+}
+#info{
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+}
+#ketiga{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.title{
+    display: flex;
+}
+.title p{
+    width: max-content;
+}
+.desc-isi{
+    height: 15rem;
+}
+#card{
+    display: flex;
+    justify-content: center;
+}
+#card-2{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+#card-2 .col-md-3{
+    background-color: rgb(190, 190, 190);
+    padding: 1rem 1rem;
+    text-align: center;
+    font-size: 12px;
+}
+
+
+
+footer{
+    background-color: #1A1A1A;
+    color: white;
+    padding: 4rem 0 1rem 0; 
+}
+#footer__main{
+    display: flex;
+    justify-content: space-between;
+}
+.hr {
+    margin: 1rem 0;
+    color: white;
+    background-color: white;
+    border: 0;
+    opacity: 0.25;
+  }
+.tj{
+    text-align: justify;
+}
+.legal{
+    display: flex;
+    justify-content: space-between;
+}

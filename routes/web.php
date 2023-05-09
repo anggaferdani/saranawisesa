@@ -11,6 +11,7 @@ use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\DireksiController;
 use App\Http\Controllers\Pages\ComproController as Compro;
+use App\Http\Controllers\Pages\EprocController as Eproc;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\KomisarisController;
 use App\Http\Controllers\PortofolioController;
@@ -117,6 +118,12 @@ Route::prefix('compro')->name('compro.')->group(function(){
 });
 
 Route::prefix('eproc')->name('eproc.')->group(function(){
+
+  Route::get('/pengadaan', [Eproc::class, 'pengadaan'])->name('pengadaan');
+  Route::get('/pengadaan/{id}', [Eproc::class, 'detail_pengadaan'])->name('detail-pengadaan');
+  Route::get('/ikut-pengadaan/{id}', [Eproc::class, 'ikut_pengadaan'])->name('ikut-pengadaan');
+  Route::post('/kirim-lampiran', [Eproc::class, 'kirim_lampiran'])->name('kirim-lampiran');
+
   Route::middleware(['web'])->group(function(){
     Route::middleware(['logged_in'])->group(function(){
       Route::get('/login', [EprocController::class, 'login'])->name('login');
@@ -124,6 +131,8 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
     });
     Route::get('/logout', [EprocController::class, 'logout'])->name('logout');
     Route::get('/register', [EprocController::class, 'register'])->name('register');
+    Route::post('/postregister', [EprocController::class, 'postregister'])->name('postregister');
+    Route::get('/verify', [EprocController::class, 'verify'])->name('verify');
   });
 
   Route::prefix('superadmin')->name('superadmin.')->group(function(){

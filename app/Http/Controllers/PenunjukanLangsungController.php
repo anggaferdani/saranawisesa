@@ -33,6 +33,7 @@ class PenunjukanLangsungController extends Controller
             'lokasi_pekerjaan' => 'required',
             'hps' => 'required',
             'syarat_kualifikasi' => 'required',
+            'lampiran_pengadaan' => 'required',
         ]);
         
         $id_generator = ['table' => 'lelangs', 'field' => 'kode_lelang', 'length' => 10, 'prefix' => 'PEN'];
@@ -52,6 +53,7 @@ class PenunjukanLangsungController extends Controller
             'lokasi_pekerjaan' => $request['lokasi_pekerjaan'],
             'hps' => $hps,
             'syarat_kualifikasi' => $request['syarat_kualifikasi'],
+            'lampiran_pengadaan' => $request['lampiran_pengadaan'],
             'status_pengadaan' => 'penunjukan_langsung',
         );
 
@@ -65,15 +67,14 @@ class PenunjukanLangsungController extends Controller
     }
 
     public function show($id){
-        $penunjukan_langsung = Lelang::with('additional_lampiran_pengadaans', 'jenis_pengadaans', 'perusahaans')->find($id);
+        $penunjukan_langsung = Lelang::with('jenis_pengadaans', 'perusahaans')->find($id);
         return view('pages.penunjukan-langsung.show', compact('penunjukan_langsung'));
     }
 
     public function edit($id){
         $penunjukan_langsung = Lelang::find($id);
         $jenis_pengadaan = JenisPengadaan::all();
-        $additional_lampiran_pengadaan = AdditionalLampiranPengadaan::where('lelang_id', $id)->first();
-        return view('pages.penunjukan-langsung.edit', compact('penunjukan_langsung', 'jenis_pengadaan', 'additional_lampiran_pengadaan'));
+        return view('pages.penunjukan-langsung.edit', compact('penunjukan_langsung', 'jenis_pengadaan'));
     }
 
     public function update(Request $request, $id){
@@ -89,6 +90,7 @@ class PenunjukanLangsungController extends Controller
             'lokasi_pekerjaan' => 'required',
             'hps' => 'required',
             'syarat_kualifikasi' => 'required',
+            'lampiran_pengadaan' => 'required',
         ]);
 
         $harga_perkiraan_sendiri = preg_replace('/\D/', '', $request->hps);
@@ -104,6 +106,7 @@ class PenunjukanLangsungController extends Controller
             'lokasi_pekerjaan' => $request->lokasi_pekerjaan,
             'hps' => $hps,
             'syarat_kualifikasi' => $request->syarat_kualifikasi,
+            'lampiran_pengadaan' => $request->lampiran_pengadaan,
         ]);
 
         if(auth()->user()->level == 'superadmin'){

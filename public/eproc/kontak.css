@@ -1,0 +1,40 @@
+nav{
+    z-index: 9999;
+}
+#menu__nav{
+    align-items: center;
+    justify-content: space-between;
+}
+.sub__menu{
+    gap: 1.25rem;
+}
+#top{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+
+footer{
+    background-color: #1A1A1A;
+    color: white;
+    padding: 4rem 0 1rem 0; 
+}
+#footer__main{
+    display: flex;
+    justify-content: space-between;
+}
+.hr {
+    margin: 1rem 0;
+    color: white;
+    background-color: white;
+    border: 0;
+    opacity: 0.25;
+  }
+.tj{
+    text-align: justify;
+}
+.legal{
+    display: flex;
+    justify-content: space-between;
+}

@@ -22,6 +22,7 @@
       <div class="form-group">
         <label for="email">Email</label>
         <input id="email" type="email" class="form-control" name="email">
+        {{ Session::get('verified') ? Session::get('verified') : old('email') }}
         @error('email')<div class="text-danger">{{ $message }}</div>@enderror
       </div>
       <div class="form-group">

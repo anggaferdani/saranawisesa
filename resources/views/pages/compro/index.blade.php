@@ -42,7 +42,7 @@
                   <a class="nav-link" href="#artikel">ARTIKEL</a>
                 </li>
                 <li class="nav-item mx-1">
-                  <a class="nav-link" href="#">PROCUREMENT</a>
+                  <a class="nav-link" href="{{ route('eproc.logout') }}">PROCUREMENT</a>
                 </li>
               </ul>
             </div>

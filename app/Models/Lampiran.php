@@ -3,25 +3,26 @@
 namespace App\Models;
 
 use App\Models\Lelang;
+use App\Models\Perusahaan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class LampiranPengadaan extends Model
+class Lampiran extends Model
 {
     use HasFactory;
 
-    protected $table = 'lampiran_pengadaans';
+    protected $table = 'lampirans';
 
     protected $primaryKey = 'id';
 
     protected $fillable = [
         'id',
         'lelang_id',
-        'nama_perusahaan',
-        'email_perusahaan',
-        'alamat_perusahaan',
-        'pengajuan_anggaran',
+        'perusahaan_id',
+        'penawaran',
+        'konsep',
+        'penawaran_dan_konsep',
         'status_aktif',
         'created_by',
         'updated_by',
@@ -40,5 +41,9 @@ class LampiranPengadaan extends Model
 
     public function lelangs(){
         return $this->belongsTo(Lelang::class, 'lelang_id');
+    }
+
+    public function perusahaans(){
+        return $this->belongsTo(Perusahaan::class, 'perusahaan_id');
     }
 }

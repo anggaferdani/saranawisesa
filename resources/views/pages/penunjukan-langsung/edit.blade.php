@@ -72,6 +72,23 @@
             <textarea id="syarat_kualifikasi" class="form-control ckeditor" name="syarat_kualifikasi">{{ $lelang->syarat_kualifikasi }}</textarea>
             @error('syarat_kualifikasi')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
+          <div class="form-group">
+            <label class="form-label">Lampiran Pengadaan</label>
+            <div class="selectgroup selectgroup-pills">
+              <label class="selectgroup-item">
+                <input type="radio" name="lampiran_pengadaan" value="penawaran" class="selectgroup-input" {{ $lelang->lampiran_pengadaan == 'penawaran' ? 'checked': '' }}>
+                <span class="selectgroup-button">Penawaran</span>
+              </label>
+              <label class="selectgroup-item">
+                <input type="radio" name="lampiran_pengadaan" value="konsep" class="selectgroup-input" {{ $lelang->lampiran_pengadaan == 'konsep' ? 'checked': '' }}>
+                <span class="selectgroup-button">Konsep</span>
+              </label>
+              <label class="selectgroup-item">
+                <input type="radio" name="lampiran_pengadaan" value="penawaran_dan_konsep" class="selectgroup-input" {{ $lelang->lampiran_pengadaan == 'penawaran_dan_konsep' ? 'checked': '' }}>
+                <span class="selectgroup-button">Penawaran Dan Konsep</span>
+              </label>
+            </div>
+          </div>
           @if(auth()->user()->level == 'superadmin')
             <a href="{{ route('eproc.superadmin.penunjukan-langsung.index') }}" class="btn btn-secondary">Back</a>
           @endif

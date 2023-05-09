@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use App\Models\Lelang;
+use App\Models\Lampiran;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,9 +20,15 @@ class Perusahaan extends Model
     protected $fillable = [
         'id',
         'lelang_id',
-        'nama_perusahaan',
-        'email_perusahaan',
-        'password',
+        'user_id',
+        'lampiran0001',
+        'lampiran0002',
+        'lampiran0003',
+        'lampiran0004',
+        'lampiran0005',
+        'lampiran0006',
+        'lampiran0007',
+        'lampiran0008',
         'status_aktif',
         'created_by',
         'updated_by',
@@ -39,5 +47,13 @@ class Perusahaan extends Model
 
     public function lelangs(){
         return $this->belongsTo(Lelang::class, 'lelang_id');
+    }
+
+    public function users(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function lampirans(){
+        return $this->hasMany(Lampiran::class);
     }
 }

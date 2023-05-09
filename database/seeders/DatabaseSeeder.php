@@ -27,18 +27,6 @@ class DatabaseSeeder extends Seeder
             'level' => 'superadmin',
         ]);
 
-        Perusahaan::create([
-            'nama_perusahaan' => 'Perusahaan0001',
-            'email_perusahaan' => 'perusahaan0001@gmail.com',
-            'password' => bcrypt(12345678),
-        ]);
-
-        Perusahaan::create([
-            'nama_perusahaan' => 'Perusahaan0002',
-            'email_perusahaan' => 'perusahaan0002@gmail.com',
-            'password' => bcrypt(12345678),
-        ]);
-
         Setting::create([
             'nama_perusahaan' => 'PT SARANAWISESA PROPERINDO',
             'no_telepon_perusahaan' => '(021) 83794770',

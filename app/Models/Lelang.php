@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Lampiran;
 use App\Models\JadwalLelang;
 use App\Models\LampiranPengadaan;
 use Illuminate\Support\Facades\Auth;
@@ -22,13 +23,14 @@ class Lelang extends Model
         'kode_lelang',
         'jenis_pengadaan_id',
         'nama_lelang',
-        'urian_singkat_pekerjaan',
+        'uraian_singkat_pekerjaan',
         'tanggal_mulai_lelang',
         'tanggal_akhir_lelang',
         'jenis_kontrak',
         'lokasi_pekerjaan',
         'hps',
         'syarat_kualifikasi',
+        'lampiran_pengadaan',
         'status_pengadaan',
         'status_aktif',
         'created_by',
@@ -60,5 +62,9 @@ class Lelang extends Model
 
     public function perusahaans(){
         return $this->hasMany(Perusahaan::class);
+    }
+
+    public function lampirans(){
+        return $this->hasMany(Lampiran::class);
     }
 }

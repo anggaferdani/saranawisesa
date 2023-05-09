@@ -3,8 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\Lelang;
 use App\Models\Perusahaan;
+use App\Models\VerifyEmail;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
@@ -23,6 +23,8 @@ class User extends Authenticatable
         'id',
         'nama_panjang',
         'email',
+        'email_has_been_verified',
+        'email_verified_at',
         'password',
         'level',
         'status_aktif',
@@ -48,5 +50,13 @@ class User extends Authenticatable
         static::saving(function($model){
             $model->updated_by = Auth::id();
         });
+    }
+
+    public function perusahaans(){
+        return $this->hasMany(Perusahaan::class);
+    }
+
+    public function verify_emails(){
+        return $this->hasMany(VerifyEmail::class);
     }
 }

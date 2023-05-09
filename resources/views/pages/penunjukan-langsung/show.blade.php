@@ -38,6 +38,16 @@
         <p>{{ 'Rp. '.strrev(implode('.', str_split(strrev(strval($penunjukan_langsung->hps)), 3))) }}</p>
         <div>Syarat Kualifikasi :</div>
         <p>{!! $penunjukan_langsung->syarat_kualifikasi !!}</p>
+        <div>Lampiran Pengadaan :</div>
+        @if($lelang->lampiran_pengadaan == 'penawaran')
+          <p>Penawaran</p>
+        @endif
+        @if($lelang->lampiran_pengadaan == 'konsep')
+          <p>Konsep</p>
+        @endif
+        @if($lelang->lampiran_pengadaan == 'penawaran_dan_konsep')
+          <p>Penawaran Dan Konsep</p>
+        @endif
         <div>Created At :</div>
         <p>{{ $penunjukan_langsung->created_at }}</p>
         <div>Updated At :</div>

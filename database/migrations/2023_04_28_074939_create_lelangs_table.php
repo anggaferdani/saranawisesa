@@ -16,13 +16,14 @@ return new class extends Migration
             $table->string('kode_lelang');
             $table->foreignId('jenis_pengadaan_id')->references('id')->on('jenis_pengadaans')->onDelete('cascade');
             $table->string('nama_lelang');
-            $table->string('urian_singkat_pekerjaan');
+            $table->string('uraian_singkat_pekerjaan');
             $table->date('tanggal_mulai_lelang');
             $table->date('tanggal_akhir_lelang');
             $table->string('jenis_kontrak');
             $table->string('lokasi_pekerjaan');
             $table->bigInteger('hps');
             $table->string('syarat_kualifikasi');
+            $table->enum('lampiran_pengadaan', ['penawaran', 'konsep', 'penawaran_dan_konsep']);
             $table->enum('status_pengadaan', ['lelang', 'penunjukan_langsung']);
             $table->enum('status_aktif', ['aktif', 'tidak_aktif'])->default('aktif');
             $table->string('created_by')->nullable();

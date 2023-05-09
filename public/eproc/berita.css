@@ -1,0 +1,79 @@
+nav{
+    z-index: 9999;
+}
+#menu__nav{
+    align-items: center;
+    justify-content: space-between;
+}
+.sub__menu{
+    gap: 1.25rem;
+}
+#atas{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+#header__content{
+    background-color: #0458B8;
+    padding: 2rem 2rem 0 2rem;
+    height: max-content;
+    display: flex;
+    align-items: center;
+}
+.bola-icon{
+    position: absolute;
+    top: 7rem;
+    right: 11.5rem;
+}
+
+
+#main-content{
+    display: flex;
+    flex-wrap: wrap;
+}
+.parent__content{
+    padding: 1rem;
+}
+.parent__content a{
+    text-decoration: none;
+}
+.c__desc{
+    padding: .5rem 1rem;
+}
+
+.pagination{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+.pagination .p1{
+    padding: 0 1rem;
+    background-color: #DFE4ED;
+    display: flex;
+}
+
+
+
+footer{
+    background-color: #1A1A1A;
+    color: white;
+    padding: 4rem 0 1rem 0; 
+}
+#footer__main{
+    display: flex;
+    justify-content: space-between;
+}
+.hr {
+    margin: 1rem 0;
+    color: white;
+    background-color: white;
+    border: 0;
+    opacity: 0.25;
+  }
+.tj{
+    text-align: justify;
+}
+.legal{
+    display: flex;
+    justify-content: space-between;
+}

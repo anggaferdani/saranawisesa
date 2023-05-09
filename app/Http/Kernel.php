@@ -65,6 +65,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'logged_in' => \App\Http\Middleware\LoggedInStatusCheck::class,
         'disable_back_button' => \App\Http\Middleware\DisableBackButton::class,
+        'email_has_been_verified' => \App\Http\Middleware\EmailHasBeenVerified::class,
         'compro' => \App\Http\Middleware\ComproSessionCheck::class,
         'eproc' => \App\Http\Middleware\EprocSessionCheck::class,
         'superadmin' => \App\Http\Middleware\SuperAdminCheck::class,

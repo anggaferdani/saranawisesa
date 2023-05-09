@@ -17,10 +17,16 @@
                 @if($currentStep == 1)
                 <div class="step-one">
                     @csrf
+                    <input id="user_id" type="hidden" class="form-control" name="user_id" value="{{ $user_id }}" wire:model="user_id">
                     <div class="form-group">
-                        <label for="nama_perusahaan">Nama Perusahaan</label>
-                        <input id="nama_perusahaan" type="text" class="form-control" name="nama_perusahaan" wire:model="nama_perusahaan">
-                        @error('nama_perusahaan')<div class="text-danger">{{ $message }}</div>@enderror
+                        <label for="lampiran0001">Lampiran 0001</label>
+                        <input id="lampiran0001" type="text" class="form-control" name="lampiran0001" wire:model="lampiran0001">
+                        @error('lampiran0001')<div class="text-danger">{{ $message }}</div>@enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="lampiran0002">Lampiran 0002</label>
+                        <input id="lampiran0002" type="text" class="form-control" name="lampiran0002" wire:model="lampiran0002">
+                        @error('lampiran0002')<div class="text-danger">{{ $message }}</div>@enderror
                     </div>
                 </div>
                 @endif
@@ -28,14 +34,14 @@
                 <div class="step-two">
                     @csrf
                     <div class="form-group">
-                        <label for="nib">Nomor Induk Berusaha</label>
-                        <input id="nib" type="number" class="form-control" name="nib" wire:model="nib">
-                        @error('nib')<div class="text-danger">{{ $message }}</div>@enderror
+                        <label for="lampiran0003">Lampiran 0003</label>
+                        <input id="lampiran0003" type="text" class="form-control" name="lampiran0003" wire:model="lampiran0003">
+                        @error('lampiran0003')<div class="text-danger">{{ $message }}</div>@enderror
                     </div>
                     <div class="form-group">
-                        <label for="alamat_perusahaan">Alamat Perusahaan</label>
-                        <textarea id="alamat_perusahaan" class="form-control" name="alamat_perusahaan" wire:model="alamat_perusahaan"></textarea>
-                        @error('alamat_perusahaan')<div class="text-danger">{{ $message }}</div>@enderror
+                        <label for="lampiran0004">Lampiran 0004</label>
+                        <input id="lampiran0004" type="text" class="form-control" name="lampiran0004" wire:model="lampiran0004">
+                        @error('lampiran0004')<div class="text-danger">{{ $message }}</div>@enderror
                     </div>
                 </div>
                 @endif
@@ -43,14 +49,14 @@
                 <div class="step-three">
                     @csrf
                     <div class="form-group">
-                        <label for="telepon_perusahaan">Telepon Perusahaan</label>
-                        <input id="telepon_perusahaan" type="number" class="form-control" name="telepon_perusahaan" wire:model="telepon_perusahaan">
-                        @error('telepon_perusahaan')<div class="text-danger">{{ $message }}</div>@enderror
+                        <label for="lampiran0005">Lampiran 0005</label>
+                        <input id="lampiran0005" type="text" class="form-control" name="lampiran0005" wire:model="lampiran0005">
+                        @error('lampiran0005')<div class="text-danger">{{ $message }}</div>@enderror
                     </div>
                     <div class="form-group">
-                        <label for="email_perusahaan">Email Perusahaan</label>
-                        <input id="email_perusahaan" type="email" class="form-control" name="email_perusahaan" wire:model="email_perusahaan">
-                        @error('email_perusahaan')<div class="text-danger">{{ $message }}</div>@enderror
+                        <label for="lampiran0006">Lampiran 0006</label>
+                        <input id="lampiran0006" type="text" class="form-control" name="lampiran0006" wire:model="lampiran0006">
+                        @error('lampiran0006')<div class="text-danger">{{ $message }}</div>@enderror
                     </div>
                 </div>
                 @endif
@@ -58,9 +64,14 @@
                 <div class="step-four">
                     @csrf
                     <div class="form-group">
-                        <label for="dokumen_pendukung">Dokumen Pendukung</label>
-                        <input id="dokumen_pendukung" type="file" class="form-control" name="dokumen_pendukung" wire:model="dokumen_pendukung">
-                        @error('dokumen_pendukung')<div class="text-danger">{{ $message }}</div>@enderror
+                        <label for="lampiran0007">Lampiran 0007</label>
+                        <input id="lampiran0007" type="text" class="form-control" name="lampiran0007" wire:model="lampiran0007">
+                        @error('lampiran0007')<div class="text-danger">{{ $message }}</div>@enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="lampiran0008">Lampiran 0008</label>
+                        <input id="lampiran0008" type="file" class="form-control" name="lampiran0008" wire:model="lampiran0008">
+                        @error('lampiran0008')<div class="text-danger">{{ $message }}</div>@enderror
                     </div>
                     <div class="form-group">
                         <div class="custom-control custom-checkbox">

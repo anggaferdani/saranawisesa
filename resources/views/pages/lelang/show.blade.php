@@ -19,7 +19,7 @@
         <div>Nama Lelang :</div>
         <p>{{ $lelang->nama_lelang }}</p>
         <div>Uraian Singkat Pekerjaan :</div>
-        <p>{{ $lelang->urian_singkat_pekerjaan }}</p>
+        <p>{{ $lelang->uraian_singkat_pekerjaan }}</p>
         <div>Tanggal Mulai Lelang :</div>
         <p>{{ $lelang->tanggal_mulai_lelang }}</p>
         <div>Tanggal Akhir Lelang :</div>
@@ -36,6 +36,16 @@
         <p>{{ 'Rp. '.strrev(implode('.', str_split(strrev(strval($lelang->hps)), 3))) }}</p>
         <div>Syarat Kualifikasi :</div>
         <p>{!! $lelang->syarat_kualifikasi !!}</p>
+        <div>Lampiran Pengadaan :</div>
+        @if($lelang->lampiran_pengadaan == 'penawaran')
+          <p>Penawaran</p>
+        @endif
+        @if($lelang->lampiran_pengadaan == 'konsep')
+          <p>Konsep</p>
+        @endif
+        @if($lelang->lampiran_pengadaan == 'penawaran_dan_konsep')
+          <p>Penawaran Dan Konsep</p>
+        @endif
         <div>Created At :</div>
         <p>{{ $lelang->created_at }}</p>
         <div>Updated At :</div>

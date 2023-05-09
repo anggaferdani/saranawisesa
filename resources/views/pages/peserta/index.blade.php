@@ -58,8 +58,8 @@
                   <?php $id++; ?>
                   <tr>
                     <td>{{ $id }}</td>
-                    <td>{{ $perusahaans->nama_perusahaan }}</td>
-                    <td>{{ $perusahaans->email_perusahaan }}</td>
+                    <td>{{ $perusahaans->users->nama_panjang }}</td>
+                    <td>{{ $perusahaans->users->email }}</td>
                     <td>
                       @if(auth()->user()->level == 'superadmin')
                       <a href="{{ route('eproc.superadmin.peserta.show', ['id' => $perusahaans->id, 'lelang_id' => $lelang->id]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>

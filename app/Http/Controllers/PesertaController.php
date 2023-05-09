@@ -11,14 +11,13 @@ class PesertaController extends Controller
 {
     public function index($lelang_id){
         $lelang = Lelang::find($lelang_id);
-        $perusahaan = Perusahaan::all();
+        $perusahaan = Perusahaan::with('users')->get();
         return view('pages.peserta.index', compact('lelang', 'perusahaan'));
     }
 
     public function show($lelang_id, $id){
         $lelang = Lelang::find($lelang_id);
         $perusahaan = Perusahaan::find($id);
-        $additional_lampiran_pengadaan = AdditionalLampiranPengadaan::find($lelang_id);
-        return view('pages.peserta.show', compact('lelang', 'perusahaan', 'additional_lampiran_pengadaan'));
+        return view('pages.peserta.show', compact('lelang', 'perusahaan'));
     }
 }

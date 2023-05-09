@@ -13,12 +13,20 @@
     <div class="card">
       <div class="card-body">
         <div>Nama Perusahaan :</div>
-        <p>{{ $perusahaan->nama_perusahaan }}</p>
+        <p>{{ $perusahaan->users->nama_panjang }}</p>
         <div>Email Perusahaan :</div>
-        <p>{{ $perusahaan->email_perusahaan }}</p>
-        @if($additional_lampiran_pengadaan->status_aktif == 'aktif')
-        <div>Email Perusahaan :</div>
-        <p>{{ $perusahaan->email_perusahaan }}</p>
+        <p>{{ $perusahaan->users->email }}</p>
+        <div>Lampiran Pengadaan :</div>
+        @if($lelang->lampiran_pengadaan == 'penawaran')
+          <p>Penawaran</p>
+        @endif
+        @if($lelang->lampiran_pengadaan == 'konsep')
+          <p>Konsep</p>
+        @endif
+        @if($lelang->lampiran_pengadaan == 'penawaran_dan_konsep')
+          <p>Penawaran Dan Konsep</p>
+        @endif
+        <p>{{ $perusahaan->lampiran_pengadaan }}</p>
         <div>Created At :</div>
         <p>{{ $perusahaan->created_at }}</p>
         <div>Updated At :</div>

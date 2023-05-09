@@ -29,15 +29,15 @@
               <label class="form-label">Level</label>
               <div class="selectgroup selectgroup-pills">
                 <label class="selectgroup-item">
-                  <input type="radio" name="level" value="2" class="selectgroup-input" checked>
+                  <input type="radio" name="level" value="admin" class="selectgroup-input" checked>
                   <span class="selectgroup-button">Admin</span>
                 </label>
                 <label class="selectgroup-item">
-                  <input type="radio" name="level" value="3" class="selectgroup-input">
+                  <input type="radio" name="level" value="creator" class="selectgroup-input">
                   <span class="selectgroup-button">Creator</span>
                 </label>
                 <label class="selectgroup-item">
-                  <input type="radio" name="level" value="4" class="selectgroup-input">
+                  <input type="radio" name="level" value="helpdesk" class="selectgroup-input">
                   <span class="selectgroup-button">Helpdesk</span>
                 </label>
               </div>

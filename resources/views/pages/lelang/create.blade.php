@@ -37,9 +37,9 @@
             @error('nama_lelang')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           <div class="form-group">
-            <label for="urian_singkat_pekerjaan">Uraian Singkat Pekerjaan</label>
-            <input id="urian_singkat_pekerjaan" type="text" class="form-control" name="urian_singkat_pekerjaan">
-            @error('urian_singkat_pekerjaan')<div class="text-danger">{{ $message }}</div>@enderror
+            <label for="uraian_singkat_pekerjaan">Uraian Singkat Pekerjaan</label>
+            <input id="uraian_singkat_pekerjaan" type="text" class="form-control" name="uraian_singkat_pekerjaan">
+            @error('uraian_singkat_pekerjaan')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           <div class="form-group">
             <label for="tanggal_mulai_lelang">Tanggal Mulai Lelang</label>
@@ -70,6 +70,23 @@
             <label for="syarat_kualifikasi">Syarat Kualifikasi</label>
             <textarea id="syarat_kualifikasi" class="form-control ckeditor" name="syarat_kualifikasi"></textarea>
             @error('syarat_kualifikasi')<div class="text-danger">{{ $message }}</div>@enderror
+          </div>
+          <div class="form-group">
+            <label class="form-label">Lampiran Pengadaan</label>
+            <div class="selectgroup selectgroup-pills">
+              <label class="selectgroup-item">
+                <input type="radio" name="lampiran_pengadaan" value="penawaran" class="selectgroup-input" checked>
+                <span class="selectgroup-button">Penawaran</span>
+              </label>
+              <label class="selectgroup-item">
+                <input type="radio" name="lampiran_pengadaan" value="konsep" class="selectgroup-input">
+                <span class="selectgroup-button">Konsep</span>
+              </label>
+              <label class="selectgroup-item">
+                <input type="radio" name="lampiran_pengadaan" value="penawaran_dan_konsep" class="selectgroup-input">
+                <span class="selectgroup-button">Penawaran Dan Konsep</span>
+              </label>
+            </div>
           </div>
           @if(auth()->user()->level == 'superadmin')
             <a href="{{ route('eproc.superadmin.lelang.index') }}" class="btn btn-secondary">Back</a>

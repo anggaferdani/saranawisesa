@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('lampirans', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_panjang');
-            $table->string('email')->unique();
-            $table->string('email_has_been_verified')->nullable();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->enum('level', ['superadmin', 'admin', 'creator', 'helpdesk', 'perusahaan']);
+            $table->foreignId('lelang_id')->references('id')->on('lelangs')->onDelete('cascade');
+            $table->foreignId('perusahaan_id')->references('id')->on('perusahaans')->onDelete('cascade');
+            $table->string('penawaran')->nullable();
+            $table->string('konsep')->nullable();
+            $table->string('penawaran_dan_konsep')->nullable();
             $table->enum('status_aktif', ['aktif', 'tidak_aktif'])->default('aktif');
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('lampirans');
     }
 };
