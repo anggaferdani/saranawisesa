@@ -6,6 +6,8 @@ namespace Database\Seeders;
 
 use App\Models\Artikel;
 use App\Models\Direksi;
+use App\Models\JenisPengadaan;
+use App\Models\Lelang;
 use App\Models\Perusahaan;
 use App\Models\Portofolio;
 use App\Models\User;
@@ -25,6 +27,38 @@ class DatabaseSeeder extends Seeder
             'email' => 'superadmin@gmail.com',
             'password' => bcrypt(12345678),
             'level' => 'superadmin',
+        ]);
+        
+        User::create([
+            'nama_panjang' => 'perusahaan',
+            'email_has_been_verified' => 1,
+            'email' => 'perusahaan@gmail.com',
+            'password' => bcrypt(12345678),
+            'level' => 'perusahaan',
+        ]);
+
+        JenisPengadaan::create([
+            'jenis_pengadaan' => 'Jasa',
+        ]);
+
+        Lelang::create([
+            'kode_lelang' => 'PEN0001',
+            'jenis_pengadaan_id' => 1,
+            'nama_lelang' => 'lelang0001',
+            'uraian_singkat_pekerjaan' => 'lelang laptop',
+            'tanggal_mulai_lelang' => '2023-05-09',
+            'tanggal_akhir_lelang' => '2023-05-26',
+            'jenis_kontrak' => 'tertulis',
+            'lokasi_pekerjaan' => 'jakarta',
+            'hps' => 1000000,
+            'syarat_kualifikasi' => 'lorem ipsum',
+            'lampiran_pengadaan' => 'penawaran',
+            'status_pengadaan' => 'lelang',
+        ]);
+
+        Perusahaan::create([
+            'lelang_id' => 1,
+            'user_id' => 2,
         ]);
 
         Setting::create([
