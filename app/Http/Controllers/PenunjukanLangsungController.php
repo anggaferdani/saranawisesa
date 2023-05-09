@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Lelang;
 use Illuminate\Http\Request;
 use App\Models\JenisPengadaan;
-use App\Models\AdditionalLampiranPengadaan;
 use App\Models\Perusahaan;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 
@@ -18,7 +17,7 @@ class PenunjukanLangsungController extends Controller
 
     public function create(){
         $jenis_pengadaan = JenisPengadaan::all();
-        $perusahaan = Perusahaan::all();
+        $perusahaan = Perusahaan::with('users')->get();
         return view('pages.penunjukan-langsung.create', compact('jenis_pengadaan', 'perusahaan'));
     }
 
@@ -26,7 +25,7 @@ class PenunjukanLangsungController extends Controller
         $request->validate([
             'jenis_pengadaan_id' => 'required',
             'nama_lelang' => 'required',
-            'urian_singkat_pekerjaan' => 'required',
+            'uraian_singkat_pekerjaan' => 'required',
             'tanggal_mulai_lelang' => 'required|after:yesterday',
             'tanggal_akhir_lelang' => 'required|after:yesterday',
             'jenis_kontrak' => 'required',
@@ -34,8 +33,10 @@ class PenunjukanLangsungController extends Controller
             'hps' => 'required',
             'syarat_kualifikasi' => 'required',
             'lampiran_pengadaan' => 'required',
+
+            'lelang_id' => 'required',
         ]);
-        
+
         $id_generator = ['table' => 'lelangs', 'field' => 'kode_lelang', 'length' => 10, 'prefix' => 'PEN'];
         $kode_lelang = IdGenerator::generate($id_generator);
 
@@ -46,7 +47,7 @@ class PenunjukanLangsungController extends Controller
             'kode_lelang' => $kode_lelang,
             'jenis_pengadaan_id' => $request['jenis_pengadaan_id'],
             'nama_lelang' => $request['nama_lelang'],
-            'urian_singkat_pekerjaan' => $request['urian_singkat_pekerjaan'],
+            'uraian_singkat_pekerjaan' => $request['uraian_singkat_pekerjaan'],
             'tanggal_mulai_lelang' => $request['tanggal_mulai_lelang'],
             'tanggal_akhir_lelang' => $request['tanggal_akhir_lelang'],
             'jenis_kontrak' => $request['jenis_kontrak'],
@@ -58,6 +59,13 @@ class PenunjukanLangsungController extends Controller
         );
 
         $penunjukan_langsung = Lelang::create($input_array_penunjukan_langsung);
+
+        $lelang_id = $request['lelang_id'];
+        $perusahaan = Perusahaan::where('id', $lelang_id);
+
+        $perusahaan->update([
+            'lelang_id' => $penunjukan_langsung->id,
+        ]);
 
         if(auth()->user()->level == 'superadmin'){
             return redirect()->route('eproc.superadmin.penunjukan-langsung.index')->with('success', 'Berhasil ditambahkan pada : '.$penunjukan_langsung->created_at);
@@ -83,7 +91,7 @@ class PenunjukanLangsungController extends Controller
         $request->validate([
             'jenis_pengadaan_id' => 'required',
             'nama_lelang' => 'required',
-            'urian_singkat_pekerjaan' => 'required',
+            'uraian_singkat_pekerjaan' => 'required',
             'tanggal_mulai_lelang' => 'required',
             'tanggal_akhir_lelang' => 'required',
             'jenis_kontrak' => 'required',
@@ -99,7 +107,7 @@ class PenunjukanLangsungController extends Controller
         $penunjukan_langsung->update([
             'jenis_pengadaan_id' => $request->jenis_pengadaan_id,
             'nama_lelang' => $request->nama_lelang,
-            'urian_singkat_pekerjaan' => $request->urian_singkat_pekerjaan,
+            'uraian_singkat_pekerjaan' => $request->uraian_singkat_pekerjaan,
             'tanggal_mulai_lelang' => $request->tanggal_mulai_lelang,
             'tanggal_akhir_lelang' => $request->tanggal_akhir_lelang,
             'jenis_kontrak' => $request->jenis_kontrak,

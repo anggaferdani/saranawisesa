@@ -32,14 +32,26 @@
             </select>
           </div>
           <div class="form-group">
+            <label>Perusahaan</label>
+            <select class="form-control" name="lelang_id">
+              <option selected disabled>Pilih</option>
+              @foreach ($perusahaan as $perusahaans)
+                @if($perusahaans->status_aktif == 'aktif')
+                  <option value="{{ $perusahaans->id }}">{{ $perusahaans->users->nama_panjang }}</option>
+                @endif
+              @endforeach
+              @error('lelang_id')<div class="text-danger">{{ $message }}</div>@enderror
+            </select>
+          </div>
+          <div class="form-group">
             <label for="nama_lelang">Nama Lelang</label>
             <input id="nama_lelang" type="text" class="form-control" name="nama_lelang">
             @error('nama_lelang')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           <div class="form-group">
-            <label for="urian_singkat_pekerjaan">Uraian Singkat Pekerjaan</label>
-            <input id="urian_singkat_pekerjaan" type="text" class="form-control" name="urian_singkat_pekerjaan">
-            @error('urian_singkat_pekerjaan')<div class="text-danger">{{ $message }}</div>@enderror
+            <label for="uraian_singkat_pekerjaan">Uraian Singkat Pekerjaan</label>
+            <input id="uraian_singkat_pekerjaan" type="text" class="form-control" name="uraian_singkat_pekerjaan">
+            @error('uraian_singkat_pekerjaan')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           <div class="form-group">
             <label for="tanggal_mulai_lelang">Tanggal Mulai Lelang</label>

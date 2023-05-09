@@ -38,9 +38,9 @@
             @error('nama_lelang')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           <div class="form-group">
-            <label for="urian_singkat_pekerjaan">Uraian Singkat Pekerjaan</label>
-            <input id="urian_singkat_pekerjaan" type="text" class="form-control" name="urian_singkat_pekerjaan" value="{{ $penunjukan_langsung->urian_singkat_pekerjaan }}">
-            @error('urian_singkat_pekerjaan')<div class="text-danger">{{ $message }}</div>@enderror
+            <label for="uraian_singkat_pekerjaan">Uraian Singkat Pekerjaan</label>
+            <input id="uraian_singkat_pekerjaan" type="text" class="form-control" name="uraian_singkat_pekerjaan" value="{{ $penunjukan_langsung->uraian_singkat_pekerjaan }}">
+            @error('uraian_singkat_pekerjaan')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           <div class="form-group">
             <label for="tanggal_mulai_lelang">Tanggal Mulai Lelang</label>

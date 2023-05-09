@@ -16,12 +16,10 @@
         <p>{{ $penunjukan_langsung->kode_lelang }}</p>
         <div>Jenis Lelang :</div>
         <p>{{ $penunjukan_langsung->jenis_pengadaans->jenis_pengadaan }}</p>
-        <div>Nama Perusahaan :</div>
-        <p>{{ $penunjukan_langsung->perusahaans->nama_perusahaan }}</p>
         <div>Nama Lelang :</div>
         <p>{{ $penunjukan_langsung->nama_lelang }}</p>
         <div>Uraian Singkat Pekerjaan :</div>
-        <p>{{ $penunjukan_langsung->urian_singkat_pekerjaan }}</p>
+        <p>{{ $penunjukan_langsung->uraian_singkat_pekerjaan }}</p>
         <div>Tanggal Mulai Lelang :</div>
         <p>{{ $penunjukan_langsung->tanggal_mulai_lelang }}</p>
         <div>Tanggal Akhir Lelang :</div>
@@ -39,13 +37,13 @@
         <div>Syarat Kualifikasi :</div>
         <p>{!! $penunjukan_langsung->syarat_kualifikasi !!}</p>
         <div>Lampiran Pengadaan :</div>
-        @if($lelang->lampiran_pengadaan == 'penawaran')
+        @if($penunjukan_langsung->lampiran_pengadaan == 'penawaran')
           <p>Penawaran</p>
         @endif
-        @if($lelang->lampiran_pengadaan == 'konsep')
+        @if($penunjukan_langsung->lampiran_pengadaan == 'konsep')
           <p>Konsep</p>
         @endif
-        @if($lelang->lampiran_pengadaan == 'penawaran_dan_konsep')
+        @if($penunjukan_langsung->lampiran_pengadaan == 'penawaran_dan_konsep')
           <p>Penawaran Dan Konsep</p>
         @endif
         <div>Created At :</div>

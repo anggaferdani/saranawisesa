@@ -49,7 +49,6 @@
                 <td>No</td>
                 <td>Kode Lelang</td>
                 <td>Nama Lelang</td>
-                <td>Nama Perusahaan</td>
                 <td>HPS</td>
                 <td>Tgl Akhir Lelang</td>
                 <td>Action</td>
