@@ -17,26 +17,30 @@
     @include('templates.compro.header')
 
     <!-- hero section -->
-    <br><br><br><br>
-
-    <section class="qe">
-      <main>
-        <img src="/portofolio/{{ $portofolio->portofolio }}" style="width: 100%; height: 65vh; object-fit: cover" alt="">
-      </main>
-      <div class="container">
-        <div class="row py-5">
+    <br><br>
+    
+    <!-- Our Portofolio -->
+    <section id="portofolio">
+      <div class="container position-relative">
+        <div class="row">
           <div class="col-12">
-            <span class="mall">{{ $portofolio->judul_portofolio }}</span>
-            <p class="alamat mt-2">{{ $portofolio->alamat_portofolio }}</p>
-            <p class="penje">{{ $portofolio->isi_portofolio }}</p>
-            <p class="dater">Ditulis oleh {{ $portofolio->created_by }}</p>
+            <h2 class="py-5" >Our Portofolio</h2>
           </div>
+        </div>
+        <div id="outer-grid3">
+          @foreach ($portofolio as $portofolios)
+          <div style="background-image: linear-gradient(180deg, rgba(217, 217, 217, 0) 4.69%, #000000 100%), url('{{ asset('portofolio/'.$portofolios['portofolio']) }}'); width: 100%; background-repeat: no-repeat; background-size: cover;">
+            <h4>{{ Str::limit($portofolios->judul_portofolio, 25) }}</h4>
+            <p class="jl">{{ Str::limit($portofolios->alamat_portofolio, 70) }}</p>
+            <p class="more"><a href="{{ route('portofolio', $portofolios->id) }}">View more <img src="{{ asset('compro/img/arrow_right_alt.png') }}" alt=""></a></p>
+          </div>
+          @endforeach
         </div>
       </div>
     </section>
 
     @include('templates.compro.footer')
-
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   </body>
 </html>

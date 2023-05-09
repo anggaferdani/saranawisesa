@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pages;
 
 use App\Models\User;
+use App\Models\Berita;
 use App\Models\Lelang;
 use App\Models\Setting;
 use App\Models\Lampiran;
@@ -15,6 +16,15 @@ use App\Http\Controllers\Controller;
 
 class EprocController extends Controller
 {
+    public function beranda(){
+        $profile_perusahaan = ProfilePerusahaan::first();
+        $setting = Setting::first();
+        return view('pages.eproc.beranda', compact(
+            'profile_perusahaan',
+            'setting',
+        ));
+    }
+
     public function pengadaan(){
         // Joy's
         $jenisPengadaansGroupByLelang   = JenisPengadaan::with(["lelangs" => function ($query) { $query->where("status_pengadaan", "lelang"); }])->whereHas("lelangs", function ($query) { $query->where("id", "!=", null); })->get();
@@ -101,5 +111,25 @@ class EprocController extends Controller
         $berita = Lampiran::create($input_array_lampiran);
 
         return redirect()->back()->with('success', 'Berhasil ditambahkan pada : '.$berita->created_at.' Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, omnis laborum in quidem consequuntur at nostrum saepe atque, deserunt non sequi sit totam iure dolores eos ipsam fugit aperiam odio.');
+    }
+
+    public function berita(){
+        $profile_perusahaan = ProfilePerusahaan::first();
+        $setting = Setting::first();
+        $berita = Berita::all();
+        return view('pages.eproc.berita', compact(
+            'profile_perusahaan',
+            'setting',
+            'berita',
+        ));
+    }
+
+    public function kontak_kami(){
+        $profile_perusahaan = ProfilePerusahaan::first();
+        $setting = Setting::first();
+        return view('pages.eproc.kontak-kami', compact(
+            'profile_perusahaan',
+            'setting',
+        ));
     }
 }

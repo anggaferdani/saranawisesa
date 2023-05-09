@@ -14,42 +14,7 @@
     <title>Saranawisesa</title>
   </head>
   <body>
-    <header>
-      <div class="">
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top ">
-          <div class="container">
-            <a href="{{ route('index') }}">
-              <img src="{{ asset('compro/img/logo-saranawisesa.png') }}" alt="" width="56" class="d-inline-block align-text-top">
-            </a>
-            <button class=" mx-4 navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav ms-auto py-4">
-                <li class="nav-item mx-1">
-                  <a class="nav-link " aria-current="page" href="#home">HOME</a>
-                </li>
-                <li class="nav-item mx-1">
-                  <a class="nav-link" href="#profile-perusahaan">PROFIL</a>
-                </li>
-                <li class="nav-item mx-1">
-                  <a class="nav-link" href="#produk">PRODUK & LAYANAN</a>
-                </li>
-                <li class="nav-item mx-1">
-                  <a class="nav-link" href="#portofolio">PORTOFOLIO</a>
-                </li>
-                <li class="nav-item mx-1">
-                  <a class="nav-link" href="#artikel">ARTIKEL</a>
-                </li>
-                <li class="nav-item mx-1">
-                  <a class="nav-link" href="{{ route('eproc.logout') }}">PROCUREMENT</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </div>
-    </header>
+    @include('templates.compro.header')
 
     <!-- hero section -->
     <section id="home">
@@ -172,7 +137,7 @@
         </div>
         <div id="outer-grid3">
           @foreach ($portofolio->take(6) as $portofolios)
-          <div style="background-image: linear-gradient(180deg, rgba(217, 217, 217, 0) 4.69%, #000000 100%), url('portofolio/{{ $portofolios->portofolio }}'); width: 100%; background-repeat: no-repeat; background-size: cover;">
+          <div style="background-image: linear-gradient(180deg, rgba(217, 217, 217, 0) 4.69%, #000000 100%), url('{{ asset('portofolio/'.$portofolios['portofolio']) }}'); width: 100%; background-repeat: no-repeat; background-size: cover;">
             <h4>{{ Str::limit($portofolios->judul_portofolio, 25) }}</h4>
             <p class="jl">{{ Str::limit($portofolios->alamat_portofolio, 70) }}</p>
             <p class="more"><a href="{{ route('portofolio', $portofolios->id) }}">View more <img src="{{ asset('compro/img/arrow_right_alt.png') }}" alt=""></a></p>
@@ -196,17 +161,17 @@
             <h2 class="py-5">Article</h2>
           </div>
           <div class="col-6">
-           <a href=""><p class="py-5 float-end" >Lihat selengkapnya <img src="{{ asset('compro/img/black.png') }}" alt=""></p></a>
+           <a href="{{ route('artikel2') }}"><p class="py-5 float-end" >Lihat selengkapnya <img src="{{ asset('compro/img/black.png') }}" alt=""></p></a>
           </div>
         </div>
         <div id="outer-grid4">
           @foreach ($artikel->take(5) as $artikels)
             <div class="mb-3">
               <div class="card-body">
-                <img src="/artikel/{{ $artikels->thumbnail }}" class="card-img-top" style="width: 100%; height: 200px; object-fit: cover;" alt="">
+                <img src="{{ asset('artikel/'.$artikels['thumbnail']) }}" class="card-img-top" style="width: 100%; height: 200px; object-fit: cover;" alt="">
                 <h5 class="card-title mb-0">{{ Str::limit($artikels->judul_artikel, 15) }}</h5>
                 <p class="card-text mb-0">{{ \Carbon\Carbon::parse($artikels->tanggal_publikasi)->format('l, d M Y') }}</p>
-                <p class="card-text text-start mb-0">{{ Str::limit($artikels->isi_artikel, 80) }}</p>
+                <p class="card-text text-start mb-0">{!! Str::limit($artikels->isi_artikel, 80) !!}</p>
                 <a href="{{ route('artikel', $artikels->id) }}" class="card-link">Read more <img src="{{ asset('compro/img/black.png') }}" alt=""></a>
               </div>
             </div>
@@ -215,87 +180,7 @@
       </div>
     </section>
 
-    <!-- FOOTER -->
-    <section>
-      <div class="foli mt-5">
-        <div class="container">
-          <div id="outer-grid5">
-            <div class="mt-4 ">
-              <h5 class="mx-4 py-2">PROFILE</h5>
-              <ul class="ulli">
-                <li class="item">
-                  <a href="about.html">About Us</a>
-                </li>
-                <li class="item">
-                  <a href="#">Visi & Misi</a>
-                </li>
-                <li class="item">
-                  <a href="#">Board of Directors</a>
-                </li>
-                <li class="item">
-                  <a href="#">Board of Commissioners</a>
-                </li>
-              </ul>
-            </div>
-            <div class="mt-4">
-              <h5 class="mx-4 py-2">PRODUCT & SERVICES</h5>
-              <ul class="ulli">
-                <li class="item">
-                  <a href="">Wise</a>
-                </li>
-                <li class="item">
-                  <a href="">Wira</a>
-                </li>
-                <li class="item">
-                  <a href="">SP Parking</a>
-                </li>
-                <li class="item">
-                  <a href="">ICT</a>
-                </li>
-                <li class="item">
-                  <a href="">DIKLAT</a>
-                </li>
-              </ul>
-            </div>
-            <div class="mt-4 ">
-              <h5 class="mx-4 py-2">CONTACT INFO</h5>
-              <ul class="ulli">
-                <li class="item">
-                  Address : {{ $setting->alamat_perusahaan }}
-                </li>
-                <li class="item">
-                  Telephone : {{ $setting->no_telepon_perusahaan }}
-                </li>
-                <li class="item">
-                  {{ $setting->email_perusahaan }}
-                </li>
-              </ul>
-            </div>
-            <div class="mt-4 ">
-              <h5 class="mx-4 py-2">SOCIAL MEDIA</h5>
-              <ul class="ulli">
-                <li class="item">
-                  <a class="bi bi-facebook" href="{{ $setting->facebook }}"> saranawisesa</a>
-                </li>
-                <li class="item">
-                  <a class="bi bi-instagram" href="{{ $setting->instagram }}"> saranawisesa.ofc</a>
-                </li>
-                <li class="item">
-                  <a class="bi bi-twitter" href="{{ $setting->twitter }}"> saranawisesa.ofc</a>
-                </li>
-                <li class="item">
-                  <a class="bi bi-youtube" href="{{ $setting->youtube }}"> saranawisesa TV</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="end" >
-        <h7>©2023 Saranawisesa. Website by Spero.id</h7>
-      </div>
-    </section>
-    <!-- AKHIR FOOTER -->
+    @include('templates.compro.footer')
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   </body>

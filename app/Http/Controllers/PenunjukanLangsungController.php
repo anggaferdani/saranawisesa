@@ -12,6 +12,7 @@ class PenunjukanLangsungController extends Controller
 {
     public function index(){
         $penunjukan_langsung = Lelang::with('perusahaans')->get();
+        $penunjukan_langsung = Perusahaan::where('lelang_id')->get();
         return view('pages.penunjukan-langsung.index', compact('penunjukan_langsung'));
     }
 
@@ -76,7 +77,8 @@ class PenunjukanLangsungController extends Controller
 
     public function show($id){
         $penunjukan_langsung = Lelang::with('jenis_pengadaans', 'perusahaans')->find($id);
-        return view('pages.penunjukan-langsung.show', compact('penunjukan_langsung'));
+        $perusahaan = Perusahaan::where('lelang_id', $penunjukan_langsung->id);
+        return view('pages.penunjukan-langsung.show', compact('penunjukan_langsung', 'perusahaan'));
     }
 
     public function edit($id){

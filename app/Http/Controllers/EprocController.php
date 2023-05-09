@@ -43,8 +43,12 @@ class EprocController extends Controller
                         $request->session()->put('eproc', $credentials);
                         return redirect()->route('eproc.admin.dashboard');
                     }elseif(auth()->user()->level == 'perusahaan'){
-                        $request->session()->put('eproc', $credentials);
-                        return redirect()->route('eproc.pengadaan');
+                        if(auth()->user()->email_has_been_verified == 1){
+                            $request->session()->put('eproc', $credentials);
+                            return redirect()->route('eproc.pengadaan');
+                        }else{
+                            return redirect()->back()->with('fail', 'Akun yang digunakan belum verifikasi');
+                        }
                     }else{
                         return redirect()->route('eproc.login')->with('fail', 'Level akun yang digunakan untuk login tidak sesuai');
                     }

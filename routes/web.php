@@ -34,8 +34,10 @@ use App\Http\Controllers\ProfilePerusahaanController;
 
 Route::get('/', [Compro::class, 'index'])->name('index');
 Route::get('/profile-perusahaan', [Compro::class, 'profile_perusahaan'])->name('profile-perusahaan');
-Route::get('/artikel/{id}', [Compro::class, 'artikel'])->name('artikel');
-Route::get('/portofolio/{id}', [Compro::class, 'portofolio'])->name('portofolio');
+Route::get('/compro/artikel', [Compro::class, 'artikel2'])->name('artikel2');
+Route::get('/compro/artikel/{id}', [Compro::class, 'artikel'])->name('artikel');
+Route::get('/compro/portofolio', [Compro::class, 'portofolio2'])->name('portofolio2');
+Route::get('/compro/portofolio/{id}', [Compro::class, 'portofolio'])->name('portofolio');
 
 Route::prefix('compro')->name('compro.')->group(function(){
   Route::middleware(['web'])->group(function(){
@@ -119,10 +121,13 @@ Route::prefix('compro')->name('compro.')->group(function(){
 
 Route::prefix('eproc')->name('eproc.')->group(function(){
 
+  Route::get('/beranda', [Eproc::class, 'beranda'])->name('beranda');
   Route::get('/pengadaan', [Eproc::class, 'pengadaan'])->name('pengadaan');
   Route::get('/pengadaan/{id}', [Eproc::class, 'detail_pengadaan'])->name('detail-pengadaan');
   Route::get('/ikut-pengadaan/{id}', [Eproc::class, 'ikut_pengadaan'])->name('ikut-pengadaan');
   Route::post('/kirim-lampiran', [Eproc::class, 'kirim_lampiran'])->name('kirim-lampiran');
+  Route::get('/berita', [Eproc::class, 'berita'])->name('berita');
+  Route::get('/kontak-kami', [Eproc::class, 'kontak_kami'])->name('kontak-kami');
 
   Route::middleware(['web'])->group(function(){
     Route::middleware(['logged_in'])->group(function(){

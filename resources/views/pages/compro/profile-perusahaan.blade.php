@@ -14,36 +14,7 @@
     <title>Saranawisesa</title>
   </head>
   <body>
-    <header>
-      <div class="">
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-          <div class="container">
-            <a href="{{ route('index') }}">
-              <img src="{{ asset('compro/img/logo-saranawisesa.png') }}" alt="" width="56" class="d-inline-block align-text-top">
-            </a>
-            <button class=" mx-4 navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav ms-auto py-4">
-                <li class="nav-item mx-1">
-                  <a class="nav-link" aria-current="page" href="{{ route('index') }}">HOME</a>
-                </li>
-                <li class="nav-item mx-1">
-                  <a class="nav-link" href="#profile-perusahaan">ABOUT US</a>
-                </li>
-                <li class="nav-item mx-1">
-                  <a class="nav-link" href="#visi">VISI & MISI</a>
-                </li>
-                <li class="nav-item mx-1">
-                  <a class="nav-link" href="#jajaran">JAJARAN DIREKTUR</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </div>
-    </header>
+    @include('templates.compro.header')
 
     <!-- hero section -->
     <br>
@@ -171,87 +142,7 @@
       </div>
     </section>
 
-    <!-- FOOTER -->
-    <section>
-      <div class="foli mt-5">
-        <div class="container">
-          <div id="outer-grid5">
-            <div class="mt-4 ">
-              <h5 class="mx-4 py-2">PROFILE</h5>
-              <ul class="ulli">
-                <li class="item">
-                  <a href="about.html">About Us</a>
-                </li>
-                <li class="item">
-                  <a href="#">Visi & Misi</a>
-                </li>
-                <li class="item">
-                  <a href="#">Board of Directors</a>
-                </li>
-                <li class="item">
-                  <a href="#">Board of Commissioners</a>
-                </li>
-              </ul>
-            </div>
-            <div class="mt-4">
-              <h5 class="mx-4 py-2">PRODUCT & SERVICES</h5>
-              <ul class="ulli">
-                <li class="item">
-                  <a href="">Wise</a>
-                </li>
-                <li class="item">
-                  <a href="">Wira</a>
-                </li>
-                <li class="item">
-                  <a href="">SP Parking</a>
-                </li>
-                <li class="item">
-                  <a href="">ICT</a>
-                </li>
-                <li class="item">
-                  <a href="">DIKLAT</a>
-                </li>
-              </ul>
-            </div>
-            <div class="mt-4 ">
-              <h5 class="mx-4 py-2">CONTACT INFO</h5>
-              <ul class="ulli">
-                <li class="item">
-                  Address : {{ $setting->alamat_perusahaan }}
-                </li>
-                <li class="item">
-                  Telephone : {{ $setting->no_telepon_perusahaan }}
-                </li>
-                <li class="item">
-                  {{ $setting->email_perusahaan }}
-                </li>
-              </ul>
-            </div>
-            <div class="mt-4 ">
-              <h5 class="mx-4 py-2">SOCIAL MEDIA</h5>
-              <ul class="ulli">
-                <li class="item">
-                  <a class="bi bi-facebook" href="{{ $setting->facebook }}"> saranawisesa</a>
-                </li>
-                <li class="item">
-                  <a class="bi bi-instagram" href="{{ $setting->instagram }}"> saranawisesa.ofc</a>
-                </li>
-                <li class="item">
-                  <a class="bi bi-twitter" href="{{ $setting->twitter }}"> saranawisesa.ofc</a>
-                </li>
-                <li class="item">
-                  <a class="bi bi-youtube" href="{{ $setting->youtube }}"> saranawisesa TV</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="end" >
-        <h7>©2023 Saranawisesa. Website by Spero.id</h7>
-      </div>
-    </section>
-    <!-- AKHIR FOOTER -->
+    @include('templates.compro.footer')
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   </body>

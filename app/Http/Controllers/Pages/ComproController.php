@@ -36,6 +36,15 @@ class ComproController extends Controller
         ));
     }
     
+    public function portofolio2(){
+        $portofolio = Portofolio::all();
+        $setting = Setting::first();
+        return view('pages.compro.portofolio2', compact(
+            'portofolio',
+            'setting',
+        ));
+    }
+
     public function portofolio($id){
         $portofolio = Portofolio::find($id);
         $portofolio2 = Portofolio::all();
@@ -43,6 +52,15 @@ class ComproController extends Controller
         return view('pages.compro.portofolio', compact(
             'portofolio',
             'portofolio2',
+            'setting',
+        ));
+    }
+
+    public function artikel2(){
+        $artikel = Artikel::all();
+        $setting = Setting::first();
+        return view('pages.compro.artikel2', compact(
+            'artikel',
             'setting',
         ));
     }
