@@ -74,14 +74,51 @@
             <div class="col-md-8 mt-2 right__content d-flex align-items-center">
                 <p class="mb-0">{!! $lelang->syarat_kualifikasi !!}</p>
             </div>
+            <div class="">
+                <label for="penawaran_dan_konsep" class="form-label">Jadwal Lelang</label>
+            <div style="overflow-x: auto;">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                          <th scope="col" style="white-space: nowrap;">#</th>
+                          <th scope="col" style="white-space: nowrap;">Nama Agenda</th>
+                          <th scope="col" style="white-space: nowrap;">Tanggal Mulai Agenda</th>
+                          <th scope="col" style="white-space: nowrap;">Tanggal Mulai Agenda</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php $id = 0; ?>
+                        @forelse ($lelang->jadwal_lelangs as $jadwal_lelang)
+                            <?php $id++; ?>
+                            @if($jadwal_lelang->status_aktif == 'aktif')
+                                <tr>
+                                    <td>{{ $id }}</td>
+                                    <td>{{ $jadwal_lelang->nama_lelang }}</td>
+                                    <td>@twitter</td>
+                                    <td>@twitter</td>
+                                </tr>
+                            @else
+                                <tr>
+                                    <td colspan="4" style="text-align: center; padding-block: 2rem;">Belum ada jadwal yang ditentukan</td>
+                                </tr>
+                            @endif
+                        @empty
+                        <tr>
+                            <td colspan="4" style="text-align: center; padding-block: 2rem;">Belum ada jadwal yang ditentukan</td>
+                        </tr>
+                        @endforelse
+                      </tbody>
+                </table>
+            </div>
+            </div>
             @if(!Auth::guest())
                 @if(empty($perusahaan->lelang_id))
-                    <a href="{{ route('eproc.ikut-pengadaan', $lelang->id) }}" class="btn btn-icon btn-primary">Ikut Pengadaan</a>
+                    <a href="{{ route('eproc.ikut-pengadaan', $perusahaan->id) }}" class="btn btn-icon btn-primary">Ikut Pengadaan</a>
                 @else
                     <form method="POST" action="{{ route('eproc.kirim-lampiran') }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
                         @csrf
                         <input id="lelang_id" type="hidden" class="form-control" name="lelang_id" value="{{ $lelang->id }}">
-                        <input id="perusahaan_id" type="hidden" class="form-control" name="perusahaan_id" value="{{ auth()->user()->id }}">
+                        <input id="perusahaan_id" type="hidden" class="form-control" name="perusahaan_id" value="{{ $perusahaan->id }}">
                         @if($lelang->lampiran_pengadaan == 'penawaran')
                             <div class="mb-3">
                                 <label for="penawaran" class="form-label">Penawaran</label>

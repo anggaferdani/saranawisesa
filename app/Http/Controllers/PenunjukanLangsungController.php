@@ -11,8 +11,20 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 class PenunjukanLangsungController extends Controller
 {
     public function index(){
-        $penunjukan_langsung = Lelang::with('perusahaans')->get();
-        $penunjukan_langsung = Perusahaan::where('lelang_id')->get();
+        $penunjukan_langsung = Lelang::with('perusahaans.users')->get();
+        $penunjukan_langsung->map(function ($query) {
+            $perusahaan = $query->perusahaans->first();
+
+            if ($perusahaan) {
+                $namaPerusahaan = $perusahaan->users->nama_panjang;
+            } else {
+                $namaPerusahaan = null;
+            }
+            
+            $query->namaPerusahaan = $namaPerusahaan;
+
+            return $query;
+        });
         return view('pages.penunjukan-langsung.index', compact('penunjukan_langsung'));
     }
 

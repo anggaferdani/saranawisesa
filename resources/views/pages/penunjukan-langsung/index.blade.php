@@ -48,7 +48,7 @@
               <tr>
                 <td>No</td>
                 <td>Kode Lelang</td>
-                <td>Nama Lelang</td>
+                <td>Nama Perusahaan</td>
                 <td>Nama Lelang</td>
                 <td>HPS</td>
                 <td>Tgl Akhir Lelang</td>
@@ -61,7 +61,7 @@
                   <tr>
                     <td>{{ $id }}</td>
                     <td>{{ $penunjukan_langsungs->kode_lelang }}</td>
-                    <td>{{ $perusahaan->users->nama_panjang }}</td>
+                    <td>{{ $penunjukan_langsungs->namaPerusahaan }}</td>
                     <td>{{ $penunjukan_langsungs->nama_lelang }}</td>
                     <td>{{ 'Rp. '.strrev(implode('.', str_split(strrev(strval($penunjukan_langsungs->hps)), 3))) }}</td>
                     <td>

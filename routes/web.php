@@ -10,16 +10,17 @@ use App\Http\Controllers\LelangController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\DireksiController;
-use App\Http\Controllers\Pages\ComproController as Compro;
-use App\Http\Controllers\Pages\EprocController as Eproc;
+use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\KomisarisController;
+use App\Http\Controllers\PerusahaanController;
 use App\Http\Controllers\PortofolioController;
 use App\Http\Controllers\JadwalLelangController;
 use App\Http\Controllers\JenisPengadaanController;
-use App\Http\Controllers\PenunjukanLangsungController;
-use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\ProfilePerusahaanController;
+use App\Http\Controllers\PenunjukanLangsungController;
+use App\Http\Controllers\Pages\EprocController as Eproc;
+use App\Http\Controllers\Pages\ComproController as Compro;
 
 /*
 |--------------------------------------------------------------------------
@@ -121,13 +122,7 @@ Route::prefix('compro')->name('compro.')->group(function(){
 
 Route::prefix('eproc')->name('eproc.')->group(function(){
 
-  Route::get('/beranda', [Eproc::class, 'beranda'])->name('beranda');
-  Route::get('/pengadaan', [Eproc::class, 'pengadaan'])->name('pengadaan');
-  Route::get('/pengadaan/{id}', [Eproc::class, 'detail_pengadaan'])->name('detail-pengadaan');
-  Route::get('/ikut-pengadaan/{id}', [Eproc::class, 'ikut_pengadaan'])->name('ikut-pengadaan');
-  Route::post('/kirim-lampiran', [Eproc::class, 'kirim_lampiran'])->name('kirim-lampiran');
-  Route::get('/berita', [Eproc::class, 'berita'])->name('berita');
-  Route::get('/kontak-kami', [Eproc::class, 'kontak_kami'])->name('kontak-kami');
+  // Route::get('/test', [Eproc::class, 'test'])->name('test');
 
   Route::middleware(['web'])->group(function(){
     Route::middleware(['logged_in'])->group(function(){
@@ -138,11 +133,26 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
     Route::get('/register', [EprocController::class, 'register'])->name('register');
     Route::post('/postregister', [EprocController::class, 'postregister'])->name('postregister');
     Route::get('/verify', [EprocController::class, 'verify'])->name('verify');
+
+    Route::get('/kualifikasi/{user_id}', [Eproc::class, 'kualifikasi'])->name('kualifikasi');
+    Route::post('/kirim-kualifikasi', [Eproc::class, 'kirim_kualifikasi'])->name('kirim-kualifikasi');
+    Route::get('/administrasi/{perusahaan_id}', [Eproc::class, 'administrasi'])->name('administrasi');
+    Route::post('/kirim-administrasi', [Eproc::class, 'kirim_administrasi'])->name('kirim-administrasi');
+
+    Route::get('/beranda', [Eproc::class, 'beranda'])->name('beranda');
+    Route::get('/pengadaan', [Eproc::class, 'pengadaan'])->name('pengadaan');
+    Route::get('/pengadaan/{id}', [Eproc::class, 'detail_pengadaan'])->name('detail-pengadaan');
+    Route::get('/ikut-pengadaan/{id}', [Eproc::class, 'ikut_pengadaan'])->name('ikut-pengadaan');
+    Route::post('/kirim-lampiran', [Eproc::class, 'kirim_lampiran'])->name('kirim-lampiran');
+    Route::get('/berita', [Eproc::class, 'berita'])->name('berita');
+    Route::get('/kontak-kami', [Eproc::class, 'kontak_kami'])->name('kontak-kami');
   });
 
   Route::prefix('superadmin')->name('superadmin.')->group(function(){
     Route::middleware(['auth:web', 'disable_back_button', 'eproc', 'superadmin'])->group(function(){
       Route::get('/dashboard', function(){return view('pages.dashboard');})->name('dashboard');
+      Route::get('perusahaan', [PerusahaanController::class, 'index'])->name('perusahaan.index');
+      Route::get('perusahaan/{id}', [PerusahaanController::class, 'show'])->name('perusahaan.show');
       Route::resource('akun', AkunController::class);
       Route::get('profile', [Controller::class, 'profile'])->name('profile');
       Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
@@ -151,6 +161,8 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::post('import', [BeritaController::class, 'import'])->name('import');
       Route::get('pdf', [BeritaController::class, 'pdf'])->name('pdf');
       Route::resource('lelang', LelangController::class);
+      Route::get('/perusahaan', [Eproc::class, 'index'])->name('perusahaan.index');
+      Route::get('/perusahaan/{id}', [Eproc::class, 'show'])->name('perusahaan.show');
       Route::resource('jenis-pengadaan', JenisPengadaanController::class);
       Route::resource('penunjukan-langsung', PenunjukanLangsungController::class);
       Route::get('{lelang_id}/jadwal-lelang', [JadwalLelangController::class, 'index'])->name('jadwal-lelang.index');
@@ -168,6 +180,8 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
   Route::prefix('admin')->name('admin.')->group(function(){
     Route::middleware(['auth:web', 'disable_back_button', 'eproc', 'admin'])->group(function(){
       Route::get('/dashboard', function(){return view('pages.dashboard');})->name('dashboard');
+      Route::get('perusahaan', [PerusahaanController::class, 'index'])->name('perusahaan.index');
+      Route::get('perusahaan/{id}', [PerusahaanController::class, 'show'])->name('perusahaan.show');
       Route::get('profile', [Controller::class, 'profile'])->name('profile');
       Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
       Route::resource('berita', BeritaController::class);
@@ -175,6 +189,8 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::post('import', [BeritaController::class, 'import'])->name('import');
       Route::get('pdf', [BeritaController::class, 'pdf'])->name('pdf');
       Route::resource('lelang', LelangController::class);
+      Route::get('/perusahaan', [Eproc::class, 'index'])->name('perusahaan.index');
+      Route::get('/perusahaan/{id}', [Eproc::class, 'show'])->name('perusahaan.show');
       Route::resource('jenis-pengadaan', JenisPengadaanController::class);
       Route::resource('penunjukan-langsung', PenunjukanLangsungController::class);
       Route::get('{lelang_id}/jadwal-lelang', [JadwalLelangController::class, 'index'])->name('jadwal-lelang.index');

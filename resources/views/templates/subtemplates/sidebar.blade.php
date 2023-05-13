@@ -47,7 +47,13 @@
         @if(auth()->user()->level == 'superadmin')
           <li><a class="nav-link" href="{{ route('eproc.superadmin.dashboard') }}"><i class="far fa-square"></i><span>Dashboard</span></a></li>
           <li class="menu-header">Menu</li>
-          <li><a class="nav-link" href="{{ route('eproc.superadmin.akun.index') }}"><i class="far fa-square"></i><span>Akun</span></a></li>
+          <li class="dropdown">
+            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="far fa-square"></i><span>Akun</span></a>
+            <ul class="dropdown-menu" style="display: block;">
+              <li><a class="nav-link" href="{{ route('eproc.superadmin.akun.index') }}"><span>Admin</span></a></li>
+              <li><a class="nav-link" href="{{ route('eproc.superadmin.akun.index') }}"><span>Perusahaan</span></a></li>
+            </ul>
+          </li>
           <li><a class="nav-link" href="{{ route('eproc.superadmin.berita.index') }}"><i class="far fa-square"></i><span>Berita</span></a></li>
           <li class="dropdown">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="far fa-square"></i><span>Man Pengadaan</span></a>

@@ -127,19 +127,7 @@ class EprocController extends Controller
     public function verify(Request $request){
         $token = $request->token;
         $user_id = $request->user_id;
-        $verify_email = VerifyEmail::where('token', $token)->first();
-        if(!is_null($verify_email)){
-            $user = $verify_email->users;
-
-            if(!$user->email_has_been_verified){
-                $verify_email->users->email_has_been_verified = 1;
-                $verify_email->users->save();
-
-                return view('pages.authentications.eproc.pelengkapan-lampiran-perusahaan', ['user_id' => $user_id]);
-            }else{
-                return view('pages.authentications.eproc.pelengkapan-lampiran-perusahaan', ['user_id' => $user_id]);
-            }
-        }
+        return redirect()->route('eproc.kualifikasi', $user_id);
     }
 
     public function logout(){
