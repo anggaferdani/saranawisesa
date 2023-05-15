@@ -25,6 +25,26 @@
 </script>
 <!-- /END GA --></head>
 
+<style>
+  .separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
+  .separator::before,
+  .separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #000;
+  }
+  .separator:not(:empty)::before {
+    margin-right: .25em;
+  }
+  .separator:not(:empty)::after {
+    margin-left: .25em;
+  }
+</style>
+
 <body>
   <div id="app">
     <div class="main-wrapper main-wrapper-1">
@@ -77,10 +97,32 @@
             'Deleted!',
             'You have successfully deleted.',
             'success'
-          )
+          );
         }
-      })
-    })
+      });
+    });
+
+    $('.verifikasi').click(function(){
+      var id = $(this).attr('data-id');
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "Are you sure you want to verifiy id : "+id+"?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#6777ef',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $(this).closest("form").submit();
+          Swal.fire(
+            'Verified!',
+            'Now the account is successfully verified',
+            'success'
+          );
+        }
+      });
+    });
   </script>
 
   <script type="text/javascript">

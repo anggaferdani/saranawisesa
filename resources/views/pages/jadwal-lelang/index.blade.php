@@ -49,9 +49,9 @@
             <tbody>
               <tr>
                 <td>No</td>
-                <td>Nama Lelang</td>
-                <td>Tgl Mulai Lelang</td>
-                <td>Tgl Akhir Lelang</td>
+                <td>Nama Kegiatan Lelang</td>
+                <td>Tgl Mulai Kegiatan Lelang</td>
+                <td>Tgl Akhir Kegiatan Lelang</td>
                 <td>Action</td>
               </tr>
               <?php $id = 0; ?>

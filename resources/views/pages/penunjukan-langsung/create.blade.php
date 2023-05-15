@@ -37,7 +37,9 @@
               <option selected disabled>Pilih</option>
               @foreach ($perusahaan as $perusahaans)
                 @if($perusahaans->status_aktif == 'aktif')
-                  <option value="{{ $perusahaans->id }}">{{ $perusahaans->users->nama_panjang }}</option>
+                  @if(empty($perusahaans->lelang_id))
+                    <option value="{{ $perusahaans->id }}">{{ $perusahaans->users->nama_panjang }}</option>
+                  @endif
                 @endif
               @endforeach
               @error('lelang_id')<div class="text-danger">{{ $message }}</div>@enderror

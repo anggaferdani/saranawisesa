@@ -59,19 +59,19 @@
                 @if($penunjukan_langsungs->status_aktif == 'aktif' and $penunjukan_langsungs->status_pengadaan == 'penunjukan_langsung')
                   <?php $id++; ?>
                   <tr>
-                    <td>{{ $id }}</td>
-                    <td>{{ $penunjukan_langsungs->kode_lelang }}</td>
-                    <td>{{ $penunjukan_langsungs->namaPerusahaan }}</td>
-                    <td>{{ $penunjukan_langsungs->nama_lelang }}</td>
-                    <td>{{ 'Rp. '.strrev(implode('.', str_split(strrev(strval($penunjukan_langsungs->hps)), 3))) }}</td>
-                    <td>
+                    <td style="white-space: nowrap;">{{ $id }}</td>
+                    <td style="white-space: nowrap;">{{ $penunjukan_langsungs->kode_lelang }}</td>
+                    <td style="white-space: nowrap;">{{ $penunjukan_langsungs->namaPerusahaan }}</td>
+                    <td style="white-space: nowrap;">{{ $penunjukan_langsungs->nama_lelang }}</td>
+                    <td style="white-space: nowrap;">{{ 'Rp. '.strrev(implode('.', str_split(strrev(strval($penunjukan_langsungs->hps)), 3))) }}</td>
+                    <td style="white-space: nowrap;">
                       @if(now()->toDateTimeString() > $penunjukan_langsungs->tanggal_akhir_lelang)
                         <div class="badge badge-danger">{{ $penunjukan_langsungs->tanggal_akhir_lelang }}</div>
                       @else
                         {{ $penunjukan_langsungs->tanggal_akhir_lelang }}
                       @endif
                     </td>
-                    <td>
+                    <td style="white-space: nowrap;">
                       @if(auth()->user()->level == 'superadmin')
                         <form action="{{ route('eproc.superadmin.penunjukan-langsung.destroy', $penunjukan_langsungs->id) }}" method="POST">
                           @csrf
@@ -79,6 +79,7 @@
                           <a href="{{ route('eproc.superadmin.penunjukan-langsung.show', $penunjukan_langsungs->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
                           <a href="{{ route('eproc.superadmin.penunjukan-langsung.edit', $penunjukan_langsungs->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
                           <a href="{{ route('eproc.superadmin.jadwal-lelang.index', $penunjukan_langsungs->id) }}" class="btn btn-icon btn-primary"><i class="fa fa-calendar"></i></a>
+                          <a href="{{ route('eproc.superadmin.peserta.show', ['id' => $penunjukan_langsungs->perusahaan_id, 'lelang_id' => $penunjukan_langsungs->id]) }}" class="btn btn-icon btn-primary"><i class="fas fa-user"></i></a>
                           <button type="button" class="btn btn-icon btn-danger delete" data-id="{{ $penunjukan_langsungs->id }}"><i class="fa fa-trash"></i></button>
                         </form>
                       @endif
@@ -89,6 +90,7 @@
                           <a href="{{ route('eproc.admin.penunjukan-langsung.show', $penunjukan_langsungs->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
                           <a href="{{ route('eproc.admin.penunjukan-langsung.edit', $penunjukan_langsungs->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
                           <a href="{{ route('eproc.admin.jadwal-lelang.index', $penunjukan_langsungs->id) }}" class="btn btn-icon btn-primary"><i class="fa fa-calendar"></i></a>
+                          <a href="{{ route('eproc.admin.peserta.show', ['id' => $penunjukan_langsungs->perusahaan_id, 'lelang_id' => $penunjukan_langsungs->id]) }}" class="btn btn-icon btn-primary"><i class="fas fa-user"></i></a>
                           <button type="button" class="btn btn-icon btn-danger delete" data-id="{{ $penunjukan_langsungs->id }}"><i class="fa fa-trash"></i></button>
                         </form>
                       @endif

@@ -112,36 +112,42 @@
             </div>
             </div>
             @if(!Auth::guest())
-                @if(empty($perusahaan->lelang_id))
-                    <a href="{{ route('eproc.ikut-pengadaan', $perusahaan->id) }}" class="btn btn-icon btn-primary">Ikut Pengadaan</a>
+                @if($perusahaan->users->email_has_been_verified == 'terverifikasi')
+                    @if(empty($perusahaan->lelang_id))
+                        <a href="{{ route('eproc.ikut-pengadaan', $lelang->id) }}" class="btn btn-icon btn-primary">Ikut Pengadaan</a>
+                    @else
+                        <form method="POST" action="{{ route('eproc.kirim-lampiran') }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
+                            @csrf
+                            <input id="lelang_id" type="hidden" class="form-control" name="lelang_id" value="{{ $lelang->id }}">
+                            <input id="perusahaan_id" type="hidden" class="form-control" name="perusahaan_id" value="{{ $perusahaan->id }}">
+                            @if($lelang->lampiran_pengadaan == 'penawaran')
+                                <div class="mb-3">
+                                    <label for="penawaran" class="form-label">Penawaran</label>
+                                    <input id="penawaran" type="file" class="form-control" name="penawaran">
+                                    @error('penawaran')<div class="text-danger">{{ $message }}</div>@enderror
+                                </div>
+                            @endif
+                            @if($lelang->lampiran_pengadaan == 'konsep')
+                                <div class="mb-3">
+                                    <label for="konsep" class="form-label">Konsep</label>
+                                    <input id="konsep" type="file" class="form-control" name="konsep">
+                                    @error('konsep')<div class="text-danger">{{ $message }}</div>@enderror
+                                </div>
+                            @endif
+                            @if($lelang->lampiran_pengadaan == 'penawaran_dan_konsep')
+                                <div class="mb-3">
+                                    <label for="penawaran_dan_konsep" class="form-label">Penawaran Dan Konsep</label>
+                                    <input id="penawaran_dan_konsep" type="file" class="form-control" name="penawaran_dan_konsep">
+                                    @error('penawaran_dan_konsep')<div class="text-danger">{{ $message }}</div>@enderror
+                                </div>
+                            @endif
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    @endif
                 @else
-                    <form method="POST" action="{{ route('eproc.kirim-lampiran') }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
-                        @csrf
-                        <input id="lelang_id" type="hidden" class="form-control" name="lelang_id" value="{{ $lelang->id }}">
-                        <input id="perusahaan_id" type="hidden" class="form-control" name="perusahaan_id" value="{{ $perusahaan->id }}">
-                        @if($lelang->lampiran_pengadaan == 'penawaran')
-                            <div class="mb-3">
-                                <label for="penawaran" class="form-label">Penawaran</label>
-                                <input id="penawaran" type="file" class="form-control" name="penawaran">
-                                @error('penawaran')<div class="text-danger">{{ $message }}</div>@enderror
-                            </div>
-                        @endif
-                        @if($lelang->lampiran_pengadaan == 'konsep')
-                            <div class="mb-3">
-                                <label for="konsep" class="form-label">Konsep</label>
-                                <input id="konsep" type="file" class="form-control" name="konsep">
-                                @error('konsep')<div class="text-danger">{{ $message }}</div>@enderror
-                            </div>
-                        @endif
-                        @if($lelang->lampiran_pengadaan == 'penawaran_dan_konsep')
-                            <div class="mb-3">
-                                <label for="penawaran_dan_konsep" class="form-label">Penawaran Dan Konsep</label>
-                                <input id="penawaran_dan_konsep" type="file" class="form-control" name="penawaran_dan_konsep">
-                                @error('penawaran_dan_konsep')<div class="text-danger">{{ $message }}</div>@enderror
-                            </div>
-                        @endif
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+                    <div class="alert alert-danger">
+                        Belum bisa mengikuti lelang, tunggu beberapa saat sampai admin memverifikasi akun yang digunakan. Pemberitahuan verifikasi bahwa akun telah terverifikasi akan dikirim melalui email.
+                    </div>
                 @endif
             @endif
         </div>

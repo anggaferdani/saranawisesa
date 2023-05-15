@@ -46,30 +46,30 @@
           <table class="table table-striped table-bordered">
             <tbody>
               <tr>
-                <td>No</td>
-                <td>Kode Lelang</td>
-                <td>Nama Lelang</td>
-                <td>HPS</td>
-                <td>Tgl Akhir Lelang</td>
-                <td>Action</td>
+                <td class="text-center">No</td>
+                <td class="text-center">Kode Lelang</td>
+                <td class="text-center">Nama Lelang</td>
+                <td class="text-center">HPS</td>
+                <td class="text-center">Tgl Akhir Lelang</td>
+                <td class="text-center text-nowrap">Action</td>
               </tr>
               <?php $id = 0; ?>
               @foreach ($lelang as $lelangs)
                 @if($lelangs->status_aktif == 'aktif' and $lelangs->status_pengadaan == 'lelang')
                   <?php $id++; ?>
                   <tr>
-                    <td>{{ $id }}</td>
-                    <td>{{ $lelangs->kode_lelang }}</td>
-                    <td>{{ $lelangs->nama_lelang }}</td>
-                    <td>{{ 'Rp. '.strrev(implode('.', str_split(strrev(strval($lelangs->hps)), 3))) }}</td>
-                    <td>
+                    <td class="text-center">{{ $id }}</td>
+                    <td class="text-center">{{ $lelangs->kode_lelang }}</td>
+                    <td class="text-center">{{ $lelangs->nama_lelang }}</td>
+                    <td class="text-center">{{ 'Rp. '.strrev(implode('.', str_split(strrev(strval($lelangs->hps)), 3))) }}</td>
+                    <td class="text-center">
                       @if(now()->toDateTimeString() > $lelangs->tanggal_akhir_lelang)
                         <div class="badge badge-danger">{{ $lelangs->tanggal_akhir_lelang }}</div>
                       @else
                         {{ $lelangs->tanggal_akhir_lelang }}
                       @endif
                     </td>
-                    <td>
+                    <td class="text-center text-nowrap">
                       @if(auth()->user()->level == 'superadmin')
                         <form action="{{ route('eproc.superadmin.lelang.destroy', $lelangs->id) }}" method="POST">
                           @csrf

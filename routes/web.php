@@ -122,8 +122,6 @@ Route::prefix('compro')->name('compro.')->group(function(){
 
 Route::prefix('eproc')->name('eproc.')->group(function(){
 
-  // Route::get('/test', [Eproc::class, 'test'])->name('test');
-
   Route::middleware(['web'])->group(function(){
     Route::middleware(['logged_in'])->group(function(){
       Route::get('/login', [EprocController::class, 'login'])->name('login');
@@ -153,7 +151,36 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::get('/dashboard', function(){return view('pages.dashboard');})->name('dashboard');
       Route::get('perusahaan', [PerusahaanController::class, 'index'])->name('perusahaan.index');
       Route::get('perusahaan/{id}', [PerusahaanController::class, 'show'])->name('perusahaan.show');
+      Route::post('perusahaan/verifikasi/{id}', [PerusahaanController::class, 'verifikasi'])->name('perusahaan.verifikasi');
       Route::resource('akun', AkunController::class);
+      Route::get('profile', [Controller::class, 'profile'])->name('profile');
+      Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
+      Route::resource('berita', BeritaController::class);
+      Route::get('export', [BeritaController::class, 'export'])->name('export');
+      Route::post('import', [BeritaController::class, 'import'])->name('import');
+      Route::get('pdf', [BeritaController::class, 'pdf'])->name('pdf');
+      Route::resource('lelang', LelangController::class);
+      Route::resource('jenis-pengadaan', JenisPengadaanController::class);
+      Route::resource('penunjukan-langsung', PenunjukanLangsungController::class);
+      Route::get('{lelang_id}/jadwal-lelang', [JadwalLelangController::class, 'index'])->name('jadwal-lelang.index');
+      Route::get('{lelang_id}/jadwal-lelang/create', [JadwalLelangController::class, 'create'])->name('jadwal-lelang.create');
+      Route::post('{lelang_id}/jadwal-lelang/store', [JadwalLelangController::class, 'store'])->name('jadwal-lelang.store');
+      Route::get('{lelang_id}/jadwal-lelang/{id}', [JadwalLelangController::class, 'show'])->name('jadwal-lelang.show');
+      Route::get('{lelang_id}/jadwal-lelang/{id}/edit', [JadwalLelangController::class, 'edit'])->name('jadwal-lelang.edit');
+      Route::put('{lelang_id}/jadwal-lelang/{id}', [JadwalLelangController::class, 'update'])->name('jadwal-lelang.update');
+      Route::delete('{lelang_id}/jadwal-lelang/{id}', [JadwalLelangController::class, 'destroy'])->name('jadwal-lelang.destroy');
+      Route::get('{lelang_id}/peserta', [PesertaController::class, 'index'])->name('peserta.index');
+      Route::get('{lelang_id}/peserta/{id}', [PesertaController::class, 'show'])->name('peserta.show');
+      Route::post('{lelang_id}/peserta/{id}/pemenang', [PesertaController::class, 'pemenang'])->name('peserta.pemenang');
+    });
+  });
+
+  Route::prefix('admin')->name('admin.')->group(function(){
+    Route::middleware(['auth:web', 'disable_back_button', 'eproc', 'admin'])->group(function(){
+      Route::get('/dashboard', function(){return view('pages.dashboard');})->name('dashboard');
+      Route::get('perusahaan', [PerusahaanController::class, 'index'])->name('perusahaan.index');
+      Route::get('perusahaan/{id}', [PerusahaanController::class, 'show'])->name('perusahaan.show');
+      Route::post('perusahaan/verifikasi/{id}', [PerusahaanController::class, 'verifikasi'])->name('perusahaan.verifikasi');
       Route::get('profile', [Controller::class, 'profile'])->name('profile');
       Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
       Route::resource('berita', BeritaController::class);
@@ -174,32 +201,7 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::delete('{lelang_id}/jadwal-lelang/{id}', [JadwalLelangController::class, 'destroy'])->name('jadwal-lelang.destroy');
       Route::get('{lelang_id}/peserta', [PesertaController::class, 'index'])->name('peserta.index');
       Route::get('{lelang_id}/peserta/{id}', [PesertaController::class, 'show'])->name('peserta.show');
-    });
-  });
-
-  Route::prefix('admin')->name('admin.')->group(function(){
-    Route::middleware(['auth:web', 'disable_back_button', 'eproc', 'admin'])->group(function(){
-      Route::get('/dashboard', function(){return view('pages.dashboard');})->name('dashboard');
-      Route::get('perusahaan', [PerusahaanController::class, 'index'])->name('perusahaan.index');
-      Route::get('perusahaan/{id}', [PerusahaanController::class, 'show'])->name('perusahaan.show');
-      Route::get('profile', [Controller::class, 'profile'])->name('profile');
-      Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
-      Route::resource('berita', BeritaController::class);
-      Route::get('export', [BeritaController::class, 'export'])->name('export');
-      Route::post('import', [BeritaController::class, 'import'])->name('import');
-      Route::get('pdf', [BeritaController::class, 'pdf'])->name('pdf');
-      Route::resource('lelang', LelangController::class);
-      Route::get('/perusahaan', [Eproc::class, 'index'])->name('perusahaan.index');
-      Route::get('/perusahaan/{id}', [Eproc::class, 'show'])->name('perusahaan.show');
-      Route::resource('jenis-pengadaan', JenisPengadaanController::class);
-      Route::resource('penunjukan-langsung', PenunjukanLangsungController::class);
-      Route::get('{lelang_id}/jadwal-lelang', [JadwalLelangController::class, 'index'])->name('jadwal-lelang.index');
-      Route::get('{lelang_id}/jadwal-lelang/create', [JadwalLelangController::class, 'create'])->name('jadwal-lelang.create');
-      Route::post('{lelang_id}/jadwal-lelang/store', [JadwalLelangController::class, 'store'])->name('jadwal-lelang.store');
-      Route::get('{lelang_id}/jadwal-lelang/{id}', [JadwalLelangController::class, 'show'])->name('jadwal-lelang.show');
-      Route::get('{lelang_id}/jadwal-lelang/{id}/edit', [JadwalLelangController::class, 'edit'])->name('jadwal-lelang.edit');
-      Route::put('{lelang_id}/jadwal-lelang/{id}', [JadwalLelangController::class, 'update'])->name('jadwal-lelang.update');
-      Route::delete('{lelang_id}/jadwal-lelang/{id}', [JadwalLelangController::class, 'destroy'])->name('jadwal-lelang.destroy');
+      Route::post('{lelang_id}/peserta/{id}/pemenang', [PesertaController::class, 'pemenang'])->name('peserta.pemenang');
     });
   });
 });

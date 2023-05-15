@@ -61,7 +61,7 @@ class EprocController extends Controller
         if (Auth::guest()) {
             $perusahaan = null;
         } else {
-            $perusahaan = Perusahaan::with('lelangs')->where('user_id', Auth::user()->id)->first();
+            $perusahaan = Perusahaan::with('lelangs', 'users')->where('user_id', Auth::user()->id)->first();
         }
 
         return view('pages.eproc.detail-pengadaan', compact(
@@ -73,7 +73,7 @@ class EprocController extends Controller
     }
 
     public function ikut_pengadaan($id){
-        $perusahaan = Perusahaan::find($id);
+        $perusahaan = Perusahaan::where('user_id', Auth::user()->id)->first();
 
         $perusahaan->update([
             'lelang_id' => $id,
@@ -97,21 +97,21 @@ class EprocController extends Controller
         );
 
         if($penawaran = $request->file('penawaran')){
-            $destination_path = 'penawaran/';
+            $destination_path = 'lampiran/penawaran/';
             $file_penawaran = date('YmdHis') . "." . $penawaran->getClientOriginalExtension();
             $penawaran->move($destination_path, $file_penawaran);
             $input_array_lampiran['penawaran'] = $file_penawaran;
         }
 
         if($konsep = $request->file('konsep')){
-            $destination_path = 'konsep/';
+            $destination_path = 'lampiran/konsep/';
             $file_konsep = date('YmdHis') . "." . $konsep->getClientOriginalExtension();
             $konsep->move($destination_path, $file_konsep);
             $input_array_lampiran['konsep'] = $file_konsep;
         }
 
         if($penawaran_dan_konsep = $request->file('penawaran_dan_konsep')){
-            $destination_path = 'penawaran-dan-konsep/';
+            $destination_path = 'lampiran/penawaran-dan-konsep/';
             $file_penawaran_dan_konsep = date('YmdHis') . "." . $penawaran_dan_konsep->getClientOriginalExtension();
             $penawaran_dan_konsep->move($destination_path, $file_penawaran_dan_konsep);
             $input_array_lampiran['penawaran_dan_konsep'] = $file_penawaran_dan_konsep;
@@ -142,10 +142,6 @@ class EprocController extends Controller
         ));
     }
     
-    // public function test(){
-    //     return view('pages.authentications.eproc.kualifikasi');
-    // }
-
     public function kualifikasi($user_id){
         return view('pages.authentications.eproc.kualifikasi', compact('user_id'));
     }
@@ -353,7 +349,7 @@ class EprocController extends Controller
 
         $kualifikasi = Kualifikasi::create($input_array_kualifikasi);
         
-        return redirect()->route('eproc.login')->with('success', 'Isian kualifikasi berhasil ditambahkan pada : '.$kualifikasi->created_at);
+        return redirect()->route('eproc.login')->with('success', 'Isian kualifikasi berhasil ditambahkan pada : '.$kualifikasi->created_at.'. Silakan login');
         // return redirect()->route('eproc.administrasi', $perusahaan->id)->with('success', 'Isian kualifikasi berhasil ditambahkan pada : '.$kualifikasi->created_at);
     }
 

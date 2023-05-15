@@ -69,22 +69,22 @@
           </div>
           <div class="form-group">
             <label for="syarat_kualifikasi">Syarat Kualifikasi</label>
-            <textarea id="syarat_kualifikasi" class="form-control ckeditor" name="syarat_kualifikasi">{{ $lelang->syarat_kualifikasi }}</textarea>
+            <textarea id="syarat_kualifikasi" class="form-control ckeditor" name="syarat_kualifikasi">{{ $penunjukan_langsung->syarat_kualifikasi }}</textarea>
             @error('syarat_kualifikasi')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           <div class="form-group">
             <label class="form-label">Lampiran Pengadaan</label>
             <div class="selectgroup selectgroup-pills">
               <label class="selectgroup-item">
-                <input type="radio" name="lampiran_pengadaan" value="penawaran" class="selectgroup-input" {{ $lelang->lampiran_pengadaan == 'penawaran' ? 'checked': '' }}>
+                <input type="radio" name="lampiran_pengadaan" value="penawaran" class="selectgroup-input" {{ $penunjukan_langsung->lampiran_pengadaan == 'penawaran' ? 'checked': '' }}>
                 <span class="selectgroup-button">Penawaran</span>
               </label>
               <label class="selectgroup-item">
-                <input type="radio" name="lampiran_pengadaan" value="konsep" class="selectgroup-input" {{ $lelang->lampiran_pengadaan == 'konsep' ? 'checked': '' }}>
+                <input type="radio" name="lampiran_pengadaan" value="konsep" class="selectgroup-input" {{ $penunjukan_langsung->lampiran_pengadaan == 'konsep' ? 'checked': '' }}>
                 <span class="selectgroup-button">Konsep</span>
               </label>
               <label class="selectgroup-item">
-                <input type="radio" name="lampiran_pengadaan" value="penawaran_dan_konsep" class="selectgroup-input" {{ $lelang->lampiran_pengadaan == 'penawaran_dan_konsep' ? 'checked': '' }}>
+                <input type="radio" name="lampiran_pengadaan" value="penawaran_dan_konsep" class="selectgroup-input" {{ $penunjukan_langsung->lampiran_pengadaan == 'penawaran_dan_konsep' ? 'checked': '' }}>
                 <span class="selectgroup-button">Penawaran Dan Konsep</span>
               </label>
             </div>

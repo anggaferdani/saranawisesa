@@ -17,11 +17,14 @@ class PenunjukanLangsungController extends Controller
 
             if ($perusahaan) {
                 $namaPerusahaan = $perusahaan->users->nama_panjang;
+                $perusahaan_id = $perusahaan->id;
             } else {
                 $namaPerusahaan = null;
+                $perusahaan_id = null;
             }
             
             $query->namaPerusahaan = $namaPerusahaan;
+            $query->perusahaan_id = $perusahaan_id;
 
             return $query;
         });

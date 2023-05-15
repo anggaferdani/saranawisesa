@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_panjang');
             $table->string('email')->unique();
-            $table->string('email_has_been_verified')->nullable();
+            $table->enum('email_has_been_verified', ['terverifikasi', 'belum_terverifikasi'])->default('belum_terverifikasi');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

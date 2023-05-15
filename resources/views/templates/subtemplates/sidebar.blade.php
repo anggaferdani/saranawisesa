@@ -51,7 +51,7 @@
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="far fa-square"></i><span>Akun</span></a>
             <ul class="dropdown-menu" style="display: block;">
               <li><a class="nav-link" href="{{ route('eproc.superadmin.akun.index') }}"><span>Admin</span></a></li>
-              <li><a class="nav-link" href="{{ route('eproc.superadmin.akun.index') }}"><span>Perusahaan</span></a></li>
+              <li><a class="nav-link" href="{{ route('eproc.superadmin.perusahaan.index') }}"><span>Perusahaan</span></a></li>
             </ul>
           </li>
           <li><a class="nav-link" href="{{ route('eproc.superadmin.berita.index') }}"><i class="far fa-square"></i><span>Berita</span></a></li>
@@ -67,6 +67,7 @@
         @if(auth()->user()->level == 'admin')
           <li><a class="nav-link" href="{{ route('eproc.admin.dashboard') }}"><i class="far fa-square"></i><span>Dashboard</span></a></li>
           <li class="menu-header">Menu</li>
+          <li><a class="nav-link" href="{{ route('eproc.admin.perusahaan.index') }}"><i class="far fa-square"></i><span>Perusahaan</span></a></li>
           <li><a class="nav-link" href="{{ route('eproc.admin.berita.index') }}"><i class="far fa-square"></i><span>Berita</span></a></li>
           <li class="dropdown">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="far fa-square"></i><span>Man Pengadaan</span></a>

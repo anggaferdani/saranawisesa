@@ -131,7 +131,7 @@
                     </div>
                     <div class="form-group">
                       <label for="administrasi_bukti_kepemilikan_tempat_usaha">Bukti kepemilikan/penguasaan tempat usaha/kantor</label>
-                      <input id="administrasi_bukti_kepemilikan_tempat_usaha" type="file" class="form-control" name="administrasi_bukti_kepemilikan_tempat_usaha" required>
+                      <input id="administrasi_bukti_kepemilikan_tempat_usaha" type="file" class="form-control-file" name="administrasi_bukti_kepemilikan_tempat_usaha" required>
                     </div>
                   </div>
 

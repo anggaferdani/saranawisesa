@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AdditionalLampiranPengadaan;
 use App\Models\JenisPengadaan;
 use App\Models\Lelang;
+use App\Models\Pemenang;
 use Illuminate\Http\Request;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 
@@ -56,6 +57,12 @@ class LelangController extends Controller
         );
 
         $lelang = Lelang::create($input_array_lelang);
+
+        $input_array_pemenang = array(
+            'lelang_id' => $lelang->id,
+        );
+
+        $pemenang = Pemenang::create($input_array_pemenang);
 
         if(auth()->user()->level == 'superadmin'){
             return redirect()->route('eproc.superadmin.lelang.index')->with('success', 'Berhasil ditambahkan pada : '.$lelang->created_at);

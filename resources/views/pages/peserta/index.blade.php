@@ -62,10 +62,28 @@
                     <td>{{ $perusahaans->users->email }}</td>
                     <td>
                       @if(auth()->user()->level == 'superadmin')
-                      <a href="{{ route('eproc.superadmin.peserta.show', ['id' => $perusahaans->id, 'lelang_id' => $lelang->id]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                        @if(empty($pemenang->perusahaan_id))
+                        <form action="{{ route('eproc.superadmin.peserta.pemenang', ['id' => $perusahaans->id, 'lelang_id' => $lelang->id]) }}" method="POST">
+                          @csrf
+                          @method('POST')
+                          <a href="{{ route('eproc.superadmin.peserta.show', ['id' => $perusahaans->id, 'lelang_id' => $lelang->id]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                          <button type="submit" class="btn btn-icon btn-danger"><i class="fas fa-check"></i></button>
+                        </form>
+                        @else
+                          <a href="{{ route('eproc.superadmin.peserta.show', ['id' => $perusahaans->id, 'lelang_id' => $lelang->id]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                        @endif
                       @endif
                       @if(auth()->user()->level == 'admin')
-                      <a href="{{ route('eproc.admin.peserta.show', ['id' => $perusahaans->id, 'lelang_id' => $lelang->id]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                        @if(empty($pemenang->perusahaan_id))
+                        <form action="{{ route('eproc.admin.peserta.pemenang', ['id' => $perusahaans->id, 'lelang_id' => $lelang->id]) }}" method="POST">
+                          @csrf
+                          @method('POST')
+                          <a href="{{ route('eproc.admin.peserta.show', ['id' => $perusahaans->id, 'lelang_id' => $lelang->id]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                          <button type="submit" class="btn btn-icon btn-danger"><i class="fas fa-check"></i></button>
+                        </form>
+                        @else
+                          <a href="{{ route('eproc.admin.peserta.show', ['id' => $perusahaans->id, 'lelang_id' => $lelang->id]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                        @endif
                       @endif
                     </td>
                   </tr>

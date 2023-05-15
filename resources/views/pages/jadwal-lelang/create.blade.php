@@ -21,17 +21,17 @@
           @csrf
           <input hidden id="tanggal_maksimal_lelang" type="date" class="form-control" name="tanggal_maksimal_lelang" value="{{ $lelang->tanggal_akhir_lelang }}">
           <div class="form-group">
-            <label for="nama_lelang">Nama Lelang</label>
+            <label for="nama_lelang">Nama Kegiatan Lelang</label>
             <input id="nama_lelang" type="text" class="form-control" name="nama_lelang">
             @error('nama_lelang')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           <div class="form-group">
-            <label for="tanggal_mulai_lelang">Tanggal Mulai Lelang</label>
+            <label for="tanggal_mulai_lelang">Tanggal Mulai Kegiatan Lelang</label>
             <input id="tanggal_mulai_lelang" type="date" class="form-control" name="tanggal_mulai_lelang">
             @error('tanggal_mulai_lelang')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           <div class="form-group">
-            <label for="tanggal_akhir_lelang">Tanggal Akhir Lelang : Berakhir pada tanggal {{ $lelang->tanggal_akhir_lelang }}</label>
+            <label for="tanggal_akhir_lelang">Tanggal Akhir Kegiatan Lelang : Berakhir pada tanggal {{ $lelang->tanggal_akhir_lelang }}</label>
             <input id="tanggal_akhir_lelang" type="date" class="form-control" name="tanggal_akhir_lelang">
             @error('tanggal_akhir_lelang')<div class="text-danger">{{ $message }}</div>@enderror
           </div>

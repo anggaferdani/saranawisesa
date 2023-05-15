@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use App\Models\Lampiran;
+use App\Models\Pemenang;
 use App\Models\JadwalLelang;
 use App\Models\LampiranPengadaan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\AdditionalLampiranPengadaan;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Lelang extends Model
@@ -66,5 +66,9 @@ class Lelang extends Model
 
     public function lampirans(){
         return $this->hasMany(Lampiran::class);
+    }
+
+    public function pemenangs(){
+        return $this->hasMany(Pemenang::class);
     }
 }

@@ -42,7 +42,7 @@
                   </div>
                   <div class="c__desc">
                       <p>{{ \Carbon\Carbon::parse($beritas->tanggal_publikasi)->format('l, d M Y') }}</p>
-                      <p>{!! Str::limit($beritas->isi_berita, 25) !!}</p>
+                      <p>{!! Str::limit($beritas->isi_berita, 70) !!}</p>
                       <a href="">Selengkapnya</a>
                   </div>
               </div>

@@ -5,8 +5,8 @@ namespace App\Models;
 use App\Models\User;
 use App\Models\Lelang;
 use App\Models\Lampiran;
+use App\Models\Pemenang;
 use App\Models\Kualifikasi;
-use App\Models\Administrasi;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -55,7 +55,7 @@ class Perusahaan extends Model
         return $this->hasMany(Kualifikasi::class);
     }
 
-    public function administrasis(){
-        return $this->hasMany(Administrasi::class);
+    public function pemenangs(){
+        return $this->hasMany(Pemenang::class);
     }
 }

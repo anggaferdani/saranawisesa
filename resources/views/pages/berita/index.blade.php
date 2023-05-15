@@ -72,7 +72,7 @@
                     <td>{{ $beritas->judul_berita }}</td>
                     <td>{{ $beritas->tanggal_publikasi }}</td>
                     <td><img src="/berita/{{ $beritas->thumbnail }}" alt="" width="200px"></td>
-                    <td>
+                    <td style="white-space: nowrap;">
                       @if(auth()->user()->level == 'superadmin')
                         <form action="{{ route('eproc.superadmin.berita.destroy', $beritas->id) }}" method="POST">
                           @csrf
