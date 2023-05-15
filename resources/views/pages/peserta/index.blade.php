@@ -46,10 +46,10 @@
           <table class="table table-striped table-bordered">
             <tbody>
               <tr>
-                <td>No</td>
-                <td>Nama Lelang</td>
-                <td>Email</td>
-                <td>Action</td>
+                <td class="text-center">No</td>
+                <td class="text-center">Nama Lelang</td>
+                <td class="text-center">Email</td>
+                <td class="text-center">Action</td>
               </tr>
               <?php $id = 0; ?>
               @foreach ($perusahaan as $perusahaans)
@@ -57,10 +57,10 @@
                 @if($perusahaans->lelang_id == $lelang->id)
                   <?php $id++; ?>
                   <tr>
-                    <td>{{ $id }}</td>
-                    <td>{{ $perusahaans->users->nama_panjang }}</td>
-                    <td>{{ $perusahaans->users->email }}</td>
-                    <td>
+                    <td class="text-center">{{ $id }}</td>
+                    <td class="text-center">{{ $perusahaans->users->nama_panjang }}</td>
+                    <td class="text-center">{{ $perusahaans->users->email }}</td>
+                    <td class="text-center text-nowarp">
                       @if(auth()->user()->level == 'superadmin')
                         @if(empty($pemenang->perusahaan_id))
                         <form action="{{ route('eproc.superadmin.peserta.pemenang', ['id' => $perusahaans->id, 'lelang_id' => $lelang->id]) }}" method="POST">

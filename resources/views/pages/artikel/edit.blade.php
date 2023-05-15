@@ -41,7 +41,7 @@
           </div>
           <div class="form-group">
             <label for="isi_artikel">Isi Artikel</label>
-            <textarea id="isi_artikel" class="form-control" name="isi_artikel">{{ $artikel->isi_artikel }}</textarea>
+            <textarea id="isi_artikel" class="form-control ckeditor" name="isi_artikel">{{ $artikel->isi_artikel }}</textarea>
             @error('isi_artikel')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           @if(auth()->user()->level == 'superadmin')

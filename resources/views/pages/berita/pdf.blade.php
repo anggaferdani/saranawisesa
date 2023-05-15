@@ -15,11 +15,11 @@
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th>No</th>
-        <th>Judul Berita</th>
-        <th>Thumbnail</th>
-        <th>Tanggal Publikasi</th>
-        <th>Isi Berita</th>
+        <td>No</td>
+        <td>Judul Berita</td>
+        <td>Thumbnail</td>
+        <td>Tanggal Publikasi</td>
+        <td>Isi Berita</td>
       </tr>
     </thead>
     <tbody>
@@ -31,7 +31,7 @@
           <td>{{ $beritas->judul_berita }}</td>
           <td><img src="berita/{{ $beritas->thumbnail }}" alt="" width="100px"></td>
           <td>{{ $beritas->tanggal_publikasi }}</td>
-          <td>{{ $beritas->isi_berita }}</td>
+          <td>{!! $beritas->isi_berita !!}</td>
         </tr>
       @endforeach
     </tbody>

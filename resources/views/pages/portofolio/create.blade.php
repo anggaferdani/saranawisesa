@@ -37,7 +37,7 @@
           </div>
           <div class="form-group">
             <label for="isi_portofolio">Isi Portofolio</label>
-            <textarea id="isi_portofolio" class="form-control" name="isi_portofolio"></textarea>
+            <textarea id="isi_portofolio" class="form-control ckeditor" name="isi_portofolio"></textarea>
             @error('isi_portofolio')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           @if(auth()->user()->level == 'superadmin')

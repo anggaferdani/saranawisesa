@@ -19,7 +19,7 @@
         <div>Tanggal Publikasi :</div>
         <p>{{ $artikel->tanggal_publikasi }}</p>
         <div>Isi Artikel :</div>
-        <p>{{ $artikel->isi_artikel }}</p>
+        <p>{!! $artikel->isi_artikel !!}</p>
         <div>Created At :</div>
         <p>{{ $artikel->created_at }}</p>
         <div>Updated At :</div>

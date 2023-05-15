@@ -48,11 +48,11 @@
           <table class="table table-striped table-bordered">
             <tbody>
               <tr>
-                <td>No</td>
-                <td>Nama Kegiatan Lelang</td>
-                <td>Tgl Mulai Kegiatan Lelang</td>
-                <td>Tgl Akhir Kegiatan Lelang</td>
-                <td>Action</td>
+                <td class="text-center">No</td>
+                <td class="text-center">Nama Kegiatan Lelang</td>
+                <td class="text-center">Tgl Mulai Kegiatan Lelang</td>
+                <td class="text-center">Tgl Akhir Kegiatan Lelang</td>
+                <td class="text-center">Action</td>
               </tr>
               <?php $id = 0; ?>
               @foreach ($jadwal_lelang as $jadwal_lelangs)
@@ -60,17 +60,17 @@
                 @if($jadwal_lelangs->lelang_id == $lelang->id)
                   <?php $id++; ?>
                   <tr>
-                    <td>{{ $id }}</td>
-                    <td>{{ $jadwal_lelangs->nama_lelang }}</td>
-                    <td>{{ $jadwal_lelangs->tanggal_mulai_lelang }}</td>
-                    <td>
+                    <td class="text-center">{{ $id }}</td>
+                    <td class="text-center">{{ $jadwal_lelangs->nama_lelang }}</td>
+                    <td class="text-center">{{ $jadwal_lelangs->tanggal_mulai_lelang }}</td>
+                    <td class="text-center">
                       @if(now()->toDateTimeString() > $jadwal_lelangs->tanggal_akhir_lelang)
                         <div class="badge badge-danger">{{ $jadwal_lelangs->tanggal_akhir_lelang }}</div>
                       @else
                         {{ $jadwal_lelangs->tanggal_akhir_lelang }}
                       @endif
                     </td>
-                    <td>
+                    <td class="text-center text-nowarp">
                       @if(auth()->user()->level == 'superadmin')
                         <form action="{{ route('eproc.superadmin.jadwal-lelang.destroy', ['id' => $jadwal_lelangs->id, 'lelang_id' => $lelang->id]) }}" method="POST">
                           @csrf

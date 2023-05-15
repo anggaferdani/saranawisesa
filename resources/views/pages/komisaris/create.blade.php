@@ -37,7 +37,7 @@
           </div>
           <div class="form-group">
             <label for="pendapat_komisaris">Pendapat Komisaris</label>
-            <textarea id="pendapat_komisaris" class="form-control" name="pendapat_komisaris"></textarea>
+            <textarea id="pendapat_komisaris" class="form-control ckeditor" name="pendapat_komisaris"></textarea>
             @error('pendapat_komisaris')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           @if(auth()->user()->level == 'superadmin')

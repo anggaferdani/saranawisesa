@@ -46,11 +46,11 @@
           <table class="table table-striped table-bordered">
             <tbody>
               <tr>
-                <td>No</td>
-                <td>Nama Panjang</td>
-                <td>Email</td>
-                <td>Level</td>
-                <td>Action</td>
+                <td class="text-center">No</td>
+                <td class="text-center">Nama Panjang</td>
+                <td class="text-center">Email</td>
+                <td class="text-center">Level</td>
+                <td class="text-center">Action</td>
               </tr>
               <?php $id = 0; ?>
               @foreach ($akun as $akuns)
@@ -59,10 +59,10 @@
                     @if($akuns->level == 'admin' or $akuns->level == 'creator' or $akuns->level == 'helpdesk')
                       <?php $id++; ?>
                       <tr>
-                        <td>{{ $id }}</td>
-                        <td>{{ $akuns->nama_panjang }}</td>
-                        <td>{{ $akuns->email }}</td>
-                        <td>
+                        <td class="text-center">{{ $id }}</td>
+                        <td class="text-center">{{ $akuns->nama_panjang }}</td>
+                        <td class="text-center">{{ $akuns->email }}</td>
+                        <td class="text-center">
                           @if($akuns->level == 'admin')
                             <div class="badge badge-danger">Admin</div>
                           @endif
@@ -73,7 +73,7 @@
                             <div class="badge badge-warning">Helpdesk</div>
                           @endif
                         </td>
-                        <td>
+                        <td class="text-center text-nowarp">
                           <form action="{{ route('compro.superadmin.akun.destroy', $akuns->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
@@ -89,15 +89,15 @@
                     @if($akuns->level == 'admin')
                       <?php $id++; ?>
                       <tr>
-                        <td>{{ $id }}</td>
-                        <td>{{ $akuns->nama_panjang }}</td>
-                        <td>{{ $akuns->email }}</td>
-                        <td>
+                        <td class="text-center">{{ $id }}</td>
+                        <td class="text-center">{{ $akuns->nama_panjang }}</td>
+                        <td class="text-center">{{ $akuns->email }}</td>
+                        <td class="text-center">
                           @if($akuns->level == 'admin')
                             <div class="badge badge-danger">Admin</div>
                           @endif
                         </td>
-                        <td>
+                        <td class="text-center text-nowarp">
                           <form action="{{ route('eproc.superadmin.akun.destroy', $akuns->id) }}" method="POST">
                             @csrf
                             @method('DELETE')

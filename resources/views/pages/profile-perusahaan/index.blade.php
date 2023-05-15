@@ -17,13 +17,13 @@
           <p>{{ $profile_perusahaans->sejarah_perusahaan }}</p>
           <div>Visi :</div>
           <ul>
-            @foreach(explode('###', $profile_perusahaans->visi) as $visi)
+            @foreach(explode('#', $profile_perusahaans->visi) as $visi)
               <li>{{ $visi }}</li>
             @endforeach
           </ul>
           <div>Misi :</div>
           <ul>
-            @foreach(explode('###', $profile_perusahaans->misi) as $misi)
+            @foreach(explode('#', $profile_perusahaans->misi) as $misi)
               <li>{{ $misi }}</li>
             @endforeach
           </ul>

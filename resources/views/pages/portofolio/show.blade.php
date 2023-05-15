@@ -19,7 +19,7 @@
         <div>Alamat Portofolio :</div>
         <p>{{ $portofolio->alamat_portofolio }}</p>
         <div>Isi Portofolio :</div>
-        <p>{{ $portofolio->isi_portofolio }}</p>
+        <p>{!! $portofolio->isi_portofolio !!}</p>
         <div>Created At :</div>
         <p>{{ $portofolio->created_at }}</p>
         <div>Updated At :</div>

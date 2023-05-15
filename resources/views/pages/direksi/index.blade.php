@@ -46,22 +46,22 @@
           <table class="table table-striped table-bordered">
             <tbody>
               <tr>
-                <td>No</td>
-                <td>Nama Direksi</td>
-                <td>Jabatan Direksi</td>
-                <td>Direksi</td>
-                <td>Action</td>
+                <td class="text-center">No</td>
+                <td class="text-center">Nama Direksi</td>
+                <td class="text-center">Jabatan Direksi</td>
+                <td class="text-center">Direksi</td>
+                <td class="text-center">Action</td>
               </tr>
               <?php $id = 0; ?>
               @foreach ($direksi as $direksis)
                 @if($direksis->status_aktif == 'aktif')
                   <?php $id++; ?>
                   <tr>
-                    <td>{{ $id }}</td>
-                    <td>{{ $direksis->nama_direksi }}</td>
-                    <td>{{ $direksis->jabatan_direksi }}</td>
-                    <td><img src="/direksi/{{ $direksis->direksi }}" alt="" width="100px"></td>
-                    <td>
+                    <td class="text-center">{{ $id }}</td>
+                    <td class="text-center">{{ $direksis->nama_direksi }}</td>
+                    <td class="text-center">{{ $direksis->jabatan_direksi }}</td>
+                    <td class="text-center"><img src="/direksi/{{ $direksis->direksi }}" alt="" width="100px"></td>
+                    <td class="text-center text-nowarp">
                       @if(auth()->user()->level == 'superadmin')
                         <form action="{{ route('compro.superadmin.direksi.destroy', $direksis->id) }}" method="POST">
                           @csrf

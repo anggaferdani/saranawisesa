@@ -19,7 +19,7 @@
         <div>Jabatan Direksi :</div>
         <p>{{ $direksi->jabatan_direksi }}</p>
         <div>Pendapat Direksi :</div>
-        <p>{{ $direksi->pendapat_direksi }}</p>
+        <p>{!! $direksi->pendapat_direksi !!}</p>
         <div>Created At :</div>
         <p>{{ $direksi->created_at }}</p>
         <div>Updated At :</div>

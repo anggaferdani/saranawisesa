@@ -57,22 +57,22 @@
           <table class="table table-striped table-bordered">
             <tbody>
               <tr>
-                <td>No</td>
-                <td>Judul Berita</td>
-                <td>Tanggal Publikasi</td>
-                <td>Thumbnail</td>
-                <td>Action</td>
+                <td class="text-center">No</td>
+                <td class="text-center">Judul Berita</td>
+                <td class="text-center">Tanggal Publikasi</td>
+                <td class="text-center">Thumbnail</td>
+                <td class="text-center">Action</td>
               </tr>
               <?php $id = 0; ?>
               @foreach ($berita as $beritas)
                 @if($beritas->status_aktif == 'aktif')
                   <?php $id++; ?>
                   <tr>
-                    <td>{{ $id }}</td>
-                    <td>{{ $beritas->judul_berita }}</td>
-                    <td>{{ $beritas->tanggal_publikasi }}</td>
-                    <td><img src="/berita/{{ $beritas->thumbnail }}" alt="" width="200px"></td>
-                    <td style="white-space: nowrap;">
+                    <td class="text-center">{{ $id }}</td>
+                    <td class="text-center">{{ $beritas->judul_berita }}</td>
+                    <td class="text-center">{{ $beritas->tanggal_publikasi }}</td>
+                    <td class="text-center"><img src="/berita/{{ $beritas->thumbnail }}" alt="" width="200px"></td>
+                    <td class="text-center text-nowarp" style="white-space: nowrap;">
                       @if(auth()->user()->level == 'superadmin')
                         <form action="{{ route('eproc.superadmin.berita.destroy', $beritas->id) }}" method="POST">
                           @csrf

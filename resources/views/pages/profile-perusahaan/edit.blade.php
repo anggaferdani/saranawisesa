@@ -25,13 +25,13 @@
             <textarea id="sejarah_perusahaan" class="form-control" name="sejarah_perusahaan">{{ $profile_perusahaan->sejarah_perusahaan }}</textarea>
             @error('nama_panjang')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
-          <code>Untuk setiap penulisan visi diakhiri dengan penambahan(###) dan untuk yang paling terakhir tidak perlu diberi tambahan(###). Contoh : pertama### kedua### ketiga### keempat.</code>
+          <code>Untuk setiap penulisan visi diakhiri dengan penambahan(#) dan untuk yang paling terakhir tidak perlu diberi tambahan(#). Contoh : pertama# kedua# ketiga# keempat.</code>
           <div class="form-group">
             <label for="visi">Visi</label>
             <textarea id="visi" class="form-control" name="visi">{{ $profile_perusahaan->visi }}</textarea>
             @error('visi')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
-          <code>Untuk setiap penulisan misi diakhiri dengan penambahan(###) dan untuk yang paling terakhir tidak perlu diberi tambahan(###). Contoh : pertama### kedua### ketiga### keempat.</code>
+          <code>Untuk setiap penulisan misi diakhiri dengan penambahan(#) dan untuk yang paling terakhir tidak perlu diberi tambahan(#). Contoh : pertama# kedua# ketiga# keempat.</code>
           <div class="form-group">
             <label for="misi">Misi</label>
             <textarea id="misi" class="form-control" name="misi">{{ $profile_perusahaan->misi }}</textarea>

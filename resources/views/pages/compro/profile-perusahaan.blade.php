@@ -51,7 +51,7 @@
               <span class="terx"><img class="mx-1" src="{{ asset('compro/img/mata.png') }}" alt=""> VISI</span>
               <hr>
               <ul>
-                @foreach(explode('###', $profile_perusahaan->visi) as $visi)
+                @foreach(explode('#', $profile_perusahaan->visi) as $visi)
                   <li class="tect py-2">{{ $visi }}</li>
                 @endforeach
               </ul>
@@ -60,7 +60,7 @@
               <span class="terx"><img class="mx-1" src="{{ asset('compro/img/panah.png') }}" alt=""> MISI</span>
               <hr>
               <ul>
-                @foreach(explode('###', $profile_perusahaan->misi) as $misi)
+                @foreach(explode('#', $profile_perusahaan->misi) as $misi)
                   <li class="tect py-2">{{ $misi }}</li>
                 @endforeach
               </ul>

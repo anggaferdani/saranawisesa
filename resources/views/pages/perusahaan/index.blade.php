@@ -50,9 +50,9 @@
                 @if($kualifikasis->perusahaans->users->status_aktif == 'aktif')
                   <?php $id++; ?>
                   <tr>
-                    <td>{{ $id }}</td>
-                    <td>{{ $kualifikasis->administrasi_nama_badan_usaha }}</td>
-                    <td>
+                    <td class="text-center">{{ $id }}</td>
+                    <td class="text-center">{{ $kualifikasis->administrasi_nama_badan_usaha }}</td>
+                    <td class="text-center">
                       @if($kualifikasis->administrasi_status_badan_usaha == 'pusat')
                         {{ $kualifikasis->administrasi_email_pusat }}
                       @endif
@@ -60,7 +60,7 @@
                         {{ $kualifikasis->administrasi_email_cabang }}
                       @endif
                     </td>
-                    <td>
+                    <td class="text-center">
                       @if($kualifikasis->administrasi_status_badan_usaha == 'pusat')
                         <div class="badge badge-danger">Pusat</div>
                       @endif
@@ -68,7 +68,7 @@
                         <div class="badge badge-primary">Cabang</div>
                       @endif
                     </td>
-                    <td>
+                    <td class="text-center">
                       @if($kualifikasis->perusahaans->users->email_has_been_verified == 'terverifikasi')
                         <div class="badge badge-primary">Terverifikasi</div>
                       @endif
@@ -76,7 +76,7 @@
                         <div class="badge badge-danger">Belum Terverifikasi</div>
                       @endif
                     </td>
-                    <td>
+                    <td class="text-center text-nowarp">
                       @if(auth()->user()->level == 'superadmin')
                         @if($kualifikasis->perusahaans->users->email_has_been_verified == 'terverifikasi')
                           <a href="{{ route('eproc.superadmin.perusahaan.show', $kualifikasis->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>

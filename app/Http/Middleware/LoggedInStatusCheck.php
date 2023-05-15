@@ -31,6 +31,8 @@ class LoggedInStatusCheck
                 return redirect()->route('eproc.superadmin.dashboard');
             }elseif(auth()->user()->level == 'admin'){
                 return redirect()->route('eproc.admin.dashboard');
+            }elseif(auth()->user()->level == 'perusahaan'){
+                return redirect()->route('eproc.beranda');
             }
             return back();
         }

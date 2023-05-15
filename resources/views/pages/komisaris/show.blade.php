@@ -19,7 +19,7 @@
         <div>Jabatan Komisaris :</div>
         <p>{{ $komisaris->jabatan_komisaris }}</p>
         <div>Pendapat Komisaris :</div>
-        <p>{{ $komisaris->pendapat_komisaris }}</p>
+        <p>{!! $komisaris->pendapat_komisaris !!}</p>
         <div>Created At :</div>
         <p>{{ $komisaris->created_at }}</p>
         <div>Updated At :</div>

@@ -46,32 +46,32 @@
           <table class="table table-striped table-bordered">
             <tbody>
               <tr>
-                <td>No</td>
-                <td>Kode Lelang</td>
-                <td>Nama Perusahaan</td>
-                <td>Nama Lelang</td>
-                <td>HPS</td>
-                <td>Tgl Akhir Lelang</td>
-                <td>Action</td>
+                <td class="text-center">No</td>
+                <td class="text-center">Kode Lelang</td>
+                <td class="text-center">Nama Perusahaan</td>
+                <td class="text-center">Nama Lelang</td>
+                <td class="text-center">HPS</td>
+                <td class="text-center">Tgl Akhir Lelang</td>
+                <td class="text-center">Action</td>
               </tr>
               <?php $id = 0; ?>
               @foreach ($penunjukan_langsung as $penunjukan_langsungs)
                 @if($penunjukan_langsungs->status_aktif == 'aktif' and $penunjukan_langsungs->status_pengadaan == 'penunjukan_langsung')
                   <?php $id++; ?>
                   <tr>
-                    <td style="white-space: nowrap;">{{ $id }}</td>
-                    <td style="white-space: nowrap;">{{ $penunjukan_langsungs->kode_lelang }}</td>
-                    <td style="white-space: nowrap;">{{ $penunjukan_langsungs->namaPerusahaan }}</td>
-                    <td style="white-space: nowrap;">{{ $penunjukan_langsungs->nama_lelang }}</td>
-                    <td style="white-space: nowrap;">{{ 'Rp. '.strrev(implode('.', str_split(strrev(strval($penunjukan_langsungs->hps)), 3))) }}</td>
-                    <td style="white-space: nowrap;">
+                    <td class="text-center">{{ $id }}</td>
+                    <td class="text-center">{{ $penunjukan_langsungs->kode_lelang }}</td>
+                    <td class="text-center">{{ $penunjukan_langsungs->namaPerusahaan }}</td>
+                    <td class="text-center">{{ $penunjukan_langsungs->nama_lelang }}</td>
+                    <td class="text-center">{{ 'Rp. '.strrev(implode('.', str_split(strrev(strval($penunjukan_langsungs->hps)), 3))) }}</td>
+                    <td class="text-center">
                       @if(now()->toDateTimeString() > $penunjukan_langsungs->tanggal_akhir_lelang)
                         <div class="badge badge-danger">{{ $penunjukan_langsungs->tanggal_akhir_lelang }}</div>
                       @else
                         {{ $penunjukan_langsungs->tanggal_akhir_lelang }}
                       @endif
                     </td>
-                    <td style="white-space: nowrap;">
+                    <td class="text-center text-nowarp">
                       @if(auth()->user()->level == 'superadmin')
                         <form action="{{ route('eproc.superadmin.penunjukan-langsung.destroy', $penunjukan_langsungs->id) }}" method="POST">
                           @csrf

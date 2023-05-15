@@ -46,20 +46,20 @@
           <table class="table table-striped table-bordered">
             <tbody>
               <tr>
-                <td>No</td>
-                <td>Judul Portofolio</td>
-                <td>Portofolio</td>
-                <td>Action</td>
+                <td class="text-center">No</td>
+                <td class="text-center">Judul Portofolio</td>
+                <td class="text-center">Portofolio</td>
+                <td class="text-center">Action</td>
               </tr>
               <?php $id = 0; ?>
               @foreach ($portofolio as $portofolios)
                 @if($portofolios->status_aktif == 'aktif')
                   <?php $id++; ?>
                   <tr>
-                    <td>{{ $id }}</td>
-                    <td>{{ $portofolios->judul_portofolio }}</td>
-                    <td><img src="/portofolio/{{ $portofolios->portofolio }}" alt="" width="200px"></td>
-                    <td>
+                    <td class="text-center">{{ $id }}</td>
+                    <td class="text-center">{{ $portofolios->judul_portofolio }}</td>
+                    <td class="text-center"><img src="/portofolio/{{ $portofolios->portofolio }}" alt="" width="200px"></td>
+                    <td class="text-center text-nowarp">
                       @if(auth()->user()->level == 'superadmin')
                         <form action="{{ route('compro.superadmin.portofolio.destroy', $portofolios->id) }}" method="POST">
                           @csrf
