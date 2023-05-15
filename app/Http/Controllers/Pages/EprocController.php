@@ -64,12 +64,29 @@ class EprocController extends Controller
             $perusahaan = Perusahaan::with('lelangs', 'users')->where('user_id', Auth::user()->id)->first();
         }
 
-        return view('pages.eproc.detail-pengadaan', compact(
-            'profile_perusahaan',
-            'setting',
-            'lelang',
-            'perusahaan',
-        ));
+        $perusahaan_id = Perusahaan::where('lelang_id', $lelang->id)->first();
+
+        if(empty($perusahaan_id)){
+            return view('pages.eproc.detail-pengadaan', compact(
+                'profile_perusahaan',
+                'setting',
+                'lelang',
+                'perusahaan',
+                'perusahaan_id',
+            ));
+        }else{
+            $kualifikasi = Kualifikasi::where('perusahaan_id', $perusahaan_id->id)->first();
+    
+            return view('pages.eproc.detail-pengadaan', compact(
+                'profile_perusahaan',
+                'setting',
+                'lelang',
+                'perusahaan',
+                'perusahaan_id',
+                'kualifikasi',
+            ));
+        }
+
     }
 
     public function ikut_pengadaan($id){

@@ -26,18 +26,18 @@ class DatabaseSeeder extends Seeder
             'nama_panjang' => 'Superadmin',
             'email' => 'superadmin@gmail.com',
             'email_has_been_verified' => 'terverifikasi',
-            'password' => bcrypt(12345678),
+            'password' => bcrypt('saranawisesa234'),
             'level' => 'superadmin',
         ]);
+
+        User::create([
+            'nama_panjang' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'email_has_been_verified' => 'terverifikasi',
+            'password' => bcrypt('saranawisesa234'),
+            'level' => 'admin',
+        ]);
         
-        JenisPengadaan::create([
-            'jenis_pengadaan' => 'Jasa',
-        ]);
-
-        JenisPengadaan::create([
-            'jenis_pengadaan' => 'Barang',
-        ]);
-
         Setting::create([
             'nama_perusahaan' => 'PT SARANAWISESA PROPERINDO',
             'no_telepon_perusahaan' => '(021) 83794770',
@@ -74,74 +74,6 @@ class DatabaseSeeder extends Seeder
             'direksi' => '.png',
             'jabatan_direksi' => 'Direktur Operasional PT Saranawisesa Properindo',
             'pendapat_direksi' => 'Sebagai anak perusahaan Perumda Pembangunan Sarana Jaya, PT Saranawisesa Properindo berharap dapat memberikan kontribusi maksimal dari sisi Profitabilitas dan terus berkembang menjadi perusahaan yang Membanggakan.',
-        ]);
-
-        Portofolio::create([
-            'judul_portofolio' => 'JEMBATAN PENYEBERANGAN MULTIGUNA (JPM) TANAH ABANG',
-            'portofolio' => 'example0001.png',
-            'alamat_portofolio' => 'Jln. Jatibaru Raya Tanah Abang Jakarta Pusat',
-            'isi_portofolio' => 'Jembatan Penyeberangan Multiguna Tanah Abang  berlokasi di JL. Jatibaru Tanah Abang  dibangun sepanjang 386,4 meter dengan lebar 12,6 meter itu berada tepat diatas jalan Jatibaru. Pelaksana Pembangunan JPM tersebut oleh PT. Amarta Karya (Persero) dan pengawasan pembangunan dilakukan oleh PT. Bina Karya (Persero). merupakan penugasan dari Pemerintahan Provinsi DKI Jakarta untuk mengatasi kemacetan disekitaran Pasar Tanah Abang',
-        ]);
-        Portofolio::create([
-            'judul_portofolio' => 'HOTEL NOVOTEL CIKINI',
-            'portofolio' => 'example0002.png',
-            'alamat_portofolio' => 'Jalan Cikini Raya Jakarta Pusat',
-            'isi_portofolio' => 'Bangunan Hotel Novotel Cikini merupakan hotel bintang 4 milik Sarana Jaya yang terletak di Jalan Cikini Raya  Jakarta Pusat, terdiri atas 13 lantai dan 1 basement yang berdiri di atas lahan seluas 3.272 m2 dengan luas bangunan 26.967 m2.',
-        ]);
-        Portofolio::create([
-            'judul_portofolio' => 'JEMBATAN PENYEBERANGAN MULTIGUNA (JPM) TANAH ABANG',
-            'portofolio' => 'example0001.png',
-            'alamat_portofolio' => 'Jln. Jatibaru Raya Tanah Abang Jakarta Pusat',
-            'isi_portofolio' => 'Jembatan Penyeberangan Multiguna Tanah Abang  berlokasi di JL. Jatibaru Tanah Abang  dibangun sepanjang 386,4 meter dengan lebar 12,6 meter itu berada tepat diatas jalan Jatibaru. Pelaksana Pembangunan JPM tersebut oleh PT. Amarta Karya (Persero) dan pengawasan pembangunan dilakukan oleh PT. Bina Karya (Persero). merupakan penugasan dari Pemerintahan Provinsi DKI Jakarta untuk mengatasi kemacetan disekitaran Pasar Tanah Abang',
-        ]);
-        Portofolio::create([
-            'judul_portofolio' => 'JEMBATAN PENYEBERANGAN MULTIGUNA (JPM) TANAH ABANG',
-            'portofolio' => 'example0001.png',
-            'alamat_portofolio' => 'Jln. Jatibaru Raya Tanah Abang Jakarta Pusat',
-            'isi_portofolio' => 'Jembatan Penyeberangan Multiguna Tanah Abang  berlokasi di JL. Jatibaru Tanah Abang  dibangun sepanjang 386,4 meter dengan lebar 12,6 meter itu berada tepat diatas jalan Jatibaru. Pelaksana Pembangunan JPM tersebut oleh PT. Amarta Karya (Persero) dan pengawasan pembangunan dilakukan oleh PT. Bina Karya (Persero). merupakan penugasan dari Pemerintahan Provinsi DKI Jakarta untuk mengatasi kemacetan disekitaran Pasar Tanah Abang',
-        ]);
-        Portofolio::create([
-            'judul_portofolio' => 'JEMBATAN PENYEBERANGAN MULTIGUNA (JPM) TANAH ABANG',
-            'portofolio' => 'example0001.png',
-            'alamat_portofolio' => 'Jln. Jatibaru Raya Tanah Abang Jakarta Pusat',
-            'isi_portofolio' => 'Jembatan Penyeberangan Multiguna Tanah Abang  berlokasi di JL. Jatibaru Tanah Abang  dibangun sepanjang 386,4 meter dengan lebar 12,6 meter itu berada tepat diatas jalan Jatibaru. Pelaksana Pembangunan JPM tersebut oleh PT. Amarta Karya (Persero) dan pengawasan pembangunan dilakukan oleh PT. Bina Karya (Persero). merupakan penugasan dari Pemerintahan Provinsi DKI Jakarta untuk mengatasi kemacetan disekitaran Pasar Tanah Abang',
-        ]);
-        Portofolio::create([
-            'judul_portofolio' => 'JEMBATAN PENYEBERANGAN MULTIGUNA (JPM) TANAH ABANG',
-            'portofolio' => 'example0001.png',
-            'alamat_portofolio' => 'Jln. Jatibaru Raya Tanah Abang Jakarta Pusat',
-            'isi_portofolio' => 'Jembatan Penyeberangan Multiguna Tanah Abang  berlokasi di JL. Jatibaru Tanah Abang  dibangun sepanjang 386,4 meter dengan lebar 12,6 meter itu berada tepat diatas jalan Jatibaru. Pelaksana Pembangunan JPM tersebut oleh PT. Amarta Karya (Persero) dan pengawasan pembangunan dilakukan oleh PT. Bina Karya (Persero). merupakan penugasan dari Pemerintahan Provinsi DKI Jakarta untuk mengatasi kemacetan disekitaran Pasar Tanah Abang',
-        ]);
-
-        Artikel::create([
-            'judul_artikel' => 'PENGUMUMAN RENCANA UMUM PENGADAAN BARANG/JASA TAHUN ANGGARAN 2023',
-            'thumbnail' => 'example0001.png',
-            'tanggal_publikasi' => '2023-05-02',
-            'isi_artikel' => 'Bahwa Pengadaan Barang/Jasa berdasarkan RUP yang telah ditetapkan bertujuan untuk meningkatkan peran pelaku usaha nasional pada khususnya, dan multinasional dalam rangka menghasilkan value for money atas setiap pemenuhan Pengadaan Barang/Jasa',
-        ]);
-        Artikel::create([
-            'judul_artikel' => 'PENGUMUMAN RENCANA UMUM PENGADAAN BARANG/JASA TAHUN ANGGARAN 2023',
-            'thumbnail' => 'example0001.png',
-            'tanggal_publikasi' => '2023-05-02',
-            'isi_artikel' => 'Bahwa Pengadaan Barang/Jasa berdasarkan RUP yang telah ditetapkan bertujuan untuk meningkatkan peran pelaku usaha nasional pada khususnya, dan multinasional dalam rangka menghasilkan value for money atas setiap pemenuhan Pengadaan Barang/Jasa',
-        ]);
-        Artikel::create([
-            'judul_artikel' => 'PENGUMUMAN RENCANA UMUM PENGADAAN BARANG/JASA TAHUN ANGGARAN 2023',
-            'thumbnail' => 'example0001.png',
-            'tanggal_publikasi' => '2023-05-02',
-            'isi_artikel' => 'Bahwa Pengadaan Barang/Jasa berdasarkan RUP yang telah ditetapkan bertujuan untuk meningkatkan peran pelaku usaha nasional pada khususnya, dan multinasional dalam rangka menghasilkan value for money atas setiap pemenuhan Pengadaan Barang/Jasa',
-        ]);
-        Artikel::create([
-            'judul_artikel' => 'PENGUMUMAN RENCANA UMUM PENGADAAN BARANG/JASA TAHUN ANGGARAN 2023',
-            'thumbnail' => 'example0001.png',
-            'tanggal_publikasi' => '2023-05-02',
-            'isi_artikel' => 'Bahwa Pengadaan Barang/Jasa berdasarkan RUP yang telah ditetapkan bertujuan untuk meningkatkan peran pelaku usaha nasional pada khususnya, dan multinasional dalam rangka menghasilkan value for money atas setiap pemenuhan Pengadaan Barang/Jasa',
-        ]);
-        Artikel::create([
-            'judul_artikel' => 'PENGUMUMAN RENCANA UMUM PENGADAAN BARANG/JASA TAHUN ANGGARAN 2023',
-            'thumbnail' => 'example0001.png',
-            'tanggal_publikasi' => '2023-05-02',
-            'isi_artikel' => 'Bahwa Pengadaan Barang/Jasa berdasarkan RUP yang telah ditetapkan bertujuan untuk meningkatkan peran pelaku usaha nasional pada khususnya, dan multinasional dalam rangka menghasilkan value for money atas setiap pemenuhan Pengadaan Barang/Jasa',
         ]);
     }
 }

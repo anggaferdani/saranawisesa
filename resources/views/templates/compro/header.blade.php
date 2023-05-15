@@ -25,9 +25,6 @@
             <li class="nav-item mx-1">
               <a class="nav-link" href="{{ route('eproc.beranda') }}">PROCUREMENT</a>
             </li>
-            <li class="nav-item mx-1">
-              <a class="nav-link" href="{{ route('eproc.logout') }}">Logout</a>
-            </li>
           </ul>
         </div>
       </div>

@@ -134,8 +134,6 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
 
     Route::get('/kualifikasi/{user_id}', [Eproc::class, 'kualifikasi'])->name('kualifikasi');
     Route::post('/kirim-kualifikasi', [Eproc::class, 'kirim_kualifikasi'])->name('kirim-kualifikasi');
-    Route::get('/administrasi/{perusahaan_id}', [Eproc::class, 'administrasi'])->name('administrasi');
-    Route::post('/kirim-administrasi', [Eproc::class, 'kirim_administrasi'])->name('kirim-administrasi');
 
     Route::get('/beranda', [Eproc::class, 'beranda'])->name('beranda');
     Route::get('/pengadaan', [Eproc::class, 'pengadaan'])->name('pengadaan');
