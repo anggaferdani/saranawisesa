@@ -32,7 +32,7 @@
             <label for="thumbnail">Thumbnail</label>
             <input id="thumbnail" type="file" class="form-control" name="thumbnail" value="{{ $artikel->thumbnail }}" onchange="file(event)">
             @error('thumbnail')<div class="text-danger">{{ $message }}</div>@enderror
-            <p><img src="/artikel/{{ $artikel->thumbnail }}" id="output" alt="" width="200px"></p>
+            <p><img src="{{ asset('artikel/'.$artikel['thumbnail']) }}" id="output" alt="" width="200px"></p>
           </div>
           <div class="form-group">
             <label for="tanggal_publikasi">Tanggal Publikasi</label>

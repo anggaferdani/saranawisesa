@@ -28,7 +28,7 @@
               <p class="dater">{{ \Carbon\Carbon::parse($artikel->tanggal_publikasi)->format('l, d M Y') }}</p>
               <div class="mb-4" id="inner-grid10">
                 <div>
-                  <img src="/artikel/{{ $artikel->thumbnail }}" width="100%" alt="">
+                  <img src="{{ asset('artikel/'.$artikel['thumbnail']) }}" width="100%" alt="">
                 </div>
               </div>
               <p class="porro">{{ $artikel->isi_artikel }}</p>
@@ -40,7 +40,7 @@
             <div class="border-bottom mb-2" style="margin-right: calc(var(--bs-gutter-x) * -.0);" >
               <div class="row" style="padding-right: calc(var(--bs-gutter-x) * 0.5);">
                 <div class="col-6">
-                  <img src="/artikel/{{ $artikels->thumbnail }}" class="card-img-top" style="width: 110%; height: 100px; object-fit: cover;" alt="">
+                  <img src="{{ asset('artikel/'.$artikel['thumbnail']) }}" class="card-img-top" style="width: 110%; height: 100px; object-fit: cover;" alt="">
                 </div>
                 <div  class="col-6" >
                   <h5 class="est">{{ Str::limit($artikels->judul_artikel, 15) }}</h5>

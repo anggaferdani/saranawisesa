@@ -29,7 +29,7 @@
             <label for="direksi">Direksi</label>
             <input id="direksi" type="file" class="form-control" name="direksi" value="{{ $direksi->direksi }}" onchange="file(event)">
             @error('direksi')<div class="text-danger">{{ $message }}</div>@enderror
-            <p><img src="/direksi/{{ $direksi->direksi }}" id="output" alt="" width="200px"></p>
+            <p><img src="{{ asset('direksi/'.$direksi['direksi']) }}" id="output" alt="" width="200px"></p>
           </div>
           <div class="form-group">
             <label for="jabatan_direksi">Jabatan Direksi</label>

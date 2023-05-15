@@ -21,7 +21,7 @@
 
     <section class="qe">
       <main>
-        <img src="/portofolio/{{ $portofolio->portofolio }}" style="width: 100%; height: 65vh; object-fit: cover" alt="">
+        <img src="{{ asset('portofolio/'.$portofolio['portofolio']) }}" style="width: 100%; height: 65vh; object-fit: cover" alt="">
       </main>
       <div class="container">
         <div class="row py-5">

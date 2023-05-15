@@ -58,7 +58,7 @@
                   <tr>
                     <td class="text-center">{{ $id }}</td>
                     <td class="text-center">{{ $portofolios->judul_portofolio }}</td>
-                    <td class="text-center"><img src="/portofolio/{{ $portofolios->portofolio }}" alt="" width="200px"></td>
+                    <td class="text-center"><img src="{{ asset('portofolio/'.$portofolio['portofolio']) }}" alt="" width="200px"></td>
                     <td class="text-center text-nowarp">
                       @if(auth()->user()->level == 'superadmin')
                         <form action="{{ route('compro.superadmin.portofolio.destroy', $portofolios->id) }}" method="POST">

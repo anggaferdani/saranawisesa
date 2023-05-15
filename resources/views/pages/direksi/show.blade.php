@@ -15,7 +15,7 @@
         <div>Nama Direksi :</div>
         <p>{{ $direksi->nama_direksi }}</p>
         <div>Direksi :</div>
-        <p><img src="/direksi/{{ $direksi->direksi }}" alt="" width="200px"></p>
+        <p><img src="{{ asset('direksi/'.$direksi['direksi']) }}" alt="" width="200px"></p>
         <div>Jabatan Direksi :</div>
         <p>{{ $direksi->jabatan_direksi }}</p>
         <div>Pendapat Direksi :</div>

@@ -29,7 +29,7 @@
             <label for="komisaris">Komisaris</label>
             <input id="komisaris" type="file" class="form-control" name="komisaris" value="{{ $komisaris->komisaris }}" onchange="file(event)">
             @error('komisaris')<div class="text-danger">{{ $message }}</div>@enderror
-            <p><img src="/komisaris/{{ $komisaris->komisaris }}" id="output" alt="" width="200px"></p>
+            <p><img src="{{ asset('komisaris/'.$komisaris['komisaris']) }}" id="output" alt="" width="200px"></p>
           </div>
           <div class="form-group">
             <label for="jabatan_komisaris">Jabatan Komisaris</label>

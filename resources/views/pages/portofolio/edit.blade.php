@@ -29,7 +29,7 @@
             <label for="portofolio">Portofolio</label>
             <input id="portofolio" type="file" class="form-control" name="portofolio" value="{{ $portofolio->portofolio }}" onchange="file(event)">
             @error('portofolio')<div class="text-danger">{{ $message }}</div>@enderror
-            <p><img src="/portofolio/{{ $portofolio->portofolio }}" id="output" alt="" width="200px"></p>
+            <p><img src="{{ asset('portofolio/'.$portofolio['portofolio']) }}" id="output" alt="" width="200px"></p>
           </div>
           <div class="form-group">
             <label for="alamat_portofolio">Alamat Portofolio</label>

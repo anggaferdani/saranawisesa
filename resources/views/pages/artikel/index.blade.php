@@ -77,7 +77,7 @@
                     <td class="text-center">{{ $id }}</td>
                     <td class="text-center">{{ $artikels->judul_artikel }}</td>
                     <td class="text-center">{{ $artikels->tanggal_publikasi }}</td>
-                    <td class="text-center"><img src="/artikel/{{ $artikels->thumbnail }}" alt="" width="200px"></td>
+                    <td class="text-center"><img src="{{ asset('artikel/'.$artikel['thumbnail']) }}" alt="" width="200px"></td>
                     <td class="text-center text-nowarp">
                       @if(auth()->user()->level == 'superadmin')
                         <form action="{{ route('compro.superadmin.artikel.destroy', $artikels->id) }}" method="POST">

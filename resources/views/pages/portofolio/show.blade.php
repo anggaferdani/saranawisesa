@@ -15,7 +15,7 @@
         <div>Judul Portofolio :</div>
         <p>{{ $portofolio->judul_portofolio }}</p>
         <div>Portofolio :</div>
-        <p><img src="/portofolio/{{ $portofolio->portofolio }}" alt="" width="200px"></p>
+        <p><img src="{{ asset('portofolio/'.$portofolio['portofolio']) }}" alt="" width="200px"></p>
         <div>Alamat Portofolio :</div>
         <p>{{ $portofolio->alamat_portofolio }}</p>
         <div>Isi Portofolio :</div>

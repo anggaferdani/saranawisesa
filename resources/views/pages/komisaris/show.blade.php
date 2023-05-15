@@ -15,7 +15,7 @@
         <div>Nama Komisaris :</div>
         <p>{{ $komisaris->nama_komisaris }}</p>
         <div>Komisaris :</div>
-        <p><img src="/komisaris/{{ $komisaris->komisaris }}" alt="" width="200px"></p>
+        <p><img src="{{ asset('komisaris/'.$komisaris['komisaris']) }}" alt="" width="200px"></p>
         <div>Jabatan Komisaris :</div>
         <p>{{ $komisaris->jabatan_komisaris }}</p>
         <div>Pendapat Komisaris :</div>

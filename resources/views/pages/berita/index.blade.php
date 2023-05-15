@@ -71,7 +71,7 @@
                     <td class="text-center">{{ $id }}</td>
                     <td class="text-center">{{ $beritas->judul_berita }}</td>
                     <td class="text-center">{{ $beritas->tanggal_publikasi }}</td>
-                    <td class="text-center"><img src="/berita/{{ $beritas->thumbnail }}" alt="" width="200px"></td>
+                    <td class="text-center"><img src="{{ asset('berita/'.$berita['thumbnail']) }}" alt="" width="200px"></td>
                     <td class="text-center text-nowarp" style="white-space: nowrap;">
                       @if(auth()->user()->level == 'superadmin')
                         <form action="{{ route('eproc.superadmin.berita.destroy', $beritas->id) }}" method="POST">

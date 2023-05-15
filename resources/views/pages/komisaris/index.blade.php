@@ -60,7 +60,7 @@
                     <td class="text-center">{{ $id }}</td>
                     <td class="text-center">{{ $komisaris->nama_komisaris }}</td>
                     <td class="text-center">{{ $komisaris->jabatan_komisaris }}</td>
-                    <td class="text-center"><img src="/komisaris/{{ $komisaris->komisaris }}" alt="" width="100px"></td>
+                    <td class="text-center"><img src="{{ asset('komisaris/'.$komisaris['komisaris']) }}" alt="" width="100px"></td>
                     <td class="text-center text-nowarp">
                       @if(auth()->user()->level == 'superadmin')
                         <form action="{{ route('compro.superadmin.komisaris.destroy', $komisaris->id) }}" method="POST">

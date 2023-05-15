@@ -15,7 +15,7 @@
         <div>Judul Artikel :</div>
         <p>{{ $artikel->judul_artikel }}</p>
         <div>Thumbnail :</div>
-        <p><img src="/artikel/{{ $artikel->thumbnail }}" alt="" width="200px"></p>
+        <p><img src="{{ asset('artikel/'.$artikel['thumbnail']) }}" alt="" width="200px"></p>
         <div>Tanggal Publikasi :</div>
         <p>{{ $artikel->tanggal_publikasi }}</p>
         <div>Isi Artikel :</div>
