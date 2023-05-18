@@ -16,7 +16,7 @@
     <div class="container" id="atas">
       <div class="header">
        <p class="fs-4"><span class="fw-bold">BERITA</span> SEPUTAR PENGADAAN</p>
-       <div class="row text-white" id="header__content">
+       <div class="row text-white" id="header__content" style="background-color: #830000;">
            <div class="col-md-7">
                <h1>Lorem ipsum dolor sit amet consectetur.</h1>
                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt at eum quas unde reprehenderit illum officia vitae saepe architecto nemo!</p>
@@ -31,7 +31,7 @@
 
    <div class="container">
        <div class="header-2">
-           <p style=" color: #0458B8;" class="fs-4">LIST <span class="fw-bold">BERITA</span></p>
+           <p class="fs-4 fw-light">LIST <span class="fw-bold" style="color: #830000;">BERITA</span></p>
        </div>
        <div class="row" id="main-content">
            @foreach ($berita as $beritas)
@@ -43,7 +43,7 @@
                   <div class="c__desc">
                       <p>{{ \Carbon\Carbon::parse($beritas->tanggal_publikasi)->format('l, d M Y') }}</p>
                       <p>{!! Str::limit($beritas->isi_berita, 70) !!}</p>
-                      <a href="">Selengkapnya</a>
+                      <a href="" style="color: #830000; text-decoration: none;">Selengkapnya</a>
                   </div>
               </div>
             </div>

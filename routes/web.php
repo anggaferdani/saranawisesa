@@ -103,7 +103,6 @@ Route::prefix('compro')->name('compro.')->group(function(){
       Route::get('export', [ArtikelController::class, 'export'])->name('export');
       Route::post('import', [ArtikelController::class, 'import'])->name('import');
       Route::get('pdf', [ArtikelController::class, 'pdf'])->name('pdf');
-      // profile
       Route::get('profile', [Controller::class, 'profile'])->name('profile');
       Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
     });
@@ -141,7 +140,7 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
     Route::get('/ikut-pengadaan/{id}', [Eproc::class, 'ikut_pengadaan'])->name('ikut-pengadaan');
     Route::post('/kirim-lampiran', [Eproc::class, 'kirim_lampiran'])->name('kirim-lampiran');
     Route::get('/berita', [Eproc::class, 'berita'])->name('berita');
-    Route::get('/kontak-kami', [Eproc::class, 'kontak_kami'])->name('kontak-kami');
+    Route::get('/kontak', [Eproc::class, 'kontak'])->name('kontak');
   });
 
   Route::prefix('superadmin')->name('superadmin.')->group(function(){

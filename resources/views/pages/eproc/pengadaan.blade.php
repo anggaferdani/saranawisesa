@@ -11,10 +11,19 @@
 
     @include('templates.eproc.header')
 
-    <div class="header">
-      <img src="img/pengadaan.png" alt="">
-      <h1 class="text-white">PENGADAAN</h1>
-      <h2>TERBARU</h2>
+    {{-- <div class="header mt-5">
+      <img class="img-fluid" src="img/pengadaan.png" alt="">
+      <h1 class="text-white fw-light">PENGADAAN</h1>
+      <h2 class="text-white">TERBARU</h2>
+    </div> --}}
+
+    <br>
+
+    <div class="parent mt-5" style="padding-block: 70px; background-image: url('{{ asset('eproc/img/pengadaan.png') }}')">
+      <div class="container py-5 text-center">
+        <h1 class="mt-0 text-white fw-light">PENGADAAN</h1>
+        <h2 class="text-white">TERBARU</h2>
+      </div>
     </div>
 
     <div class="container my-5">
@@ -60,12 +69,12 @@
       <P>NON TENDER</P>
       @if (count($jenisPengadaansGroupByLangsung))
         @forelse ($jenisPengadaansGroupByLangsung as $jenisPengadaan)
-        <a class="btn w-100 text-white" style="background-color: #920000; font-weight: bold" href="#" role="button">{{ $jenisPengadaan->jenis_pengadaan }}</a>
+        <a class="btn w-100 text-white" style="background-color: #830000; font-weight: bold" href="#" role="button">{{ $jenisPengadaan->jenis_pengadaan }}</a>
         <div class="row">
             <div class="col-md-12">
                 <table class="table mt-2">
                     <thead>
-                      <tr class="text-white" style="background-color: #920000;">
+                      <tr class="text-white" style="background-color: #830000;">
                         <th scope="col">Kode</th>
                         <th scope="col">Tanggal Berakhir</th>
                         <th scope="col">Nama Paket</th>

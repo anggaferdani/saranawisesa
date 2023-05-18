@@ -8,12 +8,6 @@ nav{
 .sub__menu{
     gap: 1.25rem;
 }
-
-
-
-
-
-
 .circle-1{
     position: absolute;
     right: 0;
@@ -62,15 +56,12 @@ nav{
     align-items: center;
     justify-content: center;
 }
-#header h1{
-    color: #0458B8;
-}
 .btn-left{
-    background-color: #0458B8;
+    background-color: #830000;
 }
 .btn-right{
     background: none;
-    border: 1px solid grey;
+    border: 1px solid #830000;
 }
 #info{
     display: flex;
@@ -108,9 +99,6 @@ nav{
     text-align: center;
     font-size: 12px;
 }
-
-
-
 footer{
     background-color: #1A1A1A;
     color: white;

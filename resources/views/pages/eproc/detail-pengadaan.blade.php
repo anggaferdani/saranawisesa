@@ -17,7 +17,7 @@
         @if(Session::get('success'))
             <div class="alert alert-primary">{{ Session::get('success') }}</div>
         @endif
-        <h1 class="fs-4 fw-light">DETAIL <span class="fw-bold" style="color: #0458B8;">PENGADAAN</span></h1>
+        <h1 class="fs-4 fw-light">DETAIL <span class="fw-bold" style="color: #830000;">PENGADAAN</span></h1>
         <div class="row d-flex gap-0 gap-md-3">
             <div class="col-md-3 mt-2 left__content text-white d-flex align-items-center">
                 Kode Tender

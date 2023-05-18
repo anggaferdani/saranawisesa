@@ -29,11 +29,8 @@ class EprocController extends Controller
     }
 
     public function pengadaan(){
-        // Joy's
         $jenisPengadaansGroupByLelang   = JenisPengadaan::with(["lelangs" => function ($query) { $query->where("status_pengadaan", "lelang"); }])->whereHas("lelangs", function ($query) { $query->where("status_pengadaan", "lelang"); })->get();
         $jenisPengadaansGroupByLangsung = JenisPengadaan::with(["lelangs" => function ($query) { $query->where("status_pengadaan", "penunjukan_langsung"); }])->whereHas("lelangs", function ($query) { $query->where("status_pengadaan", "penunjukan_langsung"); })->get();
-        
-        // Angga's
         $profile_perusahaan = ProfilePerusahaan::first();
         $jenis_pengadaan = JenisPengadaan::with('lelangs')->whereHas("lelangs", function ($query) { $query->where("id", "!=", null); })->get();
         $setting = Setting::first();
@@ -150,10 +147,10 @@ class EprocController extends Controller
         ));
     }
 
-    public function kontak_kami(){
+    public function kontak(){
         $profile_perusahaan = ProfilePerusahaan::first();
         $setting = Setting::first();
-        return view('pages.eproc.kontak-kami', compact(
+        return view('pages.eproc.kontak', compact(
             'profile_perusahaan',
             'setting',
         ));

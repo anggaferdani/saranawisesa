@@ -13,17 +13,17 @@
 
     <br><br><br>
 
-    <div class="container" id="top">
+    <div class="container mt-5">
       <div class="header">
-          <h1 style=" color: #0458B8;" class="fs-3">HUBUNGI KAMI</h1>
-          <img class="mt-3" src="{{ asset('eproc/img/call.png') }}" alt="">
+          <h1 style=" color: #830000;" class="fs-3">HUBUNGI KAMI</h1>
+          <img class="mt-3 img-fluid" src="{{ asset('eproc/img/call.png') }}" alt="">
       </div>
     </div>
 
-  <div class="container" id="middle">
+  <div class="container mt-5" id="middle">
       <div class="row">
           <div class="col-md-12">
-              <h1 style=" color: #0458B8;" class="fs-3">Saranawisesa Call Center</h1>
+              <h1 style=" color: #830000;" class="fs-3">Saranawisesa Call Center</h1>
           </div>
           <div class="col-md-6">
               <p>Jika terdapat pertanyaan, kami siap membantu. Hubungi layanan pelanggan
@@ -32,16 +32,14 @@
       </div>
       <div class="row mt-3 mb-3">
           <div class="col-md-6">
-              <h3 style=" color: #0458B8;" class="fs-4">Layanan Pelanggan SARANAWISESA</h3>
-              <h3 style=" color: #0458B8;" class="fs-4">Telepon {{ $setting->no_telepon_perusahaan }}</h3>
-              <h3 style=" color: #0458B8;" class="fs-4">Whatsapp {{ $setting->no_telepon_perusahaan }}</h3>
-              <p class="mt-5" style=" color: #0458B8; width: 45%;">
-                  Anda dapat menghubungi kami
-                  Senin - Minggu: 10:00 – 21:00</p>
+              <h3 class="fs-4">Layanan Pelanggan SARANAWISESA</h3>
+              <h3 class="fs-4">Telepon {{ $setting->no_telepon_perusahaan }}</h3>
+              <h3 class="fs-4">Whatsapp {{ $setting->no_telepon_perusahaan }}</h3>
+              <p class="mt-5" style="width: 50%;">Anda dapat menghubungi kami Senin - Minggu: 10:00 – 21:00</p>
           </div>
           <div class="col-md-1"><div class="vr" style="height: 10rem;"></div></div>
           <div class="col-md-5">
-              <h3 style=" color: #0458B8;" class="fs-4">Email</h3>
+              <h3 style=" color: #830000;" class="fs-4">Email</h3>
               <p>E-mail kami kapan pun dan kami akan membalasnya dalam
                   24 jam.
               </p>
