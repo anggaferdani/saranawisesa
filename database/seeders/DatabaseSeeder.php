@@ -30,14 +30,6 @@ class DatabaseSeeder extends Seeder
             'level' => 'superadmin',
         ]);
 
-        User::create([
-            'nama_panjang' => 'Admin',
-            'email' => 'admin@gmail.com',
-            'email_has_been_verified' => 'terverifikasi',
-            'password' => bcrypt('saranawisesa234'),
-            'level' => 'admin',
-        ]);
-        
         Setting::create([
             'nama_perusahaan' => 'PT SARANAWISESA PROPERINDO',
             'no_telepon_perusahaan' => '(021) 83794770',

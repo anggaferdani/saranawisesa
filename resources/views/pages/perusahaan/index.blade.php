@@ -48,59 +48,61 @@
               <?php $id = 0; ?>
               @foreach ($kualifikasi as $kualifikasis)
                 @if($kualifikasis->perusahaans->users->status_aktif == 'aktif')
-                  <?php $id++; ?>
-                  <tr>
-                    <td class="text-center">{{ $id }}</td>
-                    <td class="text-center">{{ $kualifikasis->administrasi_nama_badan_usaha }}</td>
-                    <td class="text-center">
-                      @if($kualifikasis->administrasi_status_badan_usaha == 'pusat')
-                        {{ $kualifikasis->administrasi_email_pusat }}
-                      @endif
-                      @if($kualifikasis->administrasi_status_badan_usaha == 'cabang')
-                        {{ $kualifikasis->administrasi_email_cabang }}
-                      @endif
-                    </td>
-                    <td class="text-center">
-                      @if($kualifikasis->administrasi_status_badan_usaha == 'pusat')
-                        <div class="badge badge-danger">Pusat</div>
-                      @endif
-                      @if($kualifikasis->administrasi_status_badan_usaha == 'cabang')
-                        <div class="badge badge-primary">Cabang</div>
-                      @endif
-                    </td>
-                    <td class="text-center">
-                      @if($kualifikasis->perusahaans->users->email_has_been_verified == 'terverifikasi')
-                        <div class="badge badge-primary">Terverifikasi</div>
-                      @endif
-                      @if($kualifikasis->perusahaans->users->email_has_been_verified == 'belum_terverifikasi')
-                        <div class="badge badge-danger">Belum Terverifikasi</div>
-                      @endif
-                    </td>
-                    <td class="text-center text-nowarp">
-                      @if(auth()->user()->level == 'superadmin')
+                  @if($kualifikasis->perusahaans->users->check_email == 'yes')
+                    <?php $id++; ?>
+                    <tr>
+                      <td class="text-center">{{ $id }}</td>
+                      <td class="text-center">{{ $kualifikasis->administrasi_nama_badan_usaha }}</td>
+                      <td class="text-center">
+                        @if($kualifikasis->administrasi_status_badan_usaha == 'pusat')
+                          {{ $kualifikasis->administrasi_email_pusat }}
+                        @endif
+                        @if($kualifikasis->administrasi_status_badan_usaha == 'cabang')
+                          {{ $kualifikasis->administrasi_email_cabang }}
+                        @endif
+                      </td>
+                      <td class="text-center">
+                        @if($kualifikasis->administrasi_status_badan_usaha == 'pusat')
+                          <div class="badge badge-danger">Pusat</div>
+                        @endif
+                        @if($kualifikasis->administrasi_status_badan_usaha == 'cabang')
+                          <div class="badge badge-primary">Cabang</div>
+                        @endif
+                      </td>
+                      <td class="text-center">
                         @if($kualifikasis->perusahaans->users->email_has_been_verified == 'terverifikasi')
-                          <a href="{{ route('eproc.superadmin.perusahaan.show', $kualifikasis->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                        @else
-                          <form action="{{ route('eproc.superadmin.perusahaan.verifikasi', $kualifikasis->id) }}" method="POST">
-                            @csrf
+                          <div class="badge badge-primary">Terverifikasi</div>
+                        @endif
+                        @if($kualifikasis->perusahaans->users->email_has_been_verified == 'belum_terverifikasi')
+                          <div class="badge badge-danger">Belum Terverifikasi</div>
+                        @endif
+                      </td>
+                      <td class="text-center text-nowarp">
+                        @if(auth()->user()->level == 'superadmin')
+                          @if($kualifikasis->perusahaans->users->email_has_been_verified == 'terverifikasi')
                             <a href="{{ route('eproc.superadmin.perusahaan.show', $kualifikasis->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                          @else
+                            <form action="{{ route('eproc.superadmin.perusahaan.verifikasi', $kualifikasis->id) }}" method="POST">
+                              @csrf
+                              <a href="{{ route('eproc.superadmin.perusahaan.show', $kualifikasis->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                              <button type="button" class="btn btn-icon btn-danger verifikasi" data-id="{{ $kualifikasis->id }}"><i class="fas fa-check"></i></button>
+                            </form>
+                          @endif
+                        @endif
+                        @if(auth()->user()->level == 'admin')
+                          @if($kualifikasis->perusahaans->users->email_has_been_verified == 'terverifikasi')
+                          <a href="{{ route('admin.superadmin.perusahaan.show', $kualifikasis->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                          @else
+                          <form action="{{ route('admin.superadmin.perusahaan.verifikasi', $kualifikasis->id) }}" method="POST">
+                            @csrf
+                            <a href="{{ route('admin.superadmin.perusahaan.show', $kualifikasis->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
                             <button type="button" class="btn btn-icon btn-danger verifikasi" data-id="{{ $kualifikasis->id }}"><i class="fas fa-check"></i></button>
                           </form>
+                          @endif
                         @endif
-                      @endif
-                      @if(auth()->user()->level == 'admin')
-                        @if($kualifikasis->perusahaans->users->email_has_been_verified == 'terverifikasi')
-                        <a href="{{ route('admin.superadmin.perusahaan.show', $kualifikasis->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                        @else
-                        <form action="{{ route('admin.superadmin.perusahaan.verifikasi', $kualifikasis->id) }}" method="POST">
-                          @csrf
-                          <a href="{{ route('admin.superadmin.perusahaan.show', $kualifikasis->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                          <button type="button" class="btn btn-icon btn-danger verifikasi" data-id="{{ $kualifikasis->id }}"><i class="fas fa-check"></i></button>
-                        </form>
-                        @endif
-                      @endif
-                    </td>
-                  </tr>
+                      </td>
+                    </tr>
+                  @endif
                 @endif
               @endforeach
             </tbody>

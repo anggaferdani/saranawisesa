@@ -36,9 +36,11 @@
             <select class="form-control" name="lelang_id">
               <option selected disabled>Pilih</option>
               @foreach ($perusahaan as $perusahaans)
-                @if($perusahaans->status_aktif == 'aktif')
-                  @if(empty($perusahaans->lelang_id))
-                    <option value="{{ $perusahaans->id }}">{{ $perusahaans->users->nama_panjang }}</option>
+                @if($perusahaans->status_aktif == 'aktif' and $perusahaans->users->email_has_been_verified == 'terverifikasi')
+                  @if($perusahaans->users->level == 'perusahaan')
+                    @if(empty($perusahaans->lelang_id))
+                      <option value="{{ $perusahaans->id }}">{{ $perusahaans->users->nama_panjang }}</option>
+                    @endif
                   @endif
                 @endif
               @endforeach

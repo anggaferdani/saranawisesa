@@ -23,6 +23,7 @@ class User extends Authenticatable
         'id',
         'nama_panjang',
         'email',
+        'check_email',
         'email_has_been_verified',
         'email_verified_at',
         'password',
