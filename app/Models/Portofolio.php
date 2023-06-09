@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\PortofolioImages;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -34,5 +35,9 @@ class Portofolio extends Model
         static::saving(function($model){
             $model->updated_by = Auth::id();
         });
+    }
+
+    public function portofolio_images(){
+        return $this->hasMany(PortofolioImages::class);
     }
 }

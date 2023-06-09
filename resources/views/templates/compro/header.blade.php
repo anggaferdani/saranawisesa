@@ -1,29 +1,31 @@
 <header>
   <div class="">
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top ">
+    <nav class="navbar navbar-expand-lg bg-light-subtle fixed-top border-bottom">
       <div class="container">
-        <a href="{{ route('index') }}">
-          <img src="{{ asset('compro/img/logo-saranawisesa.png') }}" alt="" width="56" class="d-inline-block align-text-top">
-        </a>
-        <button class=" mx-4 navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <a href="{{ route('index') }}"><img src="{{ asset('img/saranawisesa.png') }}" class="navbar-brand" alt=""></a>
+        <img src="{{ asset('img/ISO.png') }}" class="navbar-brand" width="170" alt="">
+        <button class="navbar-toggler mx-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto py-4">
-            <li class="nav-item mx-1">
-              <a class="nav-link " aria-current="page" href="{{ route('index') }}">HOME</a>
+          <ul class="navbar-nav text-uppercase ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('index') }}">HOME</a>
             </li>
-            <li class="nav-item mx-1">
+            <li class="nav-item">
               <a class="nav-link" href="{{ route('profile-perusahaan') }}">PROFILE</a>
             </li>
-            <li class="nav-item mx-1">
-              <a class="nav-link" href="{{ route('portofolio2') }}">PORTOFOLIO</a>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('produk-dan-layanan') }}">PRODUCT & SERVICES</a>
             </li>
-            <li class="nav-item mx-1">
-              <a class="nav-link" href="{{ route('artikel2') }}">ARTIKEL</a>
+            <li class="nav-item">
+              <a class="nav-link" href="#">PORTOFOLIO</a>
             </li>
-            <li class="nav-item mx-1">
-              <a class="nav-link" href="{{ route('eproc.beranda') }}">PROCUREMENT</a>
+            <li class="nav-item">
+              <a class="nav-link" href="#">ARTICLE</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">PROCUREMENT</a>
             </li>
           </ul>
         </div>

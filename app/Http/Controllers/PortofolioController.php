@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Portofolio;
+use App\Models\PortofolioImages;
 use Illuminate\Http\Request;
 
 class PortofolioController extends Controller
@@ -38,6 +39,17 @@ class PortofolioController extends Controller
         }
 
         $portofolio = Portofolio::create($input_array_portofolio);
+
+        if($request->has('images')){
+            foreach($request->file('images') as $image){
+                $imageName = date('YmdHis'). "." .rand(999999999, 9999999999).$image->extension();
+                $image->move(public_path('portofolio/image/'), $imageName);
+                PortofolioImages::create([
+                    'portofolio_id' => $portofolio->id,
+                    'image' => $imageName,
+                ]);
+            }
+        }
 
         if(auth()->user()->level == 'superadmin'){
             return redirect()->route('compro.superadmin.portofolio.index')->with('success', 'Berhasil ditambahkan pada : '.$portofolio->created_at);

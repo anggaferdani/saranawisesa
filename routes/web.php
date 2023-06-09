@@ -17,6 +17,7 @@ use App\Http\Controllers\PerusahaanController;
 use App\Http\Controllers\PortofolioController;
 use App\Http\Controllers\JadwalLelangController;
 use App\Http\Controllers\JenisPengadaanController;
+use App\Http\Controllers\NewComproController;
 use App\Http\Controllers\ProfilePerusahaanController;
 use App\Http\Controllers\PenunjukanLangsungController;
 use App\Http\Controllers\Pages\EprocController as Eproc;
@@ -33,12 +34,13 @@ use App\Http\Controllers\Pages\ComproController as Compro;
 |
 */
 
-Route::get('/', [Compro::class, 'index'])->name('index');
-Route::get('/profile-perusahaan', [Compro::class, 'profile_perusahaan'])->name('profile-perusahaan');
-Route::get('/compro/artikel', [Compro::class, 'artikel2'])->name('artikel2');
-Route::get('/compro/artikel/{id}', [Compro::class, 'artikel'])->name('artikel');
-Route::get('/compro/portofolio', [Compro::class, 'portofolio2'])->name('portofolio2');
-Route::get('/compro/portofolio/{id}', [Compro::class, 'portofolio'])->name('portofolio');
+Route::get('/', [NewComproController::class, 'index'])->name('index');
+Route::get('/profile-perusahaan', [NewComproController::class, 'profile_perusahaan'])->name('profile-perusahaan');
+Route::get('/produk-dan-layanan', [NewComproController::class, 'produk_dan_layanan'])->name('produk-dan-layanan');
+Route::get('/portofolios', [NewComproController::class, 'portofolios'])->name('portofolios');
+Route::get('/portofolio/{id}', [NewComproController::class, 'portofolio'])->name('portofolio');
+Route::get('/artikels', [NewComproController::class, 'artikels'])->name('artikels');
+Route::get('/artikel/{id}', [NewComproController::class, 'artikel'])->name('artikel');
 
 Route::prefix('compro')->name('compro.')->group(function(){
   Route::middleware(['web'])->group(function(){

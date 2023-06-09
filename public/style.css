@@ -1,0 +1,18 @@
+.profile,
+.profile2{
+  height: 250px;
+}
+.profile3{
+  height: 210px;
+}
+@media screen and (max-width: 480px){
+  .banner{
+    width: 85%;
+    margin-top: 80px;
+  }
+  .profile,
+  .profile2,
+  .profile3{
+    height: 150px;
+  }
+}

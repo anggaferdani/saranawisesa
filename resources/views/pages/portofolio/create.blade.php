@@ -26,9 +26,14 @@
           </div>
           <div class="form-group">
             <label for="portofolio">Portofolio</label>
-            <input id="portofolio" type="file" class="form-control" name="portofolio" onchange="file(event)">
+            <input id="portofolio" type="file" class="form-control-file" name="portofolio" onchange="file(event)">
             @error('portofolio')<div class="text-danger">{{ $message }}</div>@enderror
             <p><img src="#" id="output" alt="" width="200px"></p>
+          </div>
+          <div class="form-group">
+            <label for="">Images</label>
+            <input type="file" class="form-control-file" name="images[]" accept="image/*" multiple>
+            @error('images[]')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           <div class="form-group">
             <label for="alamat_portofolio">Alamat Portofolio</label>
