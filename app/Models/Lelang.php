@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use App\Models\Lampiran;
 use App\Models\Pemenang;
 use App\Models\JadwalLelang;
@@ -22,6 +23,7 @@ class Lelang extends Model
         'id',
         'kode_lelang',
         'jenis_pengadaan_id',
+        'user_id',
         'nama_lelang',
         'uraian_singkat_pekerjaan',
         'tanggal_mulai_lelang',
@@ -32,6 +34,7 @@ class Lelang extends Model
         'syarat_kualifikasi',
         'lampiran_pengadaan',
         'status_pengadaan',
+        'status_pengadaan2',
         'status_aktif',
         'created_by',
         'updated_by',
@@ -48,11 +51,19 @@ class Lelang extends Model
         });
     }
 
+    public function users(){
+        return $this->belongsToMany(User::class, 'user_lelangs', 'lelang_id', 'user_id');
+    }
+
+    public function users2(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     public function jadwal_lelangs(){
         return $this->hasMany(JadwalLelang::class);
     }
 
-    public function lampiran_pengadaans(){
+    public function lampiran(){
         return $this->hasMany(LampiranPengadaan::class);
     }
 

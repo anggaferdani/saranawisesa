@@ -18,10 +18,9 @@ class JadwalLelang extends Model
     protected $fillable = [
         'id',
         'lelang_id',
-        'tanggal_maksimal_lelang',
-        'nama_lelang',
-        'tanggal_mulai_lelang',
-        'tanggal_akhir_lelang',
+        'nama_kegiatan_lelang',
+        'tanggal_mulai_kegiatan_lelang',
+        'tanggal_akhir_kegiatan_lelang',
         'status_aktif',
         'created_by',
         'updated_by',

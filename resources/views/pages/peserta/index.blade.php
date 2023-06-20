@@ -1,11 +1,7 @@
 @extends('templates.pages')
-@section('title')
+@section('title', 'Peserta Lelang')
 @section('header')
 <h1>Peserta Lelang : {{ $lelang->kode_lelang }}</h1>
-<div class="section-header-breadcrumb">
-  <div class="breadcrumb-item"><a href="#">Dashboard</a></div>
-  <div class="breadcrumb-item active"><a href="#">Peserta Lelang : {{ $lelang->kode_lelang }}</a></div>
-</div>
 @endsection
 @section('content')
 <div class="row">
@@ -46,52 +42,43 @@
           <table class="table table-striped table-bordered">
             <tbody>
               <tr>
-                <td class="text-center">No</td>
-                <td class="text-center">Nama Lelang</td>
-                <td class="text-center">Email</td>
-                <td class="text-center">Action</td>
+                <td>No</td>
+                <td>Nama Lelang</td>
+                <td>Email</td>
+                <td>Status Peserta</td>
+                <td>Created At</td>
+                <td>Action</td>
               </tr>
               <?php $id = 0; ?>
-              @foreach ($perusahaan as $perusahaans)
-                @if($perusahaans->status_aktif == 'aktif')
-                @if($perusahaans->lelang_id == $lelang->id)
-                  <?php $id++; ?>
-                  <tr>
-                    <td class="text-center">{{ $id }}</td>
-                    <td class="text-center">{{ $perusahaans->users->nama_panjang }}</td>
-                    <td class="text-center">{{ $perusahaans->users->email }}</td>
-                    <td class="text-center text-nowarp">
-                      @if(auth()->user()->level == 'superadmin')
-                        @if(empty($pemenang->perusahaan_id))
-                        <form action="{{ route('eproc.superadmin.peserta.pemenang', ['id' => $perusahaans->id, 'lelang_id' => $lelang->id]) }}" method="POST">
-                          @csrf
-                          @method('POST')
-                          <a href="{{ route('eproc.superadmin.peserta.show', ['id' => $perusahaans->id, 'lelang_id' => $lelang->id]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                          <button type="submit" class="btn btn-icon btn-danger"><i class="fas fa-check"></i></button>
-                        </form>
-                        @else
-                          <a href="{{ route('eproc.superadmin.peserta.show', ['id' => $perusahaans->id, 'lelang_id' => $lelang->id]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                        @endif
-                      @endif
-                      @if(auth()->user()->level == 'admin')
-                        @if(empty($pemenang->perusahaan_id))
-                        <form action="{{ route('eproc.admin.peserta.pemenang', ['id' => $perusahaans->id, 'lelang_id' => $lelang->id]) }}" method="POST">
-                          @csrf
-                          @method('POST')
-                          <a href="{{ route('eproc.admin.peserta.show', ['id' => $perusahaans->id, 'lelang_id' => $lelang->id]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                          <button type="submit" class="btn btn-icon btn-danger"><i class="fas fa-check"></i></button>
-                        </form>
-                        @else
-                          <a href="{{ route('eproc.admin.peserta.show', ['id' => $perusahaans->id, 'lelang_id' => $lelang->id]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                        @endif
-                      @endif
-                    </td>
-                  </tr>
-                @endif
-                @endif
+              @foreach ($user_lelangs as $user)
+              <?php $id++; ?>
+                <tr>
+                  <td>{{ $id }}</td>
+                  <td>{{ $user->nama_panjang }}</td>
+                  <td>{{ $user->email }}</td>
+                  <td>
+                    @if($lelang->user_id == $user->id)
+                      <div class="badge badge-danger">Pemenang</div>
+                    @else
+                      <div class="badge badge-primary">Peserta</div>
+                    @endif
+                  </td>
+                  <td>{{ $user->created_at }}</td>
+                  <td style="white-space: nowrap">
+                    @if(auth()->user()->level == 'superadmin')
+                      <a href="{{ route('eproc.superadmin.peserta.show', ['id' => Crypt::encrypt($user->id), 'lelang_id' => Crypt::encrypt($lelang->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                    @endif
+                    @if(auth()->user()->level == 'admin')
+                      <a href="{{ route('eproc.admin.peserta.show', ['id' => Crypt::encrypt($user->id), 'lelang_id' => $lelang->id]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                    @endif
+                  </td>
+                </tr>
               @endforeach
             </tbody>
           </table>
+        </div>
+        <div class="float-right">
+          {{ $user_lelangs->links('pagination::bootstrap-4') }}
         </div>
       </div>
     </div>

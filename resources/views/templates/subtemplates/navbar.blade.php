@@ -196,8 +196,6 @@
     <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
       <div class="d-sm-none d-lg-inline-block">{{ auth()->user()->email }}</div></a>
       <div class="dropdown-menu dropdown-menu-right">
-        <div class="dropdown-title">Signed in as {{ auth()->user()->nama_panjang }}</div>
-        <div class="dropdown-divider"></div>
         @if(Session::has('compro'))
           @if(auth()->user()->level == 'superadmin')
             <a href="{{ route('compro.superadmin.profile') }}" class="dropdown-item has-icon">
@@ -214,20 +212,27 @@
             <i class="far fa-user"></i> Profile
           </a>
           <a href="{{ route('compro.logout') }}" class="dropdown-item has-icon text-danger">
-            <i class="fas fa-sign-out-alt"></i> Logout
+            LOGOUT
           </a>
         @endif
         @if(Session::has('eproc'))
           @if(auth()->user()->level == 'superadmin')
             <a href="{{ route('eproc.superadmin.profile') }}" class="dropdown-item has-icon">
+              <i class="far fa-user"></i> Profile
+            </a>
           @endif
           @if(auth()->user()->level == 'admin')
             <a href="{{ route('eproc.admin.profile') }}" class="dropdown-item has-icon">
+              <i class="far fa-user"></i> Profile
+            </a>
           @endif
-            <i class="far fa-user"></i> Profile
-          </a>
+          @if(auth()->user()->level == 'perusahaan')
+            <a href="{{ route('eproc.pengadaan') }}" class="dropdown-item has-icon">
+              PENGADAAN
+            </a>
+          @endif
           <a href="{{ route('eproc.logout') }}" class="dropdown-item has-icon text-danger">
-            <i class="fas fa-sign-out-alt"></i> Logout
+            LOGOUT
           </a>
         @endif
       </div>

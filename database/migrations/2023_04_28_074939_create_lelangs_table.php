@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('kode_lelang');
             $table->foreignId('jenis_pengadaan_id')->references('id')->on('jenis_pengadaans')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('nama_lelang');
             $table->string('uraian_singkat_pekerjaan');
             $table->date('tanggal_mulai_lelang');
@@ -23,9 +24,10 @@ return new class extends Migration
             $table->string('lokasi_pekerjaan');
             $table->bigInteger('hps');
             $table->string('syarat_kualifikasi');
-            $table->enum('lampiran_pengadaan', ['penawaran', 'konsep', 'penawaran_dan_konsep']);
-            $table->enum('status_pengadaan', ['lelang', 'penunjukan_langsung']);
-            $table->enum('status_aktif', ['aktif', 'tidak_aktif'])->default('aktif');
+            $table->enum('lampiran_pengadaan', ['penawaran', 'konsep', 'penawaran dan konsep']);
+            $table->enum('status_pengadaan', ['lelang', 'penunjukan langsung']);
+            $table->enum('status_pengadaan2', ['buka', 'tutup', 'selesai'])->default('buka');
+            $table->enum('status_aktif', ['aktif', 'tidak aktif'])->default('aktif');
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
             $table->timestamps();

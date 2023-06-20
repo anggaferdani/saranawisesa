@@ -1,11 +1,7 @@
 @extends('templates.pages')
-@section('title')
+@section('title', 'Lelang')
 @section('header')
 <h1>Lelang</h1>
-<div class="section-header-breadcrumb">
-  <div class="breadcrumb-item"><a href="#">Dashboard</a></div>
-  <div class="breadcrumb-item active"><a href="#">Lelang</a></div>
-</div>
 @endsection
 @section('content')
 <div class="row">
@@ -43,61 +39,66 @@
         <div class="clearfix mb-3"></div>
   
         <div class="table-responsive">
-          <table class="table table-striped table-bordered">
+          <table class="table table-bordered">
             <tbody>
               <tr>
-                <td class="text-center">No</td>
-                <td class="text-center">Kode Lelang</td>
-                <td class="text-center">Nama Lelang</td>
-                <td class="text-center">HPS</td>
-                <td class="text-center">Tgl Akhir Lelang</td>
+                <td>No.</td>
+                <td>Kode Lelang</td>
+                <td>Nama Lelang</td>
+                <td>Status Pengadaan</td>
+                <td>Created At</td>
                 <td class="text-center text-nowrap">Action</td>
               </tr>
               <?php $id = 0; ?>
-              @foreach ($lelang as $lelangs)
-                @if($lelangs->status_aktif == 'aktif' and $lelangs->status_pengadaan == 'lelang')
-                  <?php $id++; ?>
-                  <tr>
-                    <td class="text-center">{{ $id }}</td>
-                    <td class="text-center">{{ $lelangs->kode_lelang }}</td>
-                    <td class="text-center">{{ $lelangs->nama_lelang }}</td>
-                    <td class="text-center">{{ 'Rp. '.strrev(implode('.', str_split(strrev(strval($lelangs->hps)), 3))) }}</td>
-                    <td class="text-center">
-                      @if(now()->toDateTimeString() > $lelangs->tanggal_akhir_lelang)
-                        <div class="badge badge-danger">{{ $lelangs->tanggal_akhir_lelang }}</div>
-                      @else
-                        {{ $lelangs->tanggal_akhir_lelang }}
-                      @endif
-                    </td>
-                    <td class="text-center text-nowrap">
-                      @if(auth()->user()->level == 'superadmin')
-                        <form action="{{ route('eproc.superadmin.lelang.destroy', $lelangs->id) }}" method="POST">
-                          @csrf
-                          @method('DELETE')
-                          <a href="{{ route('eproc.superadmin.lelang.show', $lelangs->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                          <a href="{{ route('eproc.superadmin.lelang.edit', $lelangs->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
-                          <a href="{{ route('eproc.superadmin.jadwal-lelang.index', $lelangs->id) }}" class="btn btn-icon btn-primary"><i class="fa fa-calendar"></i></a>
-                          <a href="{{ route('eproc.superadmin.peserta.index', $lelangs->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-user"></i></a>
-                          <button type="button" class="btn btn-icon btn-danger delete" data-id="{{ $lelangs->id }}"><i class="fa fa-trash"></i></button>
-                        </form>
-                      @endif
-                      @if(auth()->user()->level == 'admin')
-                        <form action="{{ route('eproc.admin.lelang.destroy', $lelangs->id) }}" method="POST">
-                          @csrf
-                          @method('DELETE')
-                          <a href="{{ route('eproc.admin.lelang.show', $lelangs->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                          <a href="{{ route('eproc.admin.lelang.edit', $lelangs->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
-                          <a href="{{ route('eproc.admin.jadwal-lelang.index', $lelangs->id) }}" class="btn btn-icon btn-primary"><i class="fa fa-calendar"></i></a>
-                          <a href="{{ route('eproc.admin.peserta.index', $lelangs->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-user"></i></a>
-                          <button type="button" class="btn btn-icon btn-danger delete" data-id="{{ $lelangs->id }}"><i class="fa fa-trash"></i></button>
-                        </form>
-                      @endif
-                    </td>
-                  </tr>
-                @endif
+              @foreach ($lelangs as $lelang)
+              <?php $id++; ?>
+              <tr>
+                <td>{{ $id }}</td>
+                <td>{{ $lelang->kode_lelang }}</td>
+                <td>{{ $lelang->nama_lelang }}</td>
+                <td>
+                  @if($lelang->status_pengadaan2 == 'buka')
+                    <div class="badge badge-primary">Buka</div>
+                  @endif
+                  @if($lelang->status_pengadaan2 == 'tutup')
+                    <div class="badge badge-warning">Tutup</div>
+                  @endif
+                  @if($lelang->status_pengadaan2 == 'selesai')
+                    <div class="badge badge-danger">Selesai</div>
+                  @endif
+                </td>
+                <td>{{ $lelang->created_at }}</td>
+                <td style="white-space: nowrap">
+                  @if(auth()->user()->level == 'superadmin')
+                    <form action="{{ route('eproc.superadmin.lelang.destroy', Crypt::encrypt($lelang->id)) }}" method="POST">
+                      @csrf
+                      @method('DELETE')
+                      <a href="{{ route('eproc.superadmin.lelang.show', Crypt::encrypt($lelang->id)) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                      <a href="{{ route('eproc.superadmin.lelang.edit', Crypt::encrypt($lelang->id)) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
+                      <a href="{{ route('eproc.superadmin.jadwal-lelang.index', Crypt::encrypt($lelang->id)) }}" class="btn btn-icon btn-primary"><i class="fa fa-calendar"></i></a>
+                      <a href="{{ route('eproc.superadmin.peserta.index', Crypt::encrypt($lelang->id)) }}" class="btn btn-icon btn-primary"><i class="fas fa-user"></i></a>
+                      <button type="button" class="btn btn-icon btn-danger delete"><i class="fa fa-trash"></i></button>
+                    </form>
+                  @endif
+                  @if(auth()->user()->level == 'admin')
+                    <form action="{{ route('eproc.admin.lelang.destroy', Crypt::encrypt($lelang->id)) }}" method="POST">
+                      @csrf
+                      @method('DELETE')
+                      <a href="{{ route('eproc.admin.lelang.show', Crypt::encrypt($lelang->id)) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                      <a href="{{ route('eproc.admin.lelang.edit', Crypt::encrypt($lelang->id)) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
+                      <a href="{{ route('eproc.admin.jadwal-lelang.index', Crypt::encrypt($lelang->id)) }}" class="btn btn-icon btn-primary"><i class="fa fa-calendar"></i></a>
+                      <a href="{{ route('eproc.admin.peserta.index', Crypt::encrypt($lelang->id)) }}" class="btn btn-icon btn-primary"><i class="fas fa-user"></i></a>
+                      <button type="button" class="btn btn-icon btn-danger delete"><i class="fa fa-trash"></i></button>
+                    </form>
+                  @endif
+                </td>
+              </tr>
               @endforeach
             </tbody>
           </table>
+        </div>
+        <div class="float-right">
+          {{ $lelangs->links('pagination::bootstrap-4') }}
         </div>
       </div>
     </div>

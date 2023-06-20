@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Lelang;
+use App\Models\Lampiran;
 use App\Models\Perusahaan;
 use App\Models\VerifyEmail;
 use Laravel\Sanctum\HasApiTokens;
@@ -23,8 +25,8 @@ class User extends Authenticatable
         'id',
         'nama_panjang',
         'email',
-        'check_email',
-        'email_has_been_verified',
+        'status_verifikasi',
+        'status_verifikasi2',
         'email_verified_at',
         'password',
         'level',
@@ -53,8 +55,20 @@ class User extends Authenticatable
         });
     }
 
+    public function lelangs(){
+        return $this->belongsToMany(Lelang::class, 'user_lelangs', 'user_id', 'lelang_id');
+    }
+
+    public function lelangs2(){
+        return $this->hasMany(Lelang::class);
+    }
+
     public function perusahaans(){
         return $this->hasMany(Perusahaan::class);
+    }
+
+    public function lampirans(){
+        return $this->hasMany(Lampiran::class);
     }
 
     public function verify_emails(){

@@ -1,28 +1,27 @@
 @extends('templates.pages')
-@section('title')
+@section('title', 'Jenis Pengadaan')
 @section('header')
-<h1>Edit Jenis Pengadaan</h1>
-<div class="section-header-breadcrumb">
-  <div class="breadcrumb-item"><a href="#">Dashboard</a></div>
-  <div class="breadcrumb-item active"><a href="#">Edit Jenis Pengadaan</a></div>
-</div>
+<h1>Jenis Pengadaan</h1>
 @endsection
 @section('content')
 <div class="row">
   <div class="col-12">
     <div class="card">
+      <div class="card-header">
+        <h4>Edit</h4>
+      </div>
       <div class="card-body">
         @if(auth()->user()->level == 'superadmin')
-          <form method="POST" action="{{ route('eproc.superadmin.jenis-pengadaan.update', $jenis_pengadaan->id) }}" class="needs-validation" novalidate="">
+          <form method="POST" action="{{ route('eproc.superadmin.jenis-pengadaan.update', Crypt::encrypt($jenis_pengadaan->id)) }}" class="needs-validation" novalidate="">
         @endif
         @if(auth()->user()->level == 'admin')
-          <form method="POST" action="{{ route('eproc.admin.jenis-pengadaan.update', $jenis_pengadaan->id) }}" class="needs-validation" novalidate="">
+          <form method="POST" action="{{ route('eproc.admin.jenis-pengadaan.update', Crypt::encrypt($jenis_pengadaan->id)) }}" class="needs-validation" novalidate="">
         @endif
           @csrf
           @method('PUT')
           <div class="form-group">
-            <label for="jenis_pengadaan">Jenis Pengadaan</label>
-            <input id="jenis_pengadaan" type="text" class="form-control" name="jenis_pengadaan" value="{{ $jenis_pengadaan->jenis_pengadaan }}">
+            <label>Jenis Pengadaan</label>
+            <input type="text" class="form-control" name="jenis_pengadaan" value="{{ $jenis_pengadaan->jenis_pengadaan }}">
             @error('jenis_pengadaan')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           @if(auth()->user()->level == 'superadmin')

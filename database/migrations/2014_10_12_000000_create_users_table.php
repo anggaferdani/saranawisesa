@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('nama_panjang');
             $table->string('email')->unique();
-            $table->enum('check_email', ['yes', 'no'])->default('no');
-            $table->enum('email_has_been_verified', ['terverifikasi', 'belum_terverifikasi'])->default('belum_terverifikasi');
+            $table->enum('status_verifikasi', ['terverifikasi', 'belum terverifikasi'])->default('belum terverifikasi');
+            $table->enum('status_verifikasi2', ['terverifikasi', 'belum terverifikasi'])->default('belum terverifikasi');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->enum('level', ['superadmin', 'admin', 'creator', 'helpdesk', 'perusahaan']);
-            $table->enum('status_aktif', ['aktif', 'tidak_aktif'])->default('aktif');
+            $table->enum('status_aktif', ['aktif', 'tidak aktif'])->default('aktif');
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
             $table->timestamps();

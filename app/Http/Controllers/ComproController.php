@@ -2,8 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Artikel;
+use App\Models\Direksi;
+use App\Models\Setting;
+use App\Models\Komisaris;
+use App\Models\Portofolio;
 use Illuminate\Http\Request;
+use App\Models\ProdukDanLayanan;
+use App\Models\ProfilePerusahaan;
+use App\Models\SubprodukDanLayanan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class ComproController extends Controller
 {
@@ -71,5 +80,101 @@ class ComproController extends Controller
             Auth::guard('web')->logout();
             return redirect()->route('compro.login');
         }
+    }
+
+    public function index(){
+        $produk_dan_layanans = ProdukDanLayanan::all();
+        $profile_perusahaan = ProfilePerusahaan::first();
+        $portofolios = Portofolio::where('status_aktif', 'aktif')->latest()->paginate(10);
+        $artikels = Artikel::where('status_aktif', 'aktif')->take(5)->get();
+        $setting = Setting::all();
+        return view('compro.index', compact(
+            'produk_dan_layanans',
+            'profile_perusahaan',
+            'portofolios',
+            'artikels',
+            'setting',
+        ));
+    }
+    public function profile_perusahaan(){
+        $direksis = Direksi::where('status_aktif', 'aktif')->get();
+        $komisarisies = Komisaris::where('status_aktif', 'aktif')->get();
+        $produk_dan_layanans = ProdukDanLayanan::all();
+        $profile_perusahaan = ProfilePerusahaan::first();
+        $setting = Setting::all();
+        return view('compro.profile-perusahaan', compact(
+            'direksis',
+            'komisarisies',
+            'produk_dan_layanans',
+            'profile_perusahaan',
+            'setting',
+        ));
+    }
+    public function produk_dan_layanans(){
+        $produk_dan_layanans = ProdukDanLayanan::all();
+        $setting = Setting::all();
+        return view('compro.produk-dan-layanans', compact(
+            'produk_dan_layanans',
+            'setting',
+        ));
+    }
+
+    public function produk_dan_layanan($id){
+        $produk_dan_layanan = ProdukDanLayanan::find(Crypt::decrypt($id));
+        $subproduk_dan_layanans = SubprodukDanLayanan::where('status_aktif', 'aktif')->get();
+        $produk_dan_layanans = ProdukDanLayanan::all();
+        $setting = Setting::all();
+        return view('compro.produk-dan-layanan', compact(
+            'produk_dan_layanan',
+            'subproduk_dan_layanans',
+            'produk_dan_layanans',
+            'setting',
+        ));
+    }
+
+    public function portofolios(){
+        $portofolios = Portofolio::where('status_aktif', 'aktif')->latest()->paginate(10);
+        $produk_dan_layanans = ProdukDanLayanan::all();
+        $setting = Setting::all();
+        return view('compro.portofolios', compact(
+            'portofolios',
+            'produk_dan_layanans',
+            'setting',
+        ));
+    }
+
+    public function portofolio($id){
+        $portofolio = Portofolio::find(Crypt::decrypt($id));
+        $produk_dan_layanans = ProdukDanLayanan::all();
+        $setting = Setting::all();
+        return view('compro.portofolio', compact(
+            'portofolio',
+            'produk_dan_layanans',
+            'setting',
+        ));
+    }
+
+    public function artikels(){
+        $artikels = Artikel::where('status_aktif', 'aktif')->latest()->paginate(10);
+        $produk_dan_layanans = ProdukDanLayanan::all();
+        $setting = Setting::all();
+        return view('compro.artikels', compact(
+            'artikels',
+            'produk_dan_layanans',
+            'setting',
+        ));
+    }
+
+    public function artikel($id){
+        $artikel = Artikel::find(Crypt::decrypt($id));
+        $artikels = Artikel::where('id', '<>', Crypt::decrypt($id))->where('status_aktif', 'aktif')->take(5)->get();
+        $produk_dan_layanans = ProdukDanLayanan::all();
+        $setting = Setting::all();
+        return view('compro.artikel', compact(
+            'artikel',
+            'artikels',
+            'produk_dan_layanans',
+            'setting',
+        ));
     }
 }

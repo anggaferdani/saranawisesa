@@ -72,5 +72,6 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\AdminCheck::class,
         'creator' => \App\Http\Middleware\CreatorCheck::class,
         'helpdesk' => \App\Http\Middleware\HelpDeskCheck::class,
+        'perusahaan' => \App\Http\Middleware\Perusahaan::class,
     ];
 }

@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AdditionalLampiranPengadaan;
-use App\Models\JenisPengadaan;
 use App\Models\Lelang;
 use App\Models\Pemenang;
 use Illuminate\Http\Request;
+use App\Models\JenisPengadaan;
+use Illuminate\Support\Facades\Crypt;
+use App\Models\AdditionalLampiranPengadaan;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class LelangController extends Controller
 {
     public function index(){
-        $lelang = Lelang::all();
-        return view('pages.lelang.index', compact('lelang'));
+        $lelangs = Lelang::where('status_pengadaan', 'lelang')->where('status_aktif', 'aktif')->latest()->paginate(10);
+        return view('pages.lelang.index', compact('lelangs'));
     }
 
     public function create(){
-        $jenis_pengadaan = JenisPengadaan::all();
-        return view('pages.lelang.create', compact('jenis_pengadaan'));
+        $jenis_pengadaans = JenisPengadaan::where('status_aktif', 'aktif')->get();
+        return view('pages.lelang.create', compact('jenis_pengadaans'));
     }
 
     public function store(Request $request){
@@ -35,13 +36,13 @@ class LelangController extends Controller
             'lampiran_pengadaan' => 'required',
         ]);
         
-        $id_generator = ['table' => 'lelangs', 'field' => 'kode_lelang', 'length' => 10, 'prefix' => 'PEN'];
+        $id_generator = ['table' => 'lelangs', 'field' => 'kode_lelang', 'length' => 15, 'prefix' => 'pengadaan'];
         $kode_lelang = IdGenerator::generate($id_generator);
 
         $harga_perkiraan_sendiri = preg_replace('/\D/', '', $request->hps);
         $hps = trim($harga_perkiraan_sendiri);
 
-        $input_array_lelang = array(
+        $array = array(
             'kode_lelang' => $kode_lelang,
             'jenis_pengadaan_id' => $request['jenis_pengadaan_id'],
             'nama_lelang' => $request['nama_lelang'],
@@ -56,34 +57,29 @@ class LelangController extends Controller
             'status_pengadaan' => 'lelang',
         );
 
-        $lelang = Lelang::create($input_array_lelang);
-
-        $input_array_pemenang = array(
-            'lelang_id' => $lelang->id,
-        );
-
-        $pemenang = Pemenang::create($input_array_pemenang);
+        $lelang = Lelang::create($array);
 
         if(auth()->user()->level == 'superadmin'){
-            return redirect()->route('eproc.superadmin.lelang.index')->with('success', 'Berhasil ditambahkan pada : '.$lelang->created_at);
+            return redirect()->route('eproc.superadmin.lelang.index')->with('success', 'Data has been created at '.$lelang->created_at);
         }elseif(auth()->user()->level == 'admin'){
-            return redirect()->route('eproc.admin.lelang.index')->with('success', 'Berhasil ditambahkan pada : '.$lelang->created_at);
+            return redirect()->route('eproc.admin.lelang.index')->with('success', 'Data has been created at '.$lelang->created_at);
         }
     }
 
     public function show($id){
-        $lelang = Lelang::with('jenis_pengadaans')->find($id);
-        return view('pages.lelang.show', compact('lelang'));
+        $lelang = Lelang::find(Crypt::decrypt($id));
+        $jenis_pengadaans = JenisPengadaan::where('status_aktif', 'aktif')->get();
+        return view('pages.lelang.show', compact('lelang', 'jenis_pengadaans'));
     }
 
     public function edit($id){
-        $lelang = Lelang::find($id);
-        $jenis_pengadaan = JenisPengadaan::all();
-        return view('pages.lelang.edit', compact('lelang', 'jenis_pengadaan'));
+        $lelang = Lelang::find(Crypt::decrypt($id));
+        $jenis_pengadaans = JenisPengadaan::where('status_aktif', 'aktif')->get();
+        return view('pages.lelang.edit', compact('lelang', 'jenis_pengadaans'));
     }
 
     public function update(Request $request, $id){
-        $lelang = Lelang::find($id);
+        $lelang = Lelang::find(Crypt::decrypt($id));
 
         $request->validate([
             'jenis_pengadaan_id' => 'required',
@@ -115,27 +111,27 @@ class LelangController extends Controller
         ]);
 
         if(auth()->user()->level == 'superadmin'){
-            return redirect()->route('eproc.superadmin.lelang.index')->with('success', 'Berhasil dilakukan perubahan pada : '.$lelang->created_at);
+            return redirect()->route('eproc.superadmin.lelang.index')->with('success', 'Data has been updated at '.$lelang->created_at);
         }elseif(auth()->user()->level == 'admin'){
-            return redirect()->route('eproc.admin.lelang.index')->with('success', 'Berhasil dilakukan perubahan pada : '.$lelang->created_at);
+            return redirect()->route('eproc.admin.lelang.index')->with('success', 'Data has been updated at '.$lelang->created_at);
         }
     }
 
     public function destroy($id){
-        $lelang = Lelang::find($id);
+        $lelang = Lelang::find(Crypt::decrypt($id));
         
         $lelang->update([
-            'status_aktif' => 2,
+            'status_aktif' => 'tidak aktif',
         ]);
 
         $lelang->jadwal_lelangs()->update([
-            'status_aktif' => 2,
+            'status_aktif' => 'tidak aktif',
         ]);
 
         if(auth()->user()->level == 'superadmin'){
-            return redirect()->route('eproc.superadmin.lelang.index')->with('success', 'Berhasil dihapus pada : '.$lelang->created_at);
+            return redirect()->route('eproc.superadmin.lelang.index')->with('success', 'Data has been deleted at '.$lelang->created_at);
         }elseif(auth()->user()->level == 'admin'){
-            return redirect()->route('eproc.admin.lelang.index')->with('success', 'Berhasil dihapus pada : '.$lelang->created_at);
+            return redirect()->route('eproc.admin.lelang.index')->with('success', 'Data has been deleted at '.$lelang->created_at);
         }
     }
 }

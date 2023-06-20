@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\Lelang;
-use App\Models\Perusahaan;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,7 +19,7 @@ class Lampiran extends Model
     protected $fillable = [
         'id',
         'lelang_id',
-        'perusahaan_id',
+        'user_id',
         'penawaran',
         'konsep',
         'penawaran_dan_konsep',
@@ -43,7 +43,7 @@ class Lampiran extends Model
         return $this->belongsTo(Lelang::class, 'lelang_id');
     }
 
-    public function perusahaans(){
-        return $this->belongsTo(Perusahaan::class, 'perusahaan_id');
+    public function users(){
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

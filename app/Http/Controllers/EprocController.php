@@ -3,26 +3,36 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Berita;
+use App\Models\Lelang;
+use App\Models\Setting;
+use App\Models\Lampiran;
+use App\Models\Perusahaan;
+use App\Models\UserLelang;
+use App\Models\Kualifikasi;
 use App\Models\VerifyEmail;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\JenisPengadaan;
+use App\Models\ProfilePerusahaan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Crypt;
 
 class EprocController extends Controller
 {
     public function login(){
-        return view('pages.authentications.eproc.login');
+        return view('eproc.authentications.login');
     }
 
     public $email, $password;
 
-    public function postlogin(Request $request){
+    public function postLogin(Request $request){
         $input = $request->all();
 
         $this->validate($request, [
             'email' => 'required|email|exists:users,email',
-            'password' => 'required|min:8',
+            'password' => 'required',
         ]);
 
         $credentials = array(
@@ -44,102 +54,76 @@ class EprocController extends Controller
                         return redirect()->route('eproc.admin.dashboard');
                     }elseif(auth()->user()->level == 'perusahaan'){
                         $request->session()->put('eproc', $credentials);
-                        return redirect()->route('eproc.pengadaan');
-                        // if(auth()->user()->email_has_been_verified == 'terverifikasi'){
-                        // }else{
-                        //     return redirect()->back()->with('fail', 'Akun yang digunakan belum verifikasi. Tunggu beberapa saat sampai admin memverifikasi akun yang digunakan. Pemberitahuan verifikasi akan dikirim melalui email');
-                        // }
+                        if(auth()->user()->status_verifikasi == 'terverifikasi'){
+                            return redirect()->route('eproc.perusahaan.dashboard');
+                        }else{
+                            return redirect()->back()->with('fail', 'The account used has not been verified. Wait a few moments until the admin verifies the account used. A verification notification will be sent via email');
+                        }
                     }else{
-                        return redirect()->route('eproc.login')->with('fail', 'Level akun yang digunakan untuk login tidak sesuai');
+                        return redirect()->route('eproc.login')->with('fail', 'The account level used for login does not match');
                     }
-                }elseif(auth()->user()->status_aktif == 'tidak_aktif'){
+                }elseif(auth()->user()->status_aktif == 'tidak aktif'){
                     if(session()->has('compro')){
                         session()->forget('compro');
                         Auth::guard('web')->logout();
-                        return redirect()->route('eproc.login')->with('fail', 'Status akun yang digunakan untuk login tidak aktif');
+                        return redirect()->route('eproc.login')->with('fail', 'The status of the account used for login is inactive');
                     }elseif(!session()->has('compro')){
                         Auth::guard('web')->logout();
-                        return redirect()->route('eproc.login')->with('fail', 'Status akun yang digunakan untuk login tidak aktif');
+                        return redirect()->route('eproc.login')->with('fail', 'The status of the account used for login is inactive');
                     }
                 }else{
-                    return redirect()->route('eproc.login')->with('fail', 'Status akun yang digunakan untuk login tidak aktif');
+                    return redirect()->route('eproc.login')->with('fail', 'The status of the account used for login is inactive');
                 }
             }
         }else{
-            return redirect()->route('eproc.login')->with('fail', 'Email/Password yang digunakan untuk login salah. Coba lagi');
+            return redirect()->route('eproc.login')->with('fail', 'The email or password used to login is incorrect. Try again');
         }
     }
 
     public function register(){
-        return view('pages.authentications.eproc.register');
+        return view('eproc.authentications.register');
     }
 
-    public function postregister(Request $request){
+    public function postRegister(Request $request){
         $this->validate($request, [
             'nama_panjang' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:8',
+            'password' => 'required',
         ]);
 
-        $input_array_perusahaan = array(
+        $array = array(
             'nama_panjang' => $request['nama_panjang'],
             'email' => $request['email'],
             'password' => bcrypt($request['password']),
             'level' => 'perusahaan',
         );
 
-        $perusahaan = User::create($input_array_perusahaan);
-        $user_id = $perusahaan->id;
+        $perusahaan = User::create($array);
 
-        $token = $user_id.hash('sha256', Str::random(120));
-        $verifiy_url = route('eproc.verify', ['token' => $token, 'service' => 'email_verification', 'user_id' => $user_id]);
+        $verifiy_url = route('eproc.verifikasi', ['service' => 'email_verification', 'user_id' => $perusahaan->id]);
 
-        VerifyEmail::create([
-            'user_id' => $user_id,
-            'token' => $token,
-        ]);
-
-        $message = 'Kepada <br>'.$request->nama_panjang.'</b>';
-        $message = 'Terima kasih telah mendaftar, Kami hanya perlu anda memverifikasi alamat email anda untuk menyelesaikan penyiapan akun anda.';
+        $message = 'To '.$request->nama_panjang;
+        $message = 'Thank you for signing up. We only need you to verify your email address to finish setting up your account';
 
         $mail_data = [
             'recipient' => $request->email,
             'from_email' => 'saranawisesa@gmail.com',
-            'from_nama' => 'SARANAWISESA',
-            'subject' => 'Email Verification',
+            'from_nama' => 'SARANAWISESA PROPERINDO',
+            'subject' => 'Please confirm your email address',
             'body' => $message,
             'action_link' => $verifiy_url,
         ];
 
-        Mail::send('email-template', $mail_data, function($message) use ($mail_data){
+        Mail::send('eproc.email.verifikasi', $mail_data, function($message) use ($mail_data){
             $message->to($mail_data['recipient'])
             ->from($mail_data['from_email'], $mail_data['from_nama'])
             ->subject($mail_data['subject']);
         });
 
         if($perusahaan){
-            return redirect()->back()->with('success', 'Harus melakukan verifikasi email terlebih dahulu. Link verifikasi telah dikirim, cek email.');
+            return redirect()->back()->with('success', 'Must verify email first. a verification link has been sent to the associated email address');
         }else{
-            return redirect()->back()->with('fail', 'Terdapat kesalahan saat melakukan registrasi');
-        }
-    }
-
-    public function verify(Request $request){
-        $token = $request->token;
-        $user_id = $request->user_id;
-
-        $verify_email = VerifyEmail::where('token', $token)->first();
-        if(!is_null($verify_email)){
-            $user = $verify_email->users;
-
-            if(!$user->email_has_been_verified){
-                $verify_email->users->check_email = 'yes';
-                $verify_email->users->save();
-
-                return redirect()->route('eproc.kualifikasi', $user_id);
-            }else{
-                return redirect()->route('eproc.kualifikasi', $user_id);
-            }
+            return redirect()->back()->with('fail', 'There was an error while registering');
         }
     }
 
@@ -147,7 +131,148 @@ class EprocController extends Controller
         if(session()->has('eproc')){
             session()->forget('eproc');
             Auth::guard('web')->logout();
-            return redirect()->route('eproc.beranda');
+            return redirect()->route('eproc.index');
         }
+    }
+
+    public function verifikasi(Request $request){
+        $token = $request->token;
+        $user_id = $request->user_id;
+
+        $status_verifikasi = User::where('id', $user_id);
+
+        $status_verifikasi->update([
+            'status_verifikasi' => 'terverifikasi',
+        ]);
+
+        if($status_verifikasi){
+            return redirect()->route('eproc.perusahaan.dashboard');
+        }
+    }
+
+    public function index(){
+        $profile_perusahaan = ProfilePerusahaan::first();
+        $setting = Setting::first();
+        return view('eproc.index', compact(
+            'profile_perusahaan',
+            'setting',
+        ));
+    }
+
+    public function pengadaan(){
+        $jenis_pengadaans_group_by_lelang = JenisPengadaan::with(["lelangs" => function($query){ $query->where("status_pengadaan", "lelang"); }])->whereHas("lelangs", function($query){ $query->where("status_pengadaan", "lelang"); })->get();
+        $jenis_pengadaans_group_by_penunjukan_langsung = JenisPengadaan::with(["lelangs" => function($query){ $query->where("status_pengadaan", "penunjukan langsung"); }])->whereHas("lelangs", function($query){ $query->where("status_pengadaan", "penunjukan langsung"); })->get();
+        $jenis_pengadaans = JenisPengadaan::with('lelangs')->whereHas("lelangs", function($query){ $query->where("id", "!=", null); })->get();
+        $status_pengadaan = Lelang::select('status_pengadaan')->get();
+        $lelangs = Str::contains($status_pengadaan, 'lelang');
+        $penunjukan_langsungs = Str::contains($status_pengadaan, 'penunjukan langsung');
+
+        $profile_perusahaan = ProfilePerusahaan::first();
+        $setting = Setting::first();
+        return view('eproc.pengadaan', compact(
+            'jenis_pengadaans_group_by_lelang',
+            'jenis_pengadaans_group_by_penunjukan_langsung',
+            'lelangs',
+            'penunjukan_langsungs',
+            'profile_perusahaan',
+            'setting',
+        ));
+    }
+
+    public function pengadaan2($id){
+        $lelang = Lelang::with('jadwal_lelangs')->find(Crypt::decrypt($id));
+        $ikuti_lelang = UserLelang::where('lelang_id', $lelang->id)->where('user_id', Auth::id())->first();
+        $lampiran = Lampiran::where('lelang_id', $lelang->id)->where('user_id', Auth::id())->first();
+
+        if($lelang->status_pengadaan == 'penunjukan langsung'){
+            $user_lelang = UserLelang::where('lelang_id', $lelang->id)->first();
+            $user = User::where('id', $user_lelang->user_id)->first();
+            return view('eproc.pengadaan2', compact(
+                'lelang',
+                'user',
+            ));
+        }
+
+        $profile_perusahaan = ProfilePerusahaan::first();
+        $setting = Setting::first();
+        return view('eproc.pengadaan2', compact(
+            'lelang',
+            'ikuti_lelang',
+            'lampiran',
+            'profile_perusahaan',
+            'setting',
+        ));
+
+    }
+
+    public function ikutiPengadaan($id){
+        $array2 = array(
+            'lelang_id' => Crypt::decrypt($id),
+            'user_id' => Auth::id(),
+        );
+
+        UserLelang::create($array2);
+
+        return redirect()->back()->with('success', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, omnis laborum in quidem consequuntur at nostrum saepe atque, deserunt non sequi sit totam iure dolores eos ipsam fugit aperiam odio.');
+    }
+
+    public function postLampiran(Request $request){
+        $request->validate([
+            'lelang_id' => 'required',
+            'user_id' => 'required',
+            'penawaran' => 'required_without_all:konsep,penawaran_dan_konsep',
+            'konsep' => 'required_without_all:penawaran,penawaran_dan_konsep',
+            'penawaran_dan_konsep' => 'required_without_all:penawaran,konsep',
+        ]);
+
+        $array = array(
+            'lelang_id' => $request['lelang_id'],
+            'user_id' => $request['user_id'],
+        );
+
+        if($penawaran = $request->file('penawaran')){
+            $destination_path = 'eproc/lampiran/penawaran/';
+            $penawaran0002 = date('YmdHis').rand(999999999, 9999999999).$penawaran->getClientOriginalName();
+            $penawaran->move($destination_path, $penawaran0002);
+            $array['penawaran'] = $penawaran0002;
+        }
+
+        if($konsep = $request->file('konsep')){
+            $destination_path = 'eproc/lampiran/konsep/';
+            $konsep0002 = date('YmdHis').rand(999999999, 9999999999).$konsep->getClientOriginalName();
+            $konsep->move($destination_path, $konsep0002);
+            $array['konsep'] = $konsep0002;
+        }
+
+        if($penawaran_dan_konsep = $request->file('penawaran_dan_konsep')){
+            $destination_path = 'eproc/lampiran/penawaran-dan-konsep/';
+            $penawaran_dan_konsep0002 = date('YmdHis').rand(999999999, 9999999999).$penawaran_dan_konsep->getClientOriginalName();
+            $penawaran_dan_konsep->move($destination_path, $penawaran_dan_konsep0002);
+            $array['penawaran_dan_konsep'] = $penawaran_dan_konsep0002;
+        }
+
+        $lampiran = Lampiran::create($array);
+
+        return redirect()->back()->with('success', 'Data has been created at '.$lampiran->created_at.' Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, omnis laborum in quidem consequuntur at nostrum saepe atque, deserunt non sequi sit totam iure dolores eos ipsam fugit aperiam odio.');
+    }
+
+    public function berita(){
+        $profile_perusahaan = ProfilePerusahaan::first();
+        $setting = Setting::first();
+        $berita = Berita::all();
+        return view('pages.eproc.berita', compact(
+            'profile_perusahaan',
+            'setting',
+            'berita',
+        ));
+    }
+
+    public function kontak(){
+        $profile_perusahaan = ProfilePerusahaan::first();
+        $setting = Setting::first();
+        return view('pages.eproc.kontak', compact(
+            'profile_perusahaan',
+            'setting',
+        ));
     }
 }

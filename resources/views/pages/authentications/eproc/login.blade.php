@@ -17,7 +17,7 @@
       </div>
     @endif
 
-    <form method="POST" action="{{ route('eproc.postlogin') }}" class="needs-validation" novalidate="#">
+    <form method="POST" action="{{ route('eproc.post-login') }}" class="needs-validation" novalidate="#">
       @csrf
       <div class="form-group">
         <label for="email">Email</label>

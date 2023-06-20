@@ -8,6 +8,7 @@
   <!-- General CSS Files -->
   <link rel="stylesheet" href="{{ asset('assets/modules/bootstrap/css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/modules/fontawesome/css/all.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/modules/select2/dist/css/select2.min.css') }}">
 
   <!-- CSS Libraries -->
 
@@ -83,45 +84,75 @@
     $('.delete').click(function(){
       var id = $(this).attr('data-id');
       Swal.fire({
-        title: 'Are you sure?',
-        text: "Are you sure you want to delete id : "+id+"?",
-        icon: 'warning',
+        title: "Are you sure?",
+        text: "Are you sure?",
+        icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: '#6777ef',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Yes, delete it",
+        closeOnConfirm: false
       }).then((result) => {
-        if (result.isConfirmed) {
+        if(result.isConfirmed){
           $(this).closest("form").submit();
           Swal.fire(
-            'Deleted!',
-            'You have successfully deleted.',
-            'success'
+            'Deleted',
+            'You have successfully deleted',
+            'success',
           );
         }
       });
     });
+  </script>
 
+  <script type="text/javascript">
     $('.verifikasi').click(function(){
-      var id = $(this).attr('data-id');
       Swal.fire({
-        title: 'Are you sure?',
-        text: "Are you sure you want to verifiy id : "+id+"?",
-        icon: 'warning',
+        title: "Are you sure?",
+        text: "Nyatakan perusahaan ini telah memnuhi semua persyaratan yang ada",
+        icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: '#6777ef',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes'
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Yes",
+        closeOnConfirm: false
       }).then((result) => {
-        if (result.isConfirmed) {
+        if(result.isConfirmed){
           $(this).closest("form").submit();
           Swal.fire(
-            'Verified!',
-            'Now the account is successfully verified',
-            'success'
+            'Terverifikasi',
+            'Perusahaan ini telah terverifikasi',
+            'success',
           );
         }
       });
+    });
+  </script>
+
+  <script type="text/javascript">
+    $('.tunjuk-sebagai-pemenang').click(function(){
+      Swal.fire({
+        title: "Are you sure?",
+        text: "Dengan ini menyatakan bahwa perusahaan ini telah memenuhi semua persyaratan yang ada dan nyatakan perusahaan ini sebagai Pemenang",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Yes",
+        closeOnConfirm: false
+      }).then((result) => {
+        if(result.isConfirmed){
+          $(this).closest("form").submit();
+          Swal.fire(
+            'Success',
+            'Perusahaan ini dinyatakan sebagai pemenang',
+            'success',
+          );
+        }
+      });
+    });
+  </script>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('.select2').select2({});
     });
   </script>
 
@@ -134,6 +165,13 @@
     }
   </script>
 
+  <script type="text/javascript">
+    var file = function(event){
+      var image = document.querySelector('.image');
+      image.src = URL.createObjectURL(event.target.files[0]);
+    }
+  </script>
+
   <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 
   <!-- Page Specific JS File -->
@@ -141,5 +179,6 @@
   <!-- Template JS File -->
   <script src="{{ asset('assets/js/scripts.js') }}"></script>
   <script src="{{ asset('assets/js/custom.js') }}"></script>
+  <script src="{{ asset('assets/modules/select2/dist/js/select2.full.min.js') }}"></script>
 </body>
 </html>

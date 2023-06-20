@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProfilePerusahaan;
 use Illuminate\Http\Request;
+use App\Models\ProfilePerusahaan;
+use Illuminate\Support\Facades\Crypt;
 
 class ProfilePerusahaanController extends Controller
 {
@@ -13,7 +14,7 @@ class ProfilePerusahaanController extends Controller
     }
 
     public function edit($id){
-        $profile_perusahaan = ProfilePerusahaan::findOrFail($id);
+        $profile_perusahaan = ProfilePerusahaan::find(Crypt::decrypt($id));
         return view('pages.profile-perusahaan.edit', compact('profile_perusahaan'));
     }
 

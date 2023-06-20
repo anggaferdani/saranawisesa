@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('lampirans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('lelang_id')->references('id')->on('lelangs')->onDelete('cascade');
-            $table->foreignId('perusahaan_id')->references('id')->on('perusahaans')->onDelete('cascade');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('penawaran')->nullable();
             $table->string('konsep')->nullable();
             $table->string('penawaran_dan_konsep')->nullable();
-            $table->enum('status_aktif', ['aktif', 'tidak_aktif'])->default('aktif');
+            $table->enum('status_aktif', ['aktif', 'tidak aktif'])->default('aktif');
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
             $table->timestamps();

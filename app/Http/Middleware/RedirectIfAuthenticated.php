@@ -41,6 +41,8 @@ class RedirectIfAuthenticated
                     return redirect()->route('eproc.superadmin.dashboard');
                 }elseif(Auth::guard($guard)->check() && Auth::user()->level == 'admin'){
                     return redirect()->route('eproc.admin.dashboard');
+                }elseif(Auth::guard($guard)->check() && Auth::user()->level == 'perusahaan'){
+                    return redirect()->route('eproc.perusahaan.dashboard');
                 }else{
                     return back()->route('eproc.login');
                 }

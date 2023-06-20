@@ -1,16 +1,15 @@
 @extends('templates.pages')
-@section('title')
+@section('title', 'Penunjukan Langsung')
 @section('header')
-<h1>Tambah Penunjukan Langsung</h1>
-<div class="section-header-breadcrumb">
-  <div class="breadcrumb-item"><a href="#">Dashboard</a></div>
-  <div class="breadcrumb-item active"><a href="#">Tambah Penunjukan Langsung</a></div>
-</div>
+<h1>Penunjukan Langsung</h1>
 @endsection
 @section('content')
 <div class="row">
   <div class="col-12">
     <div class="card">
+      <div class="card-header">
+        <h4>Create</h4>
+      </div>
       <div class="card-body">
         @if(auth()->user()->level == 'superadmin')
           <form method="POST" action="{{ route('eproc.superadmin.penunjukan-langsung.store') }}" class="needs-validation" novalidate="">
@@ -21,30 +20,22 @@
           @csrf
           <div class="form-group">
             <label>Jenis Pengadaan</label>
-            <select class="form-control" name="jenis_pengadaan_id">
+            <select class="form-control select2" name="jenis_pengadaan_id">
               <option selected disabled>Pilih</option>
-              @foreach ($jenis_pengadaan as $jenis_pengadaans)
-                @if($jenis_pengadaans->status_aktif == 'aktif')
-                  <option value="{{ $jenis_pengadaans->id }}">{{ $jenis_pengadaans->jenis_pengadaan }}</option>
-                @endif
+              @foreach ($jenis_pengadaans as $jenis_pengadaans)
+                <option value="{{ $jenis_pengadaans->id }}">{{ $jenis_pengadaans->jenis_pengadaan }}</option>
               @endforeach
-              @error('jenis_pengadaan_id')<div class="text-danger">{{ $message }}</div>@enderror
             </select>
+            @error('jenis_pengadaan_id')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           <div class="form-group">
             <label>Perusahaan</label>
-            <select class="form-control" name="lelang_id">
+            <select class="form-control select2" name="user_id">
               <option selected disabled>Pilih</option>
-              @foreach ($perusahaan as $perusahaans)
-                @if($perusahaans->status_aktif == 'aktif' and $perusahaans->users->email_has_been_verified == 'terverifikasi')
-                  @if($perusahaans->users->level == 'perusahaan')
-                    @if(empty($perusahaans->lelang_id))
-                      <option value="{{ $perusahaans->id }}">{{ $perusahaans->users->nama_panjang }}</option>
-                    @endif
-                  @endif
-                @endif
+              @foreach ($users as $user)
+                <option value="{{ $user->id }}">{{ $user->nama_panjang }}</option>
               @endforeach
-              @error('lelang_id')<div class="text-danger">{{ $message }}</div>@enderror
+              @error('user_id')<div class="text-danger">{{ $message }}</div>@enderror
             </select>
           </div>
           <div class="form-group">
@@ -57,15 +48,17 @@
             <input id="uraian_singkat_pekerjaan" type="text" class="form-control" name="uraian_singkat_pekerjaan">
             @error('uraian_singkat_pekerjaan')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
-          <div class="form-group">
-            <label for="tanggal_mulai_lelang">Tanggal Mulai Lelang</label>
-            <input id="tanggal_mulai_lelang" type="date" class="form-control" name="tanggal_mulai_lelang">
-            @error('tanggal_mulai_lelang')<div class="text-danger">{{ $message }}</div>@enderror
-          </div>
-          <div class="form-group">
-            <label for="tanggal_akhir_lelang">Tanggal Akhir Lelang</label>
-            <input id="tanggal_akhir_lelang" type="date" class="form-control" name="tanggal_akhir_lelang">
-            @error('tanggal_akhir_lelang')<div class="text-danger">{{ $message }}</div>@enderror
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="tanggal_mulai_lelang">Tanggal Mulai Lelang</label>
+              <input id="tanggal_mulai_lelang" type="date" class="form-control" name="tanggal_mulai_lelang">
+              @error('tanggal_mulai_lelang')<div class="text-danger">{{ $message }}</div>@enderror
+            </div>
+            <div class="form-group col-md-6">
+              <label for="tanggal_akhir_lelang">Tanggal Akhir Lelang</label>
+              <input id="tanggal_akhir_lelang" type="date" class="form-control" name="tanggal_akhir_lelang">
+              @error('tanggal_akhir_lelang')<div class="text-danger">{{ $message }}</div>@enderror
+            </div>
           </div>
           <div class="form-group">
             <label for="jenis_kontrak">Jenis Kontrak</label>
@@ -88,21 +81,14 @@
             @error('syarat_kualifikasi')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           <div class="form-group">
-            <label class="form-label">Lampiran Pengadaan</label>
-            <div class="selectgroup selectgroup-pills">
-              <label class="selectgroup-item">
-                <input type="radio" name="lampiran_pengadaan" value="penawaran" class="selectgroup-input" checked>
-                <span class="selectgroup-button">Penawaran</span>
-              </label>
-              <label class="selectgroup-item">
-                <input type="radio" name="lampiran_pengadaan" value="konsep" class="selectgroup-input">
-                <span class="selectgroup-button">Konsep</span>
-              </label>
-              <label class="selectgroup-item">
-                <input type="radio" name="lampiran_pengadaan" value="penawaran_dan_konsep" class="selectgroup-input">
-                <span class="selectgroup-button">Penawaran Dan Konsep</span>
-              </label>
-            </div>
+            <label>Lampiran Pengadaan</label>
+            <select class="form-control select2" name="lampiran_pengadaan">
+              <option selected disabled>Pilih</option>
+              <option value="penawaran">Penawaran</option>
+              <option value="konsep">Konsep</option>
+              <option value="penawaran dan konsep">Penawaran Dan Konsep</option>
+            </select>
+            @error('lampiran_pengadaan')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           @if(auth()->user()->level == 'superadmin')
             <a href="{{ route('eproc.superadmin.penunjukan-langsung.index') }}" class="btn btn-secondary">Back</a>

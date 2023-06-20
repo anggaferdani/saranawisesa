@@ -1,11 +1,7 @@
 @extends('templates.pages')
-@section('title')
+@section('title', 'Jadwal Kegiatan Lelang')
 @section('header')
-<h1>Jadwal Lelang : {{ $lelang->kode_lelang }}</h1>
-<div class="section-header-breadcrumb">
-  <div class="breadcrumb-item"><a href="#">Dashboard</a></div>
-  <div class="breadcrumb-item active"><a href="#">Jadwal Lelang : {{ $lelang->kode_lelang }}</a></div>
-</div>
+<h1>Jadwal Kegiatan Lelang : {{ $lelang->kode_lelang }}</h1>
 @endsection
 @section('content')
 <div class="row">
@@ -23,12 +19,10 @@
       <div class="card-body">
         <div class="float-left">
           @if(auth()->user()->level == 'superadmin')
-            <a href="{{ route('eproc.superadmin.lelang.index') }}" class="btn btn-primary"><i class="fas fa-times"></i></a>
-            <a href="{{ route('eproc.superadmin.jadwal-lelang.create', $lelang->id) }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+            <a href="{{ route('eproc.superadmin.jadwal-lelang.create',  Crypt::encrypt($lelang->id)) }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
           @endif
           @if(auth()->user()->level == 'admin')
-            <a href="{{ route('eproc.admin.lelang.index') }}" class="btn btn-primary"><i class="fas fa-times"></i></a>
-            <a href="{{ route('eproc.admin.jadwal-lelang.create', $lelang->id) }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+            <a href="{{ route('eproc.admin.jadwal-lelang.create',  Crypt::encrypt($lelang->id)) }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
           @endif
         </div>
         <div class="float-right">
@@ -48,54 +42,49 @@
           <table class="table table-striped table-bordered">
             <tbody>
               <tr>
-                <td class="text-center">No</td>
-                <td class="text-center">Nama Kegiatan Lelang</td>
-                <td class="text-center">Tgl Mulai Kegiatan Lelang</td>
-                <td class="text-center">Tgl Akhir Kegiatan Lelang</td>
-                <td class="text-center">Action</td>
+                <td>No.</td>
+                <td>Nama Kegiatan Lelang</td>
+                <td>Tgl Mulai Kegiatan Lelang</td>
+                <td>Tgl Akhir Kegiatan Lelang</td>
+                <td>Created At</td>
+                <td>Action</td>
               </tr>
               <?php $id = 0; ?>
-              @foreach ($jadwal_lelang as $jadwal_lelangs)
-                @if($jadwal_lelangs->status_aktif == 'aktif')
-                @if($jadwal_lelangs->lelang_id == $lelang->id)
-                  <?php $id++; ?>
-                  <tr>
-                    <td class="text-center">{{ $id }}</td>
-                    <td class="text-center">{{ $jadwal_lelangs->nama_lelang }}</td>
-                    <td class="text-center">{{ $jadwal_lelangs->tanggal_mulai_lelang }}</td>
-                    <td class="text-center">
-                      @if(now()->toDateTimeString() > $jadwal_lelangs->tanggal_akhir_lelang)
-                        <div class="badge badge-danger">{{ $jadwal_lelangs->tanggal_akhir_lelang }}</div>
-                      @else
-                        {{ $jadwal_lelangs->tanggal_akhir_lelang }}
-                      @endif
-                    </td>
-                    <td class="text-center text-nowarp">
-                      @if(auth()->user()->level == 'superadmin')
-                        <form action="{{ route('eproc.superadmin.jadwal-lelang.destroy', ['id' => $jadwal_lelangs->id, 'lelang_id' => $lelang->id]) }}" method="POST">
-                          @csrf
-                          @method('DELETE')
-                          <a href="{{ route('eproc.superadmin.jadwal-lelang.show', ['id' => $jadwal_lelangs->id, 'lelang_id' => $lelang->id]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                          <a href="{{ route('eproc.superadmin.jadwal-lelang.edit', ['id' => $jadwal_lelangs->id, 'lelang_id' => $lelang->id]) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
-                          <button type="button" class="btn btn-icon btn-danger delete" data-id="{{ $jadwal_lelangs->id }}"><i class="fa fa-trash"></i></button>
-                        </form>
-                      @endif
-                      @if(auth()->user()->level == 'admin')
-                        <form action="{{ route('eproc.admin.jadwal-lelang.destroy', ['id' => $jadwal_lelangs->id, 'lelang_id' => $lelang->id]) }}" method="POST">
-                          @csrf
-                          @method('DELETE')
-                          <a href="{{ route('eproc.admin.jadwal-lelang.show', ['id' => $jadwal_lelangs->id, 'lelang_id' => $lelang->id]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                          <a href="{{ route('eproc.admin.jadwal-lelang.edit', ['id' => $jadwal_lelangs->id, 'lelang_id' => $lelang->id]) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
-                          <button type="button" class="btn btn-icon btn-danger delete" data-id="{{ $jadwal_lelangs->id }}"><i class="fa fa-trash"></i></button>
-                        </form>
-                      @endif
-                    </td>
-                  </tr>
-                @endif
-                @endif
+              @foreach ($jadwal_lelangs as $jadwal_lelang)
+                <?php $id++; ?>
+                <tr>
+                  <td>{{ $id }}</td>
+                  <td>{{ $jadwal_lelang->nama_kegiatan_lelang }}</td>
+                  <td>{{ $jadwal_lelang->tanggal_mulai_kegiatan_lelang }}</td>
+                  <td>{{ $jadwal_lelang->tanggal_akhir_kegiatan_lelang }}</td>
+                  <td>{{ $jadwal_lelang->created_at }}</td>
+                  <td style="white-space: nowrap">
+                    @if(auth()->user()->level == 'superadmin')
+                      <form action="{{ route('eproc.superadmin.jadwal-lelang.destroy', ['id' =>  Crypt::encrypt($jadwal_lelang->id), 'lelang_id' =>  Crypt::encrypt($lelang->id)]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <a href="{{ route('eproc.superadmin.jadwal-lelang.show', ['id' =>  Crypt::encrypt($jadwal_lelang->id), 'lelang_id' =>  Crypt::encrypt($lelang->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                        <a href="{{ route('eproc.superadmin.jadwal-lelang.edit', ['id' =>  Crypt::encrypt($jadwal_lelang->id), 'lelang_id' =>  Crypt::encrypt($lelang->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
+                        <button type="button" class="btn btn-icon btn-danger delete"><i class="fa fa-trash"></i></button>
+                      </form>
+                    @endif
+                    @if(auth()->user()->level == 'admin')
+                      <form action="{{ route('eproc.admin.jadwal-lelang.destroy', ['id' =>  Crypt::encrypt($jadwal_lelang->id), 'lelang_id' =>  Crypt::encrypt($lelang->id)]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <a href="{{ route('eproc.admin.jadwal-lelang.show', ['id' =>  Crypt::encrypt($jadwal_lelang->id), 'lelang_id' =>  Crypt::encrypt($lelang->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                        <a href="{{ route('eproc.admin.jadwal-lelang.edit', ['id' =>  Crypt::encrypt($jadwal_lelang->id), 'lelang_id' =>  Crypt::encrypt($lelang->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
+                        <button type="button" class="btn btn-icon btn-danger delete"><i class="fa fa-trash"></i></button>
+                      </form>
+                    @endif
+                  </td>
+                </tr>
               @endforeach
             </tbody>
           </table>
+        </div>
+        <div class="float-right">
+          {{ $jadwal_lelangs->links('pagination::bootstrap-4') }}
         </div>
       </div>
     </div>

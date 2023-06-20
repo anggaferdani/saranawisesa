@@ -1,29 +1,42 @@
 @extends('templates.pages')
-@section('title')
+@section('title', 'Jenis Pengadaan')
 @section('header')
-<h1>Detail Jenis Pengadaan</h1>
-<div class="section-header-breadcrumb">
-  <div class="breadcrumb-item"><a href="#">Dashboard</a></div>
-  <div class="breadcrumb-item active"><a href="#">Detail Jenis Pengadaan</a></div>
-</div>
+<h1>Jenis Pengadaan</h1>
 @endsection
 @section('content')
 <div class="row">
   <div class="col-12">
     <div class="card">
+      <div class="card-header">
+        <h4>Show</h4>
+      </div>
       <div class="card-body">
-        <div>Jenis Pengadaan :</div>
-        <p>{{ $jenis_pengadaan->jenis_pengadaan }}</p>
-        <div>Created At :</div>
-        <p>{{ $jenis_pengadaan->created_at }}</p>
-        <div>Updated At :</div>
-        <p>{{ $jenis_pengadaan->updated_at }}</p>
-        @if(auth()->user()->level == 'superadmin')
-          <a href="{{ route('eproc.superadmin.jenis-pengadaan.index') }}" class="btn btn-secondary">Back</a>
-        @endif
-        @if(auth()->user()->level == 'admin')
-          <a href="{{ route('eproc.admin.jenis-pengadaan.index') }}" class="btn btn-secondary">Back</a>
-        @endif
+        <form method="POST" action="" class="needs-validation" novalidate="">
+          @csrf
+          <div class="form-group">
+            <label>Jenis Pengadaan</label>
+            <input disabled type="text" class="form-control" name="jenis_pengadaan" value="{{ $jenis_pengadaan->jenis_pengadaan }}">
+            @error('jenis_pengadaan')<div class="text-danger">{{ $message }}</div>@enderror
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Created At</label>
+              <input disabled type="text" class="form-control" name="created_at" value="{{ $jenis_pengadaan->created_at }}">
+              @error('created_at')<div class="text-danger">{{ $message }}</div>@enderror
+            </div>
+            <div class="form-group col-md-6">
+              <label>Updated At</label>
+              <input disabled type="text" class="form-control" name="updated_at" value="{{ $jenis_pengadaan->updated_at }}">
+              @error('updated_at')<div class="text-danger">{{ $message }}</div>@enderror
+            </div>
+          </div>
+          @if(auth()->user()->level == 'superadmin')
+            <a href="{{ route('eproc.superadmin.jenis-pengadaan.index') }}" class="btn btn-secondary">Back</a>
+          @endif
+          @if(auth()->user()->level == 'admin')
+            <a href="{{ route('eproc.admin.jenis-pengadaan.index') }}" class="btn btn-secondary">Back</a>
+          @endif
+        </form>
       </div>
     </div>
   </div>

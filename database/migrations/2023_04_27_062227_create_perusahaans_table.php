@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('perusahaans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('lelang_id')->nullable();
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->enum('status_aktif', ['aktif', 'tidak_aktif'])->default('aktif');
             $table->string('created_by')->nullable();

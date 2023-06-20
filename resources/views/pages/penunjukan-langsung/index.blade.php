@@ -1,11 +1,7 @@
 @extends('templates.pages')
-@section('title')
+@section('title', 'Penunjukan Langsung')
 @section('header')
 <h1>Penunjukan Langsung</h1>
-<div class="section-header-breadcrumb">
-  <div class="breadcrumb-item"><a href="#">Dashboard</a></div>
-  <div class="breadcrumb-item active"><a href="#">Penunjukan Langsung</a></div>
-</div>
 @endsection
 @section('content')
 <div class="row">
@@ -43,63 +39,70 @@
         <div class="clearfix mb-3"></div>
   
         <div class="table-responsive">
-          <table class="table table-striped table-bordered">
+          <table class="table table-bordered">
             <tbody>
               <tr>
-                <td class="text-center">No</td>
-                <td class="text-center">Kode Lelang</td>
-                <td class="text-center">Nama Perusahaan</td>
-                <td class="text-center">Nama Lelang</td>
-                <td class="text-center">HPS</td>
-                <td class="text-center">Tgl Akhir Lelang</td>
-                <td class="text-center">Action</td>
+                <td>No.</td>
+                <td>Kode Lelang</td>
+                <td>Nama Perusahaan</td>
+                <td>Nama Lelang</td>
+                <td>Status Pengadaan</td>
+                <td>Created At</td>
+                <td>Action</td>
               </tr>
               <?php $id = 0; ?>
-              @foreach ($penunjukan_langsung as $penunjukan_langsungs)
-                @if($penunjukan_langsungs->status_aktif == 'aktif' and $penunjukan_langsungs->status_pengadaan == 'penunjukan_langsung')
-                  <?php $id++; ?>
-                  <tr>
-                    <td class="text-center">{{ $id }}</td>
-                    <td class="text-center">{{ $penunjukan_langsungs->kode_lelang }}</td>
-                    <td class="text-center">{{ $penunjukan_langsungs->namaPerusahaan }}</td>
-                    <td class="text-center">{{ $penunjukan_langsungs->nama_lelang }}</td>
-                    <td class="text-center">{{ 'Rp. '.strrev(implode('.', str_split(strrev(strval($penunjukan_langsungs->hps)), 3))) }}</td>
-                    <td class="text-center">
-                      @if(now()->toDateTimeString() > $penunjukan_langsungs->tanggal_akhir_lelang)
-                        <div class="badge badge-danger">{{ $penunjukan_langsungs->tanggal_akhir_lelang }}</div>
-                      @else
-                        {{ $penunjukan_langsungs->tanggal_akhir_lelang }}
-                      @endif
-                    </td>
-                    <td class="text-center text-nowarp">
-                      @if(auth()->user()->level == 'superadmin')
-                        <form action="{{ route('eproc.superadmin.penunjukan-langsung.destroy', $penunjukan_langsungs->id) }}" method="POST">
-                          @csrf
-                          @method('DELETE')
-                          <a href="{{ route('eproc.superadmin.penunjukan-langsung.show', $penunjukan_langsungs->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                          <a href="{{ route('eproc.superadmin.penunjukan-langsung.edit', $penunjukan_langsungs->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
-                          <a href="{{ route('eproc.superadmin.jadwal-lelang.index', $penunjukan_langsungs->id) }}" class="btn btn-icon btn-primary"><i class="fa fa-calendar"></i></a>
-                          <a href="{{ route('eproc.superadmin.peserta.show', ['id' => $penunjukan_langsungs->perusahaan_id, 'lelang_id' => $penunjukan_langsungs->id]) }}" class="btn btn-icon btn-primary"><i class="fas fa-user"></i></a>
-                          <button type="button" class="btn btn-icon btn-danger delete" data-id="{{ $penunjukan_langsungs->id }}"><i class="fa fa-trash"></i></button>
-                        </form>
-                      @endif
-                      @if(auth()->user()->level == 'admin')
-                        <form action="{{ route('eproc.admin.penunjukan-langsung.destroy', $penunjukan_langsungs->id) }}" method="POST">
-                          @csrf
-                          @method('DELETE')
-                          <a href="{{ route('eproc.admin.penunjukan-langsung.show', $penunjukan_langsungs->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                          <a href="{{ route('eproc.admin.penunjukan-langsung.edit', $penunjukan_langsungs->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
-                          <a href="{{ route('eproc.admin.jadwal-lelang.index', $penunjukan_langsungs->id) }}" class="btn btn-icon btn-primary"><i class="fa fa-calendar"></i></a>
-                          <a href="{{ route('eproc.admin.peserta.show', ['id' => $penunjukan_langsungs->perusahaan_id, 'lelang_id' => $penunjukan_langsungs->id]) }}" class="btn btn-icon btn-primary"><i class="fas fa-user"></i></a>
-                          <button type="button" class="btn btn-icon btn-danger delete" data-id="{{ $penunjukan_langsungs->id }}"><i class="fa fa-trash"></i></button>
-                        </form>
-                      @endif
-                    </td>
-                  </tr>
-                @endif
+              @foreach ($penunjukan_langsungs as $penunjukan_langsung)
+                <?php $id++; ?>
+                <tr>
+                  <td>{{ $id }}</td>
+                  <td>{{ $penunjukan_langsung->kode_lelang }}</td>
+                  @foreach($penunjukan_langsung->users as $users)
+                    <td>{{ $users->nama_panjang }}</td>
+                  @endforeach
+                  <td>{{ $penunjukan_langsung->nama_lelang }}</td>
+                  <td>
+                    @if($penunjukan_langsung->status_pengadaan2 == 'buka')
+                      <div class="badge badge-primary">Buka</div>
+                    @endif
+                    @if($penunjukan_langsung->status_pengadaan2 == 'tutup')
+                      <div class="badge badge-warning">Tutup</div>
+                    @endif
+                    @if($penunjukan_langsung->status_pengadaan2 == 'selesai')
+                      <div class="badge badge-danger">Selesai</div>
+                    @endif
+                  </td>
+                  <td>{{ $penunjukan_langsung->created_at }}</td>
+                  <td style="white-space: nowrap">
+                    @if(auth()->user()->level == 'superadmin')
+                      <form action="{{ route('eproc.superadmin.penunjukan-langsung.destroy', Crypt::encrypt($penunjukan_langsung->id)) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <a href="{{ route('eproc.superadmin.penunjukan-langsung.show', Crypt::encrypt($penunjukan_langsung->id)) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                        <a href="{{ route('eproc.superadmin.penunjukan-langsung.edit', Crypt::encrypt($penunjukan_langsung->id)) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
+                        <a href="{{ route('eproc.superadmin.jadwal-lelang.index', Crypt::encrypt($penunjukan_langsung->id)) }}" class="btn btn-icon btn-primary"><i class="fa fa-calendar"></i></a>
+                        <a href="{{ route('eproc.superadmin.peserta.index', ['id' => Crypt::encrypt($penunjukan_langsung->id), 'lelang_id' => Crypt::encrypt($penunjukan_langsung->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-user"></i></a>
+                        <button type="button" class="btn btn-icon btn-danger delete"><i class="fa fa-trash"></i></button>
+                      </form>
+                    @endif
+                    @if(auth()->user()->level == 'admin')
+                      <form action="{{ route('eproc.admin.penunjukan-langsung.destroy', Crypt::encrypt($penunjukan_langsung->id)) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <a href="{{ route('eproc.admin.penunjukan-langsung.show', Crypt::encrypt($penunjukan_langsung->id)) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                        <a href="{{ route('eproc.admin.penunjukan-langsung.edit', Crypt::encrypt($penunjukan_langsung->id)) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
+                        <a href="{{ route('eproc.admin.jadwal-lelang.index', Crypt::encrypt($penunjukan_langsung->id)) }}" class="btn btn-icon btn-primary"><i class="fa fa-calendar"></i></a>
+                        <a href="{{ route('eproc.admin.peserta.index', ['id' => Crypt::encrypt($penunjukan_langsung->id), 'lelang_id' => Crypt::encrypt($penunjukan_langsung->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-user"></i></a>
+                        <button type="button" class="btn btn-icon btn-danger delete"><i class="fa fa-trash"></i></button>
+                      </form>
+                    @endif
+                  </td>
+                </tr>
               @endforeach
             </tbody>
           </table>
+        </div>
+        <div class="float-right">
+          {{ $penunjukan_langsungs->links('pagination::bootstrap-4') }}
         </div>
       </div>
     </div>

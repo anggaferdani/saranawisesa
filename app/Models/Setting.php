@@ -16,13 +16,7 @@ class Setting extends Model
 
     protected $fillable = [
         'id',
-        'nama_perusahaan',
-        'no_telepon_perusahaan',
-        'email_perusahaan',
-        'alamat_perusahaan',
-        'instagram',
-        'facebook',
-        'twitter',
-        'youtube',
+        'isi',
+        'link',
     ];
 }
