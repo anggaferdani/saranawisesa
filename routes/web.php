@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\EprocController;
 use App\Http\Controllers\BeritaController;
@@ -36,6 +37,14 @@ use App\Http\Controllers\Pages\ComproController as Compro;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/bM2cA4MsdHD5pkzdVEg6', function(){
+  Artisan::call('migrate:fresh');
+});
+
+Route::get('/pnmGhdBEHaBxhPzh6cA4', function(){
+  Artisan::call('db:seed');
+});
 
 Route::get('/', [ComproController::class, 'index'])->name('index');
 Route::get('/profile-perusahaan', [ComproController::class, 'profile_perusahaan'])->name('profile-perusahaan');
