@@ -9,6 +9,11 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 </head>
 <style>
+  .ball{
+    width: 25%;
+    top: 6%;
+    right: 6%;
+  }
   .banner2{
     position: absolute;
     top: 0;
@@ -31,6 +36,11 @@
     z-index: -1;
   }
   @media screen and (max-width: 480px){
+    .ball{
+      width: 60%;
+      top: 2%;
+      right: -4%;
+    }
     .banner2{
       position: absolute;
       top: 0;

@@ -18,7 +18,7 @@
             <div class="card h-100 rounded-4 border-light-subtle">
               <div class="row">
                 <div class="col">
-                  <div class="rounded-start-4" style="height: 175px; background-image: url({{ asset('compro/produk-dan-layanan/thumbnail/'.$produk_dan_layanan["thumbnail"]) }}); background-position: center; background-size: cover;"></div>
+                  <div class="rounded-start-4" style="height: 175px; background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url({{ asset('compro/produk-dan-layanan/thumbnail/'.$produk_dan_layanan["thumbnail"]) }}); background-position: center; background-size: cover;"></div>
                 </div>
                 <div class="col">
                   <div class="card-body h-100 ps-0" style="height: 175px; display: flex; justify-content: space-between; flex-direction: column;">

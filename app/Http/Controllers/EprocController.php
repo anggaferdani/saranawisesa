@@ -152,7 +152,7 @@ class EprocController extends Controller
 
     public function index(){
         $profile_perusahaan = ProfilePerusahaan::first();
-        $setting = Setting::first();
+        $setting = Setting::all();
         return view('eproc.index', compact(
             'profile_perusahaan',
             'setting',
@@ -168,7 +168,7 @@ class EprocController extends Controller
         $penunjukan_langsungs = Str::contains($status_pengadaan, 'penunjukan langsung');
 
         $profile_perusahaan = ProfilePerusahaan::first();
-        $setting = Setting::first();
+        $setting = Setting::all();
         return view('eproc.pengadaan', compact(
             'jenis_pengadaans_group_by_lelang',
             'jenis_pengadaans_group_by_penunjukan_langsung',
@@ -194,7 +194,7 @@ class EprocController extends Controller
         }
 
         $profile_perusahaan = ProfilePerusahaan::first();
-        $setting = Setting::first();
+        $setting = Setting::all();
         return view('eproc.pengadaan2', compact(
             'lelang',
             'ikuti_lelang',
@@ -256,21 +256,33 @@ class EprocController extends Controller
         return redirect()->back()->with('success', 'Data has been created at '.$lampiran->created_at.' Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, omnis laborum in quidem consequuntur at nostrum saepe atque, deserunt non sequi sit totam iure dolores eos ipsam fugit aperiam odio.');
     }
 
-    public function berita(){
+    public function berita_tentang_pengadaan(){
+        $beritas = Berita::where('status_aktif', 'aktif')->latest()->paginate(10);
         $profile_perusahaan = ProfilePerusahaan::first();
-        $setting = Setting::first();
-        $berita = Berita::all();
-        return view('pages.eproc.berita', compact(
+        $setting = Setting::all();
+        return view('eproc.berita', compact(
+            'beritas',
             'profile_perusahaan',
             'setting',
+        ));
+    }
+    public function berita_tentang_pengadaan2($id){
+        $berita = Berita::find(Crypt::decrypt($id));
+        $beritas = Berita::where('id', '<>', Crypt::decrypt($id))->where('status_aktif', 'aktif')->take(5)->get();
+        $profile_perusahaan = ProfilePerusahaan::first();
+        $setting = Setting::all();
+        return view('eproc.berita2', compact(
             'berita',
+            'beritas',
+            'profile_perusahaan',
+            'setting',
         ));
     }
 
     public function kontak(){
         $profile_perusahaan = ProfilePerusahaan::first();
-        $setting = Setting::first();
-        return view('pages.eproc.kontak', compact(
+        $setting = Setting::all();
+        return view('eproc.kontak', compact(
             'profile_perusahaan',
             'setting',
         ));

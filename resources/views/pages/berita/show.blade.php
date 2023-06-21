@@ -15,7 +15,7 @@
         <div>Judul Berita :</div>
         <p>{{ $berita->judul_berita }}</p>
         <div>Thumbnail :</div>
-        <p><img src="{{ asset('berita/'.$berita['thumbnail']) }}" alt="" width="200px"></p>
+        <p><img src="{{ asset('eproc/berita/'.$berita["thumbnail"]) }}" alt="" width="200px"></p>
         <div>Tanggal Publikasi :</div>
         <p>{{ $berita->tanggal_publikasi }}</p>
         <div>Isi Berita :</div>

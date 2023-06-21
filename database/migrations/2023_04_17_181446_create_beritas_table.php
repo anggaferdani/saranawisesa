@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('thumbnail');
             $table->string('tanggal_publikasi');
             $table->text('isi_berita');
-            $table->enum('status_aktif', ['aktif', 'tidak_aktif'])->default('aktif');
+            $table->enum('status_aktif', ['aktif', 'tidak aktif'])->default('aktif');
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
             $table->timestamps();

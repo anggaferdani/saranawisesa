@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg fixed-top" style="transition: all 0.3s ease-in-out">
   <div class="container">
     <a href="{{ route('index') }}"><img src="{{ asset('compro/img/logo.png') }}" class="navbar-brand" width="60px" alt=""></a>
-    <img src="{{ asset('compro/img/ISO.png') }}" class="navbar-brand2" width="200" alt="">
+    <img src="{{ asset('compro/img/ISO.png') }}" class="navbar-brand2" width="170" alt="">
     <button class="navbar-toggler mx-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

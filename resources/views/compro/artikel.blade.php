@@ -12,19 +12,19 @@
       </div>
       <div class="col-md-4 mt-5">
         <div class="row row-cols-1 row-cols-lg-1 mt-0 row-cols-1 gy-2">
-          @foreach ($artikels as $artikels)
+          @foreach ($artikels as $artikel)
           <div class="col">
             <div class="card" style="border: none;">
               <div class="row">
                 <div class="col-md-6 col-6 pe-0">
-                  <div class="rounded-3" style="height: 110px; background: url({{ asset('artikel/'.$artikels["thumbnail"]) }}); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+                  <div class="rounded-3" style="height: 110px; background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url({{ asset('artikel/'.$artikel["thumbnail"]) }}); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
                 </div>
                 <div class="col-md-6 col-6 py-2" style="display: flex; justify-content: space-between; flex-direction: column;">
                   <div>
-                    <div class="lh-sm fw-semibold">{{ Str::limit($artikels->judul_artikel, 35) }}</div>
-                    <div class="small text-secondary">{{ \Carbon\Carbon::parse($artikels->tanggal_publikasi)->format('l, d M Y') }}</div>
+                    <div class="lh-sm fw-semibold">{{ Str::limit($artikel->judul_artikel, 35) }}</div>
+                    <div class="small text-secondary">{{ \Carbon\Carbon::parse($artikel->tanggal_publikasi)->format('l, d M Y') }}</div>
                   </div>
-                  <div class="mt-2"><a href="{{ route('artikel', Crypt::encrypt($artikels->id)) }}" class="small text-decoration-none text-dark stretched-link">Read More</a></div>
+                  <div class="mt-2"><a href="{{ route('artikel', Crypt::encrypt($artikel->id)) }}" class="small text-decoration-none text-dark stretched-link">Read More</a></div>
                 </div>
               </div>
             </div>

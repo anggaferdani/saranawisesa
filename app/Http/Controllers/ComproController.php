@@ -87,12 +87,14 @@ class ComproController extends Controller
         $profile_perusahaan = ProfilePerusahaan::first();
         $portofolios = Portofolio::where('status_aktif', 'aktif')->latest()->paginate(10);
         $artikels = Artikel::where('status_aktif', 'aktif')->take(5)->get();
+        $profile_perusahaan = ProfilePerusahaan::first();
         $setting = Setting::all();
         return view('compro.index', compact(
             'produk_dan_layanans',
             'profile_perusahaan',
             'portofolios',
             'artikels',
+            'profile_perusahaan',
             'setting',
         ));
     }
@@ -105,8 +107,8 @@ class ComproController extends Controller
         return view('compro.profile-perusahaan', compact(
             'direksis',
             'komisarisies',
-            'produk_dan_layanans',
             'profile_perusahaan',
+            'produk_dan_layanans',
             'setting',
         ));
     }
@@ -121,7 +123,7 @@ class ComproController extends Controller
 
     public function produk_dan_layanan($id){
         $produk_dan_layanan = ProdukDanLayanan::find(Crypt::decrypt($id));
-        $subproduk_dan_layanans = SubprodukDanLayanan::where('status_aktif', 'aktif')->get();
+        $subproduk_dan_layanans = SubprodukDanLayanan::where('produk_dan_layanan_id', $produk_dan_layanan->id)->where('status_aktif', 'aktif')->get();
         $produk_dan_layanans = ProdukDanLayanan::all();
         $setting = Setting::all();
         return view('compro.produk-dan-layanan', compact(

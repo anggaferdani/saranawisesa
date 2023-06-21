@@ -56,7 +56,7 @@
             <div class="card h-100 rounded-4 border-light-subtle">
               <div class="row">
                 <div class="col">
-                  <div class="rounded-start-4" style="height: 175px; background-image: url({{ asset('compro/produk-dan-layanan/thumbnail/'.$produk_dan_layanan["thumbnail"]) }}); background-position: center; background-size: cover;"></div>
+                  <div class="rounded-start-4" style="height: 175px; background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url({{ asset('compro/produk-dan-layanan/thumbnail/'.$produk_dan_layanan["thumbnail"]) }}); background-position: center; background-size: cover;"></div>
                 </div>
                 <div class="col">
                   <div class="card-body h-100 ps-0" style="height: 175px; display: flex; justify-content: space-between; flex-direction: column;">
@@ -87,7 +87,7 @@
       @foreach ($portofolios as $portofolio)
       <div class="col">
         <div class="card h-100 rounded-4 shadow-sm">
-          <div class="rounded-top-4" style="height: 200px; background: url({{ asset('portofolio/'.$portofolio["portofolio"]) }}); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+          <div class="rounded-top-4" style="height: 200px; background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url({{ asset('portofolio/'.$portofolio["portofolio"]) }}); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
           <div class="card-body">
             <h5 class="card-title mt-2">{{ Str::limit($portofolio->judul_portofolio, 25) }}</h5>
             <p class="card-text small lh-sm">{!! Str::limit($portofolio->isi_portofolio, 80) !!}</p>
@@ -118,15 +118,15 @@
       <?php $id++; ?>
       <div class="col">
         <div class="card h-100 rounded-4">
-          <div class="rounded-top-4 d-flex justify-content-end align-items-end px-3 py-2" style="height: 200px; background-image: url({{ asset('artikel/'.$artikel["thumbnail"]) }}); background-position: center; background-size: cover;">
+          <div class="rounded-top-4 d-flex justify-content-end align-items-end px-3 py-2" style="height: 200px; background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url({{ asset('artikel/'.$artikel["thumbnail"]) }}); background-position: center; background-size: cover;">
             <h2 class="text-white m-0">0{{ $id }}</h2>
           </div>
           <div class="card-body" style="display: flex; justify-content: space-between; flex-direction: column;">
             <div>
-              <h5 class="card-title fw-bold" style="color: #920000;">{{ Str::limit($artikel->judul_artikel, 15) }}</h5>
+              <h5 class="card-title fw-bold" style="color: #920000;">{{ Str::limit($artikel->judul_artikel, 13) }}</h5>
               <p class="card-text fw-semibold small lh-sm">{!! Str::limit($artikel->isi_artikel, 80) !!}</p>
             </div>
-            <a href="" class="d-flex justify-content-end align-items-center text-decoration-none text-dark fw-semibold small lh-sm stretched-link mt-4">Read More <i class="bi bi-arrow-right"></i></a>
+            <a href="{{ route('artikel', Crypt::encrypt($artikel->id)) }}" class="d-flex justify-content-end align-items-center text-decoration-none text-dark fw-semibold small lh-sm stretched-link mt-4">Read More <i class="bi bi-arrow-right"></i></a>
           </div>
         </div>
       </div>

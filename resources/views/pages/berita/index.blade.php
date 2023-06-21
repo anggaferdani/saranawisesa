@@ -64,39 +64,40 @@
                 <td class="text-center">Action</td>
               </tr>
               <?php $id = 0; ?>
-              @foreach ($berita as $beritas)
-                @if($beritas->status_aktif == 'aktif')
-                  <?php $id++; ?>
-                  <tr>
-                    <td class="text-center">{{ $id }}</td>
-                    <td class="text-center">{{ $beritas->judul_berita }}</td>
-                    <td class="text-center">{{ $beritas->tanggal_publikasi }}</td>
-                    <td class="text-center"><img src="{{ asset('berita/'.$berita['thumbnail']) }}" alt="" width="200px"></td>
-                    <td class="text-center text-nowarp" style="white-space: nowrap;">
-                      @if(auth()->user()->level == 'superadmin')
-                        <form action="{{ route('eproc.superadmin.berita.destroy', $beritas->id) }}" method="POST">
-                          @csrf
-                          @method('DELETE')
-                          <a href="{{ route('eproc.superadmin.berita.show', $beritas->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                          <a href="{{ route('eproc.superadmin.berita.edit', $beritas->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
-                          <button type="button" class="btn btn-icon btn-danger delete" data-id="{{ $beritas->id }}"><i class="fa fa-trash"></i></button>
-                        </form>
-                      @endif
-                      @if(auth()->user()->level == 'admin')
-                        <form action="{{ route('eproc.admin.berita.destroy', $beritas->id) }}" method="POST">
-                          @csrf
-                          @method('DELETE')
-                          <a href="{{ route('eproc.admin.berita.show', $beritas->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                          <a href="{{ route('eproc.admin.berita.edit', $beritas->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
-                          <button type="button" class="btn btn-icon btn-danger delete" data-id="{{ $beritas->id }}"><i class="fa fa-trash"></i></button>
-                        </form>
-                      @endif
-                    </td>
-                  </tr>
-                @endif
+              @foreach ($beritas as $berita)
+              <?php $id++; ?>
+              <tr>
+                <td class="text-center">{{ $id }}</td>
+                <td class="text-center">{{ $berita->judul_berita }}</td>
+                <td class="text-center">{{ $berita->tanggal_publikasi }}</td>
+                <td class="text-center"><img src="{{ asset('eproc/berita/'.$berita["thumbnail"]) }}" alt="" width="200px"></td>
+                <td class="text-center text-nowarp" style="white-space: nowrap;">
+                  @if(auth()->user()->level == 'superadmin')
+                    <form action="{{ route('eproc.superadmin.berita.destroy', $berita->id) }}" method="POST">
+                      @csrf
+                      @method('DELETE')
+                      <a href="{{ route('eproc.superadmin.berita.show', $berita->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                      <a href="{{ route('eproc.superadmin.berita.edit', $berita->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
+                      <button type="button" class="btn btn-icon btn-danger delete" data-id="{{ $berita->id }}"><i class="fa fa-trash"></i></button>
+                    </form>
+                  @endif
+                  @if(auth()->user()->level == 'admin')
+                    <form action="{{ route('eproc.admin.berita.destroy', $berita->id) }}" method="POST">
+                      @csrf
+                      @method('DELETE')
+                      <a href="{{ route('eproc.admin.berita.show', $berita->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                      <a href="{{ route('eproc.admin.berita.edit', $berita->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
+                      <button type="button" class="btn btn-icon btn-danger delete" data-id="{{ $berita->id }}"><i class="fa fa-trash"></i></button>
+                    </form>
+                  @endif
+                </td>
+              </tr>
               @endforeach
             </tbody>
           </table>
+        </div>
+        <div class="float-right">
+          {{ $beritas->links('pagination::bootstrap-4') }}
         </div>
       </div>
     </div>

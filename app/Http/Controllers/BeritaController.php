@@ -20,7 +20,7 @@ class BeritaController extends Controller
         $nama_file = $file->getClientOriginalName();
         $file->move('berita/import', $nama_file);
 
-        Excel::import(new BeritaImport, public_path('/berita/import/'.$nama_file));
+        Excel::import(new BeritaImport, public_path('eproc/berita/import/'.$nama_file));
         
         if(auth()->user()->level == 'superadmin'){
             return redirect()->route('eproc.superadmin.berita.index')->with('success', 'Berhasil ditambahkan kedalam database');
@@ -43,8 +43,8 @@ class BeritaController extends Controller
     }
 
     public function index(){
-        $berita = Berita::all();
-        return view('pages.berita.index', compact('berita'));
+        $beritas = Berita::where('status_aktif', 'aktif')->latest()->paginate(10);
+        return view('pages.berita.index', compact('beritas'));
     }
 
     public function create(){
@@ -66,7 +66,7 @@ class BeritaController extends Controller
         );
 
         if($thumbnail = $request->file('thumbnail')){
-            $destination_path = 'berita/';
+            $destination_path = 'eproc/berita/';
             $foto_thumbnail = date('YmdHis') . "." . $thumbnail->getClientOriginalExtension();
             $thumbnail->move($destination_path, $foto_thumbnail);
             $input_array_berita['thumbnail'] = $foto_thumbnail;
@@ -101,7 +101,7 @@ class BeritaController extends Controller
         ]);
 
         if($thumbnail = $request->file('thumbnail')){
-            $destination_path = 'berita/';
+            $destination_path = 'eproc/berita/';
             $foto_thumbnail = date('YmdHis') . "." . $thumbnail->getClientOriginalExtension();
             $thumbnail->move($destination_path, $foto_thumbnail);
             $input_array_berita['thumbnail'] = $foto_thumbnail;
@@ -124,7 +124,7 @@ class BeritaController extends Controller
         $berita = Berita::find($id);
         
         $berita->update([
-            'status_aktif' => 2,
+            'status_aktif' => 'tidak aktif',
         ]);
 
         if(auth()->user()->level == 'superadmin'){

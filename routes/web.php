@@ -163,8 +163,9 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
     Route::get('/pengadaan/{id}', [EprocController::class, 'pengadaan2'])->name('pengadaan2');
     Route::get('/ikuti-pengadaan/{id}', [EprocController::class, 'ikutiPengadaan'])->name('ikuti-pengadaan');
     Route::post('/post-lampiran', [EprocController::class, 'postLampiran'])->name('post-lampiran');
-    Route::get('/berita', [EprocController::class, 'berita'])->name('berita');
-    Route::get('/contact-us', [EprocController::class, 'contactUs'])->name('contact-us');
+    Route::get('/berita-tentang-pengadaan', [EprocController::class, 'berita_tentang_pengadaan'])->name('berita-tentang-pengadaan');
+    Route::get('/berita-tentang-pengadaan/{id}', [EprocController::class, 'berita_tentang_pengadaan2'])->name('berita-tentang-pengadaan2');
+    Route::get('/kontak', [EprocController::class, 'kontak'])->name('kontak');
   });
 
   Route::prefix('superadmin')->name('superadmin.')->group(function(){

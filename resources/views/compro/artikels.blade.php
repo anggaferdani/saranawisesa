@@ -15,7 +15,7 @@
       @foreach ($artikels as $artikel)
       <div class="col">
         <div class="card h-100 rounded-4">
-          <div class="rounded-top-4" style="height: 200px; background-image: url({{ asset('artikel/'.$artikel["thumbnail"]) }}); background-position: center; background-size: cover;">
+          <div class="rounded-top-4" style="height: 200px; background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url({{ asset('artikel/'.$artikel["thumbnail"]) }}); background-position: center; background-size: cover;">
           </div>
           <div class="card-body" style="display: flex; justify-content: space-between; flex-direction: column;">
             <div>

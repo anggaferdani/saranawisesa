@@ -13,10 +13,10 @@
 </head>
 <style>
   .navbar-brand-scrolled{
-    width: 80px !important;
+    width: 70px !important;
   }
   .navbar-brand-scrolled2{
-    width: 200px !important;
+    width: 190px !important;
   }
 </style>
 <body style="margin-top: 90px;">

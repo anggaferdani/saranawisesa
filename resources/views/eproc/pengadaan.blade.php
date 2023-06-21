@@ -1,7 +1,7 @@
 @extends('templates.eproc.pages')
 @section('title', 'SARANAWISESA PROPERINDO')
 @section('content')
-<section style="height: 50vh; background: url({{ asset('eproc/img/pengadaan.png') }}); background-size: cover; background-repeat: no-repeat; background-position: center;">
+<section style="height: 50vh; background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url({{ asset('eproc/img/pengadaan.png') }}); background-size: cover; background-repeat: no-repeat; background-position: center;">
   <div class="container h-100">
     <div class="row py-4 h-100 align-items-center justify-content-center">
       <div class="col-12 col-lg-8 col-md-4 text-white">
