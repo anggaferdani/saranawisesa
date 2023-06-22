@@ -7,6 +7,7 @@ use App\Models\Lelang;
 use App\Models\Lampiran;
 use App\Models\Perusahaan;
 use App\Models\VerifyEmail;
+use App\Models\Administrasi;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
@@ -73,5 +74,18 @@ class User extends Authenticatable
 
     public function verify_emails(){
         return $this->hasMany(VerifyEmail::class);
+    }
+
+
+
+
+
+
+
+
+
+
+    public function administrasis(){
+        return $this->hasMany(Administrasi::class);
     }
 }

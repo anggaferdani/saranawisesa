@@ -12,6 +12,8 @@ use App\Models\UserLelang;
 use App\Models\Kualifikasi;
 use App\Models\VerifyEmail;
 use Illuminate\Support\Str;
+use App\Models\Administrasi;
+use App\Models\AktaPendirianPerusahaan;
 use Illuminate\Http\Request;
 use App\Models\JenisPengadaan;
 use App\Models\ProfilePerusahaan;
@@ -99,6 +101,15 @@ class EprocController extends Controller
         );
 
         $perusahaan = User::create($array);
+
+        Administrasi::create([
+            'user_id' => $perusahaan->id,
+            'nama_perusahaan' => $perusahaan->nama_panjang,
+        ]);
+
+        AktaPendirianPerusahaan::create([
+            'user_id' => $perusahaan->id,
+        ]);
 
         $verifiy_url = route('eproc.verifikasi', ['service' => 'email_verification', 'user_id' => $perusahaan->id]);
 

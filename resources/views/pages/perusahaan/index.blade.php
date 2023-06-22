@@ -34,12 +34,12 @@
           <table class="table table-bordered">
             <tbody>
               <tr>
-                <td>No.</td>
-                <td>Nama Perusahaan</td>
-                <td>Email</td>
-                <td>Status Verifikasi</td>
-                <td>Created At</td>
-                <td>Action</td>
+                <th>No.</th>
+                <th>Nama Perusahaan</th>
+                <th>Email</th>
+                <th>Status Verifikasi</th>
+                <th>Created At</th>
+                <th>Action</th>
               </tr>
               <?php $id = 0; ?>
               @foreach ($users as $user)

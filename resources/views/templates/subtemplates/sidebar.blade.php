@@ -87,6 +87,7 @@
         @if(auth()->user()->level == 'perusahaan')
           <li class="menu-header">Menu</li>
           <li class="{{ str_contains(Route::currentRouteName(), 'eproc.perusahaan.dashboard') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.perusahaan.dashboard') }}"><i class="fas fa-quote-right"></i><span>Dashboard</span></a></li>
+          <li class="{{ str_contains(Route::currentRouteName(), 'eproc.perusahaan.administrasi') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.perusahaan.administrasi.edit', ['user_id' => Crypt::encrypt(Auth::id())]) }}"><i class="fas fa-quote-right"></i><span>Kualifikasi</span></a></li>
           <li class="{{ str_contains(Route::currentRouteName(), 'eproc.perusahaan.pengadaan.index') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.perusahaan.pengadaan.index') }}"><i class="fas fa-tag"></i><span>Pengadaan</span></a></li>
         @endif
       @endif

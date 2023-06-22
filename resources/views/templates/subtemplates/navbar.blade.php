@@ -209,7 +209,7 @@
           @if(auth()->user()->level == 'helpdesk')
             <a href="{{ route('compro.helpdesk.profile') }}" class="dropdown-item has-icon">
           @endif
-            <i class="far fa-user"></i> Profile
+            PROFILE
           </a>
           <a href="{{ route('compro.logout') }}" class="dropdown-item has-icon text-danger">
             LOGOUT
@@ -218,12 +218,12 @@
         @if(Session::has('eproc'))
           @if(auth()->user()->level == 'superadmin')
             <a href="{{ route('eproc.superadmin.profile') }}" class="dropdown-item has-icon">
-              <i class="far fa-user"></i> Profile
+              PROFILE
             </a>
           @endif
           @if(auth()->user()->level == 'admin')
             <a href="{{ route('eproc.admin.profile') }}" class="dropdown-item has-icon">
-              <i class="far fa-user"></i> Profile
+              PROFILE
             </a>
           @endif
           @if(auth()->user()->level == 'perusahaan')

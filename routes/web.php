@@ -17,6 +17,7 @@ use App\Http\Controllers\KomisarisController;
 use App\Http\Controllers\NewComproController;
 use App\Http\Controllers\PerusahaanController;
 use App\Http\Controllers\PortofolioController;
+use App\Http\Controllers\AdministrasiController;
 use App\Http\Controllers\JadwalLelangController;
 use App\Http\Controllers\Pengadaan0002Controller;
 use App\Http\Controllers\JenisPengadaanController;
@@ -26,6 +27,8 @@ use App\Http\Controllers\PenunjukanLangsungController;
 use App\Http\Controllers\SubprodukDanLayananController;
 use App\Http\Controllers\Pages\EprocController as Eproc;
 use App\Http\Controllers\Pages\ComproController as Compro;
+use App\Http\Controllers\AktaPendirianPerusahaanController;
+use App\Http\Controllers\PengurusBadanUsahaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -227,6 +230,25 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
     Route::middleware(['auth:web', 'disable_back_button', 'eproc', 'perusahaan'])->group(function(){
       Route::get('/dashboard', function(){return view('pages.dashboard');})->name('dashboard');
       Route::resource('pengadaan', Pengadaan0002Controller::class);
+
+      Route::get('{user_id}/administrasi/edit', [AdministrasiController::class, 'edit'])->name('administrasi.edit');
+      Route::put('{user_id}/administrasi', [AdministrasiController::class, 'update'])->name('administrasi.update');
+
+      Route::get('{user_id}/akta-pendirian-perusahaan/', [AktaPendirianPerusahaanController::class, 'index'])->name('akta-pendirian-perusahaan.index');
+      Route::get('{user_id}/akta-pendirian-perusahaan/create', [AktaPendirianPerusahaanController::class, 'create'])->name('akta-pendirian-perusahaan.create');
+      Route::post('{user_id}/akta-pendirian-perusahaan/store', [AktaPendirianPerusahaanController::class, 'store'])->name('akta-pendirian-perusahaan.store');
+      Route::get('{user_id}/akta-pendirian-perusahaan/{id}', [AktaPendirianPerusahaanController::class, 'show'])->name('akta-pendirian-perusahaan.show');
+      Route::get('{user_id}/akta-pendirian-perusahaan/{id}/edit', [AktaPendirianPerusahaanController::class, 'edit'])->name('akta-pendirian-perusahaan.edit');
+      Route::put('{user_id}/akta-pendirian-perusahaan/{id}', [AktaPendirianPerusahaanController::class, 'update'])->name('akta-pendirian-perusahaan.update');
+      Route::delete('{user_id}/akta-pendirian-perusahaan/{id}', [AktaPendirianPerusahaanController::class, 'destroy'])->name('akta-pendirian-perusahaan.destroy');
+
+      Route::get('{user_id}/pengurus-badan-usaha/', [PengurusBadanUsahaController::class, 'index'])->name('pengurus-badan-usaha.index');
+      Route::get('{user_id}/pengurus-badan-usaha/create', [PengurusBadanUsahaController::class, 'create'])->name('pengurus-badan-usaha.create');
+      Route::post('{user_id}/pengurus-badan-usaha/store', [PengurusBadanUsahaController::class, 'store'])->name('pengurus-badan-usaha.store');
+      Route::get('{user_id}/pengurus-badan-usaha/{id}', [PengurusBadanUsahaController::class, 'show'])->name('pengurus-badan-usaha.show');
+      Route::get('{user_id}/pengurus-badan-usaha/{id}/edit', [PengurusBadanUsahaController::class, 'edit'])->name('pengurus-badan-usaha.edit');
+      Route::put('{user_id}/pengurus-badan-usaha/{id}', [PengurusBadanUsahaController::class, 'update'])->name('pengurus-badan-usaha.update');
+      Route::delete('{user_id}/pengurus-badan-usaha/{id}', [PengurusBadanUsahaController::class, 'destroy'])->name('pengurus-badan-usaha.destroy');
     });
   });
 });
