@@ -22,13 +22,16 @@ use App\Http\Controllers\JadwalLelangController;
 use App\Http\Controllers\Pengadaan0002Controller;
 use App\Http\Controllers\JenisPengadaanController;
 use App\Http\Controllers\ProdukDanLayananController;
+use App\Http\Controllers\TandaDaftarUsahaController;
 use App\Http\Controllers\ProfilePerusahaanController;
+use App\Http\Controllers\PengurusBadanUsahaController;
 use App\Http\Controllers\PenunjukanLangsungController;
 use App\Http\Controllers\SubprodukDanLayananController;
 use App\Http\Controllers\Pages\EprocController as Eproc;
 use App\Http\Controllers\Pages\ComproController as Compro;
 use App\Http\Controllers\AktaPendirianPerusahaanController;
-use App\Http\Controllers\PengurusBadanUsahaController;
+use App\Http\Controllers\DataPersonaliaController;
+use App\Http\Controllers\SusunanKepemilikanSahamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -249,6 +252,25 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::get('{user_id}/pengurus-badan-usaha/{id}/edit', [PengurusBadanUsahaController::class, 'edit'])->name('pengurus-badan-usaha.edit');
       Route::put('{user_id}/pengurus-badan-usaha/{id}', [PengurusBadanUsahaController::class, 'update'])->name('pengurus-badan-usaha.update');
       Route::delete('{user_id}/pengurus-badan-usaha/{id}', [PengurusBadanUsahaController::class, 'destroy'])->name('pengurus-badan-usaha.destroy');
+
+      Route::get('{user_id}/tanda-daftar-usaha/edit', [TandaDaftarUsahaController::class, 'edit'])->name('tanda-daftar-usaha.edit');
+      Route::put('{user_id}/tanda-daftar-usaha', [TandaDaftarUsahaController::class, 'update'])->name('tanda-daftar-usaha.update');
+
+      Route::get('{user_id}/susunan-kepemilikan-saham/', [SusunanKepemilikanSahamController::class, 'index'])->name('susunan-kepemilikan-saham.index');
+      Route::get('{user_id}/susunan-kepemilikan-saham/create', [SusunanKepemilikanSahamController::class, 'create'])->name('susunan-kepemilikan-saham.create');
+      Route::post('{user_id}/susunan-kepemilikan-saham/store', [SusunanKepemilikanSahamController::class, 'store'])->name('susunan-kepemilikan-saham.store');
+      Route::get('{user_id}/susunan-kepemilikan-saham/{id}', [SusunanKepemilikanSahamController::class, 'show'])->name('susunan-kepemilikan-saham.show');
+      Route::get('{user_id}/susunan-kepemilikan-saham/{id}/edit', [SusunanKepemilikanSahamController::class, 'edit'])->name('susunan-kepemilikan-saham.edit');
+      Route::put('{user_id}/susunan-kepemilikan-saham/{id}', [SusunanKepemilikanSahamController::class, 'update'])->name('susunan-kepemilikan-saham.update');
+      Route::delete('{user_id}/susunan-kepemilikan-saham/{id}', [SusunanKepemilikanSahamController::class, 'destroy'])->name('susunan-kepemilikan-saham.destroy');
+
+      Route::get('{user_id}/data-personalia/', [DataPersonaliaController::class, 'index'])->name('data-personalia.index');
+      Route::get('{user_id}/data-personalia/create', [DataPersonaliaController::class, 'create'])->name('data-personalia.create');
+      Route::post('{user_id}/data-personalia/store', [DataPersonaliaController::class, 'store'])->name('data-personalia.store');
+      Route::get('{user_id}/data-personalia/{id}', [DataPersonaliaController::class, 'show'])->name('data-personalia.show');
+      Route::get('{user_id}/data-personalia/{id}/edit', [DataPersonaliaController::class, 'edit'])->name('data-personalia.edit');
+      Route::put('{user_id}/data-personalia/{id}', [DataPersonaliaController::class, 'update'])->name('data-personalia.update');
+      Route::delete('{user_id}/data-personalia/{id}', [DataPersonaliaController::class, 'destroy'])->name('data-personalia.destroy');
     });
   });
 });

@@ -13,13 +13,14 @@ use App\Models\Kualifikasi;
 use App\Models\VerifyEmail;
 use Illuminate\Support\Str;
 use App\Models\Administrasi;
-use App\Models\AktaPendirianPerusahaan;
 use Illuminate\Http\Request;
 use App\Models\JenisPengadaan;
+use App\Models\TandaDaftarUsaha;
 use App\Models\ProfilePerusahaan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Crypt;
+use App\Models\AktaPendirianPerusahaan;
 
 class EprocController extends Controller
 {
@@ -107,7 +108,7 @@ class EprocController extends Controller
             'nama_perusahaan' => $perusahaan->nama_panjang,
         ]);
 
-        AktaPendirianPerusahaan::create([
+        TandaDaftarUsaha::create([
             'user_id' => $perusahaan->id,
         ]);
 

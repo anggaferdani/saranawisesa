@@ -8,8 +8,13 @@ use App\Models\Lampiran;
 use App\Models\Perusahaan;
 use App\Models\VerifyEmail;
 use App\Models\Administrasi;
+use App\Models\DataPersonalia;
+use App\Models\TandaDaftarUsaha;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\PengurusBadanUsaha;
 use Illuminate\Support\Facades\Auth;
+use App\Models\AktaPendirianPerusahaan;
+use App\Models\SusunanKepemilikanSaham;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -87,5 +92,20 @@ class User extends Authenticatable
 
     public function administrasis(){
         return $this->hasMany(Administrasi::class);
+    }
+    public function akta_pendirian_perusahaans(){
+        return $this->hasMany(AktaPendirianPerusahaan::class);
+    }
+    public function pengurus_badan_usahas(){
+        return $this->hasMany(PengurusBadanUsaha::class);
+    }
+    public function tanda_daftar_usahas(){
+        return $this->hasMany(TandaDaftarUsaha::class);
+    }
+    public function susunan_kepemilikan_sahams(){
+        return $this->hasMany(SusunanKepemilikanSaham::class);
+    }
+    public function data_personalias(){
+        return $this->hasMany(DataPersonalia::class);
     }
 }
