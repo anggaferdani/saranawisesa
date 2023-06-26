@@ -15,10 +15,10 @@ class Authenticate extends Middleware
     {
         if(!$request->expectsJson()){
             if($request->routeIs('compro.*')){
-                session()->flash('fail', 'Login terlebih dahulu');
+                session()->flash('fail', 'You must log in first');
                 return route('compro.login', ['fail' => true, 'return_url' => URL::current()]);
             }elseif($request->routeIs('eproc.*')){
-                session()->flash('fail', 'Login terlebih dahulu');
+                session()->flash('fail', 'You must log in first');
                 return route('eproc.login', ['fail' => true, 'return_url' => URL::current()]);
             }
         }

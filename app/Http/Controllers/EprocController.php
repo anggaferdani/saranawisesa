@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\AktaPendirianPerusahaan;
+use App\Models\LampiranKualifikasi;
+use App\Models\SisaKemampuanNyata;
 
 class EprocController extends Controller
 {
@@ -105,10 +107,18 @@ class EprocController extends Controller
 
         Administrasi::create([
             'user_id' => $perusahaan->id,
-            'nama_perusahaan' => $perusahaan->nama_panjang,
+            'nama_badan_usaha' => $perusahaan->nama_panjang,
         ]);
 
         TandaDaftarUsaha::create([
+            'user_id' => $perusahaan->id,
+        ]);
+
+        SisaKemampuanNyata::create([
+            'user_id' => $perusahaan->id,
+        ]);
+
+        LampiranKualifikasi::create([
             'user_id' => $perusahaan->id,
         ]);
 

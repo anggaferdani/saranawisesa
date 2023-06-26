@@ -42,12 +42,12 @@
           <table class="table table-bordered">
             <tbody>
               <tr>
-                <td>No.</td>
-                <td>Kode Lelang</td>
-                <td>Nama Lelang</td>
-                <td>Status Pengadaan</td>
-                <td>Created At</td>
-                <td class="text-center text-nowrap">Action</td>
+                <th>No.</th>
+                <th>Kode Lelang</th>
+                <th>Nama Lelang</th>
+                <th>Status Pengadaan</th>
+                <th>Created At</th>
+                <th class="text-center text-nowrap">Action</th>
               </tr>
               <?php $id = 0; ?>
               @foreach ($lelangs as $lelang)

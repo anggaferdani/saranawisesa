@@ -1,16 +1,15 @@
 @extends('templates.pages')
-@section('title')
+@section('title', 'Akun')
 @section('header')
-<h1>Tambah Akun</h1>
-<div class="section-header-breadcrumb">
-  <div class="breadcrumb-item"><a href="#">Dashboard</a></div>
-  <div class="breadcrumb-item active"><a href="#">Tambah Akun</a></div>
-</div>
+<h1>Akun</h1>
 @endsection
 @section('content')
 <div class="row">
   <div class="col-12">
     <div class="card">
+      <div class="card-header">
+        <h4>Create</h4>
+      </div>
       <div class="card-body">
         @if(Session::has('compro'))
           <form method="POST" action="{{ route('compro.superadmin.akun.store') }}" class="needs-validation" novalidate="">
@@ -20,40 +19,33 @@
         @endif
           @csrf
           <div class="form-group">
-            <label for="nama_panjang">Nama Panjang</label>
-            <input id="nama_panjang" type="text" class="form-control" name="nama_panjang">
+            <label>Nama Panjang</label>
+            <input type="text" class="form-control" name="nama_panjang">
             @error('nama_panjang')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           @if(Session::has('compro'))
             <div class="form-group">
-              <label class="form-label">Level</label>
-              <div class="selectgroup selectgroup-pills">
-                <label class="selectgroup-item">
-                  <input type="radio" name="level" value="admin" class="selectgroup-input" checked>
-                  <span class="selectgroup-button">Admin</span>
-                </label>
-                <label class="selectgroup-item">
-                  <input type="radio" name="level" value="creator" class="selectgroup-input">
-                  <span class="selectgroup-button">Creator</span>
-                </label>
-                <label class="selectgroup-item">
-                  <input type="radio" name="level" value="helpdesk" class="selectgroup-input">
-                  <span class="selectgroup-button">Helpdesk</span>
-                </label>
-              </div>
+              <label>Level</label>
+              <select class="form-control select2" name="level">
+                <option selected disabled>Pilih</option>
+                <option value="admin">Admin</option>
+                <option value="creator">Creator</option>
+                <option value="helpdesk">Helpdesk</option>
+              </select>
+              @error('level')<div class="text-danger">{{ $message }}</div>@enderror
             </div>
           @endif
           @if(Session::has('eproc'))
-            <input hidden id="level" type="text" class="form-control" name="level" value="admin">
+            <input hidden type="text" class="form-control" name="level" value="admin">
           @endif
           <div class="form-group">
-            <label for="email">Email</label>
-            <input id="email" type="email" class="form-control" name="email">
+            <label>Email</label>
+            <input type="email" class="form-control" name="email">
             @error('email')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           <div class="form-group">
-            <label for="password">Password</label>
-            <input id="password" type="text" class="form-control" name="password">
+            <label>Password</label>
+            <input type="text" class="form-control" name="password">
             @error('password')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           @if(Session::has('compro'))

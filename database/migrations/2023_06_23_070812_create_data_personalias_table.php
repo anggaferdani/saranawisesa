@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('nama')->nullable();
-            $table->string('tanggal_lahir')->nullable();
+            $table->date('tanggal_lahir')->nullable();
             $table->string('jabatan')->nullable();
             $table->string('pengalaman_kerja')->nullable();
             $table->string('profesi_keahlian')->nullable();

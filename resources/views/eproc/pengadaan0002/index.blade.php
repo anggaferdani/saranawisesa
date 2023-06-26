@@ -18,6 +18,7 @@
     <div class="card">
       <div class="card-body">
         <div class="float-left">
+          <a href="{{ route('eproc.pengadaan') }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
         </div>
         <div class="float-right">
           <form>

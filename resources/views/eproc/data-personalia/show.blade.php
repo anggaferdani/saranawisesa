@@ -1,7 +1,7 @@
 @extends('templates.pages')
-@section('title', 'Susunan Kepemilikan Saham')
+@section('title', 'Data Personalia')
 @section('header')
-<h1>Susunan Kepemilikan Saham</h1>
+<h1>Data Personalia</h1>
 @endsection
 @section('content')
 <div class="row">

@@ -19,19 +19,24 @@ use App\Http\Controllers\PerusahaanController;
 use App\Http\Controllers\PortofolioController;
 use App\Http\Controllers\AdministrasiController;
 use App\Http\Controllers\JadwalLelangController;
+use App\Http\Controllers\DataFasilitasController;
 use App\Http\Controllers\Pengadaan0002Controller;
+use App\Http\Controllers\DataPersonaliaController;
 use App\Http\Controllers\JenisPengadaanController;
 use App\Http\Controllers\ProdukDanLayananController;
 use App\Http\Controllers\TandaDaftarUsahaController;
 use App\Http\Controllers\ProfilePerusahaanController;
 use App\Http\Controllers\PengurusBadanUsahaController;
 use App\Http\Controllers\PenunjukanLangsungController;
+use App\Http\Controllers\SisaKemampuanNyataController;
 use App\Http\Controllers\SubprodukDanLayananController;
 use App\Http\Controllers\Pages\EprocController as Eproc;
+use App\Http\Controllers\PengalamanPerusahaanController;
 use App\Http\Controllers\Pages\ComproController as Compro;
 use App\Http\Controllers\AktaPendirianPerusahaanController;
-use App\Http\Controllers\DataPersonaliaController;
+use App\Http\Controllers\LampiranKualifikasiController;
 use App\Http\Controllers\SusunanKepemilikanSahamController;
+use App\Http\Controllers\PekerjaanYangSedangDilaksanakanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,7 +68,7 @@ Route::get('/artikel/{id}', [ComproController::class, 'artikel'])->name('artikel
 
 Route::prefix('compro')->name('compro.')->group(function(){
   Route::middleware(['web'])->group(function(){
-    Route::middleware(['logged_in'])->group(function(){
+    Route::middleware(['loggedIn'])->group(function(){
       Route::get('/login', [ComproController::class, 'login'])->name('login');
       Route::post('/postlogin', [ComproController::class, 'postlogin'])->name('postlogin');
     });
@@ -71,10 +76,9 @@ Route::prefix('compro')->name('compro.')->group(function(){
   });
 
   Route::prefix('superadmin')->name('superadmin.')->group(function(){
-    Route::middleware(['auth:web', 'disable_back_button', 'compro', 'superadmin'])->group(function(){
+    Route::middleware(['auth:web', 'disableBackButton', 'compro', 'superadmin'])->group(function(){
       Route::get('/dashboard', function(){return view('pages.dashboard');})->name('dashboard');
       Route::resource('akun', AkunController::class);
-      Route::get('profile-perusahaan', [ProfilePerusahaanController::class, 'index'])->name('profile-perusahaan.index');
       Route::get('profile-perusahaan/{id}/edit', [ProfilePerusahaanController::class, 'edit'])->name('profile-perusahaan.edit');
       Route::put('profile-perusahaan/{id}', [ProfilePerusahaanController::class, 'update'])->name('profile-perusahaan.update');
       Route::resource('portofolio', PortofolioController::class);
@@ -101,9 +105,8 @@ Route::prefix('compro')->name('compro.')->group(function(){
   });
 
   Route::prefix('admin')->name('admin.')->group(function(){
-    Route::middleware(['auth:web', 'disable_back_button', 'compro', 'admin'])->group(function(){
+    Route::middleware(['auth:web', 'disableBackButton', 'compro', 'admin'])->group(function(){
       Route::get('/dashboard', function(){return view('pages.dashboard');})->name('dashboard');
-      Route::get('profile-perusahaan', [ProfilePerusahaanController::class, 'index'])->name('profile-perusahaan.index');
       Route::get('profile-perusahaan/{id}/edit', [ProfilePerusahaanController::class, 'edit'])->name('profile-perusahaan.edit');
       Route::put('profile-perusahaan/{id}', [ProfilePerusahaanController::class, 'update'])->name('profile-perusahaan.update');
       Route::resource('portofolio', PortofolioController::class);
@@ -130,7 +133,7 @@ Route::prefix('compro')->name('compro.')->group(function(){
   });
 
   Route::prefix('creator')->name('creator.')->group(function(){
-    Route::middleware(['auth:web', 'disable_back_button', 'compro', 'creator'])->group(function(){
+    Route::middleware(['auth:web', 'disableBackButton', 'compro', 'creator'])->group(function(){
       Route::get('/dashboard', function(){return view('pages.dashboard');})->name('dashboard');
       Route::resource('artikel', ArtikelController::class);
       Route::get('export', [ArtikelController::class, 'export'])->name('export');
@@ -142,7 +145,7 @@ Route::prefix('compro')->name('compro.')->group(function(){
   });
 
   Route::prefix('helpdesk')->name('helpdesk.')->group(function(){
-    Route::middleware(['auth:web', 'disable_back_button', 'compro', 'helpdesk'])->group(function(){
+    Route::middleware(['auth:web', 'disableBackButton', 'compro', 'helpdesk'])->group(function(){
       Route::get('/dashboard', function(){return view('pages.dashboard');})->name('dashboard');
       Route::get('survey', [SurveyController::class, 'index'])->name('survey.index');
       Route::get('survey/{id}', [SurveyController::class, 'show'])->name('survey.show');
@@ -155,10 +158,11 @@ Route::prefix('compro')->name('compro.')->group(function(){
 Route::prefix('eproc')->name('eproc.')->group(function(){
 
   Route::middleware(['web'])->group(function(){
-    Route::middleware(['logged_in'])->group(function(){
+    Route::middleware(['loggedIn'])->group(function(){
       Route::get('/login', [EprocController::class, 'login'])->name('login');
       Route::post('/post-login', [EprocController::class, 'postLogin'])->name('post-login');
     });
+
     Route::get('/logout', [EprocController::class, 'logout'])->name('logout');
     Route::get('/register', [EprocController::class, 'register'])->name('register');
     Route::post('/post-register', [EprocController::class, 'postRegister'])->name('post-register');
@@ -175,16 +179,19 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
   });
 
   Route::prefix('superadmin')->name('superadmin.')->group(function(){
-    Route::middleware(['auth:web', 'disable_back_button', 'eproc', 'superadmin'])->group(function(){
+    Route::middleware(['auth:web', 'disableBackButton', 'eproc', 'superadmin'])->group(function(){
       Route::get('/dashboard', function(){return view('pages.dashboard');})->name('dashboard');
-      Route::resource('perusahaan', PerusahaanController::class);
-      Route::resource('akun', AkunController::class);
       Route::get('profile', [Controller::class, 'profile'])->name('profile');
       Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
+
+      Route::resource('akun', AkunController::class);
+      Route::resource('perusahaan', PerusahaanController::class);
+
       Route::resource('berita', BeritaController::class);
       Route::get('export', [BeritaController::class, 'export'])->name('export');
       Route::post('import', [BeritaController::class, 'import'])->name('import');
       Route::get('pdf', [BeritaController::class, 'pdf'])->name('pdf');
+
       Route::resource('lelang', LelangController::class);
       Route::resource('jenis-pengadaan', JenisPengadaanController::class);
       Route::resource('penunjukan-langsung', PenunjukanLangsungController::class);
@@ -202,18 +209,19 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
   });
 
   Route::prefix('admin')->name('admin.')->group(function(){
-    Route::middleware(['auth:web', 'disable_back_button', 'eproc', 'admin'])->group(function(){
+    Route::middleware(['auth:web', 'disableBackButton', 'eproc', 'admin'])->group(function(){
       Route::get('/dashboard', function(){return view('pages.dashboard');})->name('dashboard');
-      Route::resource('perusahaan', PerusahaanController::class);
       Route::get('profile', [Controller::class, 'profile'])->name('profile');
       Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
+
+      Route::resource('perusahaan', PerusahaanController::class);
+      
       Route::resource('berita', BeritaController::class);
       Route::get('export', [BeritaController::class, 'export'])->name('export');
       Route::post('import', [BeritaController::class, 'import'])->name('import');
       Route::get('pdf', [BeritaController::class, 'pdf'])->name('pdf');
+
       Route::resource('lelang', LelangController::class);
-      Route::get('/perusahaan', [Eproc::class, 'index'])->name('perusahaan.index');
-      Route::get('/perusahaan/{id}', [Eproc::class, 'show'])->name('perusahaan.show');
       Route::resource('jenis-pengadaan', JenisPengadaanController::class);
       Route::resource('penunjukan-langsung', PenunjukanLangsungController::class);
       Route::get('{lelang_id}/jadwal-lelang', [JadwalLelangController::class, 'index'])->name('jadwal-lelang.index');
@@ -230,8 +238,11 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
   });
 
   Route::prefix('perusahaan')->name('perusahaan.')->group(function(){
-    Route::middleware(['auth:web', 'disable_back_button', 'eproc', 'perusahaan'])->group(function(){
+    Route::middleware(['auth:web', 'disableBackButton', 'eproc', 'perusahaan'])->group(function(){
       Route::get('/dashboard', function(){return view('pages.dashboard');})->name('dashboard');
+      Route::get('profile', [Controller::class, 'profile'])->name('profile');
+      Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
+
       Route::resource('pengadaan', Pengadaan0002Controller::class);
 
       Route::get('{user_id}/administrasi/edit', [AdministrasiController::class, 'edit'])->name('administrasi.edit');
@@ -271,6 +282,36 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::get('{user_id}/data-personalia/{id}/edit', [DataPersonaliaController::class, 'edit'])->name('data-personalia.edit');
       Route::put('{user_id}/data-personalia/{id}', [DataPersonaliaController::class, 'update'])->name('data-personalia.update');
       Route::delete('{user_id}/data-personalia/{id}', [DataPersonaliaController::class, 'destroy'])->name('data-personalia.destroy');
+
+      Route::get('{user_id}/data-fasilitas/', [DataFasilitasController::class, 'index'])->name('data-fasilitas.index');
+      Route::get('{user_id}/data-fasilitas/create', [DataFasilitasController::class, 'create'])->name('data-fasilitas.create');
+      Route::post('{user_id}/data-fasilitas/store', [DataFasilitasController::class, 'store'])->name('data-fasilitas.store');
+      Route::get('{user_id}/data-fasilitas/{id}', [DataFasilitasController::class, 'show'])->name('data-fasilitas.show');
+      Route::get('{user_id}/data-fasilitas/{id}/edit', [DataFasilitasController::class, 'edit'])->name('data-fasilitas.edit');
+      Route::put('{user_id}/data-fasilitas/{id}', [DataFasilitasController::class, 'update'])->name('data-fasilitas.update');
+      Route::delete('{user_id}/data-fasilitas/{id}', [DataFasilitasController::class, 'destroy'])->name('data-fasilitas.destroy');
+
+      Route::get('{user_id}/pengalaman-perusahaan/', [PengalamanPerusahaanController::class, 'index'])->name('pengalaman-perusahaan.index');
+      Route::get('{user_id}/pengalaman-perusahaan/create', [PengalamanPerusahaanController::class, 'create'])->name('pengalaman-perusahaan.create');
+      Route::post('{user_id}/pengalaman-perusahaan/store', [PengalamanPerusahaanController::class, 'store'])->name('pengalaman-perusahaan.store');
+      Route::get('{user_id}/pengalaman-perusahaan/{id}', [PengalamanPerusahaanController::class, 'show'])->name('pengalaman-perusahaan.show');
+      Route::get('{user_id}/pengalaman-perusahaan/{id}/edit', [PengalamanPerusahaanController::class, 'edit'])->name('pengalaman-perusahaan.edit');
+      Route::put('{user_id}/pengalaman-perusahaan/{id}', [PengalamanPerusahaanController::class, 'update'])->name('pengalaman-perusahaan.update');
+      Route::delete('{user_id}/pengalaman-perusahaan/{id}', [PengalamanPerusahaanController::class, 'destroy'])->name('pengalaman-perusahaan.destroy');
+
+      Route::get('{user_id}/pekerjaan-yang-sedang-dilaksanakan/', [PekerjaanYangSedangDilaksanakanController::class, 'index'])->name('pekerjaan-yang-sedang-dilaksanakan.index');
+      Route::get('{user_id}/pekerjaan-yang-sedang-dilaksanakan/create', [PekerjaanYangSedangDilaksanakanController::class, 'create'])->name('pekerjaan-yang-sedang-dilaksanakan.create');
+      Route::post('{user_id}/pekerjaan-yang-sedang-dilaksanakan/store', [PekerjaanYangSedangDilaksanakanController::class, 'store'])->name('pekerjaan-yang-sedang-dilaksanakan.store');
+      Route::get('{user_id}/pekerjaan-yang-sedang-dilaksanakan/{id}', [PekerjaanYangSedangDilaksanakanController::class, 'show'])->name('pekerjaan-yang-sedang-dilaksanakan.show');
+      Route::get('{user_id}/pekerjaan-yang-sedang-dilaksanakan/{id}/edit', [PekerjaanYangSedangDilaksanakanController::class, 'edit'])->name('pekerjaan-yang-sedang-dilaksanakan.edit');
+      Route::put('{user_id}/pekerjaan-yang-sedang-dilaksanakan/{id}', [PekerjaanYangSedangDilaksanakanController::class, 'update'])->name('pekerjaan-yang-sedang-dilaksanakan.update');
+      Route::delete('{user_id}/pekerjaan-yang-sedang-dilaksanakan/{id}', [PekerjaanYangSedangDilaksanakanController::class, 'destroy'])->name('pekerjaan-yang-sedang-dilaksanakan.destroy');
+
+      Route::get('{user_id}/sisa-kemampuan-nyata/edit', [SisaKemampuanNyataController::class, 'edit'])->name('sisa-kemampuan-nyata.edit');
+      Route::put('{user_id}/sisa-kemampuan-nyata', [SisaKemampuanNyataController::class, 'update'])->name('sisa-kemampuan-nyata.update');
+
+      Route::get('{user_id}/lampiran-kualifikasi/edit', [LampiranKualifikasiController::class, 'edit'])->name('lampiran-kualifikasi.edit');
+      Route::put('{user_id}/lampiran-kualifikasi', [LampiranKualifikasiController::class, 'update'])->name('lampiran-kualifikasi.update');
     });
   });
 });

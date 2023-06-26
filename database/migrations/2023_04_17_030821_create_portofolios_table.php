@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('portofolios', function (Blueprint $table) {
             $table->id();
-            $table->string('judul_portofolio');
-            $table->string('portofolio');
-            $table->string('alamat_portofolio');
-            $table->text('isi_portofolio');
-            $table->enum('status_aktif', ['aktif', 'tidak_aktif'])->default('aktif');
+            $table->string('judul');
+            $table->string('alamat');
+            $table->text('isi');
+            $table->enum('status_aktif', ['aktif', 'tidak aktif'])->default('aktif');
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
             $table->timestamps();

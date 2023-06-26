@@ -24,51 +24,11 @@
           <a href="#">#Stisla</a>
           <a href="#" class="search-close"><i class="fas fa-times"></i></a>
         </div>
-        <div class="search-header">
-          Result
-        </div>
-        <div class="search-item">
-          <a href="#">
-            <img class="mr-3 rounded" width="30" src="{{ asset('assets/img/products/product-3-50.png') }}" alt="product">
-            oPhone S9 Limited Edition
-          </a>
-        </div>
-        <div class="search-item">
-          <a href="#">
-            <img class="mr-3 rounded" width="30" src="{{ asset('assets/img/products/product-2-50.png') }}" alt="product">
-            Drone X2 New Gen-7
-          </a>
-        </div>
-        <div class="search-item">
-          <a href="#">
-            <img class="mr-3 rounded" width="30" src="{{ asset('assets/img/products/product-1-50.png') }}" alt="product">
-            Headphone Blitz
-          </a>
-        </div>
-        <div class="search-header">
-          Projects
-        </div>
-        <div class="search-item">
-          <a href="#">
-            <div class="search-icon bg-danger text-white mr-3">
-              <i class="fas fa-code"></i>
-            </div>
-            Stisla Admin Template
-          </a>
-        </div>
-        <div class="search-item">
-          <a href="#">
-            <div class="search-icon bg-primary text-white mr-3">
-              <i class="fas fa-laptop"></i>
-            </div>
-            Create a new Homepage Design
-          </a>
-        </div>
       </div>
     </div>
   </form>
   <ul class="navbar-nav navbar-right">
-    <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
+    <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle"><i class="far fa-envelope"></i></a>
       <div class="dropdown-menu dropdown-list dropdown-menu-right">
         <div class="dropdown-header">Messages
           <div class="float-right">
@@ -76,27 +36,6 @@
           </div>
         </div>
         <div class="dropdown-list-content dropdown-list-message">
-          <a href="#" class="dropdown-item dropdown-item-unread">
-            <div class="dropdown-item-avatar">
-              <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}" class="rounded-circle">
-              <div class="is-online"></div>
-            </div>
-            <div class="dropdown-item-desc">
-              <b>Kusnaedi</b>
-              <p>Hello, Bro!</p>
-              <div class="time">10 Hours Ago</div>
-            </div>
-          </a>
-          <a href="#" class="dropdown-item dropdown-item-unread">
-            <div class="dropdown-item-avatar">
-              <img alt="image" src="{{ asset('assets/img/avatar/avatar-2.png') }}" class="rounded-circle">
-            </div>
-            <div class="dropdown-item-desc">
-              <b>Dedik Sugiharto</b>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
-              <div class="time">12 Hours Ago</div>
-            </div>
-          </a>
           <a href="#" class="dropdown-item dropdown-item-unread">
             <div class="dropdown-item-avatar">
               <img alt="image" src="{{ asset('assets/img/avatar/avatar-3.png') }}" class="rounded-circle">
@@ -134,7 +73,7 @@
         </div>
       </div>
     </li>
-    <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
+    <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg"><i class="far fa-bell"></i></a>
       <div class="dropdown-menu dropdown-list dropdown-menu-right">
         <div class="dropdown-header">Notifications
           <div class="float-right">
@@ -142,15 +81,6 @@
           </div>
         </div>
         <div class="dropdown-list-content dropdown-list-icons">
-          <a href="#" class="dropdown-item dropdown-item-unread">
-            <div class="dropdown-item-icon bg-primary text-white">
-              <i class="fas fa-code"></i>
-            </div>
-            <div class="dropdown-item-desc">
-              Template update is available now!
-              <div class="time text-primary">2 Min Ago</div>
-            </div>
-          </a>
           <a href="#" class="dropdown-item">
             <div class="dropdown-item-icon bg-info text-white">
               <i class="far fa-user"></i>
@@ -167,24 +97,6 @@
             <div class="dropdown-item-desc">
               <b>Kusnaedi</b> has moved task <b>Fix bug header</b> to <b>Done</b>
               <div class="time">12 Hours Ago</div>
-            </div>
-          </a>
-          <a href="#" class="dropdown-item">
-            <div class="dropdown-item-icon bg-danger text-white">
-              <i class="fas fa-exclamation-triangle"></i>
-            </div>
-            <div class="dropdown-item-desc">
-              Low disk space. Lets clean it!
-              <div class="time">17 Hours Ago</div>
-            </div>
-          </a>
-          <a href="#" class="dropdown-item">
-            <div class="dropdown-item-icon bg-info text-white">
-              <i class="fas fa-bell"></i>
-            </div>
-            <div class="dropdown-item-desc">
-              Welcome to Stisla template!
-              <div class="time">Yesterday</div>
             </div>
           </a>
         </div>
@@ -227,6 +139,9 @@
             </a>
           @endif
           @if(auth()->user()->level == 'perusahaan')
+            <a href="{{ route('eproc.perusahaan.profile') }}" class="dropdown-item has-icon">
+              PROFILE
+            </a>
             <a href="{{ route('eproc.pengadaan') }}" class="dropdown-item has-icon">
               PENGADAAN
             </a>

@@ -1,5 +1,5 @@
 @extends('templates.compro.pages')
-@section('title', 'Index')
+@section('title', 'Artikel')
 @section('content')
 <section class="py-5" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url({{ asset('img/artikel.png') }}); background-size: cover; background-repeat: no-repeat; background-position: center;">
   <div class="container py-5 h-100">

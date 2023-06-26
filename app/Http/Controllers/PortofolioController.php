@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Portofolio;
-use App\Models\PortofolioImages;
 use Illuminate\Http\Request;
+use App\Models\PortofolioImages;
+use Illuminate\Support\Facades\Crypt;
 
 class PortofolioController extends Controller
 {
     public function index(){
-        $portofolio = Portofolio::all();
-        return view('pages.portofolio.index', compact('portofolio'));
+        $portofolios = Portofolio::where('status_aktif', 'aktif')->latest()->paginate(10);
+        return view('pages.portofolio.index', compact('portofolios'));
     }
 
     public function create(){
@@ -19,95 +20,80 @@ class PortofolioController extends Controller
 
     public function store(Request $request){
         $request->validate([
-            'judul_portofolio' => 'required',
-            'portofolio' => 'required',
-            'alamat_portofolio' => 'required',
-            'isi_portofolio' => 'required',
+            'judul' => 'required',
+            'alamat' => 'required',
+            'isi' => 'required',
         ]);
 
-        $input_array_portofolio = array(
-            'judul_portofolio' => $request['judul_portofolio'],
-            'alamat_portofolio' => $request['alamat_portofolio'],
-            'isi_portofolio' => $request['isi_portofolio'],
+        $array = array(
+            'judul' => $request['judul'],
+            'alamat' => $request['alamat'],
+            'isi' => $request['isi'],
         );
 
-        if($portofolio = $request->file('portofolio')){
-            $destination_path = 'portofolio/';
-            $foto_portofolio = date('YmdHis') . "." . $portofolio->getClientOriginalExtension();
-            $portofolio->move($destination_path, $foto_portofolio);
-            $input_array_portofolio['portofolio'] = $foto_portofolio;
-        }
-
-        $portofolio = Portofolio::create($input_array_portofolio);
+        $portofolio = Portofolio::create($array);
 
         if($request->has('images')){
             foreach($request->file('images') as $image){
-                $imageName = date('YmdHis'). "." .rand(999999999, 9999999999).$image->extension();
-                $image->move(public_path('portofolio/image/'), $imageName);
+                $image0002 = date('YmdHis').rand(999999999, 9999999999).$image->getClientOriginalName();
+                $image->move(public_path('compro/portofolio/image/'), $image0002);
                 PortofolioImages::create([
                     'portofolio_id' => $portofolio->id,
-                    'image' => $imageName,
+                    'image' => $image0002,
                 ]);
             }
         }
 
         if(auth()->user()->level == 'superadmin'){
-            return redirect()->route('compro.superadmin.portofolio.index')->with('success', 'Berhasil ditambahkan pada : '.$portofolio->created_at);
+            return redirect()->route('compro.superadmin.portofolio.index')->with('success', 'Data has been created at '.$portofolio->created_at);
         }elseif(auth()->user()->level == 'admin'){
-            return redirect()->route('compro.admin.portofolio.index')->with('success', 'Berhasil ditambahkan pada : '.$portofolio->created_at);
+            return redirect()->route('compro.admin.portofolio.index')->with('success', 'Data has been created at '.$portofolio->created_at);
         }
     }
 
     public function show($id){
-        $portofolio = Portofolio::find($id);
+        $portofolio = Portofolio::find(Crypt::decrypt($id));
         return view('pages.portofolio.show', compact('portofolio'));
     }
 
     public function edit($id){
-        $portofolio = Portofolio::find($id);
+        $portofolio = Portofolio::find(Crypt::decrypt($id));
         return view('pages.portofolio.edit', compact('portofolio'));
     }
 
     public function update(Request $request, $id){
-        $input_array_portofolio = Portofolio::find($id);
+        $portofolio = Portofolio::find(Crypt::decrypt($id));
 
         $request->validate([
-            'judul_portofolio' => 'required',
-            'alamat_portofolio' => 'required',
-            'isi_portofolio' => 'required',
+            'judul' => 'required',
+            'alamat' => 'required',
+            'isi' => 'required',
         ]);
 
-        if($portofolio = $request->file('portofolio')){
-            $destination_path = 'portofolio/';
-            $foto_portofolio = date('YmdHis') . "." . $portofolio->getClientOriginalExtension();
-            $portofolio->move($destination_path, $foto_portofolio);
-            $input_array_portofolio['portofolio'] = $foto_portofolio;
-        }
-        
-        $input_array_portofolio->update([
-            'judul_portofolio' => $request->judul_portofolio,
-            'alamat_portofolio' => $request->alamat_portofolio,
-            'isi_portofolio' => $request->isi_portofolio,
+        $portofolio->update([
+            'judul' => $request->judul,
+            'alamat' => $request->alamat,
+            'isi' => $request->isi,
         ]);
         
         if(auth()->user()->level == 'superadmin'){
-            return redirect()->route('compro.superadmin.portofolio.index')->with('success', 'Berhasil dilakukan perubahan pada : '.$input_array_portofolio->created_at);
+            return redirect()->route('compro.superadmin.portofolio.index')->with('success', 'Data has been updated at '.$portofolio->created_at);
         }elseif(auth()->user()->level == 'admin'){
-            return redirect()->route('compro.admin.portofolio.index')->with('success', 'Berhasil dilakukan perubahan pada : '.$input_array_portofolio->created_at);
+            return redirect()->route('compro.admin.portofolio.index')->with('success', 'Data has been updated at '.$portofolio->created_at);
         }
     }
 
     public function destroy($id){
-        $portofolio = Portofolio::find($id);
+        $portofolio = Portofolio::find(Crypt::decrypt($id));
         
         $portofolio->update([
-            'status_aktif' => 2,
+            'status_aktif' => 'tidak aktif',
         ]);
 
         if(auth()->user()->level == 'superadmin'){
-            return redirect()->route('compro.superadmin.portofolio.index')->with('success', 'Berhasil dihapus pada : '.$portofolio->created_at);
+            return redirect()->route('compro.superadmin.portofolio.index')->with('success', 'Data has been deleted at '.$portofolio->created_at);
         }elseif(auth()->user()->level == 'admin'){
-            return redirect()->route('compro.admin.portofolio.index')->with('success', 'Berhasil dihapus pada : '.$portofolio->created_at);
+            return redirect()->route('compro.admin.portofolio.index')->with('success', 'Data has been deleted at '.$portofolio->created_at);
         }
     }
 }

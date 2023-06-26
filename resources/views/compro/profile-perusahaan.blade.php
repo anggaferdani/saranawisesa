@@ -1,5 +1,5 @@
 @extends('templates.compro.pages')
-@section('title', 'Index')
+@section('title', 'Profile Perusahaan')
 @section('content')
 <section class="py-5">
   <div class="container py-5">
@@ -9,7 +9,7 @@
       </div>
       <div class="col-md-6 pt-4">
         <h1>ABOUT US</h1>
-        <p class="fw-light p-0 m-0 lh-sm">{{ $profile_perusahaan->sejarah_perusahaan }}</p>
+        <div class="fw-light p-0 m-0 lh-sm">{!! $profile_perusahaan->sejarah_perusahaan !!}</div>
         <div class="mt-4">
           <a href="{{ route('profile-perusahaan') }}/#visi-dan-misi"><img src="{{ asset('img/read-more.png') }}" alt=""></a>
         </div>
@@ -26,20 +26,12 @@
           <div class="card-body">
             <h5 class="card-title"><i class="bi bi-eye-fill"></i> VISI</h5>
             <hr>
-            <ul style="list-style-type: none">
-              @foreach(explode('#', $profile_perusahaan->visi) as $visi)
-                <li class="tect py-2">{{ $visi }}</li>
-              @endforeach
-            </ul>
+            <div>{!! $profile_perusahaan->visi !!}</div>
           </div>
           <div class="card-body">
             <h5 class="card-title"><i class="bi bi-pin-angle-fill"></i> MISI</h5>
             <hr>
-            <ul style="list-style-type: none">
-              @foreach(explode('#', $profile_perusahaan->misi) as $misi)
-                <li class="tect py-2">{{ $misi }}</li>
-              @endforeach
-            </ul>
+            <div>{!! $profile_perusahaan->misi !!}</div>
           </div>
         </div>
       </div>

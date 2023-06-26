@@ -8,10 +8,13 @@ use App\Models\Lampiran;
 use App\Models\Perusahaan;
 use App\Models\VerifyEmail;
 use App\Models\Administrasi;
+use App\Models\DataFasilitas;
 use App\Models\DataPersonalia;
 use App\Models\TandaDaftarUsaha;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\PengurusBadanUsaha;
+use App\Models\LampiranKualifikasi;
+use App\Models\PengalamanPerusahaan;
 use Illuminate\Support\Facades\Auth;
 use App\Models\AktaPendirianPerusahaan;
 use App\Models\SusunanKepemilikanSaham;
@@ -107,5 +110,20 @@ class User extends Authenticatable
     }
     public function data_personalias(){
         return $this->hasMany(DataPersonalia::class);
+    }
+    public function data_fasilitas(){
+        return $this->hasMany(DataFasilitas::class);
+    }
+    public function pengalaman_perusahaans(){
+        return $this->hasMany(PengalamanPerusahaan::class);
+    }
+    public function pekerjaan_yang_sedang_dilaksanakans(){
+        return $this->hasMany(PengalamanPerusahaan::class);
+    }
+    public function sisa_kemampuan_nyatas(){
+        return $this->hasMany(SisaKemampuanNyata::class);
+    }
+    public function lampiran_kualifikasis(){
+        return $this->hasMany(LampiranKualifikasi::class);
     }
 }

@@ -1,11 +1,7 @@
 @extends('templates.pages')
-@section('title')
+@section('title', 'Profile')
 @section('header')
 <h1>Profile</h1>
-<div class="section-header-breadcrumb">
-  <div class="breadcrumb-item"><a href="#">Dashboard</a></div>
-  <div class="breadcrumb-item active"><a href="#">Profile</a></div>
-</div>
 @endsection
 @section('content')
 <div class="row">
@@ -37,6 +33,9 @@
           @endif
           @if(auth()->user()->level == 'admin')
             <form method="POST" action="{{ route('eproc.admin.postprofile') }}" class="needs-validation" novalidate="">
+          @endif
+          @if(auth()->user()->level == 'perusahaan')
+            <form method="POST" action="{{ route('eproc.perusahaan.postprofile') }}" class="needs-validation" novalidate="">
           @endif
         @endif
           @csrf

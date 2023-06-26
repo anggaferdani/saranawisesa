@@ -42,19 +42,21 @@ class Controller extends BaseController
         
         if(session()->has('compro')){
             if(auth()->user()->level == 'superadmin'){
-                return redirect()->route('compro.superadmin.profile')->with('success', 'Berhasil dilakukan perubahan pada : '.$profile->created_at);
+                return redirect()->route('compro.superadmin.profile')->with('success', 'Data has been updated at '.$profile->created_at);
             }elseif(auth()->user()->level == 'admin'){
-                return redirect()->route('compro.admin.profile')->with('success', 'Berhasil dilakukan perubahan pada : '.$profile->created_at);
+                return redirect()->route('compro.admin.profile')->with('success', 'Data has been updated at '.$profile->created_at);
             }elseif(auth()->user()->level == 'creator'){
-                return redirect()->route('compro.creator.profile')->with('success', 'Berhasil dilakukan perubahan pada : '.$profile->created_at);
+                return redirect()->route('compro.creator.profile')->with('success', 'Data has been updated at '.$profile->created_at);
             }elseif(auth()->user()->level == 'helpdesk'){
-                return redirect()->route('compro.helpdesk.profile')->with('success', 'Berhasil dilakukan perubahan pada : '.$profile->created_at);
+                return redirect()->route('compro.helpdesk.profile')->with('success', 'Data has been updated at '.$profile->created_at);
             }
         }elseif(session()->has('eproc')){
             if(auth()->user()->level == 'superadmin'){
-                return redirect()->route('eproc.superadmin.profile')->with('success', 'Berhasil dilakukan perubahan pada : '.$profile->created_at);
+                return redirect()->route('eproc.superadmin.profile')->with('success', 'Data has been updated at '.$profile->created_at);
             }elseif(auth()->user()->level == 'admin'){
-                return redirect()->route('eproc.admin.profile')->with('success', 'Berhasil dilakukan perubahan pada : '.$profile->created_at);
+                return redirect()->route('eproc.admin.profile')->with('success', 'Data has been updated at '.$profile->created_at);
+            }elseif(auth()->user()->level == 'perusahaan'){
+                return redirect()->route('eproc.perusahaan.profile')->with('success', 'Data has been updated at '.$profile->created_at);
             }
         }
     }

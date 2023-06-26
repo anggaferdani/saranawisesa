@@ -17,10 +17,9 @@ class Portofolio extends Model
 
     protected $fillable = [
         'id',
-        'judul_portofolio',
-        'portofolio',
-        'alamat_portofolio',
-        'isi_portofolio',
+        'judul',
+        'alamat',
+        'isi',
         'status_aktif',
         'created_by',
         'updated_by',

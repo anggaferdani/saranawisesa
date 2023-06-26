@@ -1,0 +1,64 @@
+@extends('templates.pages')
+@section('title', 'Pekerjaan Yang Sedang Dilaksanakan')
+@section('header')
+<h1>Pekerjaan Yang Sedang Dilaksanakan</h1>
+@endsection
+@section('content')
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h4>Edit</h4>
+      </div>
+      <div class="card-body">
+        <form method="POST" action="{{ route('eproc.perusahaan.pekerjaan-yang-sedang-dilaksanakan.update', ['user_id' => Crypt::encrypt(Auth::id()), 'id' => Crypt::encrypt($pekerjaan_yang_sedang_dilaksanakan->id)]) }}" class="needs-validation" novalidate="">
+          @csrf
+          @method('PUT')
+          <div class="form-group">
+            <label>Nama Paket Pekerjaan</label>
+            <input type="text" class="form-control" name="nama_paket_pekerjaan" value="{{ $pekerjaan_yang_sedang_dilaksanakan->nama_paket_pekerjaan }}">
+          </div>
+          <div class="form-group">
+            <label>Kelompok</label>
+            <input type="text" class="form-control" name="kelompok" value="{{ $pekerjaan_yang_sedang_dilaksanakan->kelompok }}">
+          </div>
+          <div class="form-group">
+            <label>Ringkas Lingkup Paket Pekerjaan</label>
+            <input type="text" class="form-control" name="ringkas_lingkup_paket_pekerjaan" value="{{ $pekerjaan_yang_sedang_dilaksanakan->ringkas_lingkup_paket_pekerjaan }}">
+          </div>
+          <div class="form-group">
+            <label>Lokasi</label>
+            <input type="text" class="form-control" name="lokasi" value="{{ $pekerjaan_yang_sedang_dilaksanakan->lokasi }}">
+          </div>
+          <div class="form-group">
+            <label>Nama Pemberi Pekerjaan</label>
+            <input type="text" class="form-control" name="nama_pemberi_pekerjaan" value="{{ $pekerjaan_yang_sedang_dilaksanakan->nama_pemberi_pekerjaan }}">
+          </div>
+          <div class="form-group">
+            <label>Alamat Pemberi Pekerjaan</label>
+            <input type="text" class="form-control" name="alamat_pemberi_pekerjaan" value="{{ $pekerjaan_yang_sedang_dilaksanakan->alamat_pemberi_pekerjaan }}">
+          </div>
+          <div class="form-group">
+            <label>Tanggal Kontrak</label>
+            <input type="date" class="form-control" name="tanggal_kontrak" value="{{ $pekerjaan_yang_sedang_dilaksanakan->tanggal_kontrak }}">
+          </div>
+          <div class="form-group">
+            <label>Nilai Kontrak</label>
+            <input type="text" class="form-control" name="nilai_kontrak" value="{{ $pekerjaan_yang_sedang_dilaksanakan->nilai_kontrak }}" onkeyup="formatNumber(this)">
+          </div>
+          <div class="form-group">
+            <label>Progres Terakhir Berdasarkan Kontrak</label>
+            <input type="text" class="form-control" name="progres_terakhir_berdasarkan_kontrak" value="{{ $pekerjaan_yang_sedang_dilaksanakan->progres_terakhir_berdasarkan_kontrak }}">
+          </div>
+          <div class="form-group">
+            <label>Progres Terakhir Berdasarkan Prestasi Kerja</label>
+            <input type="text" class="form-control" name="progres_terakhir_berdasarkan_prestasi_kerja" value="{{ $pekerjaan_yang_sedang_dilaksanakan->progres_terakhir_berdasarkan_prestasi_kerja }}">
+          </div>
+          <a href="{{ route('eproc.perusahaan.pekerjaan-yang-sedang-dilaksanakan.index', ['user_id' => Crypt::encrypt(Auth::id())]) }}" class="btn btn-secondary">Back</a>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection

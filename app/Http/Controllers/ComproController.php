@@ -83,18 +83,16 @@ class ComproController extends Controller
     }
 
     public function index(){
-        $produk_dan_layanans = ProdukDanLayanan::all();
         $profile_perusahaan = ProfilePerusahaan::first();
+        $produk_dan_layanans = ProdukDanLayanan::where('status_aktif', 'aktif')->get()->take(6);
         $portofolios = Portofolio::where('status_aktif', 'aktif')->latest()->paginate(10);
-        $artikels = Artikel::where('status_aktif', 'aktif')->take(5)->get();
-        $profile_perusahaan = ProfilePerusahaan::first();
+        $artikels = Artikel::where('status_aktif', 'aktif')->get()->take(5);
         $setting = Setting::all();
         return view('compro.index', compact(
-            'produk_dan_layanans',
             'profile_perusahaan',
+            'produk_dan_layanans',
             'portofolios',
             'artikels',
-            'profile_perusahaan',
             'setting',
         ));
     }
@@ -113,7 +111,7 @@ class ComproController extends Controller
         ));
     }
     public function produk_dan_layanans(){
-        $produk_dan_layanans = ProdukDanLayanan::all();
+        $produk_dan_layanans = ProdukDanLayanan::where('status_aktif', 'aktif')->get();
         $setting = Setting::all();
         return view('compro.produk-dan-layanans', compact(
             'produk_dan_layanans',
@@ -135,7 +133,7 @@ class ComproController extends Controller
     }
 
     public function portofolios(){
-        $portofolios = Portofolio::where('status_aktif', 'aktif')->latest()->paginate(10);
+        $portofolios = Portofolio::where('status_aktif', 'aktif')->latest()->paginate(9);
         $produk_dan_layanans = ProdukDanLayanan::all();
         $setting = Setting::all();
         return view('compro.portofolios', compact(

@@ -1,11 +1,7 @@
 @extends('templates.pages')
-@section('title')
+@section('title', 'Akun')
 @section('header')
 <h1>Akun</h1>
-<div class="section-header-breadcrumb">
-  <div class="breadcrumb-item"><a href="#">Dashboard</a></div>
-  <div class="breadcrumb-item active"><a href="#">Akun</a></div>
-</div>
 @endsection
 @section('content')
 <div class="row">
@@ -43,76 +39,77 @@
         <div class="clearfix mb-3"></div>
   
         <div class="table-responsive">
-          <table class="table table-striped table-bordered">
+          <table class="table table-bordered">
             <tbody>
               <tr>
-                <td class="text-center">No</td>
-                <td class="text-center">Nama Panjang</td>
-                <td class="text-center">Email</td>
-                <td class="text-center">Level</td>
-                <td class="text-center">Action</td>
+                <th>No.</th>
+                <th>Nama Panjang</th>
+                <th>Email</th>
+                <th>Level</th>
+                <th>Action</th>
               </tr>
               <?php $id = 0; ?>
-              @foreach ($akun as $akuns)
-                @if($akuns->status_aktif == 'aktif')
-                  @if(Session::has('compro'))
-                    @if($akuns->level == 'admin' or $akuns->level == 'creator' or $akuns->level == 'helpdesk')
-                      <?php $id++; ?>
-                      <tr>
-                        <td class="text-center">{{ $id }}</td>
-                        <td class="text-center">{{ $akuns->nama_panjang }}</td>
-                        <td class="text-center">{{ $akuns->email }}</td>
-                        <td class="text-center">
-                          @if($akuns->level == 'admin')
-                            <div class="badge badge-danger">Admin</div>
-                          @endif
-                          @if($akuns->level == 'creator')
-                            <div class="badge badge-primary">Creator</div>
-                          @endif
-                          @if($akuns->level == 'helpdesk')
-                            <div class="badge badge-warning">Helpdesk</div>
-                          @endif
-                        </td>
-                        <td class="text-center text-nowarp">
-                          <form action="{{ route('compro.superadmin.akun.destroy', $akuns->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <a href="{{ route('compro.superadmin.akun.show', $akuns->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                            <a href="{{ route('compro.superadmin.akun.edit', $akuns->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
-                            <button type="button" class="btn btn-icon btn-danger delete" data-id="{{ $akuns->id }}"><i class="fa fa-trash"></i></button>
-                          </form>
-                        </td>
-                      </tr>
-                    @endif
+              @foreach ($akuns as $akun)
+                @if(Session::has('compro'))
+                  @if($akun->level == 'admin' or $akun->level == 'creator' or $akun->level == 'helpdesk')
+                    <?php $id++; ?>
+                    <tr>
+                      <td>{{ $id }}</td>
+                      <td>{{ $akun->nama_panjang }}</td>
+                      <td>{{ $akun->email }}</td>
+                      <td>
+                        @if($akun->level == 'admin')
+                          <div class="badge badge-danger">Admin</div>
+                        @endif
+                        @if($akun->level == 'creator')
+                          <div class="badge badge-primary">Creator</div>
+                        @endif
+                        @if($akun->level == 'helpdesk')
+                          <div class="badge badge-warning">Helpdesk</div>
+                        @endif
+                      </td>
+                      <td style="white-space: nowrap">
+                        <form action="{{ route('compro.superadmin.akun.destroy', Crypt::encrypt($akun->id)) }}" method="POST">
+                          @csrf
+                          @method('DELETE')
+                          <a href="{{ route('compro.superadmin.akun.show', Crypt::encrypt($akun->id)) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                          <a href="{{ route('compro.superadmin.akun.edit', Crypt::encrypt($akun->id)) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
+                          <button type="button" class="btn btn-icon btn-danger delete"><i class="fa fa-trash"></i></button>
+                        </form>
+                      </td>
+                    </tr>
                   @endif
-                  @if(Session::has('eproc'))
-                    @if($akuns->level == 'admin')
-                      <?php $id++; ?>
-                      <tr>
-                        <td class="text-center">{{ $id }}</td>
-                        <td class="text-center">{{ $akuns->nama_panjang }}</td>
-                        <td class="text-center">{{ $akuns->email }}</td>
-                        <td class="text-center">
-                          @if($akuns->level == 'admin')
-                            <div class="badge badge-danger">Admin</div>
-                          @endif
-                        </td>
-                        <td class="text-center text-nowarp">
-                          <form action="{{ route('eproc.superadmin.akun.destroy', $akuns->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <a href="{{ route('eproc.superadmin.akun.show', $akuns->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                            <a href="{{ route('eproc.superadmin.akun.edit', $akuns->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
-                            <button type="button" class="btn btn-icon btn-danger delete" data-id="{{ $akuns->id }}"><i class="fa fa-trash"></i></button>
-                          </form>
-                        </td>
-                      </tr>
-                    @endif
+                @endif
+                @if(Session::has('eproc'))
+                  @if($akun->level == 'admin')
+                    <?php $id++; ?>
+                    <tr>
+                      <td>{{ $id }}</td>
+                      <td>{{ $akun->nama_panjang }}</td>
+                      <td>{{ $akun->email }}</td>
+                      <td>
+                        @if($akun->level == 'admin')
+                          <div class="badge badge-danger">Admin</div>
+                        @endif
+                      </td>
+                      <td class="text-center text-nowarp">
+                        <form action="{{ route('eproc.superadmin.akun.destroy', Crypt::encrypt($akun->id)) }}" method="POST">
+                          @csrf
+                          @method('DELETE')
+                          <a href="{{ route('eproc.superadmin.akun.show', Crypt::encrypt($akun->id)) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                          <a href="{{ route('eproc.superadmin.akun.edit', Crypt::encrypt($akun->id)) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
+                          <button type="button" class="btn btn-icon btn-danger delete"><i class="fa fa-trash"></i></button>
+                        </form>
+                      </td>
+                    </tr>
                   @endif
                 @endif
               @endforeach
             </tbody>
           </table>
+        </div>
+        <div class="float-right">
+          {{ $akuns->links('pagination::bootstrap-4') }}
         </div>
       </div>
     </div>

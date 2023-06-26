@@ -38,22 +38,22 @@
           <table class="table table-striped table-bordered">
             <tbody>
               <tr>
-                <td class="text-center">No</td>
-                <td class="text-center">Nama Panjang</td>
-                <td class="text-center">Email</td>
-                <td class="text-center">Created At</td>
-                <td class="text-center">Action</td>
+                <td>No</td>
+                <td>Nama Panjang</td>
+                <td>Email</td>
+                <td>Created At</td>
+                <td>Action</td>
               </tr>
               <?php $id = 0; ?>
               @foreach ($survey as $surveys)
                 @if($surveys->status_aktif == 'aktif')
                   <?php $id++; ?>
                   <tr>
-                    <td class="text-center">{{ $id }}</td>
-                    <td class="text-center">{{ $surveys->nama_panjang }}</td>
-                    <td class="text-center">{{ $surveys->email }}</td>
-                    <td class="text-center">{{ $surveys->created_at }}</td>
-                    <td class="text-center text-nowarp">
+                    <td>{{ $id }}</td>
+                    <td>{{ $surveys->nama_panjang }}</td>
+                    <td>{{ $surveys->email }}</td>
+                    <td>{{ $surveys->created_at }}</td>
+                    <td style="white-space: nowrap">
                       @if(auth()->user()->level == 'superadmin')
                         <a href="{{ route('compro.superadmin.survey.show', $surveys->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
                       @endif

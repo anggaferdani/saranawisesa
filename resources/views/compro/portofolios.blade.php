@@ -10,15 +10,17 @@
 </section>
 
 <section>
-  <div class="container mt-5">
+  <div class="container py-1 py-md-5">
     <div class="row row-cols-1 row-cols-md-3 row-cols-lg-3 g-2 mt-2">
       @foreach ($portofolios as $portofolio)
       <div class="col">
         <div class="card h-100 rounded-4 shadow-sm">
-          <div class="rounded-top-4" style="height: 200px; background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url({{ asset('portofolio/'.$portofolio["portofolio"]) }}); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+          @foreach ($portofolio->portofolio_images->take(1) as $portofolio_image)
+            <div class="rounded-top-4" style="height: 200px; background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url({{ asset('compro/portofolio/image/'.$portofolio_image["image"]) }}); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+          @endforeach
           <div class="card-body">
-            <h5 class="card-title mt-2">{{ Str::limit($portofolio->judul_portofolio, 25) }}</h5>
-            <p class="card-text small lh-sm">{!! Str::limit($portofolio->isi_portofolio, 80) !!}</p>
+            <h5 class="card-title mt-2">{{ Str::limit($portofolio->judul, 25) }}</h5>
+            <p class="card-text small lh-sm">{!! Str::limit($portofolio->isi, 80) !!}</p>
             <a href="{{ route('portofolio', Crypt::encrypt($portofolio->id)) }}" class="d-flex small align-items-center text-dark text-decoration-none">
               Read More<i class="bi bi-arrow-right stretched-link"></i>
             </a>
@@ -30,7 +32,7 @@
   </div>
 </section>
 
-<div class="section py-5">
+<div class="section pt-2 py-md-2">
   <div class="container d-flex justify-content-center">
     {{ $portofolios->links('pagination::bootstrap-4') }}
   </div>

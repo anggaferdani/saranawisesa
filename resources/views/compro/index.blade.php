@@ -37,7 +37,7 @@
         </div>
       </div>
       <div class="col-md-6">
-        <p class="lh-sm m-0 p-0 mb-2 mb-md-4">{{ $profile_perusahaan->sejarah_perusahaan }}</p>
+        <div class="lh-sm m-0 p-0 mb-2 mb-md-4">{!! $profile_perusahaan->sejarah_perusahaan !!}</div>
         <a href="{{ route('profile-perusahaan') }}"><img src="{{ asset('img/read-more.png') }}" alt=""></a>
       </div>
     </div>
@@ -87,10 +87,12 @@
       @foreach ($portofolios as $portofolio)
       <div class="col">
         <div class="card h-100 rounded-4 shadow-sm">
-          <div class="rounded-top-4" style="height: 200px; background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url({{ asset('portofolio/'.$portofolio["portofolio"]) }}); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+          @foreach ($portofolio->portofolio_images->take(1) as $portofolio_image)
+            <div class="rounded-top-4" style="height: 200px; background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url({{ asset('compro/portofolio/image/'.$portofolio_image["image"]) }}); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+          @endforeach
           <div class="card-body">
-            <h5 class="card-title mt-2">{{ Str::limit($portofolio->judul_portofolio, 25) }}</h5>
-            <p class="card-text small lh-sm">{!! Str::limit($portofolio->isi_portofolio, 80) !!}</p>
+            <h5 class="card-title mt-2">{{ Str::limit($portofolio->judul, 25) }}</h5>
+            <p class="card-text small lh-sm">{!! Str::limit($portofolio->isi, 80) !!}</p>
             <a href="{{ route('portofolio', Crypt::encrypt($portofolio->id)) }}" class="d-flex small align-items-center text-dark text-decoration-none">
               Read More<i class="bi bi-arrow-right stretched-link"></i>
             </a>

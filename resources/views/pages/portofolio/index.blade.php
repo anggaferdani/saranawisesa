@@ -1,11 +1,7 @@
 @extends('templates.pages')
-@section('title')
+@section('title', 'Portofolio')
 @section('header')
 <h1>Portofolio</h1>
-<div class="section-header-breadcrumb">
-  <div class="breadcrumb-item"><a href="#">Dashboard</a></div>
-  <div class="breadcrumb-item active"><a href="#">Portofolio</a></div>
-</div>
 @endsection
 @section('content')
 <div class="row">
@@ -43,47 +39,52 @@
         <div class="clearfix mb-3"></div>
   
         <div class="table-responsive">
-          <table class="table table-striped table-bordered">
+          <table class="table table-bordered">
             <tbody>
               <tr>
-                <td class="text-center">No</td>
-                <td class="text-center">Judul Portofolio</td>
-                <td class="text-center">Portofolio</td>
-                <td class="text-center">Action</td>
+                <th>No.</th>
+                <th>Judul Portofolio</th>
+                <th>Image</th>
+                <th>Action</th>
               </tr>
               <?php $id = 0; ?>
-              @foreach ($portofolio as $portofolios)
-                @if($portofolios->status_aktif == 'aktif')
-                  <?php $id++; ?>
-                  <tr>
-                    <td class="text-center">{{ $id }}</td>
-                    <td class="text-center">{{ $portofolios->judul_portofolio }}</td>
-                    <td class="text-center"><img src="{{ asset('portofolio/'.$portofolios['portofolio']) }}" alt="" width="200px"></td>
-                    <td class="text-center text-nowarp">
-                      @if(auth()->user()->level == 'superadmin')
-                        <form action="{{ route('compro.superadmin.portofolio.destroy', $portofolios->id) }}" method="POST">
-                          @csrf
-                          @method('DELETE')
-                          <a href="{{ route('compro.superadmin.portofolio.show', $portofolios->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                          <a href="{{ route('compro.superadmin.portofolio.edit', $portofolios->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
-                          <button type="button" class="btn btn-icon btn-danger delete" data-id="{{ $portofolios->id }}"><i class="fa fa-trash"></i></button>
-                        </form>
-                      @endif
-                      @if(auth()->user()->level == 'admin')
-                        <form action="{{ route('compro.admin.portofolio.destroy', $portofolios->id) }}" method="POST">
-                          @csrf
-                          @method('DELETE')
-                          <a href="{{ route('compro.admin.portofolio.show', $portofolios->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                          <a href="{{ route('compro.admin.portofolio.edit', $portofolios->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
-                          <button type="button" class="btn btn-icon btn-danger delete" data-id="{{ $portofolios->id }}"><i class="fa fa-trash"></i></button>
-                        </form>
-                      @endif
-                    </td>
-                  </tr>
-                @endif
+              @foreach ($portofolios as $portofolio)
+                <?php $id++; ?>
+                <tr>
+                  <td>{{ $id }}</td>
+                  <td>{{ $portofolio->judul }}</td>
+                  <td>
+                    @foreach ($portofolio->portofolio_images->take(1) as $portofolio_image)
+                      <img src="{{ asset('compro/portofolio/image/'.$portofolio_image["image"]) }}" alt="" width="200px">
+                    @endforeach
+                  </td>
+                  <td style="white-space: nowrap">
+                    @if(auth()->user()->level == 'superadmin')
+                      <form action="{{ route('compro.superadmin.portofolio.destroy', Crypt::encrypt($portofolio->id)) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <a href="{{ route('compro.superadmin.portofolio.show', Crypt::encrypt($portofolio->id)) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                        <a href="{{ route('compro.superadmin.portofolio.edit', Crypt::encrypt($portofolio->id)) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
+                        <button type="button" class="btn btn-icon btn-danger delete"><i class="fa fa-trash"></i></button>
+                      </form>
+                    @endif
+                    @if(auth()->user()->level == 'admin')
+                      <form action="{{ route('compro.admin.portofolio.destroy', Crypt::encrypt($portofolio->id)) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <a href="{{ route('compro.admin.portofolio.show', Crypt::encrypt($portofolio->id)) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                        <a href="{{ route('compro.admin.portofolio.edit', Crypt::encrypt($portofolio->id)) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
+                        <button type="button" class="btn btn-icon btn-danger delete"><i class="fa fa-trash"></i></button>
+                      </form>
+                    @endif
+                  </td>
+                </tr>
               @endforeach
             </tbody>
           </table>
+        </div>
+        <div class="float-right">
+          {{ $portofolios->links('pagination::bootstrap-4') }}
         </div>
       </div>
     </div>

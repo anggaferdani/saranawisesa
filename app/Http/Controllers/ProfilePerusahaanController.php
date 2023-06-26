@@ -8,11 +8,6 @@ use Illuminate\Support\Facades\Crypt;
 
 class ProfilePerusahaanController extends Controller
 {
-    public function index(){
-        $profile_perusahaan = ProfilePerusahaan::all();
-        return view('pages.profile-perusahaan.index', compact('profile_perusahaan'));
-    }
-
     public function edit($id){
         $profile_perusahaan = ProfilePerusahaan::find(Crypt::decrypt($id));
         return view('pages.profile-perusahaan.edit', compact('profile_perusahaan'));
@@ -33,10 +28,6 @@ class ProfilePerusahaanController extends Controller
             'misi' => $request->misi,
         ]);
         
-        if(auth()->user()->level == 'superadmin'){
-            return redirect()->route('compro.superadmin.profile-perusahaan.index')->with('success', 'Berhasil dilakukan perubahan pada : '.$profile_perusahaan->created_at);
-        }elseif(auth()->user()->level == 'admin'){
-            return redirect()->route('compro.admin.profile-perusahaan.index')->with('success', 'Berhasil dilakukan perubahan pada : '.$profile_perusahaan->created_at);
-        }
+        return back()->with('success', 'Data has been updated at '.$profile_perusahaan->created_at);
     }
 }

@@ -63,22 +63,22 @@
           <table class="table table-striped table-bordered">
             <tbody>
               <tr>
-                <td class="text-center">No</td>
-                <td class="text-center">Judul Artikel</td>
-                <td class="text-center">Tanggal Publikasi</td>
-                <td class="text-center">Thumbnail</td>
-                <td class="text-center">Action</td>
+                <td>No.</td>
+                <td>Judul Artikel</td>
+                <td>Tanggal Publikasi</td>
+                <td>Thumbnail</td>
+                <td>Action</td>
               </tr>
               <?php $id = 0; ?>
               @foreach ($artikel as $artikels)
                 @if($artikels->status_aktif == 'aktif')
                   <?php $id++; ?>
                   <tr>
-                    <td class="text-center">{{ $id }}</td>
-                    <td class="text-center">{{ $artikels->judul_artikel }}</td>
-                    <td class="text-center">{{ $artikels->tanggal_publikasi }}</td>
-                    <td class="text-center"><img src="{{ asset('artikel/'.$artikels["thumbnail"]) }}" alt="" width="200px"></td>
-                    <td class="text-center text-nowarp">
+                    <td>{{ $id }}</td>
+                    <td>{{ $artikels->judul_artikel }}</td>
+                    <td>{{ $artikels->tanggal_publikasi }}</td>
+                    <td><img src="{{ asset('artikel/'.$artikels["thumbnail"]) }}" alt="" width="200px"></td>
+                    <td style="white-space: nowrap">
                       @if(auth()->user()->level == 'superadmin')
                         <form action="{{ route('compro.superadmin.artikel.destroy', $artikels->id) }}" method="POST">
                           @csrf
