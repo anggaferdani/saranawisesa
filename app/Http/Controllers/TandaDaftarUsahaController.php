@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\TandaDaftarUsaha;
 use Illuminate\Support\Facades\Auth;
@@ -10,8 +11,12 @@ use Illuminate\Support\Facades\Crypt;
 class TandaDaftarUsahaController extends Controller
 {
     public function edit($user_id){
+        $user = User::find(Crypt::decrypt($user_id));
         $tanda_daftar_usaha = TandaDaftarUsaha::where('user_id', Crypt::decrypt($user_id))->first();
-        return view('eproc.tanda-daftar-usaha.edit', compact('tanda_daftar_usaha'));
+        return view('eproc.tanda-daftar-usaha.edit', compact(
+            'user',
+            'tanda_daftar_usaha',
+        ));
     }
 
     public function update(Request $request, $user_id){

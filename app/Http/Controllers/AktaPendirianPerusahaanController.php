@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -10,8 +11,12 @@ use App\Models\AktaPendirianPerusahaan;
 class AktaPendirianPerusahaanController extends Controller
 {
     public function index($user_id){
+        $user = User::find(Crypt::decrypt($user_id));
         $akta_pendirian_perusahaans = AktaPendirianPerusahaan::where('user_id', Crypt::decrypt($user_id))->latest()->paginate(10);
-        return view('eproc.akta-pendirian-perusahaan.index', compact('akta_pendirian_perusahaans'));
+        return view('eproc.akta-pendirian-perusahaan.index', compact(
+            'user',
+            'akta_pendirian_perusahaans',
+        ));
     }
     public function create($user_id){
         return view('eproc.akta-pendirian-perusahaan.create');
@@ -31,8 +36,12 @@ class AktaPendirianPerusahaanController extends Controller
     }
 
     public function show($user_id, $id){
+        $user = User::find(Crypt::decrypt($user_id));
         $akta_pendirian_perusahaan = AktaPendirianPerusahaan::find(Crypt::decrypt($id));
-        return view('eproc.akta-pendirian-perusahaan.show', compact('akta_pendirian_perusahaan'));
+        return view('eproc.akta-pendirian-perusahaan.show', compact(
+            'user',
+            'akta_pendirian_perusahaan',
+        ));
     }
     public function edit($user_id, $id){
         $akta_pendirian_perusahaan = AktaPendirianPerusahaan::find(Crypt::decrypt($id));

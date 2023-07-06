@@ -128,6 +128,29 @@
   </script>
 
   <script type="text/javascript">
+    $('.batalkanVerifikasi').click(function(){
+      Swal.fire({
+        title: "Are you sure?",
+        text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus amet dolore ex saepe, incidunt accusamus distinctio voluptatum esse recusandae. Beatae dicta tempora culpa libero suscipit quam vero ad, corporis soluta.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Yes",
+        closeOnConfirm: false
+      }).then((result) => {
+        if(result.isConfirmed){
+          $(this).closest("form").submit();
+          Swal.fire(
+            'Batal Terverifikasi',
+            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus amet dolore ex saepe, incidunt accusamus distinctio voluptatum esse recusandae. Beatae dicta tempora culpa libero suscipit quam vero ad, corporis soluta.',
+            'success',
+          );
+        }
+      });
+    });
+  </script>
+
+  <script type="text/javascript">
     $('.tunjuk-sebagai-pemenang').click(function(){
       Swal.fire({
         title: "Are you sure?",

@@ -22,7 +22,9 @@
     <div class="card">
       <div class="card-body">
         <div class="float-left">
-          <a href="{{ route('eproc.perusahaan.data-personalia.create', ['user_id' => Crypt::encrypt(Auth::id())]) }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+          @if(auth()->user()->level == 'perusahaan')
+            <a href="{{ route('eproc.perusahaan.data-personalia.create', ['user_id' => Crypt::encrypt(Auth::id())]) }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+          @endif
         </div>
         <div class="float-right">
           <form>
@@ -56,13 +58,21 @@
                   <td>{{ $data_personalia->tanggal_lahir }}</td>
                   <td>{{ $data_personalia->jabatan }}</td>
                   <td style="white-space: nowrap">
-                    <form action="{{ route('eproc.perusahaan.data-personalia.destroy', ['user_id' => Crypt::encrypt(Auth::id()), 'id' => Crypt::encrypt($data_personalia->id)]) }}" method="POST">
-                      @csrf
-                      @method('DELETE')
-                      <a href="{{ route('eproc.perusahaan.data-personalia.show', ['user_id' => Crypt::encrypt(Auth::id()), 'id' => Crypt::encrypt($data_personalia->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                      <a href="{{ route('eproc.perusahaan.data-personalia.edit', ['user_id' => Crypt::encrypt(Auth::id()), 'id' => Crypt::encrypt($data_personalia->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
-                      <button type="button" class="btn btn-icon btn-danger delete"><i class="fa fa-trash"></i></button>
-                    </form>
+                    @if(auth()->user()->level == 'superadmin')
+                      <a href="{{ route('eproc.superadmin.data-personalia.show', ['user_id' => Crypt::encrypt($user->id), 'id' => Crypt::encrypt($data_personalia->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                    @endif
+                    @if(auth()->user()->level == 'admin')
+                      <a href="{{ route('eproc.admin.data-personalia.show', ['user_id' => Crypt::encrypt($user->id), 'id' => Crypt::encrypt($data_personalia->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                    @endif
+                    @if(auth()->user()->level == 'perusahaan')
+                      <form action="{{ route('eproc.perusahaan.data-personalia.destroy', ['user_id' => Crypt::encrypt(Auth::id()), 'id' => Crypt::encrypt($data_personalia->id)]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <a href="{{ route('eproc.perusahaan.data-personalia.show', ['user_id' => Crypt::encrypt(Auth::id()), 'id' => Crypt::encrypt($data_personalia->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                        <a href="{{ route('eproc.perusahaan.data-personalia.edit', ['user_id' => Crypt::encrypt(Auth::id()), 'id' => Crypt::encrypt($data_personalia->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
+                        <button type="button" class="btn btn-icon btn-danger delete"><i class="fa fa-trash"></i></button>
+                      </form>
+                    @endif
                   </td>
                 </tr>
               @endforeach

@@ -31,7 +31,7 @@
           </li>
         @else
           <li class="nav-item mx-1">
-            <a class="nav-link" href="{{ route('eproc.register') }}">REIGSTER</a>
+            <a class="nav-link" href="{{ route('eproc.register') }}">REGISTER</a>
           </li>
           <li class="nav-item mx-1">
             <a class="nav-link" href="{{ route('eproc.login') }}">LOGIN</a>

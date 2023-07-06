@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\PengurusBadanUsaha;
 use Illuminate\Support\Facades\Auth;
@@ -10,8 +11,12 @@ use Illuminate\Support\Facades\Crypt;
 class PengurusBadanUsahaController extends Controller
 {
     public function index($user_id){
+        $user = User::find(Crypt::decrypt($user_id));
         $pengurus_badan_usahas = PengurusBadanUsaha::where('user_id', Crypt::decrypt($user_id))->latest()->paginate(10);
-        return view('eproc.pengurus-badan-usaha.index', compact('pengurus_badan_usahas'));
+        return view('eproc.pengurus-badan-usaha.index', compact(
+            'user',
+            'pengurus_badan_usahas',
+        ));
     }
     public function create($user_id){
         return view('eproc.pengurus-badan-usaha.create');
@@ -32,12 +37,18 @@ class PengurusBadanUsahaController extends Controller
     }
 
     public function show($user_id, $id){
+        $user = User::find(Crypt::decrypt($user_id));
         $pengurus_badan_usaha = PengurusBadanUsaha::find(Crypt::decrypt($id));
-        return view('eproc.pengurus-badan-usaha.show', compact('pengurus_badan_usaha'));
+        return view('eproc.pengurus-badan-usaha.show', compact(
+            'user',
+            'pengurus_badan_usaha',
+        ));
     }
     public function edit($user_id, $id){
         $pengurus_badan_usaha = PengurusBadanUsaha::find(Crypt::decrypt($id));
-        return view('eproc.pengurus-badan-usaha.edit', compact('pengurus_badan_usaha'));
+        return view('eproc.pengurus-badan-usaha.edit', compact(
+            'pengurus_badan_usaha',
+        ));
     }
 
     public function update(Request $request, $user_id, $id){

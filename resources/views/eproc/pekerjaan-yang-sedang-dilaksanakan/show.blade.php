@@ -53,7 +53,15 @@
             <label>Progres Terakhir Berdasarkan Prestasi Kerja</label>
             <input disabled type="text" class="form-control" name="progres_terakhir_berdasarkan_prestasi_kerja" value="{{ $pekerjaan_yang_sedang_dilaksanakan->progres_terakhir_berdasarkan_prestasi_kerja }}">
           </div>
-          <a href="{{ route('eproc.perusahaan.pengalaman-perusahaan.index', ['user_id' => Crypt::encrypt(Auth::id())]) }}" class="btn btn-secondary">Back</a>
+          @if(auth()->user()->level == 'superadmin')
+            <a href="{{ route('eproc.superadmin.pekerjaan-yang-sedang-dilaksanakan.index', ['user_id' => Crypt::encrypt($user->id)]) }}" class="btn btn-secondary">Back</a>
+          @endif
+          @if(auth()->user()->level == 'admin')
+            <a href="{{ route('eproc.admin.pekerjaan-yang-sedang-dilaksanakan.index', ['user_id' => Crypt::encrypt($user->id)]) }}" class="btn btn-secondary">Back</a>
+          @endif
+          @if(auth()->user()->level == 'perusahaan')
+            <a href="{{ route('eproc.perusahaan.pekerjaan-yang-sedang-dilaksanakan.index', ['user_id' => Crypt::encrypt(Auth::id())]) }}" class="btn btn-secondary">Back</a>
+          @endif
         </form>
       </div>
     </div>

@@ -29,7 +29,7 @@
       <div class="col-md-4"><div class="p-2 text-white" style="background-color: #0458B8">Lokasi Pekerjaan</div></div>
       <div class="col-md-8"><div class="p-2" style="background-color: #F5F6F8">{{ $lelang->lokasi_pekerjaan }}</div></div>
       <div class="col-md-4"><div class="p-2 text-white" style="background-color: #0458B8">HPS</div></div>
-      <div class="col-md-8"><div class="p-2" style="background-color: #F5F6F8">{{ $lelang->hps }}</div></div>
+      <div class="col-md-8"><div class="p-2" style="background-color: #F5F6F8">{{ 'Rp. '.strrev(implode('.', str_split(strrev(strval($lelang->hps)), 3))) }}</div></div>
       <div class="col-md-4"><div class="p-2 text-white" style="background-color: #0458B8">Syarat Kualifikasi</div></div>
       <div class="col-md-8"><div class="p-2" style="background-color: #F5F6F8">{!! $lelang->syarat_kualifikasi !!}</div></div>
     </div>

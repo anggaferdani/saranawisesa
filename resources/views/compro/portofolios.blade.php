@@ -20,7 +20,6 @@
           @endforeach
           <div class="card-body">
             <h5 class="card-title mt-2">{{ Str::limit($portofolio->judul, 25) }}</h5>
-            <p class="card-text small lh-sm">{!! Str::limit($portofolio->isi, 80) !!}</p>
             <a href="{{ route('portofolio', Crypt::encrypt($portofolio->id)) }}" class="d-flex small align-items-center text-dark text-decoration-none">
               Read More<i class="bi bi-arrow-right stretched-link"></i>
             </a>

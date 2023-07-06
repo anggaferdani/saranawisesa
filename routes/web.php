@@ -186,6 +186,8 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
 
       Route::resource('akun', AkunController::class);
       Route::resource('perusahaan', PerusahaanController::class);
+      Route::get('perusahaan/batalkan-verifikasi/{id}', [PerusahaanController::class, 'batalkanVerifikasi'])->name('perusahaan.batalkan-verifikasi');
+      Route::get('perusahaan/pdf/{id}', [PerusahaanController::class, 'pdf'])->name('perusahaan.pdf');
 
       Route::resource('berita', BeritaController::class);
       Route::get('export', [BeritaController::class, 'export'])->name('export');
@@ -205,6 +207,35 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::get('{lelang_id}/peserta', [PesertaController::class, 'index'])->name('peserta.index');
       Route::get('{lelang_id}/peserta/{id}', [PesertaController::class, 'show'])->name('peserta.show');
       Route::put('{lelang_id}/peserta/{id}', [PesertaController::class, 'pemenang'])->name('peserta.pemenang');
+
+      Route::get('{user_id}/administrasi/edit', [AdministrasiController::class, 'edit'])->name('administrasi.edit');
+      
+      Route::get('{user_id}/akta-pendirian-perusahaan', [AktaPendirianPerusahaanController::class, 'index'])->name('akta-pendirian-perusahaan.index');
+      Route::get('{user_id}/akta-pendirian-perusahaan/{id}', [AktaPendirianPerusahaanController::class, 'show'])->name('akta-pendirian-perusahaan.show');
+
+      Route::get('{user_id}/pengurus-badan-usaha', [PengurusBadanUsahaController::class, 'index'])->name('pengurus-badan-usaha.index');
+      Route::get('{user_id}/pengurus-badan-usaha/{id}', [PengurusBadanUsahaController::class, 'show'])->name('pengurus-badan-usaha.show');
+
+      Route::get('{user_id}/tanda-daftar-usaha/edit', [TandaDaftarUsahaController::class, 'edit'])->name('tanda-daftar-usaha.edit');
+
+      Route::get('{user_id}/susunan-kepemilikan-saham/', [SusunanKepemilikanSahamController::class, 'index'])->name('susunan-kepemilikan-saham.index');
+      Route::get('{user_id}/susunan-kepemilikan-saham/{id}', [SusunanKepemilikanSahamController::class, 'show'])->name('susunan-kepemilikan-saham.show');
+
+      Route::get('{user_id}/data-personalia/', [DataPersonaliaController::class, 'index'])->name('data-personalia.index');
+      Route::get('{user_id}/data-personalia/{id}', [DataPersonaliaController::class, 'show'])->name('data-personalia.show');
+
+      Route::get('{user_id}/data-fasilitas/', [DataFasilitasController::class, 'index'])->name('data-fasilitas.index');
+      Route::get('{user_id}/data-fasilitas/{id}', [DataFasilitasController::class, 'show'])->name('data-fasilitas.show');
+
+      Route::get('{user_id}/pengalaman-perusahaan/', [PengalamanPerusahaanController::class, 'index'])->name('pengalaman-perusahaan.index');
+      Route::get('{user_id}/pengalaman-perusahaan/{id}', [PengalamanPerusahaanController::class, 'show'])->name('pengalaman-perusahaan.show');
+
+      Route::get('{user_id}/pekerjaan-yang-sedang-dilaksanakan/', [PekerjaanYangSedangDilaksanakanController::class, 'index'])->name('pekerjaan-yang-sedang-dilaksanakan.index');
+      Route::get('{user_id}/pekerjaan-yang-sedang-dilaksanakan/{id}', [PekerjaanYangSedangDilaksanakanController::class, 'show'])->name('pekerjaan-yang-sedang-dilaksanakan.show');
+
+      Route::get('{user_id}/sisa-kemampuan-nyata/edit', [SisaKemampuanNyataController::class, 'edit'])->name('sisa-kemampuan-nyata.edit');
+
+      Route::get('{user_id}/lampiran-kualifikasi/edit', [LampiranKualifikasiController::class, 'edit'])->name('lampiran-kualifikasi.edit');
     });
   });
 
@@ -215,6 +246,8 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
 
       Route::resource('perusahaan', PerusahaanController::class);
+      Route::get('perusahaan/batalkan-verifikasi/{id}', [PerusahaanController::class, 'batalkanVerifikasi'])->name('perusahaan.batalkan-verifikasi');
+      Route::get('perusahaan/pdf/{id}', [PerusahaanController::class, 'pdf'])->name('perusahaan.pdf');
       
       Route::resource('berita', BeritaController::class);
       Route::get('export', [BeritaController::class, 'export'])->name('export');
@@ -234,6 +267,35 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::get('{lelang_id}/peserta', [PesertaController::class, 'index'])->name('peserta.index');
       Route::get('{lelang_id}/peserta/{id}', [PesertaController::class, 'show'])->name('peserta.show');
       Route::put('{lelang_id}/peserta/{id}', [PesertaController::class, 'pemenang'])->name('peserta.pemenang');
+
+      Route::get('{user_id}/administrasi/edit', [AdministrasiController::class, 'edit'])->name('administrasi.edit');
+      
+      Route::get('{user_id}/akta-pendirian-perusahaan', [AktaPendirianPerusahaanController::class, 'index'])->name('akta-pendirian-perusahaan.index');
+      Route::get('{user_id}/akta-pendirian-perusahaan/{id}', [AktaPendirianPerusahaanController::class, 'show'])->name('akta-pendirian-perusahaan.show');
+
+      Route::get('{user_id}/pengurus-badan-usaha', [PengurusBadanUsahaController::class, 'index'])->name('pengurus-badan-usaha.index');
+      Route::get('{user_id}/pengurus-badan-usaha/{id}', [PengurusBadanUsahaController::class, 'show'])->name('pengurus-badan-usaha.show');
+
+      Route::get('{user_id}/tanda-daftar-usaha/edit', [TandaDaftarUsahaController::class, 'edit'])->name('tanda-daftar-usaha.edit');
+
+      Route::get('{user_id}/susunan-kepemilikan-saham/', [SusunanKepemilikanSahamController::class, 'index'])->name('susunan-kepemilikan-saham.index');
+      Route::get('{user_id}/susunan-kepemilikan-saham/{id}', [SusunanKepemilikanSahamController::class, 'show'])->name('susunan-kepemilikan-saham.show');
+
+      Route::get('{user_id}/data-personalia/', [DataPersonaliaController::class, 'index'])->name('data-personalia.index');
+      Route::get('{user_id}/data-personalia/{id}', [DataPersonaliaController::class, 'show'])->name('data-personalia.show');
+
+      Route::get('{user_id}/data-fasilitas/', [DataFasilitasController::class, 'index'])->name('data-fasilitas.index');
+      Route::get('{user_id}/data-fasilitas/{id}', [DataFasilitasController::class, 'show'])->name('data-fasilitas.show');
+
+      Route::get('{user_id}/pengalaman-perusahaan/', [PengalamanPerusahaanController::class, 'index'])->name('pengalaman-perusahaan.index');
+      Route::get('{user_id}/pengalaman-perusahaan/{id}', [PengalamanPerusahaanController::class, 'show'])->name('pengalaman-perusahaan.show');
+
+      Route::get('{user_id}/pekerjaan-yang-sedang-dilaksanakan/', [PekerjaanYangSedangDilaksanakanController::class, 'index'])->name('pekerjaan-yang-sedang-dilaksanakan.index');
+      Route::get('{user_id}/pekerjaan-yang-sedang-dilaksanakan/{id}', [PekerjaanYangSedangDilaksanakanController::class, 'show'])->name('pekerjaan-yang-sedang-dilaksanakan.show');
+
+      Route::get('{user_id}/sisa-kemampuan-nyata/edit', [SisaKemampuanNyataController::class, 'edit'])->name('sisa-kemampuan-nyata.edit');
+
+      Route::get('{user_id}/lampiran-kualifikasi/edit', [LampiranKualifikasiController::class, 'edit'])->name('lampiran-kualifikasi.edit');
     });
   });
 

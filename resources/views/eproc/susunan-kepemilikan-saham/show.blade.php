@@ -19,7 +19,7 @@
           </div>
           <div class="form-group">
             <label>No. KTP/ Paspor/ Keterangan Domisili Tinggal Pemilik Saham</label>
-            <input disabled type="number" class="form-control" name="no_ktp_paspor_keterangan_domisili_tinggal_pemilik_saham" value="{{ $susunan_kepemilikan_saham->no_ktp_paspor_keterangan_domisili_tinggal_pemilik_saham }}">
+            <input disabled type="text" class="form-control" name="no_ktp_paspor_keterangan_domisili_tinggal_pemilik_saham" value="{{ $susunan_kepemilikan_saham->no_ktp_paspor_keterangan_domisili_tinggal_pemilik_saham }}">
           </div>
           <div class="form-group">
             <label>Alamat Pemilik Saham</label>
@@ -29,7 +29,15 @@
             <label>Persentase Kepemilikan Saham</label>
             <input disabled type="number" class="form-control" name="persentase_kepemilikan_saham" value="{{ $susunan_kepemilikan_saham->persentase_kepemilikan_saham }}">
           </div>
-          <a href="{{ route('eproc.perusahaan.susunan-kepemilikan-saham.index', ['user_id' => Crypt::encrypt(Auth::id())]) }}" class="btn btn-secondary">Back</a>
+          @if(auth()->user()->level == 'superadmin')
+            <a href="{{ route('eproc.superadmin.susunan-kepemilikan-saham.index', ['user_id' => Crypt::encrypt($user->id)]) }}" class="btn btn-secondary">Back</a>
+          @endif
+          @if(auth()->user()->level == 'admin')
+            <a href="{{ route('eproc.admin.susunan-kepemilikan-saham.index', ['user_id' => Crypt::encrypt($user->id)]) }}" class="btn btn-secondary">Back</a>
+          @endif
+          @if(auth()->user()->level == 'perusahaan')
+            <a href="{{ route('eproc.perusahaan.susunan-kepemilikan-saham.index', ['user_id' => Crypt::encrypt(Auth::id())]) }}" class="btn btn-secondary">Back</a>
+          @endif
         </form>
       </div>
     </div>

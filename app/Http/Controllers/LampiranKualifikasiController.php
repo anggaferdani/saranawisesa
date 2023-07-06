@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\LampiranKualifikasi;
 use Illuminate\Support\Facades\Crypt;
@@ -9,8 +10,12 @@ use Illuminate\Support\Facades\Crypt;
 class LampiranKualifikasiController extends Controller
 {
     public function edit($user_id){
+        $user = User::find(Crypt::decrypt($user_id));
         $lampiran_kualifikasi = LampiranKualifikasi::where('user_id', Crypt::decrypt($user_id))->first();
-        return view('eproc.lampiran-kualifikasi.edit', compact('lampiran_kualifikasi'));
+        return view('eproc.lampiran-kualifikasi.edit', compact(
+            'user',
+            'lampiran_kualifikasi',
+        ));
     }
 
     public function update(Request $request, $user_id){

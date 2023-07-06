@@ -18,26 +18,22 @@
 
 <section class="pb-md-5">
   <div class="container py-5">
-    <div class="row g-2 g-md-4">
-      <div class="col-md-6">
-        <div class="row gx-2 gx-md-3">
-          <div class="col">
-            <div class="profile p-4" style="background-color: #920000;">
-              <h2 class="text-white">Tentang <br>Kami</h2>
+    <div class="row g-2 g-md-4 align-items-center">
+      <div class="col-md-6 position-relative">
+        <img class="orang position-relative" src="{{ asset('img/index2.jpeg') }}" alt="orang" style="width: 100%; height: auto;">
+        <div class="puzzle position-absolute top-0">
+            <div class="puzzle-border">
+                <div class="info d-flex justify-content-center align-items-center fs-1 fw-bold">Tentang Kami</div>
+                <div class="tag"></div>
+                <div class="comment"></div>
+                <div class="album"></div>
+                <div class="rotate"></div>
             </div>
-          </div>
-          <div class="col">
-            <div class="profile2" style="background-image: url({{ asset('img/profile2.png') }}); background-position: center; background-repeat: no-repeat; background-size: cover"></div>
-          </div>
         </div>
-        <div class="row mt-2 mt-md-3 mt-lg-3">
-          <div class="col">
-            <div class="profile3" style="background-image: url({{ asset('img/profile3.png') }}); background-position: center; background-repeat: no-repeat; background-size: cover"></div>
-          </div>
-        </div>
-      </div>
+    </div>
       <div class="col-md-6">
-        <div class="lh-sm m-0 p-0 mb-2 mb-md-4">{!! $profile_perusahaan->sejarah_perusahaan !!}</div>
+        <h2 class="fw-bold" style="color: #920000;">PT SARANAWISESA PROPERINDO</h2>
+        <div class="lh-sm m-0 p-0 mb-2 mb-md-4" style="text-align: justify;">{!! $profile_perusahaan->sejarah_perusahaan !!}</div>
         <a href="{{ route('profile-perusahaan') }}"><img src="{{ asset('img/read-more.png') }}" alt=""></a>
       </div>
     </div>
@@ -92,7 +88,6 @@
           @endforeach
           <div class="card-body">
             <h5 class="card-title mt-2">{{ Str::limit($portofolio->judul, 25) }}</h5>
-            <p class="card-text small lh-sm">{!! Str::limit($portofolio->isi, 80) !!}</p>
             <a href="{{ route('portofolio', Crypt::encrypt($portofolio->id)) }}" class="d-flex small align-items-center text-dark text-decoration-none">
               Read More<i class="bi bi-arrow-right stretched-link"></i>
             </a>

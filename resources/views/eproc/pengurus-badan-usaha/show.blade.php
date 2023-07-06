@@ -37,7 +37,15 @@
             <input disabled type="text" class="form-control" name="jabatan_pengurus_badan_usaha" value="{{ $pengurus_badan_usaha->jabatan_pengurus_badan_usaha }}">
             @error('jabatan_pengurus_badan_usaha')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
-          <a href="{{ route('eproc.perusahaan.pengurus-badan-usaha.index', ['user_id' => Crypt::encrypt(Auth::id())]) }}" class="btn btn-secondary">Back</a>
+          @if(auth()->user()->level == 'superadmin')
+            <a href="{{ route('eproc.superadmin.pengurus-badan-usaha.index', ['user_id' => Crypt::encrypt($user->id)]) }}" class="btn btn-secondary">Back</a>
+          @endif
+          @if(auth()->user()->level == 'admin')
+            <a href="{{ route('eproc.admin.pengurus-badan-usaha.index', ['user_id' => Crypt::encrypt($user->id)]) }}" class="btn btn-secondary">Back</a>
+          @endif
+          @if(auth()->user()->level == 'perusahaan')
+            <a href="{{ route('eproc.perusahaan.pengurus-badan-usaha.index', ['user_id' => Crypt::encrypt(Auth::id())]) }}" class="btn btn-secondary">Back</a>
+          @endif
         </form>
       </div>
     </div>

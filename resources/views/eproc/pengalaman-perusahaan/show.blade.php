@@ -57,7 +57,15 @@
             <label>Tanggal Selesai Berdasarkan BA Serah Terima</label>
             <input disabled type="date" class="form-control" name="tanggal_selesai_berdasarkan_ba_serah_terima" value="{{ $pengalaman_perusahaan->tanggal_selesai_berdasarkan_ba_serah_terima }}">
           </div>
-          <a href="{{ route('eproc.perusahaan.pengalaman-perusahaan.index', ['user_id' => Crypt::encrypt(Auth::id())]) }}" class="btn btn-secondary">Back</a>
+          @if(auth()->user()->level == 'superadmin')
+            <a href="{{ route('eproc.superadmin.pengalaman-perusahaan.index', ['user_id' => Crypt::encrypt($user->id)]) }}" class="btn btn-secondary">Back</a>
+          @endif
+          @if(auth()->user()->level == 'admin')
+            <a href="{{ route('eproc.admin.pengalaman-perusahaan.index', ['user_id' => Crypt::encrypt($user->id)]) }}" class="btn btn-secondary">Back</a>
+          @endif
+          @if(auth()->user()->level == 'perusahaan')
+            <a href="{{ route('eproc.perusahaan.pengalaman-perusahaan.index', ['user_id' => Crypt::encrypt(Auth::id())]) }}" class="btn btn-secondary">Back</a>
+          @endif
         </form>
       </div>
     </div>

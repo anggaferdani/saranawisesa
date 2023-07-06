@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -10,8 +11,12 @@ use App\Models\PekerjaanYangSedangDilaksanakan;
 class PekerjaanYangSedangDilaksanakanController extends Controller
 {
     public function index($user_id){
+        $user = User::find(Crypt::decrypt($user_id));
         $pekerjaan_yang_sedang_dilaksanakans = PekerjaanYangSedangDilaksanakan::where('user_id', Crypt::decrypt($user_id))->latest()->paginate(10);
-        return view('eproc.pekerjaan-yang-sedang-dilaksanakan.index', compact('pekerjaan_yang_sedang_dilaksanakans'));
+        return view('eproc.pekerjaan-yang-sedang-dilaksanakan.index', compact(
+            'user',
+            'pekerjaan_yang_sedang_dilaksanakans',
+        ));
     }
     public function create($user_id){
         return view('eproc.pekerjaan-yang-sedang-dilaksanakan.create');
@@ -41,8 +46,12 @@ class PekerjaanYangSedangDilaksanakanController extends Controller
     }
 
     public function show($user_id, $id){
+        $user = User::find(Crypt::decrypt($user_id));
         $pekerjaan_yang_sedang_dilaksanakan = PekerjaanYangSedangDilaksanakan::find(Crypt::decrypt($id));
-        return view('eproc.pekerjaan-yang-sedang-dilaksanakan.show', compact('pekerjaan_yang_sedang_dilaksanakan'));
+        return view('eproc.pekerjaan-yang-sedang-dilaksanakan.show', compact(
+            'user',
+            'pekerjaan_yang_sedang_dilaksanakan',
+        ));
     }
     public function edit($user_id, $id){
         $pekerjaan_yang_sedang_dilaksanakan = PekerjaanYangSedangDilaksanakan::find(Crypt::decrypt($id));

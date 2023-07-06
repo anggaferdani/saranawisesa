@@ -13,13 +13,13 @@
 </section>
 
 <section>
-  <div class="container-fluid">
+  <div class="container">
     @foreach($subproduk_dan_layanans as $subproduk_dan_layanan)
       <div class="row my-5">
-        <div class="col-md-4 rounded-end-5" style="background: url({{ asset('compro/subproduk-dan-layanan/thumbnail/'.$subproduk_dan_layanan["thumbnail"]) }}); background-size: cover; background-repeat: no-repeat; background-position: center; min-height: 320px; border-left: 20px solid #920000;"></div>
-        <div class="col-md-8 mt-2 ps-2 ps-md-5">
+        <div class="col-md-5 rounded-end-5" style="background: url({{ asset('compro/subproduk-dan-layanan/thumbnail/'.$subproduk_dan_layanan["thumbnail"]) }}); background-size: cover; background-repeat: no-repeat; background-position: center; min-height: 200px;"></div>
+        <div class="col-md-7 mt-2 ps-2 ps-md-5">
           <h1 class="fw-bold" style="color: #920000;">{{ $subproduk_dan_layanan->judul }}</h1>
-          <div class="mt-2 mt-md-4 lh-sm fs-5">{!! $subproduk_dan_layanan->deskripsi !!}</div>
+          <div class="mt-2 mt-md-4 lh-sm fs-5" style="text-align: justify;">{!! $subproduk_dan_layanan->deskripsi !!}</div>
         </div>
       </div>
     @endforeach

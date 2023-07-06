@@ -28,7 +28,15 @@
             <input disabled type="text" class="form-control" name="nama_notaris" value="{{ $akta_pendirian_perusahaan->nama_notaris }}">
             @error('nama_notaris')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
-          <a href="{{ route('eproc.perusahaan.akta-pendirian-perusahaan.index', ['user_id' => Crypt::encrypt(Auth::id())]) }}" class="btn btn-secondary">Back</a>
+          @if(auth()->user()->level == 'superadmin')
+            <a href="{{ route('eproc.superadmin.akta-pendirian-perusahaan.index', ['user_id' => Crypt::encrypt($user->id)]) }}" class="btn btn-secondary">Back</a>
+          @endif
+          @if(auth()->user()->level == 'admin')
+            <a href="{{ route('eproc.admin.akta-pendirian-perusahaan.index', ['user_id' => Crypt::encrypt($user->id)]) }}" class="btn btn-secondary">Back</a>
+          @endif
+          @if(auth()->user()->level == 'perusahaan')
+            <a href="{{ route('eproc.perusahaan.akta-pendirian-perusahaan.index', ['user_id' => Crypt::encrypt(Auth::id())]) }}" class="btn btn-secondary">Back</a>
+          @endif
         </form>
       </div>
     </div>

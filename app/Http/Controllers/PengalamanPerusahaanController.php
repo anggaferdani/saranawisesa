@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\PengalamanPerusahaan;
 use Illuminate\Support\Facades\Auth;
@@ -10,8 +11,12 @@ use Illuminate\Support\Facades\Crypt;
 class PengalamanPerusahaanController extends Controller
 {
     public function index($user_id){
+        $user = User::find(Crypt::decrypt($user_id));
         $pengalaman_perusahaans = PengalamanPerusahaan::where('user_id', Crypt::decrypt($user_id))->latest()->paginate(10);
-        return view('eproc.pengalaman-perusahaan.index', compact('pengalaman_perusahaans'));
+        return view('eproc.pengalaman-perusahaan.index', compact(
+            'user',
+            'pengalaman_perusahaans',
+        ));
     }
     public function create($user_id){
         return view('eproc.pengalaman-perusahaan.create');
@@ -42,8 +47,12 @@ class PengalamanPerusahaanController extends Controller
     }
 
     public function show($user_id, $id){
+        $user = User::find(Crypt::decrypt($user_id));
         $pengalaman_perusahaan = PengalamanPerusahaan::find(Crypt::decrypt($id));
-        return view('eproc.pengalaman-perusahaan.show', compact('pengalaman_perusahaan'));
+        return view('eproc.pengalaman-perusahaan.show', compact(
+            'user',
+            'pengalaman_perusahaan',
+        ));
     }
     public function edit($user_id, $id){
         $pengalaman_perusahaan = PengalamanPerusahaan::find(Crypt::decrypt($id));

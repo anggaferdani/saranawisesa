@@ -22,7 +22,9 @@
     <div class="card">
       <div class="card-body">
         <div class="float-left">
-          <a href="{{ route('eproc.perusahaan.susunan-kepemilikan-saham.create', ['user_id' => Crypt::encrypt(Auth::id())]) }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+          @if(auth()->user()->level == 'perusahaan')
+            <a href="{{ route('eproc.perusahaan.susunan-kepemilikan-saham.create', ['user_id' => Crypt::encrypt(Auth::id())]) }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+          @endif
         </div>
         <div class="float-right">
           <form>
@@ -56,13 +58,21 @@
                   <td>{{ $susunan_kepemilikan_saham->no_ktp_paspor_keterangan_domisili_tinggal_pemilik_saham }}</td>
                   <td>{{ $susunan_kepemilikan_saham->persentase_kepemilikan_saham }}</td>
                   <td style="white-space: nowrap">
-                    <form action="{{ route('eproc.perusahaan.susunan-kepemilikan-saham.destroy', ['user_id' => Crypt::encrypt(Auth::id()), 'id' => Crypt::encrypt($susunan_kepemilikan_saham->id)]) }}" method="POST">
-                      @csrf
-                      @method('DELETE')
-                      <a href="{{ route('eproc.perusahaan.susunan-kepemilikan-saham.show', ['user_id' => Crypt::encrypt(Auth::id()), 'id' => Crypt::encrypt($susunan_kepemilikan_saham->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                      <a href="{{ route('eproc.perusahaan.susunan-kepemilikan-saham.edit', ['user_id' => Crypt::encrypt(Auth::id()), 'id' => Crypt::encrypt($susunan_kepemilikan_saham->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
-                      <button type="button" class="btn btn-icon btn-danger delete"><i class="fa fa-trash"></i></button>
-                    </form>
+                    @if(auth()->user()->level == 'superadmin')
+                      <a href="{{ route('eproc.superadmin.susunan-kepemilikan-saham.show', ['user_id' => Crypt::encrypt($user->id), 'id' => Crypt::encrypt($susunan_kepemilikan_saham->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                    @endif
+                    @if(auth()->user()->level == 'admin')
+                      <a href="{{ route('eproc.admin.susunan-kepemilikan-saham.show', ['user_id' => Crypt::encrypt($user->id), 'id' => Crypt::encrypt($susunan_kepemilikan_saham->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                    @endif
+                    @if(auth()->user()->level == 'perusahaan')
+                      <form action="{{ route('eproc.perusahaan.susunan-kepemilikan-saham.destroy', ['user_id' => Crypt::encrypt(Auth::id()), 'id' => Crypt::encrypt($susunan_kepemilikan_saham->id)]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <a href="{{ route('eproc.perusahaan.susunan-kepemilikan-saham.show', ['user_id' => Crypt::encrypt(Auth::id()), 'id' => Crypt::encrypt($susunan_kepemilikan_saham->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                        <a href="{{ route('eproc.perusahaan.susunan-kepemilikan-saham.edit', ['user_id' => Crypt::encrypt(Auth::id()), 'id' => Crypt::encrypt($susunan_kepemilikan_saham->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-pen"></i></a>
+                        <button type="button" class="btn btn-icon btn-danger delete"><i class="fa fa-trash"></i></button>
+                      </form>
+                    @endif
                   </td>
                 </tr>
               @endforeach

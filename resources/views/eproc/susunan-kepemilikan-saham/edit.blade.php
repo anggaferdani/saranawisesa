@@ -20,7 +20,7 @@
           </div>
           <div class="form-group">
             <label>No. KTP/ Paspor/ Keterangan Domisili Tinggal Pemilik Saham</label>
-            <input type="number" class="form-control" name="no_ktp_paspor_keterangan_domisili_tinggal_pemilik_saham" value="{{ $susunan_kepemilikan_saham->no_ktp_paspor_keterangan_domisili_tinggal_pemilik_saham }}">
+            <input type="text" class="form-control" name="no_ktp_paspor_keterangan_domisili_tinggal_pemilik_saham" value="{{ $susunan_kepemilikan_saham->no_ktp_paspor_keterangan_domisili_tinggal_pemilik_saham }}">
           </div>
           <div class="form-group">
             <label>Alamat Pemilik Saham</label>

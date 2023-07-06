@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\DataFasilitas;
 use Illuminate\Support\Facades\Auth;
@@ -10,8 +11,12 @@ use Illuminate\Support\Facades\Crypt;
 class DataFasilitasController extends Controller
 {
     public function index($user_id){
+        $user = User::find(Crypt::decrypt($user_id));
         $data_fasilitasies = DataFasilitas::where('user_id', Crypt::decrypt($user_id))->latest()->paginate(10);
-        return view('eproc.data-fasilitas.index', compact('data_fasilitasies'));
+        return view('eproc.data-fasilitas.index', compact(
+            'user',
+            'data_fasilitasies',
+        ));
     }
     public function create($user_id){
         return view('eproc.data-fasilitas.create');
@@ -35,8 +40,12 @@ class DataFasilitasController extends Controller
     }
 
     public function show($user_id, $id){
+        $user = User::find(Crypt::decrypt($user_id));
         $data_fasilitas = DataFasilitas::find(Crypt::decrypt($id));
-        return view('eproc.data-fasilitas.show', compact('data_fasilitas'));
+        return view('eproc.data-fasilitas.show', compact(
+            'user',
+            'data_fasilitas',
+        ));
     }
     public function edit($user_id, $id){
         $data_fasilitas = DataFasilitas::find(Crypt::decrypt($id));

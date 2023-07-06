@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Administrasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,8 +11,12 @@ use Illuminate\Support\Facades\Crypt;
 class AdministrasiController extends Controller
 {
     public function edit($user_id){
+        $user = User::find(Crypt::decrypt($user_id));
         $administrasi = Administrasi::where('user_id', Crypt::decrypt($user_id))->first();
-        return view('eproc.administrasi.edit', compact('administrasi'));
+        return view('eproc.administrasi.edit', compact(
+            'user',
+            'administrasi',
+        ));
     }
 
     public function update(Request $request, $user_id){

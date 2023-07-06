@@ -37,7 +37,15 @@
             <label>Tahun Sertifikat Ijazah</label>
             <input disabled type="text" class="form-control" name="tahun_sertifikat_ijazah" value="{{ $data_personalia->tahun_sertifikat_ijazah }}">
           </div>
-          <a href="{{ route('eproc.perusahaan.data-personalia.index', ['user_id' => Crypt::encrypt(Auth::id())]) }}" class="btn btn-secondary">Back</a>
+          @if(auth()->user()->level == 'superadmin')
+            <a href="{{ route('eproc.superadmin.data-personalia.index', ['user_id' => Crypt::encrypt($user->id)]) }}" class="btn btn-secondary">Back</a>
+          @endif
+          @if(auth()->user()->level == 'admin')
+            <a href="{{ route('eproc.admin.data-personalia.index', ['user_id' => Crypt::encrypt($user->id)]) }}" class="btn btn-secondary">Back</a>
+          @endif
+          @if(auth()->user()->level == 'perusahaan')
+            <a href="{{ route('eproc.perusahaan.data-personalia.index', ['user_id' => Crypt::encrypt(Auth::id())]) }}" class="btn btn-secondary">Back</a>
+          @endif
         </form>
       </div>
     </div>

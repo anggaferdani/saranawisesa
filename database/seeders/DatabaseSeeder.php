@@ -79,42 +79,42 @@ class DatabaseSeeder extends Seeder
         Direksi::create([
             'nama_direksi' => 'RONALD BATUBARA',
             'direksi' => 'DEFAULT.jpg',
-            'jabatan_direksi' => 'Direktur Umum & Keuangan PT Saranawisesa Properindo',
+            'jabatan_direksi' => 'Direktur Umum & Keuangan',
             'pendapat_direksi' => 'Pelayanan terhadap jasa yang kami berikan berpedoman kepada Objektivitas, Efisiensi, Profesional dan Bertanggung Jawab. Semoga Company Profile ini dapat memberikan wacana dan pertimbangan untuk menjalin kerjasama yang baik dan saling menguntungkan.',
         ]);
 
         Direksi::create([
             'nama_direksi' => 'HARWIN U. TENGGANO',
             'direksi' => 'DEFAULT.jpg',
-            'jabatan_direksi' => 'Direktur Utama PT Saranawisesa Properindo',
+            'jabatan_direksi' => 'Direktur Utama',
             'pendapat_direksi' => 'Dengan karakter perusahaan yang kuat, PT Saranawisesa Properindo yakin MAMPU meningkatkan laba perusahaan secara maksimal yang terukur dan AKUNTABEL, dengan tetap menjunjung tinggi KEJUJURAN dalam bekerja sehingga menjadi perusahaan yang UNGGUL dalam bidangnya. SWP MAJU!',
         ]);
 
         Direksi::create([
             'nama_direksi' => 'BERNARD YOHANES',
             'direksi' => 'DEFAULT.jpg',
-            'jabatan_direksi' => 'Direktur Operasional PT Saranawisesa Properindo',
+            'jabatan_direksi' => 'Direktur Operasional',
             'pendapat_direksi' => 'Sebagai anak perusahaan Perumda Pembangunan Sarana Jaya, PT Saranawisesa Properindo berharap dapat memberikan kontribusi maksimal dari sisi Profitabilitas dan terus berkembang menjadi perusahaan yang Membanggakan.',
         ]);
 
         Komisaris::create([
             'nama_komisaris' => 'RONALD BATUBARA',
             'komisaris' => 'DEFAULT.jpg',
-            'jabatan_komisaris' => 'Direktur Umum & Keuangan PT Saranawisesa Properindo',
+            'jabatan_komisaris' => 'Direktur Umum & Keuangan',
             'pendapat_komisaris' => 'Pelayanan terhadap jasa yang kami berikan berpedoman kepada Objektivitas, Efisiensi, Profesional dan Bertanggung Jawab. Semoga Company Profile ini dapat memberikan wacana dan pertimbangan untuk menjalin kerjasama yang baik dan saling menguntungkan.',
         ]);
 
         Komisaris::create([
             'nama_komisaris' => 'HARWIN U. TENGGANO',
             'komisaris' => 'DEFAULT.jpg',
-            'jabatan_komisaris' => 'Direktur Utama PT Saranawisesa Properindo',
+            'jabatan_komisaris' => 'Direktur Utama',
             'pendapat_komisaris' => 'Dengan karakter perusahaan yang kuat, PT Saranawisesa Properindo yakin MAMPU meningkatkan laba perusahaan secara maksimal yang terukur dan AKUNTABEL, dengan tetap menjunjung tinggi KEJUJURAN dalam bekerja sehingga menjadi perusahaan yang UNGGUL dalam bidangnya. SWP MAJU!',
         ]);
 
         Komisaris::create([
             'nama_komisaris' => 'BERNARD YOHANES',
             'komisaris' => 'DEFAULT.jpg',
-            'jabatan_komisaris' => 'Direktur Operasional PT Saranawisesa Properindo',
+            'jabatan_komisaris' => 'Direktur Operasional',
             'pendapat_komisaris' => 'Sebagai anak perusahaan Perumda Pembangunan Sarana Jaya, PT Saranawisesa Properindo berharap dapat memberikan kontribusi maksimal dari sisi Profitabilitas dan terus berkembang menjadi perusahaan yang Membanggakan.',
         ]);
 

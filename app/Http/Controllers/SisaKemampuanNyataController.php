@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\SisaKemampuanNyata;
 use Illuminate\Support\Facades\Crypt;
@@ -9,8 +10,12 @@ use Illuminate\Support\Facades\Crypt;
 class SisaKemampuanNyataController extends Controller
 {
     public function edit($user_id){
+        $user = User::find(Crypt::decrypt($user_id));
         $sisa_kemampuan_nyata = SisaKemampuanNyata::where('user_id', Crypt::decrypt($user_id))->first();
-        return view('eproc.sisa-kemampuan-nyata.edit', compact('sisa_kemampuan_nyata'));
+        return view('eproc.sisa-kemampuan-nyata.edit', compact(
+            'user',
+            'sisa_kemampuan_nyata',
+        ));
     }
 
     public function update(Request $request, $user_id){

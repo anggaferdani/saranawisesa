@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -10,8 +11,12 @@ use App\Models\SusunanKepemilikanSaham;
 class SusunanKepemilikanSahamController extends Controller
 {
     public function index($user_id){
+        $user = User::find(Crypt::decrypt($user_id));
         $susunan_kepemilikan_sahams = SusunanKepemilikanSaham::where('user_id', Crypt::decrypt($user_id))->latest()->paginate(10);
-        return view('eproc.susunan-kepemilikan-saham.index', compact('susunan_kepemilikan_sahams'));
+        return view('eproc.susunan-kepemilikan-saham.index', compact(
+            'user',
+            'susunan_kepemilikan_sahams',
+        ));
     }
     public function create($user_id){
         return view('eproc.susunan-kepemilikan-saham.create');
@@ -32,8 +37,12 @@ class SusunanKepemilikanSahamController extends Controller
     }
 
     public function show($user_id, $id){
+        $user = User::find(Crypt::decrypt($user_id));
         $susunan_kepemilikan_saham = SusunanKepemilikanSaham::find(Crypt::decrypt($id));
-        return view('eproc.susunan-kepemilikan-saham.show', compact('susunan_kepemilikan_saham'));
+        return view('eproc.susunan-kepemilikan-saham.show', compact(
+            'user',
+            'susunan_kepemilikan_saham',
+        ));
     }
     public function edit($user_id, $id){
         $susunan_kepemilikan_saham = SusunanKepemilikanSaham::find(Crypt::decrypt($id));

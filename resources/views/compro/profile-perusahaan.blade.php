@@ -9,10 +9,7 @@
       </div>
       <div class="col-md-6 pt-4">
         <h1>ABOUT US</h1>
-        <div class="fw-light p-0 m-0 lh-sm">{!! $profile_perusahaan->sejarah_perusahaan !!}</div>
-        <div class="mt-4">
-          <a href="{{ route('profile-perusahaan') }}/#visi-dan-misi"><img src="{{ asset('img/read-more.png') }}" alt=""></a>
-        </div>
+        <div class="fw-light p-0 m-0 lh-sm" style="text-align: justify;">{!! $profile_perusahaan->sejarah_perusahaan !!}</div>
       </div>
     </div>
   </div>
@@ -24,12 +21,12 @@
       <div class="col-md-6">
         <div class="card shadow-sm">
           <div class="card-body">
-            <h5 class="card-title"><i class="bi bi-eye-fill"></i> VISI</h5>
+            <h5 class="card-title"><i class="fa-solid fa-eye"></i> VISI</h5>
             <hr>
             <div>{!! $profile_perusahaan->visi !!}</div>
           </div>
           <div class="card-body">
-            <h5 class="card-title"><i class="bi bi-pin-angle-fill"></i> MISI</h5>
+            <h5 class="card-title"><i class="fa-solid fa-thumbtack"></i> MISI</h5>
             <hr>
             <div>{!! $profile_perusahaan->misi !!}</div>
           </div>
@@ -88,22 +85,22 @@
   </div>
 </section>
 
-<section class="py-5">
-  <div class="container py-5">
+<section class="pt-5 pb-2">
+  <div class="container pt-5">
     <div class="row">
-      <h1 class="text-center">BOARD OF DIRECTORS</h1>
+      <h1 class="text-center">BOARD OF COMMISSIONERS</h1>
     </div>
-    <div class="row g-2 mt-2">
-      @foreach ($direksis as $direksi)
-      <div class="col-md-4">
-        <div class="card h-100 rounded-4">
-          <div class="rounded-top-4" style="height: 300px; background-image: url({{ asset('direksi/'.$direksi['direksi']) }}); background-position: center; background-size: cover;"></div>
-          <div class="card-body" style="display: flex; justify-content: space-between; flex-direction: column;">
+    <div class="row g-2 g-md-5 mt-4 justify-content-center">
+      @foreach ($komisarisies as $komisaris)
+      <div class="col-md-4 m-0">
+        <div class="card h-100 rounded-4 border-0">
+          <div class="rounded-circle mx-auto" style="height: 250px; width: 250px; background-image: url({{ asset('komisaris/'.$komisaris["komisaris"]) }}); background-position: center; background-size: cover; border: 5px #920000 solid;"></div>
+          <div class="card-body px-0 px-md-5">
             <div class="mb-2">
-              <h5 class="card-title fw-bold">{{ $direksi->nama_direksi }}</h5>
-              <p class="card-text small lh-sm">{!! $direksi->pendapat_direksi !!}</p>
+              <h5 class="card-title fw-bold text-center mt-2">{{ $komisaris->nama_komisaris }}</h5>
+              <p class="card-text fw-semibold small lh-sm text-center mt-2" style="color: #920000;">{{ $komisaris->jabatan_komisaris }}</p>
+              <div class="card-text small lh-sm" style="text-align: justify;">{!! $komisaris->pendapat_komisaris !!}</div>
             </div>
-            <p class="card-text fw-semibold small lh-sm">{{ $direksi->jabatan_direksi }}</p>
           </div>
         </div>
       </div>
@@ -115,19 +112,19 @@
 <section class="py-5">
   <div class="container py-5">
     <div class="row">
-      <h1 class="text-center">BOARD OF COMMISSINERS</h1>
+      <h1 class="text-center">BOARD OF DIRECTORS</h1>
     </div>
-    <div class="row g-2 mt-2">
-      @foreach ($komisarisies as $komisaris)
-      <div class="col-md-4">
-        <div class="card h-100 rounded-4">
-          <div class="rounded-top-4" style="height: 300px; background-image: url({{ asset('komisaris/'.$komisaris["komisaris"]) }}); background-position: center; background-size: cover;"></div>
-          <div class="card-body" style="display: flex; justify-content: space-between; flex-direction: column;">
+    <div class="row g-2 g-md-5 mt-4 justify-content-center">
+      @foreach ($direksis as $direksi)
+      <div class="col-md-4 m-0">
+        <div class="card h-100 rounded-4 border-0">
+          <div class="rounded-circle mx-auto" style="height: 250px; width: 250px; background-image: url({{ asset('direksi/'.$direksi['direksi']) }}); background-position: center; background-size: cover; border: 5px #920000 solid;"></div>
+          <div class="card-body px-0 px-md-5">
             <div class="mb-2">
-              <h5 class="card-title fw-bold">{{ $komisaris->nama_komisaris }}</h5>
-              <p class="card-text small lh-sm">{!! $komisaris->pendapat_komisaris !!}</p>
+              <h5 class="card-title fw-bold text-center mt-2">{{ $direksi->nama_direksi }}</h5>
+              <p class="card-text fw-semibold small lh-sm text-center mt-2" style="color: #920000;">{{ $direksi->jabatan_direksi }}</p>
+              <div class="card-text small lh-sm" style="text-align: justify;">{!! $direksi->pendapat_direksi !!}</div>
             </div>
-            <p class="card-text fw-semibold small lh-sm">{{ $komisaris->jabatan_komisaris }}</p>
           </div>
         </div>
       </div>

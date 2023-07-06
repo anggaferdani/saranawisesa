@@ -29,12 +29,12 @@
           @method('PUT')
           <div class="form-group">
             <label>Nama Badan Usaha</label>
-            <input type="text" class="form-control" name="nama_badan_usaha" value="{{ $administrasi->nama_badan_usaha }}">
+            <input type="text" class="form-control" name="nama_badan_usaha" value="{{ $administrasi->nama_badan_usaha }}" @if(auth()->user()->level == 'superadmin' || auth()->user()->level == 'admin')@disabled(true)@endif>
             @error('nama_badan_usaha')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           <div class="form-group">
             <label>Status Badan Usaha</label>
-            <select class="form-control select2" name="status_badan_usaha">
+            <select class="form-control select2" name="status_badan_usaha" @if(auth()->user()->level == 'superadmin' || auth()->user()->level == 'admin')@disabled(true)@endif>
               <option selected disabled>Pilih</option>
               <option value="pusat" @if($administrasi->status_badan_usaha == 'pusat')@selected(true)@endif>Pusat</option>
               <option value="cabang" @if($administrasi->status_badan_usaha == 'cabang')@selected(true)@endif>Cabang</option>
@@ -43,20 +43,22 @@
           </div>
           <div class="form-group">
             <label>Alamat Badan Usaha</label>
-            <input type="text" class="form-control" name="alamat_badan_usaha" value="{{ $administrasi->alamat_badan_usaha }}">
+            <input type="text" class="form-control" name="alamat_badan_usaha" value="{{ $administrasi->alamat_badan_usaha }}" @if(auth()->user()->level == 'superadmin' || auth()->user()->level == 'admin')@disabled(true)@endif>
             @error('alamat_badan_usaha')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           <div class="form-group">
             <label>No. Telepon Badan Usaha</label>
-            <input type="number" class="form-control" name="telepon_badan_usaha" value="{{ $administrasi->telepon_badan_usaha }}">
-            @error('telepon_badan_usaha')<div class="text-danger">{{ $message }}</div>@enderror
+            <input type="number" class="form-control" name="no_telepon_badan_usaha" value="{{ $administrasi->no_telepon_badan_usaha }}" @if(auth()->user()->level == 'superadmin' || auth()->user()->level == 'admin')@disabled(true)@endif>
+            @error('no_telepon_badan_usaha')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           <div class="form-group">
             <label>Email Badan Usaha</label>
-            <input type="email" class="form-control" name="email_badan_usaha" value="{{ $administrasi->email_badan_usaha }}">
+            <input type="email" class="form-control" name="email_badan_usaha" value="{{ $administrasi->email_badan_usaha }}" @if(auth()->user()->level == 'superadmin' || auth()->user()->level == 'admin')@disabled(true)@endif>
             @error('email_badan_usaha')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          @if(auth()->user()->level == 'perusahaan')
+            <button type="submit" class="btn btn-primary">Submit</button>
+          @endif
         </form>
       </div>
     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\DataPersonalia;
 use Illuminate\Support\Facades\Auth;
@@ -10,8 +11,12 @@ use Illuminate\Support\Facades\Crypt;
 class DataPersonaliaController extends Controller
 {
     public function index($user_id){
+        $user = User::find(Crypt::decrypt($user_id));
         $data_personalias = DataPersonalia::where('user_id', Crypt::decrypt($user_id))->latest()->paginate(10);
-        return view('eproc.data-personalia.index', compact('data_personalias'));
+        return view('eproc.data-personalia.index', compact(
+            'user',
+            'data_personalias',
+        ));
     }
     public function create($user_id){
         return view('eproc.data-personalia.create');
@@ -34,8 +39,12 @@ class DataPersonaliaController extends Controller
     }
 
     public function show($user_id, $id){
+        $user = User::find(Crypt::decrypt($user_id));
         $data_personalia = DataPersonalia::find(Crypt::decrypt($id));
-        return view('eproc.data-personalia.show', compact('data_personalia'));
+        return view('eproc.data-personalia.show', compact(
+            'user',
+            'data_personalia',
+        ));
     }
     public function edit($user_id, $id){
         $data_personalia = DataPersonalia::find(Crypt::decrypt($id));
