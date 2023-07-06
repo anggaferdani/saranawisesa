@@ -1,4 +1,4 @@
-<section class="text-white pt-3 pt-md-5 pt-lg-5 pb-4 mt-4" style="background-color: #212529;">
+<section class="text-white pt-3 pt-md-5 pt-lg-5 pb-4" style="background-color: #212529;">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-2 mx-auto px-md-2 px-lg-2 mt-3">

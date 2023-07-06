@@ -9,30 +9,40 @@
   </div>
 </section>
 
-<section>
+<section class="py-5">
   <div class="container py-5">
-    <div class="row mt-2">
-      <div class="col-md-8">
-        <h1 style="color: #830000;">Saranawisesa call center</h1>
-        <p>Jika terdapat pertanyaan, kami siap membantu. Hubungi layanan pelanggan SARANAWISESA atau temukan jawabannya di bawah ini.</p>
-      </div>
-    </div>
-    <div class="row g-4 mt-2">
-      <div class="col-md-6">
-        <div class="row">
-          <h4>Layanan Pelanggan SARANAWISESA</h4>
-          <h4>Telepon {{ $setting[0]->isi }}</h4>
-        </div>
-        <div class="row">
-          <p class="m-0 fs-4 lh-sm">Anda dapat menghubungi kami <br>Senin - Minggu : 10.00 - 21.00</p>
+    <div class="row">
+      <div class="col-md-4 px-2 px-md-5 contact  border-end border-dark border-2">
+        <div class="location d-flex gap-3">
+          <div class="icon">
+            <i class="fa-solid fa-location-dot fs-1" style="color: #830000;"></i>
+          </div>
+          <div class="location-desc">
+            <h3 class="fw-bold" style="color: #830000;">LOCATION</h3>
+            <p class="">Sarana Suqare Lt.5 Jalan Tebet Barat IV No.20, Jakarta Selatan 12810</p>
+          </div>
         </div>
       </div>
-      <div class="col-md-1"><div class="vr h-100"></div></div>
-      <div class="col-md-5">
-        <div class="row">
-          <h4 style="color: #830000;">Email</h4>
-          <p class="fs-5 lh-sm">Email kami kapan pun dan kami akan membalasnya dalam 24 jam</p>
-          <p class="fs-5">kirim email ke {{ $setting[1]->isi }}</p>
+      <div class="col-md-4 px-2 px-md-5 contact">
+        <div class="location d-flex gap-3">
+          <div class="icon">
+            <i class="fa-solid fa-envelope fs-1" style="color: #830000;"></i>
+          </div>
+          <div class="location-desc">
+            <h3 class="fw-bold" style="color: #830000;">E-MAIL</h3>
+            <p class="">Hubungi alamat email kami di <span class="fw-bold">info@saranawisesa.co.id</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 px-2 px-md-5 contact border-start border-dark border-2">
+        <div class="location d-flex gap-3">
+          <div class="icon">
+            <i class="fa-solid fa-phone fs-1" style="color: #830000;"></i>
+          </div>
+          <div class="location-desc">
+            <h3 class="fw-bold" style="color: #830000;">CALL SERVICES</h3>
+            <p class=""><span class="fw-bold">(021) 83794770</span><br> Anda dapat mengubungi kami <span class="fw-bold">Senin - Minggu : 10.00 - 21.00</span></p>
+          </div>
         </div>
       </div>
     </div>
