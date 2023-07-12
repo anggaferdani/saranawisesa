@@ -19,7 +19,7 @@
           </div>
           <div class="location-desc">
             <h3 class="fw-bold" style="color: #830000;">LOCATION</h3>
-            <p class="">Sarana Suqare Lt.5 Jalan Tebet Barat IV No.20, Jakarta Selatan 12810</p>
+            <p class="">Sarana Square Lt.5 Jalan Tebet Barat IV No.20, Jakarta Selatan 12810</p>
           </div>
         </div>
       </div>
