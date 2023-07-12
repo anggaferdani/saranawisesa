@@ -34,6 +34,7 @@ use App\Http\Controllers\Pages\EprocController as Eproc;
 use App\Http\Controllers\PengalamanPerusahaanController;
 use App\Http\Controllers\Pages\ComproController as Compro;
 use App\Http\Controllers\AktaPendirianPerusahaanController;
+use App\Http\Controllers\DataPerusahaanController;
 use App\Http\Controllers\LampiranKualifikasiController;
 use App\Http\Controllers\SusunanKepemilikanSahamController;
 use App\Http\Controllers\PekerjaanYangSedangDilaksanakanController;
@@ -307,6 +308,8 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
 
       Route::resource('pengadaan', Pengadaan0002Controller::class);
 
+      Route::get('dokumen', [DataPerusahaanController::class, 'dokumen'])->name('dokumen.index');
+      
       Route::get('{user_id}/administrasi/edit', [AdministrasiController::class, 'edit'])->name('administrasi.edit');
       Route::put('{user_id}/administrasi', [AdministrasiController::class, 'update'])->name('administrasi.update');
 

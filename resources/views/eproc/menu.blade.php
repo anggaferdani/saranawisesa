@@ -29,6 +29,7 @@
       <a href="{{ route('eproc.admin.lampiran-kualifikasi.edit', ['user_id' => Crypt::encrypt($user->id)]) }}" class="btn btn-secondary {{ str_contains(Route::currentRouteName(), 'eproc.admin.lampiran-kualifikasi') ? 'btn-primary' : '' }}">Lampiran kualifikasi</a>
     @endif
     @if(auth()->user()->level == 'perusahaan')
+      <a href="" class="btn badge text-white px-5" style="background-color: #830000 !important;">Dokumen</a>
       <a href="{{ route('eproc.perusahaan.administrasi.edit', ['user_id' => Crypt::encrypt(Auth::id())]) }}" class="btn btn-secondary {{ str_contains(Route::currentRouteName(), 'eproc.perusahaan.administrasi') ? 'btn-primary' : '' }}">Administrasi</a>
       <a href="{{ route('eproc.perusahaan.akta-pendirian-perusahaan.index', ['user_id' => Crypt::encrypt(Auth::id())]) }}" class="btn btn-secondary {{ str_contains(Route::currentRouteName(), 'eproc.perusahaan.akta-pendirian-perusahaan') ? 'btn-primary' : '' }}">Akta Pendirian Usaha</a>
       <a href="{{ route('eproc.perusahaan.pengurus-badan-usaha.index', ['user_id' => Crypt::encrypt(Auth::id())]) }}" class="btn btn-secondary {{ str_contains(Route::currentRouteName(), 'eproc.perusahaan.pengurus-badan-usaha') ? 'btn-primary' : '' }}">Pengurus Badan Usaha</a>

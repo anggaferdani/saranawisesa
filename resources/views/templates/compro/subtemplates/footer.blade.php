@@ -13,9 +13,11 @@
       <div class="col-md-3 mx-auto px-md-2">
         <ul class="list-unstyled">
           <h5 class="fw-bold text-white fs-6 mb-4">PRODUCT & SERVICES</h5>
-          @foreach($produk_dan_layanans as $produk_dan_layanan)
-            <li><a href="{{ route('produk-dan-layanan', Crypt::encrypt($produk_dan_layanan->id)) }}" class="d-block text-white text-decoration-none small product-and-service">{{ $produk_dan_layanan->judul }}</a></li>
-          @endforeach
+          <div style="display:grid; grid-template-rows: repeat(5, 1fr); grid-auto-flow: column">
+            @foreach($produk_dan_layanans as $produk_dan_layanan)
+              <li><a href="{{ route('produk-dan-layanan', Crypt::encrypt($produk_dan_layanan->id)) }}" class="d-block text-white text-decoration-none small product-and-service">{{ $produk_dan_layanan->judul }}</a></li>
+            @endforeach
+          </div>
         </ul>
       </div>
       <div class="col-md-3 mx-auto px-md-2">
