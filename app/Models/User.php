@@ -8,6 +8,7 @@ use App\Models\Lampiran;
 use App\Models\Perusahaan;
 use App\Models\VerifyEmail;
 use App\Models\Administrasi;
+use App\Models\AktaPendirian;
 use App\Models\DataFasilitas;
 use App\Models\DataPersonalia;
 use App\Models\TandaDaftarUsaha;
@@ -93,8 +94,8 @@ class User extends Authenticatable
 
 
 
-    public function administrasis(){
-        return $this->hasMany(Administrasi::class);
+    public function akta_pendirians(){
+        return $this->hasMany(AktaPendirian::class);
     }
     public function akta_pendirian_perusahaans(){
         return $this->hasMany(AktaPendirianPerusahaan::class);

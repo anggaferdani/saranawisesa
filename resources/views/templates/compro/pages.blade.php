@@ -17,6 +17,18 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <style>
+  .card2 .slick-list{
+    margin: 0 -5px !important;
+  }
+  .card2 .slick-slide > div{
+    margin: 0 5px !important;
+  }
+  .card3 .slick-list{
+    margin: 0 -5px !important;
+  }
+  .card3 .slick-slide > div{
+    margin: 0 5px !important;
+  }
   body{
     font-family: 'Nunito Sans', sans-serif;
   }
@@ -191,6 +203,90 @@
           settings: {
             slidesToShow: 3,
             slidesToScroll: 3,
+            arrows: false,
+          }
+        }
+      ]
+    });
+  </script>
+
+  <script type="text/javascript">
+    $('.card2').slick({
+      arrows: false,
+      dots: true,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      infinite: true,
+      speed: 300,
+      slidesToShow: 3,
+      slidesToScroll: 3,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            infinite: true,
+            arrows: false,
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            infinite: true,
+            arrows: false,
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            infinite: true,
+            arrows: false,
+          }
+        }
+      ]
+    });
+  </script>
+
+  <script type="text/javascript">
+    $('.card3').slick({
+      arrows: false,
+      dots: true,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      infinite: true,
+      speed: 300,
+      slidesToShow: 5,
+      slidesToScroll: 5,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            infinite: true,
+            arrows: false,
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            infinite: true,
+            arrows: false,
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            infinite: true,
             arrows: false,
           }
         }

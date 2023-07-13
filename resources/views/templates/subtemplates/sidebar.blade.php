@@ -20,6 +20,7 @@
           <li class="{{ str_contains(Route::currentRouteName(), 'compro.superadmin.komisaris') ? 'active' : '' }}"><a class="nav-link" href="{{ route('compro.superadmin.komisaris.index') }}"><i class="fas fa-user"></i><span>Komisaris</span></a></li>
           <li class="{{ str_contains(Route::currentRouteName(), 'compro.superadmin.survey') ? 'active' : '' }}"><a class="nav-link" href="{{ route('compro.superadmin.survey.index') }}"><i class="fas fa-star"></i><span>Survey</span></a></li>
           <li class="{{ str_contains(Route::currentRouteName(), 'compro.superadmin.setting') ? 'active' : '' }}"><a class="nav-link" href="{{ route('compro.superadmin.setting.index') }}"><i class="fas fa-cog"></i><span>Setting</span></a></li>
+          <li class="{{ str_contains(Route::currentRouteName(), 'compro.superadmin.banner') ? 'active' : '' }}"><a class="nav-link" href="{{ route('compro.superadmin.banner.index') }}"><i class="fas fa-image"></i><span>Banner</span></a></li>
         @endif
         @if(auth()->user()->level == 'admin')
         <li class="menu-header">Menu</li>
@@ -32,6 +33,7 @@
           <li class="{{ str_contains(Route::currentRouteName(), 'compro.admin.komisaris') ? 'active' : '' }}"><a class="nav-link" href="{{ route('compro.admin.komisaris.index') }}"><i class="fas fa-user"></i><span>Komisaris</span></a></li>
           <li class="{{ str_contains(Route::currentRouteName(), 'compro.admin.survey') ? 'active' : '' }}"><a class="nav-link" href="{{ route('compro.admin.survey.index') }}"><i class="fas fa-star"></i><span>Survey</span></a></li>
           <li class="{{ str_contains(Route::currentRouteName(), 'compro.admin.setting') ? 'active' : '' }}"><a class="nav-link" href="{{ route('compro.admin.setting.index') }}"><i class="fas fa-cog"></i><span>Setting</span></a></li>
+          <li class="{{ str_contains(Route::currentRouteName(), 'compro.admin.banner') ? 'active' : '' }}"><a class="nav-link" href="{{ route('compro.admin.banner.index') }}"><i class="fas fa-image"></i><span>Banner</span></a></li>
         @endif
         @if(auth()->user()->level == 'creator')
         <li class="menu-header">Menu</li>
@@ -132,7 +134,7 @@
         @if(auth()->user()->level == 'perusahaan')
           <li class="menu-header">Menu</li>
           <li class="{{ str_contains(Route::currentRouteName(), 'eproc.perusahaan.dashboard') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.perusahaan.dashboard') }}"><i class="fas fa-quote-right"></i><span>Dashboard</span></a></li>
-          <li class="{{ str_contains(Route::currentRouteName(), 'eproc.perusahaan.administrasi') ||
+          <li class="{{ str_contains(Route::currentRouteName(), 'eproc.perusahaan.dokumen') ||
           str_contains(Route::currentRouteName(), 'eproc.perusahaan.administrasi') ||
           str_contains(Route::currentRouteName(), 'eproc.perusahaan.akta-pendirian-perusahaan') ||
           str_contains(Route::currentRouteName(), 'eproc.perusahaan.pengurus-badan-usaha') ||
@@ -143,7 +145,7 @@
           str_contains(Route::currentRouteName(), 'eproc.perusahaan.pengalaman-perusahaan') ||
           str_contains(Route::currentRouteName(), 'eproc.perusahaan.pekerjaan-yang-sedang-dilaksanakan') ||
           str_contains(Route::currentRouteName(), 'eproc.perusahaan.sisa-kemampuan-nyata') ||
-          str_contains(Route::currentRouteName(), 'eproc.perusahaan.lampiran-kualifikasi') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.perusahaan.administrasi.edit', ['user_id' => Crypt::encrypt(Auth::id())]) }}"><i class="fas fa-user"></i><span>Kualifikasi</span></a></li>
+          str_contains(Route::currentRouteName(), 'eproc.perusahaan.lampiran-kualifikasi') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.perusahaan.dokumen', ['user_id' => Crypt::encrypt(Auth::id())]) }}"><i class="fas fa-user"></i><span>Kualifikasi</span></a></li>
           <li class="{{ str_contains(Route::currentRouteName(), 'eproc.perusahaan.pengadaan') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.perusahaan.pengadaan.index') }}"><i class="fas fa-tag"></i><span>Pengadaan</span></a></li>
         @endif
       @endif

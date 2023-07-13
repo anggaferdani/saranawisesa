@@ -27,6 +27,44 @@
 <!-- /END GA --></head>
 
 <style>
+  body.sidebar-mini .main-sidebar .sidebar-menu > li.active > a{
+    background-color: #920000;
+    color: white !important;
+    box-shadow: none;
+  }
+  .navbar-bg{
+    background-color: #920000 !important;
+  }
+  .btn.btn-primary{
+    background-color: #920000 !important;
+    box-shadow: none;
+    border: none;
+  }
+  .btn.btn-primary:hover{
+    background-color: #720000 !important;
+    box-shadow: none;
+    border: none;
+  }
+  .btn.btn-primary:active{
+    background-color: #720000 !important;
+    box-shadow: none;
+    border: none;
+  }
+  .main-sidebar .sidebar-menu li.active a{
+    color: #920000 !important;
+  }
+  body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu > li.active > a:before{
+    background-color: #920000 !important;
+  }
+  .active{
+    color: #920000 !important;
+  }
+  .modal-backdrop{
+    display: none;
+  }
+  .modal{
+    background: rgba(0, 0, 0, 0.5); 
+  }
   .separator {
     display: flex;
     align-items: center;
@@ -46,7 +84,7 @@
   }
 </style>
 
-<body>
+<body class="sidebar-mini">
   <div id="app">
     <div class="main-wrapper main-wrapper-1">
       <div class="navbar-bg"></div>
@@ -82,10 +120,9 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script type="text/javascript">
     $('.delete').click(function(){
-      var id = $(this).attr('data-id');
       Swal.fire({
         title: "Are you sure?",
-        text: "Are you sure?",
+        text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus amet dolore ex saepe, incidunt accusamus distinctio voluptatum esse recusandae. Beatae dicta tempora culpa libero suscipit quam vero ad, corporis soluta.",
         icon: "warning",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",

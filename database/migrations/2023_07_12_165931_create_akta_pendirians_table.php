@@ -11,12 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('perusahaans', function (Blueprint $table) {
+        Schema::create('akta_pendirians', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->enum('status_aktif', ['aktif', 'tidak_aktif'])->default('aktif');
-            $table->string('created_by')->nullable();
-            $table->string('updated_by')->nullable();
+            $table->string('no_dokumen');
+            $table->string('no_akta')->nullable();
+            $table->date('tanggal_akta')->nullable();
+            $table->string('nama_notaris')->nullable();
+            $table->string('no_sk')->nullable();
+            $table->date('tanggal_sk')->nullable();
+            $table->string('akta')->nullable();
+            $table->string('sk')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('perusahaans');
+        Schema::dropIfExists('akta_pendirians');
     }
 };

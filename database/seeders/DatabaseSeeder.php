@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\User;
+use App\Models\Banner;
 use App\Models\Lelang;
 use App\Models\Artikel;
 use App\Models\Direksi;
@@ -166,6 +167,16 @@ class DatabaseSeeder extends Seeder
             'judul' => 'Subproduk0002',
             'deskripsi' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt quibusdam quod illum doloremque minus ut cupiditate nulla porro aut, laudantium adipisci enim numquam consequuntur impedit laborum, ad repellendus, accusantium velit.',
             'thumbnail' => 'subproduk0002.jpg',
+        ]);
+
+        Banner::create([
+            'keterangan' => 'Produk Dan Pelayanan',
+        ]);
+        Banner::create([
+            'keterangan' => 'Portfolio',
+        ]);
+        Banner::create([
+            'keterangan' => 'Artikel',
         ]);
     }
 }

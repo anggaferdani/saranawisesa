@@ -35,8 +35,8 @@
     </div>
     <div class="row mt-5 justify-content-center text-center">
       <div class="col">
-        <a href="{{ $setting[3]->link }}" class="text-white mx-2 fs-5"><i class="fa-brands fa-facebook"></i></a>
-        <a href="{{ $setting[4]->link }}" class="text-white mx-2 fs-5"><i class="fa-brands fa-instagram"></i></a>
+        <a href="{{ $setting[4]->link }}" class="text-white mx-2 fs-5"><i class="fa-brands fa-facebook"></i></a>
+        <a href="{{ $setting[3]->link }}" class="text-white mx-2 fs-5"><i class="fa-brands fa-instagram"></i></a>
         <a href="{{ $setting[5]->link }}" class="text-white mx-2 fs-5"><i class="fa-brands fa-twitter"></i></a>
         <a href="{{ $setting[6]->link }}" class="text-white mx-2 fs-5"><i class="fa-brands fa-youtube"></i></a>
       </div>

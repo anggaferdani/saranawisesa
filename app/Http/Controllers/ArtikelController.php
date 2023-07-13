@@ -57,7 +57,7 @@ class ArtikelController extends Controller
         $request->validate([
             'judul_artikel' => 'required',
             'thumbnail' => 'required',
-            'tanggal_publikasi' => 'required|after:yesterday',
+            'tanggal_publikasi' => 'required',
             'isi_artikel' => 'required',
         ]);
 
@@ -100,7 +100,7 @@ class ArtikelController extends Controller
 
         $request->validate([
             'judul_artikel' => 'required',
-            'tanggal_publikasi' => 'required|after:yesterday',
+            'tanggal_publikasi' => 'required',
             'isi_artikel' => 'required',
         ]);
 

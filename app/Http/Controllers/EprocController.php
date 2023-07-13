@@ -105,6 +105,13 @@ class EprocController extends Controller
 
         $perusahaan = User::create($array);
 
+        Perusahaan::create([
+            'user_id' => $perusahaan->id,
+            'profile_picture' => 'DEFAULT.jpg',
+            'nama_badan_usaha' => $perusahaan->nama_panjang,
+            'email_badan_usaha' => $perusahaan->email,
+        ]);
+
         Administrasi::create([
             'user_id' => $perusahaan->id,
             'nama_badan_usaha' => $perusahaan->nama_panjang,

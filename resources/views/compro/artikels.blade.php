@@ -1,7 +1,7 @@
 @extends('templates.compro.pages')
 @section('title', 'Artikel')
 @section('content')
-<section class="py-5" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url({{ asset('img/artikel.png') }}); background-size: cover; background-repeat: no-repeat; background-position: center;">
+<section class="py-5" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url({{ asset('compro/banner/'.$banner[2]["thumbnail"]) }}); background-size: cover; background-repeat: no-repeat; background-position: center;">
   <div class="container py-5 h-100">
     <div class="row py-5 justify-content-center text-center align-items-center h-100">
       <div class="col text-white"><h1>ARTIKEL</h1></div>

@@ -18,6 +18,7 @@ use App\Http\Controllers\NewComproController;
 use App\Http\Controllers\PerusahaanController;
 use App\Http\Controllers\PortofolioController;
 use App\Http\Controllers\AdministrasiController;
+use App\Http\Controllers\AktaPendirianController;
 use App\Http\Controllers\JadwalLelangController;
 use App\Http\Controllers\DataFasilitasController;
 use App\Http\Controllers\Pengadaan0002Controller;
@@ -34,10 +35,13 @@ use App\Http\Controllers\Pages\EprocController as Eproc;
 use App\Http\Controllers\PengalamanPerusahaanController;
 use App\Http\Controllers\Pages\ComproController as Compro;
 use App\Http\Controllers\AktaPendirianPerusahaanController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\DataPerusahaanController;
+use App\Http\Controllers\DokumenController;
 use App\Http\Controllers\LampiranKualifikasiController;
 use App\Http\Controllers\SusunanKepemilikanSahamController;
 use App\Http\Controllers\PekerjaanYangSedangDilaksanakanController;
+use App\Http\Controllers\ProfilePerusahaan2Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,6 +99,7 @@ Route::prefix('compro')->name('compro.')->group(function(){
       Route::get('profile', [Controller::class, 'profile'])->name('profile');
       Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
       Route::resource('produk-dan-layanan', ProdukDanLayananController::class);
+      Route::resource('banner', BannerController::class);
       Route::get('{produk_dan_layanan_id}/subproduk-dan-layanan', [SubprodukDanLayananController::class, 'index'])->name('subproduk-dan-layanan.index');
       Route::get('{produk_dan_layanan_id}/subproduk-dan-layanan/create', [SubprodukDanLayananController::class, 'create'])->name('subproduk-dan-layanan.create');
       Route::post('{produk_dan_layanan_id}/subproduk-dan-layanan/store', [SubprodukDanLayananController::class, 'store'])->name('subproduk-dan-layanan.store');
@@ -123,6 +128,7 @@ Route::prefix('compro')->name('compro.')->group(function(){
       Route::get('profile', [Controller::class, 'profile'])->name('profile');
       Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
       Route::resource('produk-dan-layanan', ProdukDanLayananController::class);
+      Route::resource('banner', BannerController::class);
       Route::get('{produk_dan_layanan_id}/subproduk-dan-layanan', [SubprodukDanLayananController::class, 'index'])->name('subproduk-dan-layanan.index');
       Route::get('{produk_dan_layanan_id}/subproduk-dan-layanan/create', [SubprodukDanLayananController::class, 'create'])->name('subproduk-dan-layanan.create');
       Route::post('{produk_dan_layanan_id}/subproduk-dan-layanan/store', [SubprodukDanLayananController::class, 'store'])->name('subproduk-dan-layanan.store');
@@ -307,8 +313,6 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
 
       Route::resource('pengadaan', Pengadaan0002Controller::class);
-
-      Route::get('dokumen', [DataPerusahaanController::class, 'dokumen'])->name('dokumen.index');
       
       Route::get('{user_id}/administrasi/edit', [AdministrasiController::class, 'edit'])->name('administrasi.edit');
       Route::put('{user_id}/administrasi', [AdministrasiController::class, 'update'])->name('administrasi.update');
@@ -356,13 +360,7 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::put('{user_id}/data-fasilitas/{id}', [DataFasilitasController::class, 'update'])->name('data-fasilitas.update');
       Route::delete('{user_id}/data-fasilitas/{id}', [DataFasilitasController::class, 'destroy'])->name('data-fasilitas.destroy');
 
-      Route::get('{user_id}/pengalaman-perusahaan/', [PengalamanPerusahaanController::class, 'index'])->name('pengalaman-perusahaan.index');
-      Route::get('{user_id}/pengalaman-perusahaan/create', [PengalamanPerusahaanController::class, 'create'])->name('pengalaman-perusahaan.create');
-      Route::post('{user_id}/pengalaman-perusahaan/store', [PengalamanPerusahaanController::class, 'store'])->name('pengalaman-perusahaan.store');
-      Route::get('{user_id}/pengalaman-perusahaan/{id}', [PengalamanPerusahaanController::class, 'show'])->name('pengalaman-perusahaan.show');
-      Route::get('{user_id}/pengalaman-perusahaan/{id}/edit', [PengalamanPerusahaanController::class, 'edit'])->name('pengalaman-perusahaan.edit');
-      Route::put('{user_id}/pengalaman-perusahaan/{id}', [PengalamanPerusahaanController::class, 'update'])->name('pengalaman-perusahaan.update');
-      Route::delete('{user_id}/pengalaman-perusahaan/{id}', [PengalamanPerusahaanController::class, 'destroy'])->name('pengalaman-perusahaan.destroy');
+      
 
       Route::get('{user_id}/pekerjaan-yang-sedang-dilaksanakan/', [PekerjaanYangSedangDilaksanakanController::class, 'index'])->name('pekerjaan-yang-sedang-dilaksanakan.index');
       Route::get('{user_id}/pekerjaan-yang-sedang-dilaksanakan/create', [PekerjaanYangSedangDilaksanakanController::class, 'create'])->name('pekerjaan-yang-sedang-dilaksanakan.create');
@@ -377,6 +375,16 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
 
       Route::get('{user_id}/lampiran-kualifikasi/edit', [LampiranKualifikasiController::class, 'edit'])->name('lampiran-kualifikasi.edit');
       Route::put('{user_id}/lampiran-kualifikasi', [LampiranKualifikasiController::class, 'update'])->name('lampiran-kualifikasi.update');
+
+      Route::put('profile-perusahaan/{id}', [ProfilePerusahaan2Controller::class, 'update'])->name('profile-perusahaan.update');
+
+      Route::get('dokumen', [DokumenController::class, 'index'])->name('dokumen');
+      
+      Route::post('post-akta-pendirian', [AktaPendirianController::class, 'postAktaPendirian'])->name('post-akta-pendirian');
+      Route::put('put-akta-pendirian/{id}', [AktaPendirianController::class, 'putAktaPendirian'])->name('put-akta-pendirian');
+      Route::delete('delete-akta-pendirian/{id}', [AktaPendirianController::class, 'deleteAktaPendirian'])->name('delete-akta-pendirian');
+      
+      Route::get('pengalaman-perusahaan', [PengalamanPerusahaanController::class, 'index'])->name('index-pengalaman-perusahaan');
     });
   });
 });

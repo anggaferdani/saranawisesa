@@ -1,7 +1,7 @@
 @extends('templates.compro.pages')
 @section('title', 'Produk Dan Layanan')
 @section('content')
-<section class="py-5" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url({{ asset('img/sarana-parking.png') }}); background-size: cover; background-repeat: no-repeat; background-position: center;">
+<section class="py-5" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url({{ asset('compro/banner/'.$banner[0]["thumbnail"]) }}); background-size: cover; background-repeat: no-repeat; background-position: center;">
   <div class="container py-5 h-100">
     <div class="row py-5 justify-content-center text-center align-items-center h-100">
       <div class="col text-white"><h1>PRODUCT & SERVICES</h1></div>
@@ -22,7 +22,7 @@
                 </div>
                 <div class="col">
                   <div class="card-body h-100 ps-0" style="height: 175px; display: flex; justify-content: space-between; flex-direction: column;">
-                    <h4 class="card-title fw-bold text-uppercase" style="color: #920000;">{{ $produk_dan_layanan->judul }}</h4>
+                    <h5 class="card-title fw-bold" style="color: #920000;">{{ $produk_dan_layanan->judul }}</h5>
                     <p class="card-text fs-5 lh-sm">{!! Str::limit($produk_dan_layanan->deskripsi, 40) !!}</p>
                   </div>
                 </div>

@@ -1,4 +1,4 @@
-<div class="card-body">
+{{-- <div class="card-body">
   <div class="buttons">
     @if(auth()->user()->level == 'superadmin')
       <a href="{{ route('eproc.superadmin.perusahaan.index') }}" class="btn btn-secondary"><i class="fas fa-times"></i></a>
@@ -29,7 +29,6 @@
       <a href="{{ route('eproc.admin.lampiran-kualifikasi.edit', ['user_id' => Crypt::encrypt($user->id)]) }}" class="btn btn-secondary {{ str_contains(Route::currentRouteName(), 'eproc.admin.lampiran-kualifikasi') ? 'btn-primary' : '' }}">Lampiran kualifikasi</a>
     @endif
     @if(auth()->user()->level == 'perusahaan')
-      <a href="" class="btn badge text-white px-5" style="background-color: #830000 !important;">Dokumen</a>
       <a href="{{ route('eproc.perusahaan.administrasi.edit', ['user_id' => Crypt::encrypt(Auth::id())]) }}" class="btn btn-secondary {{ str_contains(Route::currentRouteName(), 'eproc.perusahaan.administrasi') ? 'btn-primary' : '' }}">Administrasi</a>
       <a href="{{ route('eproc.perusahaan.akta-pendirian-perusahaan.index', ['user_id' => Crypt::encrypt(Auth::id())]) }}" class="btn btn-secondary {{ str_contains(Route::currentRouteName(), 'eproc.perusahaan.akta-pendirian-perusahaan') ? 'btn-primary' : '' }}">Akta Pendirian Usaha</a>
       <a href="{{ route('eproc.perusahaan.pengurus-badan-usaha.index', ['user_id' => Crypt::encrypt(Auth::id())]) }}" class="btn btn-secondary {{ str_contains(Route::currentRouteName(), 'eproc.perusahaan.pengurus-badan-usaha') ? 'btn-primary' : '' }}">Pengurus Badan Usaha</a>
@@ -41,6 +40,23 @@
       <a href="{{ route('eproc.perusahaan.pekerjaan-yang-sedang-dilaksanakan.index', ['user_id' => Crypt::encrypt(Auth::id())]) }}" class="btn btn-secondary {{ str_contains(Route::currentRouteName(), 'eproc.perusahaan.pekerjaan-yang-sedang-dilaksanakan') ? 'btn-primary' : '' }}">Pekerjaan Yang Sedang Dilaksanakan</a>
       <a href="{{ route('eproc.perusahaan.sisa-kemampuan-nyata.edit', ['user_id' => Crypt::encrypt(Auth::id())]) }}" class="btn btn-secondary {{ str_contains(Route::currentRouteName(), 'eproc.perusahaan.sisa-kemampuan-nyata') ? 'btn-primary' : '' }}">Sisa Kemampuan Nyata</a>
       <a href="{{ route('eproc.perusahaan.lampiran-kualifikasi.edit', ['user_id' => Crypt::encrypt(Auth::id())]) }}" class="btn btn-secondary {{ str_contains(Route::currentRouteName(), 'eproc.perusahaan.lampiran-kualifikasi') ? 'btn-primary' : '' }}">Lampiran kualifikasi</a>
+    @endif
+  </div>
+</div> --}}
+<div class="card-body">
+  <div class="buttons">
+    @if(auth()->user()->level == 'superadmin')
+      
+    @endif
+    @if(auth()->user()->level == 'admin')
+      
+    @endif
+    @if(auth()->user()->level == 'perusahaan')
+      <a href="{{ route('eproc.perusahaan.dokumen', ['user_id' => Crypt::encrypt(Auth::id())]) }}" class="btn btn-secondary badge px-5 my-0 {{ str_contains(Route::currentRouteName(), 'eproc.perusahaan.dokumen') ? 'btn-primary' : '' }}">Akta Pendirian</a>
+      <a href="" class="btn btn-secondary badge px-5 my-0">Akun Bank</a>
+      <a href="" class="btn btn-secondary badge px-5 my-0">Pengalaman</a>
+      <a href="" class="btn btn-secondary badge px-5 my-0">Struktur Organisasi</a>
+      <a href="" class="btn btn-secondary badge px-5 my-0">Gambar Perusahaan</a>
     @endif
   </div>
 </div>

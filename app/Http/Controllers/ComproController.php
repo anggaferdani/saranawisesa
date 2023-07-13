@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artikel;
+use App\Models\Banner;
 use App\Models\Direksi;
 use App\Models\Setting;
 use App\Models\Komisaris;
@@ -84,9 +85,9 @@ class ComproController extends Controller
 
     public function index(){
         $profile_perusahaan = ProfilePerusahaan::first();
-        $produk_dan_layanans = ProdukDanLayanan::where('status_aktif', 'aktif')->get()->take(6);
-        $portofolios = Portofolio::where('status_aktif', 'aktif')->latest()->paginate(10);
-        $artikels = Artikel::where('status_aktif', 'aktif')->get()->take(5);
+        $produk_dan_layanans = ProdukDanLayanan::where('status_aktif', 'aktif')->get();
+        $portofolios = Portofolio::where('status_aktif', 'aktif')->latest()->get();
+        $artikels = Artikel::where('status_aktif', 'aktif')->latest()->get();
         $setting = Setting::all();
         return view('compro.index', compact(
             'profile_perusahaan',
@@ -113,9 +114,11 @@ class ComproController extends Controller
     public function produk_dan_layanans(){
         $produk_dan_layanans = ProdukDanLayanan::where('status_aktif', 'aktif')->get();
         $setting = Setting::all();
+        $banner = Banner::all();
         return view('compro.produk-dan-layanans', compact(
             'produk_dan_layanans',
             'setting',
+            'banner',
         ));
     }
 
@@ -136,10 +139,12 @@ class ComproController extends Controller
         $portofolios = Portofolio::where('status_aktif', 'aktif')->latest()->paginate(9);
         $produk_dan_layanans = ProdukDanLayanan::all();
         $setting = Setting::all();
+        $banner = Banner::all();
         return view('compro.portofolios', compact(
             'portofolios',
             'produk_dan_layanans',
             'setting',
+            'banner',
         ));
     }
 
@@ -158,10 +163,12 @@ class ComproController extends Controller
         $artikels = Artikel::where('status_aktif', 'aktif')->latest()->paginate(10);
         $produk_dan_layanans = ProdukDanLayanan::all();
         $setting = Setting::all();
+        $banner = Banner::all();
         return view('compro.artikels', compact(
             'artikels',
             'produk_dan_layanans',
             'setting',
+            'banner',
         ));
     }
 
