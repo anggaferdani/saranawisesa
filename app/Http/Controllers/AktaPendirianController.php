@@ -29,14 +29,14 @@ class AktaPendirianController extends Controller
 
         if($akta = $request->file('akta')){
             $destination_path = 'eproc/akta-pendirian/akta/';
-            $akta2 = date('YmdHis').rand(999, 9999).$akta->getClientOriginalName();
+            $akta2 = date('YmdHis').$akta->getClientOriginalName();
             $akta->move($destination_path, $akta2);
             $array['akta'] = $akta2;
         }
 
         if($sk = $request->file('sk')){
             $destination_path = 'eproc/akta-pendirian/sk/';
-            $sk2 = date('YmdHis').rand(999, 9999).$sk->getClientOriginalName();
+            $sk2 = date('YmdHis').$sk->getClientOriginalName();
             $sk->move($destination_path, $sk2);
             $array['sk'] = $sk2;
         }
@@ -51,14 +51,14 @@ class AktaPendirianController extends Controller
 
         if($akta = $request->file('akta')){
             $destination_path = 'eproc/akta-pendirian/akta/';
-            $akta2 = date('YmdHis').rand(999, 9999).$akta->getClientOriginalName();
+            $akta2 = date('YmdHis').$akta->getClientOriginalName();
             $akta->move($destination_path, $akta2);
             $akta_pendirian['akta'] = $akta2;
         }
 
         if($sk = $request->file('sk')){
             $destination_path = 'eproc/akta-pendirian/sk/';
-            $sk2 = date('YmdHis').rand(999, 9999).$sk->getClientOriginalName();
+            $sk2 = date('YmdHis').$sk->getClientOriginalName();
             $sk->move($destination_path, $sk2);
             $akta_pendirian['sk'] = $sk2;
         }
