@@ -92,19 +92,6 @@
                 @endif
               </tr>
               <tr>
-                <td>2</td>
-                <td style="white-space: nowrap">
-                  <button type="button" class="btn btn-primary btn-icon text-white"><i class="fa fa-pen"></i></button>
-                  <button type="button" class="btn btn-primary btn-icon text-white" data-toggle="modal" data-target="#surat-keterangan-domisili-perusahaan"><i class="fa fa-eye"></i></button>
-                  <button type="button" class="btn btn-primary btn-icon text-white delete"><i class="fa fa-trash"></i></button>
-                </td>
-                <td>Surat Keterangan Domisili Perusahaan (SKDP) <span class="text-danger">*wajib</span></td>
-                <td>Nama_dokumen.pdf</td>
-                <td>001</td>
-                <td>01/06/2023</td>
-                <td>01/06/2024</td>
-              </tr>
-              <tr>
                 <td>3</td>
                 <td style="white-space: nowrap">
                   <button type="button" class="btn btn-primary btn-icon text-white"><i class="fa fa-pen"></i></button>
