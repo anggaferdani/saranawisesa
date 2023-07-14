@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AktaPendirian;
+use App\Models\NomorIndukBerusaha;
 use App\Models\Perusahaan;
 use App\Models\SuratIzinUsahaPerdagangan;
 use App\Models\SuratKeteranganDomisiliPerusahaan;
@@ -16,11 +17,13 @@ class DokumenController extends Controller
         $akta_pendirian = AktaPendirian::where('user_id', Auth::id())->first();
         $surat_keterangan_domisili_perusahaan = SuratKeteranganDomisiliPerusahaan::where('user_id', Auth::id())->first();
         $surat_izin_usaha_perdagangan = SuratIzinUsahaPerdagangan::where('user_id', Auth::id())->first();
+        $nomor_induk_berusaha = NomorIndukBerusaha::where('user_id', Auth::id())->first();
         return view('eproc.dokumen', compact(
             'perusahaan',
             'akta_pendirian',
             'surat_keterangan_domisili_perusahaan',
             'surat_izin_usaha_perdagangan',
+            'nomor_induk_berusaha',
         ));
     }
 }

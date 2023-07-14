@@ -95,7 +95,7 @@
                 <td>3</td>
                 <td style="white-space: nowrap">
                   @if(!empty($surat_izin_usaha_perdagangan))
-                  <form method="POST" action="{{ route('eproc.perusahaan.delete-surat-keterangan-domisili-perusahaan', Crypt::encrypt($surat_izin_usaha_perdagangan->id)) }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
+                  <form method="POST" action="{{ route('eproc.perusahaan.delete-surat-izin-usaha-perdagangan', Crypt::encrypt($surat_izin_usaha_perdagangan->id)) }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
                     @csrf
                     @method('DELETE')
                       <button type="button" class="btn btn-primary btn-icon text-white" data-toggle="modal" data-target="#surat-izin-usaha-perdagangan2"><i class="fa fa-pen"></i></button>
@@ -123,15 +123,31 @@
               <tr>
                 <td>4</td>
                 <td style="white-space: nowrap">
-                  <button type="button" class="btn btn-primary btn-icon text-white"><i class="fa fa-pen"></i></button>
-                  <button type="button" class="btn btn-primary btn-icon text-white" data-toggle="modal" data-target="#nomor-induk-berusaha"><i class="fa fa-eye"></i></button>
-                  <button type="button" class="btn btn-primary btn-icon text-white delete"><i class="fa fa-trash"></i></button>
+                  @if(!empty($nomor_induk_berusaha))
+                  <form method="POST" action="{{ route('eproc.perusahaan.delete-nomor-induk-berusaha', Crypt::encrypt($nomor_induk_berusaha->id)) }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
+                    @csrf
+                    @method('DELETE')
+                      <button type="button" class="btn btn-primary btn-icon text-white" data-toggle="modal" data-target="#nomor-induk-berusaha2"><i class="fa fa-pen"></i></button>
+                      <button type="button" class="btn btn-primary btn-icon text-white" data-toggle="modal" data-target="#nomor-induk-berusaha3"><i class="fa fa-eye"></i></button>
+                      <button type="button" class="btn btn-primary btn-icon text-white delete"><i class="fa fa-trash"></i></button>
+                    </form>
+                  @else
+                    <button type="button" class="btn btn-primary btn-icon text-white" data-toggle="modal" data-target="#nomor-induk-berusaha"><i class="fa fa-plus"></i></button>
+                  @endif
                 </td>
-                <td>Nomor Induk Berusaha (NIB) <span class="text-danger">*wajib</span></td>
-                <td>Nama_dokumen.pdf</td>
-                <td>001</td>
-                <td>01/06/2023</td>
-                <td></td>
+                @if(!empty($nomor_induk_berusaha))
+                  <td style="white-space: nowrap">Nomor Induk Berusaha (NIB) <span class="text-danger">*wajib</span></td>
+                  <td><a href="{{ asset('eproc/nomor-induk-berusaha/'.$nomor_induk_berusaha["nib"]) }}" target="_blank">{{ Str::limit($nomor_induk_berusaha->nib, 20) }}</a></td>
+                  <td>{{ $nomor_induk_berusaha->no_dokumen }}</td>
+                  <td>{{ $nomor_induk_berusaha->tanggal_terbit }}</td>
+                  <td></td>
+                @else
+                  <td style="white-space: nowrap">Nomor Induk Berusaha (NIB) <span class="text-danger">*wajib</span></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                @endif
               </tr>
               <tr>
                 <td>5</td>
@@ -578,6 +594,7 @@
   </div>
 </div>
 
+{{-- ########################################## Nomor Induk Berusaha (NIB) ########################################## --}}
 <div class="modal fade" id="nomor-induk-berusaha" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -587,19 +604,88 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label>Tanggal Terbit</label>
-          <input disabled type="date" class="form-control" name="tanggal_terbit" value="">
+      <form method="POST" action="{{ route('eproc.perusahaan.post-nomor-induk-berusaha') }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
+        @csrf
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Tanggal Terbit</label>
+            <input type="date" class="form-control" name="tanggal_terbit" value="">
+          </div>
+          <div class="form-group">
+            <label>Upload NIB</label>
+            <input type="file" class="form-control" name="nib" value="">
+          </div>
         </div>
-        <div class="form-group">
-          <label>Upload NIB</label>
-          <input disabled type="file" class="form-control" name="upload_nib" value="">
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
         </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="nomor-induk-berusaha2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Nomor Induk Berusaha (NIB)</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      @if(!empty($nomor_induk_berusaha))
+        <form method="POST" action="{{ route('eproc.perusahaan.put-nomor-induk-berusaha', Crypt::encrypt($nomor_induk_berusaha->id)) }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
+          @csrf
+          @method('PUT')
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Tanggal Terbit</label>
+              <input type="date" class="form-control" name="tanggal_terbit" value="{{ $nomor_induk_berusaha->tanggal_terbit }}">
+            </div>
+            <div class="form-group">
+              <label>Upload NIB</label>
+              <input type="file" class="form-control" name="nib" value="{{ $nomor_induk_berusaha->nib }}">
+              <div><a href="{{ asset('eproc/nomor-induk-berusaha/'.$nomor_induk_berusaha["nib"]) }}" target="_blank">{{ $nomor_induk_berusaha->nib }}</a></div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      @endif
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="nomor-induk-berusaha3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Nomor Induk Berusaha (NIB)</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      @if(!empty($nomor_induk_berusaha))
+        <form action="">
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Tanggal Terbit</label>
+              <input disabled type="date" class="form-control" name="tanggal_terbit" value="{{ $nomor_induk_berusaha->tanggal_terbit }}">
+            </div>
+            <div class="form-group">
+              <label>Upload NIB</label>
+              <input disabled type="file" class="form-control" name="nib" value="{{ $nomor_induk_berusaha->nib }}">
+              <div><a href="{{ asset('eproc/nomor-induk-berusaha/'.$nomor_induk_berusaha["nib"]) }}" target="_blank">{{ $nomor_induk_berusaha->nib }}</a></div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      @endif
     </div>
   </div>
 </div>

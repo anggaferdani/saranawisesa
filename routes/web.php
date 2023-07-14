@@ -30,6 +30,7 @@ use App\Http\Controllers\JenisPengadaanController;
 use App\Http\Controllers\ProdukDanLayananController;
 use App\Http\Controllers\TandaDaftarUsahaController;
 use App\Http\Controllers\ProfilePerusahaanController;
+use App\Http\Controllers\NomorIndukBerusahaController;
 use App\Http\Controllers\PengurusBadanUsahaController;
 use App\Http\Controllers\PenunjukanLangsungController;
 use App\Http\Controllers\ProfilePerusahaan2Controller;
@@ -393,6 +394,10 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::post('post-surat-izin-usaha-perdagangan', [SuratIzinUsahaPerdaganganController::class, 'postSuratIzinUsahaPerdagangan'])->name('post-surat-izin-usaha-perdagangan');
       Route::put('put-surat-izin-usaha-perdagangan/{id}', [SuratIzinUsahaPerdaganganController::class, 'putSuratIzinUsahaPerdagangan'])->name('put-surat-izin-usaha-perdagangan');
       Route::delete('delete-surat-izin-usaha-perdagangan/{id}', [SuratIzinUsahaPerdaganganController::class, 'deleteSuratIzinUsahaPerdagangan'])->name('delete-surat-izin-usaha-perdagangan');
+      
+      Route::post('post-nomor-induk-berusaha', [NomorIndukBerusahaController::class, 'postNomorIndukBerusaha'])->name('post-nomor-induk-berusaha');
+      Route::put('put-nomor-induk-berusaha/{id}', [NomorIndukBerusahaController::class, 'putNomorIndukBerusaha'])->name('put-nomor-induk-berusaha');
+      Route::delete('delete-nomor-induk-berusaha/{id}', [NomorIndukBerusahaController::class, 'deleteNomorIndukBerusaha'])->name('delete-nomor-induk-berusaha');
       
       Route::get('pengalaman-perusahaan', [PengalamanPerusahaanController::class, 'index'])->name('index-pengalaman-perusahaan');
     });
