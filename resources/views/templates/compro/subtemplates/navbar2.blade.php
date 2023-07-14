@@ -17,7 +17,7 @@
           <a class="nav-link a {{ str_contains(Route::currentRouteName(), 'produk-dan-layanans') ? 'active' : '' }}" href="{{ route('produk-dan-layanans') }}">PRODUCT & SERVICES</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link a {{ str_contains(Route::currentRouteName(), 'portofolios') ? 'active' : '' }}" href="{{ route('portofolios') }}">PORTOFOLIO</a>
+          <a class="nav-link a {{ str_contains(Route::currentRouteName(), 'portofolios') ? 'active' : '' }}" href="{{ route('portofolios') }}">PORTFOLIO</a>
         </li>
         <li class="nav-item">
           <a class="nav-link a {{ str_contains(Route::currentRouteName(), 'artikels') ? 'active' : '' }}" href="{{ route('artikels') }}">ARTICLE</a>

@@ -25,7 +25,26 @@
   gtag('config', 'UA-94034622-3');
 </script>
 <!-- /END GA --></head>
-
+<style>
+  .card.card-primary{
+    border-top: 2px solid #920000 !important;
+  }
+  .btn.btn-primary{
+    background-color: #920000 !important;
+    box-shadow: none;
+    border: none;
+  }
+  .btn.btn-primary:hover{
+    background-color: #720000 !important;
+    box-shadow: none;
+    border: none;
+  }
+  .btn.btn-primary:active{
+    background-color: #720000 !important;
+    box-shadow: none;
+    border: none;
+  }
+</style>
 <body>
   <div id="app">
     <section class="section">
