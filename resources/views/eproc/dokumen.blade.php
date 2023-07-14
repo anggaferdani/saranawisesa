@@ -94,15 +94,31 @@
               <tr>
                 <td>3</td>
                 <td style="white-space: nowrap">
-                  <button type="button" class="btn btn-primary btn-icon text-white"><i class="fa fa-pen"></i></button>
-                  <button type="button" class="btn btn-primary btn-icon text-white" data-toggle="modal" data-target="#surat-izin-usaha-perdagangan"><i class="fa fa-eye"></i></button>
-                  <button type="button" class="btn btn-primary btn-icon text-white delete"><i class="fa fa-trash"></i></button>
+                  @if(!empty($surat_izin_usaha_perdagangan))
+                  <form method="POST" action="{{ route('eproc.perusahaan.delete-surat-keterangan-domisili-perusahaan', Crypt::encrypt($surat_izin_usaha_perdagangan->id)) }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
+                    @csrf
+                    @method('DELETE')
+                      <button type="button" class="btn btn-primary btn-icon text-white" data-toggle="modal" data-target="#surat-izin-usaha-perdagangan2"><i class="fa fa-pen"></i></button>
+                      <button type="button" class="btn btn-primary btn-icon text-white" data-toggle="modal" data-target="#surat-izin-usaha-perdagangan3"><i class="fa fa-eye"></i></button>
+                      <button type="button" class="btn btn-primary btn-icon text-white delete"><i class="fa fa-trash"></i></button>
+                    </form>
+                  @else
+                    <button type="button" class="btn btn-primary btn-icon text-white" data-toggle="modal" data-target="#surat-izin-usaha-perdagangan"><i class="fa fa-plus"></i></button>
+                  @endif
                 </td>
-                <td>Surat Izin Usaha Perdagangan (SIUP) <span class="text-danger">*wajib</span></td>
-                <td>Nama_dokumen.pdf</td>
-                <td>001</td>
-                <td>01/06/2023</td>
-                <td>01/06/2024</td>
+                @if(!empty($surat_izin_usaha_perdagangan))
+                  <td style="white-space: nowrap">Surat Izin Usaha Perdagangan (SIUP) <span class="text-danger">*wajib</span></td>
+                  <td><a href="{{ asset('eproc/surat-izin-usaha-perdagangan/'.$surat_izin_usaha_perdagangan["siup"]) }}" target="_blank">{{ Str::limit($surat_izin_usaha_perdagangan->siup, 20) }}</a></td>
+                  <td>{{ $surat_izin_usaha_perdagangan->no_dokumen }}</td>
+                  <td>{{ $surat_izin_usaha_perdagangan->tanggal_terbit }}</td>
+                  <td>{{ $surat_izin_usaha_perdagangan->tanggal_jatuh_tempo }}</td>
+                @else
+                  <td style="white-space: nowrap">Surat Izin Usaha Perdagangan (SIUP) <span class="text-danger">*wajib</span></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                @endif
               </tr>
               <tr>
                 <td>4</td>
@@ -322,7 +338,7 @@
   </div>
 </div>
 
-{{-- ########################################## SURAT KETERANGAN DOMISILI PERUSAHAAN ########################################## --}}
+{{-- ########################################## Surat Keterangan Domisili Perusahaan (SKDP) ########################################## --}}
 <div class="modal fade" id="surat-keterangan-domisili-perusahaan" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -442,7 +458,7 @@
   </div>
 </div>
 
-{{-- ########################################## SURAT KETERANGAN DOMISILI PERUSAHAAN ########################################## --}}
+{{-- ########################################## Surat Izin Usaha Perdagangan (SIUP) ########################################## --}}
 <div class="modal fade" id="surat-izin-usaha-perdagangan" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -452,27 +468,112 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label>No. SIUP</label>
-          <input disabled type="text" class="form-control" name="no_siup" value="">
+      <form method="POST" action="{{ route('eproc.perusahaan.post-surat-izin-usaha-perdagangan') }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
+        @csrf
+        <div class="modal-body">
+          <div class="form-group">
+            <label>No. SIUP</label>
+            <input type="text" class="form-control" name="no_siup" value="">
+          </div>
+          <div class="form-group">
+            <label>Tanggal Terbit</label>
+            <input type="date" class="form-control" name="tanggal_terbit" value="">
+          </div>
+          <div class="form-group">
+            <label>Tanggal Jatuh Tempo</label>
+            <input type="date" class="form-control" name="tanggal_jatuh_tempo" value="">
+          </div>
+          <div class="form-group">
+            <label>Upload SIUP</label>
+            <input type="file" class="form-control" name="siup" value="">
+          </div>
         </div>
-        <div class="form-group">
-          <label>Tanggal Terbit</label>
-          <input disabled type="date" class="form-control" name="tanggal_terbit" value="">
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
         </div>
-        <div class="form-group">
-          <label>Tanggal Jatuh Tempo</label>
-          <input disabled type="date" class="form-control" name="tanggal_jatuh_tempo" value="">
-        </div>
-        <div class="form-group">
-          <label>Upload SIUP</label>
-          <input disabled type="file" class="form-control" name="upload_siup" value="">
-        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="surat-izin-usaha-perdagangan2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Surat Izin Usaha Perdagangan (SIUP)</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      @if(!empty($surat_izin_usaha_perdagangan))
+        <form method="POST" action="{{ route('eproc.perusahaan.put-surat-izin-usaha-perdagangan', Crypt::encrypt($surat_izin_usaha_perdagangan->id)) }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
+          @csrf
+          @method('PUT')
+          <div class="modal-body">
+            <div class="form-group">
+              <label>No. SIUP</label>
+              <input type="text" class="form-control" name="no_siup" value="{{ $surat_izin_usaha_perdagangan->no_siup }}">
+            </div>
+            <div class="form-group">
+              <label>Tanggal Terbit</label>
+              <input type="date" class="form-control" name="tanggal_terbit" value="{{ $surat_izin_usaha_perdagangan->tanggal_terbit }}">
+            </div>
+            <div class="form-group">
+              <label>Tanggal Jatuh Tempo</label>
+              <input type="date" class="form-control" name="tanggal_jatuh_tempo" value="{{ $surat_izin_usaha_perdagangan->tanggal_jatuh_tempo }}">
+            </div>
+            <div class="form-group">
+              <label>Upload SIUP</label>
+              <input type="file" class="form-control" name="siup" value="{{ $surat_izin_usaha_perdagangan->siup }}">
+              <div><a href="{{ asset('eproc/surat-izin-usaha-perdagangan/'.$surat_izin_usaha_perdagangan["siup"]) }}" target="_blank">{{ $surat_izin_usaha_perdagangan->siup }}</a></div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      @endif
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="surat-izin-usaha-perdagangan3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Surat Izin Usaha Perdagangan (SIUP)</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      @if(!empty($surat_izin_usaha_perdagangan))
+        <form action="">
+          <div class="modal-body">
+            <div class="form-group">
+              <label>No. SIUP</label>
+              <input disabled type="text" class="form-control" name="no_siup" value="{{ $surat_izin_usaha_perdagangan->no_siup }}">
+            </div>
+            <div class="form-group">
+              <label>Tanggal Terbit</label>
+              <input disabled type="date" class="form-control" name="tanggal_terbit" value="{{ $surat_izin_usaha_perdagangan->tanggal_terbit }}">
+            </div>
+            <div class="form-group">
+              <label>Tanggal Jatuh Tempo</label>
+              <input disabled type="date" class="form-control" name="tanggal_jatuh_tempo" value="{{ $surat_izin_usaha_perdagangan->tanggal_jatuh_tempo }}">
+            </div>
+            <div class="form-group">
+              <label>Upload SIUP</label>
+              <input disabled type="file" class="form-control" name="siup" value="{{ $surat_izin_usaha_perdagangan->siup }}">
+              <div><a href="{{ asset('eproc/surat-izin-usaha-perdagangan/'.$surat_izin_usaha_perdagangan["siup"]) }}" target="_blank">{{ $surat_izin_usaha_perdagangan->siup }}</a></div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      @endif
     </div>
   </div>
 </div>

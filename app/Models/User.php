@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\AktaPendirianPerusahaan;
 use App\Models\SusunanKepemilikanSaham;
 use Illuminate\Notifications\Notifiable;
+use App\Models\SuratIzinUsahaPerdagangan;
 use App\Models\SuratKeteranganDomisiliPerusahaan;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -101,8 +102,8 @@ class User extends Authenticatable
     public function surat_keterangan_domisili_perusahaans(){
         return $this->hasMany(SuratKeteranganDomisiliPerusahaan::class);
     }
-    public function pengurus_badan_usahas(){
-        return $this->hasMany(PengurusBadanUsaha::class);
+    public function surat_izin_usaha_perdagangans(){
+        return $this->hasMany(SuratIzinUsahaPerdagangan::class);
     }
     public function tanda_daftar_usahas(){
         return $this->hasMany(TandaDaftarUsaha::class);
