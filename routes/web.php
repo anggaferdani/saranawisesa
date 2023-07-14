@@ -42,6 +42,7 @@ use App\Http\Controllers\LampiranKualifikasiController;
 use App\Http\Controllers\SusunanKepemilikanSahamController;
 use App\Http\Controllers\PekerjaanYangSedangDilaksanakanController;
 use App\Http\Controllers\ProfilePerusahaan2Controller;
+use App\Http\Controllers\SuratKeteranganDomisiliPerusahaanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -383,6 +384,10 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::post('post-akta-pendirian', [AktaPendirianController::class, 'postAktaPendirian'])->name('post-akta-pendirian');
       Route::put('put-akta-pendirian/{id}', [AktaPendirianController::class, 'putAktaPendirian'])->name('put-akta-pendirian');
       Route::delete('delete-akta-pendirian/{id}', [AktaPendirianController::class, 'deleteAktaPendirian'])->name('delete-akta-pendirian');
+
+      Route::post('post-surat-keterangan-domisili-perusahaan', [SuratKeteranganDomisiliPerusahaanController::class, 'postSuratKeteranganDomisiliPerusahaan'])->name('post-surat-keterangan-domisili-perusahaan');
+      Route::put('put-surat-keterangan-domisili-perusahaan/{id}', [SuratKeteranganDomisiliPerusahaanController::class, 'putSuratKeteranganDomisiliPerusahaan'])->name('put-surat-keterangan-domisili-perusahaan');
+      Route::delete('delete-surat-keterangan-domisili-perusahaan/{id}', [SuratKeteranganDomisiliPerusahaanController::class, 'deleteSuratKeteranganDomisiliPerusahaan'])->name('delete-surat-keterangan-domisili-perusahaan');
       
       Route::get('pengalaman-perusahaan', [PengalamanPerusahaanController::class, 'index'])->name('index-pengalaman-perusahaan');
     });

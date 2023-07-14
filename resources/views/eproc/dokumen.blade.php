@@ -51,11 +51,40 @@
                 @if(!empty($akta_pendirian))
                   <td style="white-space: nowrap">Akta Pendirian <span class="text-danger">*wajib</span></td>
                   <td><a href="{{ asset('eproc/akta-pendirian/akta/'.$akta_pendirian["akta"]) }}" target="_blank">{{ Str::limit($akta_pendirian->akta, 20) }}</a></td>
-                  <td>{{ Str::limit($akta_pendirian->no_dokumen, 20) }}</td>
+                  <td>{{ $akta_pendirian->no_dokumen }}</td>
                   <td></td>
                   <td></td>
                 @else
                   <td style="white-space: nowrap">Akta Pendirian <span class="text-danger">*wajib</span></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                @endif
+              </tr>
+              <tr>
+                <td>2</td>
+                <td style="white-space: nowrap">
+                  @if(!empty($surat_keterangan_domisili_perusahaan))
+                  <form method="POST" action="{{ route('eproc.perusahaan.delete-surat-keterangan-domisili-perusahaan', Crypt::encrypt($surat_keterangan_domisili_perusahaan->id)) }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
+                    @csrf
+                    @method('DELETE')
+                      <button type="button" class="btn btn-primary btn-icon text-white" data-toggle="modal" data-target="#surat-keterangan-domisili-perusahaan2"><i class="fa fa-pen"></i></button>
+                      <button type="button" class="btn btn-primary btn-icon text-white" data-toggle="modal" data-target="#surat-keterangan-domisili-perusahaan3"><i class="fa fa-eye"></i></button>
+                      <button type="button" class="btn btn-primary btn-icon text-white delete"><i class="fa fa-trash"></i></button>
+                    </form>
+                  @else
+                    <button type="button" class="btn btn-primary btn-icon text-white" data-toggle="modal" data-target="#surat-keterangan-domisili-perusahaan"><i class="fa fa-plus"></i></button>
+                  @endif
+                </td>
+                @if(!empty($surat_keterangan_domisili_perusahaan))
+                  <td style="white-space: nowrap">Surat Keterangan Domisili Perusahaan (SKDP) <span class="text-danger">*wajib</span></td>
+                  <td><a href="{{ asset('eproc/surat-keterangan-domisili-perusahaan/'.$surat_keterangan_domisili_perusahaan["skdp"]) }}" target="_blank">{{ Str::limit($surat_keterangan_domisili_perusahaan->skdp, 20) }}</a></td>
+                  <td>{{ $surat_keterangan_domisili_perusahaan->no_dokumen }}</td>
+                  <td>{{ $surat_keterangan_domisili_perusahaan->tanggal_terbit }}</td>
+                  <td>{{ $surat_keterangan_domisili_perusahaan->tanggal_jatuh_tempo }}</td>
+                @else
+                  <td style="white-space: nowrap">Surat Keterangan Domisili Perusahaan (SKDP) <span class="text-danger">*wajib</span></td>
                   <td></td>
                   <td></td>
                   <td></td>
@@ -148,6 +177,7 @@
   </div>
 </div>
 
+{{-- ########################################## AKTA PENDIRIAN ########################################## --}}
 <div class="modal fade" id="akta-pendirian" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -305,6 +335,7 @@
   </div>
 </div>
 
+{{-- ########################################## SURAT KETERANGAN DOMISILI PERUSAHAAN ########################################## --}}
 <div class="modal fade" id="surat-keterangan-domisili-perusahaan" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -314,31 +345,117 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label>No. SKDP</label>
-          <input disabled type="text" class="form-control" name="no_skdp" value="">
+      <form method="POST" action="{{ route('eproc.perusahaan.post-surat-keterangan-domisili-perusahaan') }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
+        @csrf
+        <div class="modal-body">
+          <div class="form-group">
+            <label>No. SKDP</label>
+            <input type="text" class="form-control" name="no_skdp" value="">
+          </div>
+          <div class="form-group">
+            <label>Tanggal Terbit</label>
+            <input type="date" class="form-control" name="tanggal_terbit" value="">
+          </div>
+          <div class="form-group">
+            <label>Tanggal Jatuh Tempo</label>
+            <input type="date" class="form-control" name="tanggal_jatuh_tempo" value="">
+          </div>
+          <div class="form-group">
+            <label>Upload SKDP</label>
+            <input type="file" class="form-control" name="skdp" value="">
+          </div>
         </div>
-        <div class="form-group">
-          <label>Tanggal Terbit</label>
-          <input disabled type="date" class="form-control" name="tanggal_terbit" value="">
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
         </div>
-        <div class="form-group">
-          <label>Tanggal Jatuh Tempo</label>
-          <input disabled type="date" class="form-control" name="tanggal_jatuh_tempo" value="">
-        </div>
-        <div class="form-group">
-          <label>Upload SKDP</label>
-          <input disabled type="file" class="form-control" name="upload_skdp" value="">
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-      </div>
+      </form>
     </div>
   </div>
 </div>
 
+<div class="modal fade" id="surat-keterangan-domisili-perusahaan2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Surat Keterangan Domisili Perusahaan (SKDP)</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      @if(!empty($surat_keterangan_domisili_perusahaan))
+        <form method="POST" action="{{ route('eproc.perusahaan.put-surat-keterangan-domisili-perusahaan', Crypt::encrypt($surat_keterangan_domisili_perusahaan->id)) }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
+          @csrf
+          @method('PUT')
+          <div class="modal-body">
+            <div class="form-group">
+              <label>No. SKDP</label>
+              <input type="text" class="form-control" name="no_skdp" value="{{ $surat_keterangan_domisili_perusahaan->no_skdp }}">
+            </div>
+            <div class="form-group">
+              <label>Tanggal Terbit</label>
+              <input type="date" class="form-control" name="tanggal_terbit" value="{{ $surat_keterangan_domisili_perusahaan->tanggal_terbit }}">
+            </div>
+            <div class="form-group">
+              <label>Tanggal Jatuh Tempo</label>
+              <input type="date" class="form-control" name="tanggal_jatuh_tempo" value="{{ $surat_keterangan_domisili_perusahaan->tanggal_jatuh_tempo }}">
+            </div>
+            <div class="form-group">
+              <label>Upload SKDP</label>
+              <input type="file" class="form-control" name="skdp" value="{{ $surat_keterangan_domisili_perusahaan->skdp }}">
+              <div><a href="{{ asset('eproc/surat-keterangan-domisili-perusahaan/'.$surat_keterangan_domisili_perusahaan["skdp"]) }}" target="_blank">{{ $surat_keterangan_domisili_perusahaan->skdp }}</a></div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      @endif
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="surat-keterangan-domisili-perusahaan3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Surat Keterangan Domisili Perusahaan (SKDP)</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      @if(!empty($surat_keterangan_domisili_perusahaan))
+        <form action="">
+          <div class="modal-body">
+            <div class="form-group">
+              <label>No. SKDP</label>
+              <input disabled type="text" class="form-control" name="no_skdp" value="{{ $surat_keterangan_domisili_perusahaan->no_skdp }}">
+            </div>
+            <div class="form-group">
+              <label>Tanggal Terbit</label>
+              <input disabled type="date" class="form-control" name="tanggal_terbit" value="{{ $surat_keterangan_domisili_perusahaan->tanggal_terbit }}">
+            </div>
+            <div class="form-group">
+              <label>Tanggal Jatuh Tempo</label>
+              <input disabled type="date" class="form-control" name="tanggal_jatuh_tempo" value="{{ $surat_keterangan_domisili_perusahaan->tanggal_jatuh_tempo }}">
+            </div>
+            <div class="form-group">
+              <label>Upload SKDP</label>
+              <input disabled type="file" class="form-control" name="skdp" value="{{ $surat_keterangan_domisili_perusahaan->skdp }}">
+              <div><a href="{{ asset('eproc/surat-keterangan-domisili-perusahaan/'.$surat_keterangan_domisili_perusahaan["skdp"]) }}" target="_blank">{{ $surat_keterangan_domisili_perusahaan->skdp }}</a></div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      @endif
+    </div>
+  </div>
+</div>
+
+{{-- ########################################## SURAT KETERANGAN DOMISILI PERUSAHAAN ########################################## --}}
 <div class="modal fade" id="surat-izin-usaha-perdagangan" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
