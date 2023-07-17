@@ -17,7 +17,7 @@ class NomorIndukBerusaha extends Model
     protected $fillable = [
         'id',
         'user_id',
-        'no_dokumen',
+        'kode_dokumen',
         'tanggal_terbit',
         'nib',
     ];

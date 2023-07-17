@@ -19,11 +19,11 @@ class NomorIndukBerusahaController extends Controller
             'nib' => 'required',
         ]);
 
-        $no_dokumen = hash('crc32', $this->generateNumber());
+        $kode_dokumen = hash('crc32', $this->generateNumber());
 
         $array = array(
             'user_id' => $user->id,
-            'no_dokumen' => $no_dokumen,
+            'kode_dokumen' => $kode_dokumen,
             'tanggal_terbit' => $request['tanggal_terbit'],
         );
 
@@ -69,9 +69,9 @@ class NomorIndukBerusahaController extends Controller
 
     public function generateNumber(){
         do{
-            $no_dokumen = mt_rand(999999999, 9999999999);
-        }while(NomorIndukBerusaha::where("no_dokumen", "=", $no_dokumen)->first());
+            $kode_dokumen = mt_rand(999999999, 9999999999);
+        }while(NomorIndukBerusaha::where("kode_dokumen", "=", $kode_dokumen)->first());
 
-        return $no_dokumen;
+        return $kode_dokumen;
     }
 }

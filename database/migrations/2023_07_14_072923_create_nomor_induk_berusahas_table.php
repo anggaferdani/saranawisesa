@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('nomor_induk_berusahas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('no_dokumen');
-            $table->date('tanggal_terbit')->nullable();
-            $table->string('nib')->nullable();
+            $table->string('kode_dokumen');
+            $table->date('tanggal_terbit');
+            $table->string('nib');
             $table->timestamps();
         });
     }
