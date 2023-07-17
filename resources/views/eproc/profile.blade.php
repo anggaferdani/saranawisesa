@@ -1,7 +1,9 @@
 <div class="row p-3">
   <div class="col-md-2 text-center">
-    <img src="{{ asset('eproc/profile-picture/'.$perusahaan["profile_picture"]) }}" class="rounded-circle img-fluid" style="border: 2px solid #830000" alt="">
-    <button class="btn btn-primary badge mt-2" data-toggle="modal" data-target="#edit">Edit Profile</button>
+    <div style="width: 180px; height: 180px;"><img src="{{ asset('eproc/profile-picture/'.$perusahaan["profile_picture"]) }}" class="rounded-circle" style="border: 2px solid #830000; object-fit: cover; width: 100%; height: 100%;" alt=""></div>
+    @if(auth()->user()->level == 'perusahaan')
+      <button class="btn btn-primary badge mt-2" data-toggle="modal" data-target="#edit">Edit Profile</button>
+    @endif
   </div>
   <div class="col-md-10">
     <h4 class="fw-bold mb-3" style="color: #830000;">{{ $perusahaan->nama_badan_usaha }}</h4>
