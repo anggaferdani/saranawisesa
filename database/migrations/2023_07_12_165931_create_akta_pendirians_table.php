@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('akta_pendirians', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('no_dokumen');
-            $table->string('no_akta')->nullable();
-            $table->date('tanggal_akta')->nullable();
-            $table->string('nama_notaris')->nullable();
-            $table->string('no_sk')->nullable();
-            $table->date('tanggal_sk')->nullable();
-            $table->string('akta')->nullable();
-            $table->string('sk')->nullable();
+            $table->string('kode_dokumen');
+            $table->string('no_akta');
+            $table->date('tanggal_akta');
+            $table->string('nama_notaris');
+            $table->string('no_sk');
+            $table->date('tanggal_sk');
+            $table->string('akta');
+            $table->string('sk');
             $table->timestamps();
         });
     }

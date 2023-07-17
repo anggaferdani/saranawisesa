@@ -17,7 +17,7 @@ class AktaPendirian extends Model
     protected $fillable = [
         'id',
         'user_id',
-        'no_dokumen',
+        'kode_dokumen',
         'no_akta',
         'tanggal_akta',
         'nama_notaris',

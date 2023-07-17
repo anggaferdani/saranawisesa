@@ -15,11 +15,22 @@ class AktaPendirianController extends Controller
     public function postAktaPendirian(Request $request){
         $user = User::find(Auth::id());
 
-        $no_dokumen = hash('crc32', $this->generateNumber());
+        $request->validate([
+            'no_akta' => 'required',
+            'tanggal_akta' => 'required',
+            'nama_notaris' => 'required',
+            'akta' => 'required',
+            'no_sk' => 'required',
+            'tanggal_sk' => 'required',
+            'akta' => 'required',
+            'sk' => 'required',
+        ]);
+
+        $kode_dokumen = hash('crc32', $this->generateNumber());
 
         $array = array(
             'user_id' => $user->id,
-            'no_dokumen' => $no_dokumen,
+            'kode_dokumen' => $kode_dokumen,
             'no_akta' => $request['no_akta'],
             'tanggal_akta' => $request['tanggal_akta'],
             'nama_notaris' => $request['nama_notaris'],
@@ -48,6 +59,15 @@ class AktaPendirianController extends Controller
 
     public function putAktaPendirian(Request $request, $id){
         $akta_pendirian = AktaPendirian::find(Crypt::decrypt($id));
+
+        $request->validate([
+            'no_akta' => 'required',
+            'tanggal_akta' => 'required',
+            'nama_notaris' => 'required',
+            'akta' => 'required',
+            'no_sk' => 'required',
+            'tanggal_sk' => 'required',
+        ]);
 
         if($akta = $request->file('akta')){
             $destination_path = 'eproc/akta-pendirian/akta/';
@@ -83,9 +103,9 @@ class AktaPendirianController extends Controller
 
     public function generateNumber(){
         do{
-            $no_dokumen = mt_rand(999999999, 9999999999);
-        }while(AktaPendirian::where("no_dokumen", "=", $no_dokumen)->first());
+            $kode_dokumen = mt_rand(999999999, 9999999999);
+        }while(AktaPendirian::where("kode_dokumen", "=", $kode_dokumen)->first());
 
-        return $no_dokumen;
+        return $kode_dokumen;
     }
 }

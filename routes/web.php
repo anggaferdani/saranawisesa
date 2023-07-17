@@ -15,8 +15,10 @@ use App\Http\Controllers\DireksiController;
 use App\Http\Controllers\DokumenController;
 use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\AkunBankController;
 use App\Http\Controllers\KomisarisController;
 use App\Http\Controllers\NewComproController;
+use App\Http\Controllers\PengalamanController;
 use App\Http\Controllers\PerusahaanController;
 use App\Http\Controllers\PortofolioController;
 use App\Http\Controllers\AdministrasiController;
@@ -27,6 +29,7 @@ use App\Http\Controllers\Pengadaan0002Controller;
 use App\Http\Controllers\DataPersonaliaController;
 use App\Http\Controllers\DataPerusahaanController;
 use App\Http\Controllers\JenisPengadaanController;
+use App\Http\Controllers\GambarPerusahaanController;
 use App\Http\Controllers\ProdukDanLayananController;
 use App\Http\Controllers\TandaDaftarUsahaController;
 use App\Http\Controllers\ProfilePerusahaanController;
@@ -35,16 +38,20 @@ use App\Http\Controllers\PengurusBadanUsahaController;
 use App\Http\Controllers\PenunjukanLangsungController;
 use App\Http\Controllers\ProfilePerusahaan2Controller;
 use App\Http\Controllers\SisaKemampuanNyataController;
+use App\Http\Controllers\StrukturOrganisasiController;
 use App\Http\Controllers\LampiranKualifikasiController;
 use App\Http\Controllers\SubprodukDanLayananController;
+use App\Http\Controllers\NomorPokokWajibPajakController;
 use App\Http\Controllers\Pages\EprocController as Eproc;
 use App\Http\Controllers\PengalamanPerusahaanController;
+use App\Http\Controllers\SuratIzinOperasionalController;
 use App\Http\Controllers\Pages\ComproController as Compro;
 use App\Http\Controllers\AktaPendirianPerusahaanController;
 use App\Http\Controllers\SusunanKepemilikanSahamController;
 use App\Http\Controllers\SuratIzinUsahaPerdaganganController;
 use App\Http\Controllers\PekerjaanYangSedangDilaksanakanController;
 use App\Http\Controllers\SuratKeteranganDomisiliPerusahaanController;
+use App\Http\Controllers\SuratPengukuhanPerusahaanKenaPajakController;
 
 /*
 |--------------------------------------------------------------------------
@@ -218,34 +225,45 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::get('{lelang_id}/peserta/{id}', [PesertaController::class, 'show'])->name('peserta.show');
       Route::put('{lelang_id}/peserta/{id}', [PesertaController::class, 'pemenang'])->name('peserta.pemenang');
 
-      Route::get('{user_id}/administrasi/edit', [AdministrasiController::class, 'edit'])->name('administrasi.edit');
+
+      Route::get('{user_id}/dokumen', [DokumenController::class, 'index'])->name('dokumen');
+
+      Route::get('{user_id}/akun-bank', [AkunBankController::class, 'akunBank'])->name('akun-bank');
+
+      Route::get('{user_id}/pengalaman', [PengalamanController::class, 'pengalaman'])->name('pengalaman');
+
+      Route::get('{user_id}/struktur-organisasi', [StrukturOrganisasiController::class, 'strukturOrganisasi'])->name('struktur-organisasi');
+
+      Route::get('{user_id}/gambar-perusahaan', [GambarPerusahaanController::class, 'gambarPerusahaan'])->name('gambar-perusahaan');
+
+      // Route::get('{user_id}/administrasi/edit', [AdministrasiController::class, 'edit'])->name('administrasi.edit');
       
-      Route::get('{user_id}/akta-pendirian-perusahaan', [AktaPendirianPerusahaanController::class, 'index'])->name('akta-pendirian-perusahaan.index');
-      Route::get('{user_id}/akta-pendirian-perusahaan/{id}', [AktaPendirianPerusahaanController::class, 'show'])->name('akta-pendirian-perusahaan.show');
+      // Route::get('{user_id}/akta-pendirian-perusahaan', [AktaPendirianPerusahaanController::class, 'index'])->name('akta-pendirian-perusahaan.index');
+      // Route::get('{user_id}/akta-pendirian-perusahaan/{id}', [AktaPendirianPerusahaanController::class, 'show'])->name('akta-pendirian-perusahaan.show');
 
-      Route::get('{user_id}/pengurus-badan-usaha', [PengurusBadanUsahaController::class, 'index'])->name('pengurus-badan-usaha.index');
-      Route::get('{user_id}/pengurus-badan-usaha/{id}', [PengurusBadanUsahaController::class, 'show'])->name('pengurus-badan-usaha.show');
+      // Route::get('{user_id}/pengurus-badan-usaha', [PengurusBadanUsahaController::class, 'index'])->name('pengurus-badan-usaha.index');
+      // Route::get('{user_id}/pengurus-badan-usaha/{id}', [PengurusBadanUsahaController::class, 'show'])->name('pengurus-badan-usaha.show');
 
-      Route::get('{user_id}/tanda-daftar-usaha/edit', [TandaDaftarUsahaController::class, 'edit'])->name('tanda-daftar-usaha.edit');
+      // Route::get('{user_id}/tanda-daftar-usaha/edit', [TandaDaftarUsahaController::class, 'edit'])->name('tanda-daftar-usaha.edit');
 
-      Route::get('{user_id}/susunan-kepemilikan-saham/', [SusunanKepemilikanSahamController::class, 'index'])->name('susunan-kepemilikan-saham.index');
-      Route::get('{user_id}/susunan-kepemilikan-saham/{id}', [SusunanKepemilikanSahamController::class, 'show'])->name('susunan-kepemilikan-saham.show');
+      // Route::get('{user_id}/susunan-kepemilikan-saham/', [SusunanKepemilikanSahamController::class, 'index'])->name('susunan-kepemilikan-saham.index');
+      // Route::get('{user_id}/susunan-kepemilikan-saham/{id}', [SusunanKepemilikanSahamController::class, 'show'])->name('susunan-kepemilikan-saham.show');
 
-      Route::get('{user_id}/data-personalia/', [DataPersonaliaController::class, 'index'])->name('data-personalia.index');
-      Route::get('{user_id}/data-personalia/{id}', [DataPersonaliaController::class, 'show'])->name('data-personalia.show');
+      // Route::get('{user_id}/data-personalia/', [DataPersonaliaController::class, 'index'])->name('data-personalia.index');
+      // Route::get('{user_id}/data-personalia/{id}', [DataPersonaliaController::class, 'show'])->name('data-personalia.show');
 
-      Route::get('{user_id}/data-fasilitas/', [DataFasilitasController::class, 'index'])->name('data-fasilitas.index');
-      Route::get('{user_id}/data-fasilitas/{id}', [DataFasilitasController::class, 'show'])->name('data-fasilitas.show');
+      // Route::get('{user_id}/data-fasilitas/', [DataFasilitasController::class, 'index'])->name('data-fasilitas.index');
+      // Route::get('{user_id}/data-fasilitas/{id}', [DataFasilitasController::class, 'show'])->name('data-fasilitas.show');
 
-      Route::get('{user_id}/pengalaman-perusahaan/', [PengalamanPerusahaanController::class, 'index'])->name('pengalaman-perusahaan.index');
-      Route::get('{user_id}/pengalaman-perusahaan/{id}', [PengalamanPerusahaanController::class, 'show'])->name('pengalaman-perusahaan.show');
+      // Route::get('{user_id}/pengalaman-perusahaan/', [PengalamanPerusahaanController::class, 'index'])->name('pengalaman-perusahaan.index');
+      // Route::get('{user_id}/pengalaman-perusahaan/{id}', [PengalamanPerusahaanController::class, 'show'])->name('pengalaman-perusahaan.show');
 
-      Route::get('{user_id}/pekerjaan-yang-sedang-dilaksanakan/', [PekerjaanYangSedangDilaksanakanController::class, 'index'])->name('pekerjaan-yang-sedang-dilaksanakan.index');
-      Route::get('{user_id}/pekerjaan-yang-sedang-dilaksanakan/{id}', [PekerjaanYangSedangDilaksanakanController::class, 'show'])->name('pekerjaan-yang-sedang-dilaksanakan.show');
+      // Route::get('{user_id}/pekerjaan-yang-sedang-dilaksanakan/', [PekerjaanYangSedangDilaksanakanController::class, 'index'])->name('pekerjaan-yang-sedang-dilaksanakan.index');
+      // Route::get('{user_id}/pekerjaan-yang-sedang-dilaksanakan/{id}', [PekerjaanYangSedangDilaksanakanController::class, 'show'])->name('pekerjaan-yang-sedang-dilaksanakan.show');
 
-      Route::get('{user_id}/sisa-kemampuan-nyata/edit', [SisaKemampuanNyataController::class, 'edit'])->name('sisa-kemampuan-nyata.edit');
+      // Route::get('{user_id}/sisa-kemampuan-nyata/edit', [SisaKemampuanNyataController::class, 'edit'])->name('sisa-kemampuan-nyata.edit');
 
-      Route::get('{user_id}/lampiran-kualifikasi/edit', [LampiranKualifikasiController::class, 'edit'])->name('lampiran-kualifikasi.edit');
+      // Route::get('{user_id}/lampiran-kualifikasi/edit', [LampiranKualifikasiController::class, 'edit'])->name('lampiran-kualifikasi.edit');
     });
   });
 
@@ -278,34 +296,44 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::get('{lelang_id}/peserta/{id}', [PesertaController::class, 'show'])->name('peserta.show');
       Route::put('{lelang_id}/peserta/{id}', [PesertaController::class, 'pemenang'])->name('peserta.pemenang');
 
-      Route::get('{user_id}/administrasi/edit', [AdministrasiController::class, 'edit'])->name('administrasi.edit');
+      Route::get('{user_id}/dokumen', [DokumenController::class, 'index'])->name('dokumen');
+
+      Route::get('{user_id}/akun-bank', [AkunBankController::class, 'akunBank'])->name('akun-bank');
+
+      Route::get('{user_id}/pengalaman', [PengalamanController::class, 'pengalaman'])->name('pengalaman');
+
+      Route::get('{user_id}/struktur-organisasi', [StrukturOrganisasiController::class, 'strukturOrganisasi'])->name('struktur-organisasi');
+
+      Route::get('{user_id}/gambar-perusahaan', [GambarPerusahaanController::class, 'gambarPerusahaan'])->name('gambar-perusahaan');
+
+      // Route::get('{user_id}/administrasi/edit', [AdministrasiController::class, 'edit'])->name('administrasi.edit');
       
-      Route::get('{user_id}/akta-pendirian-perusahaan', [AktaPendirianPerusahaanController::class, 'index'])->name('akta-pendirian-perusahaan.index');
-      Route::get('{user_id}/akta-pendirian-perusahaan/{id}', [AktaPendirianPerusahaanController::class, 'show'])->name('akta-pendirian-perusahaan.show');
+      // Route::get('{user_id}/akta-pendirian-perusahaan', [AktaPendirianPerusahaanController::class, 'index'])->name('akta-pendirian-perusahaan.index');
+      // Route::get('{user_id}/akta-pendirian-perusahaan/{id}', [AktaPendirianPerusahaanController::class, 'show'])->name('akta-pendirian-perusahaan.show');
 
-      Route::get('{user_id}/pengurus-badan-usaha', [PengurusBadanUsahaController::class, 'index'])->name('pengurus-badan-usaha.index');
-      Route::get('{user_id}/pengurus-badan-usaha/{id}', [PengurusBadanUsahaController::class, 'show'])->name('pengurus-badan-usaha.show');
+      // Route::get('{user_id}/pengurus-badan-usaha', [PengurusBadanUsahaController::class, 'index'])->name('pengurus-badan-usaha.index');
+      // Route::get('{user_id}/pengurus-badan-usaha/{id}', [PengurusBadanUsahaController::class, 'show'])->name('pengurus-badan-usaha.show');
 
-      Route::get('{user_id}/tanda-daftar-usaha/edit', [TandaDaftarUsahaController::class, 'edit'])->name('tanda-daftar-usaha.edit');
+      // Route::get('{user_id}/tanda-daftar-usaha/edit', [TandaDaftarUsahaController::class, 'edit'])->name('tanda-daftar-usaha.edit');
 
-      Route::get('{user_id}/susunan-kepemilikan-saham/', [SusunanKepemilikanSahamController::class, 'index'])->name('susunan-kepemilikan-saham.index');
-      Route::get('{user_id}/susunan-kepemilikan-saham/{id}', [SusunanKepemilikanSahamController::class, 'show'])->name('susunan-kepemilikan-saham.show');
+      // Route::get('{user_id}/susunan-kepemilikan-saham/', [SusunanKepemilikanSahamController::class, 'index'])->name('susunan-kepemilikan-saham.index');
+      // Route::get('{user_id}/susunan-kepemilikan-saham/{id}', [SusunanKepemilikanSahamController::class, 'show'])->name('susunan-kepemilikan-saham.show');
 
-      Route::get('{user_id}/data-personalia/', [DataPersonaliaController::class, 'index'])->name('data-personalia.index');
-      Route::get('{user_id}/data-personalia/{id}', [DataPersonaliaController::class, 'show'])->name('data-personalia.show');
+      // Route::get('{user_id}/data-personalia/', [DataPersonaliaController::class, 'index'])->name('data-personalia.index');
+      // Route::get('{user_id}/data-personalia/{id}', [DataPersonaliaController::class, 'show'])->name('data-personalia.show');
 
-      Route::get('{user_id}/data-fasilitas/', [DataFasilitasController::class, 'index'])->name('data-fasilitas.index');
-      Route::get('{user_id}/data-fasilitas/{id}', [DataFasilitasController::class, 'show'])->name('data-fasilitas.show');
+      // Route::get('{user_id}/data-fasilitas/', [DataFasilitasController::class, 'index'])->name('data-fasilitas.index');
+      // Route::get('{user_id}/data-fasilitas/{id}', [DataFasilitasController::class, 'show'])->name('data-fasilitas.show');
 
-      Route::get('{user_id}/pengalaman-perusahaan/', [PengalamanPerusahaanController::class, 'index'])->name('pengalaman-perusahaan.index');
-      Route::get('{user_id}/pengalaman-perusahaan/{id}', [PengalamanPerusahaanController::class, 'show'])->name('pengalaman-perusahaan.show');
+      // Route::get('{user_id}/pengalaman-perusahaan/', [PengalamanPerusahaanController::class, 'index'])->name('pengalaman-perusahaan.index');
+      // Route::get('{user_id}/pengalaman-perusahaan/{id}', [PengalamanPerusahaanController::class, 'show'])->name('pengalaman-perusahaan.show');
 
-      Route::get('{user_id}/pekerjaan-yang-sedang-dilaksanakan/', [PekerjaanYangSedangDilaksanakanController::class, 'index'])->name('pekerjaan-yang-sedang-dilaksanakan.index');
-      Route::get('{user_id}/pekerjaan-yang-sedang-dilaksanakan/{id}', [PekerjaanYangSedangDilaksanakanController::class, 'show'])->name('pekerjaan-yang-sedang-dilaksanakan.show');
+      // Route::get('{user_id}/pekerjaan-yang-sedang-dilaksanakan/', [PekerjaanYangSedangDilaksanakanController::class, 'index'])->name('pekerjaan-yang-sedang-dilaksanakan.index');
+      // Route::get('{user_id}/pekerjaan-yang-sedang-dilaksanakan/{id}', [PekerjaanYangSedangDilaksanakanController::class, 'show'])->name('pekerjaan-yang-sedang-dilaksanakan.show');
 
-      Route::get('{user_id}/sisa-kemampuan-nyata/edit', [SisaKemampuanNyataController::class, 'edit'])->name('sisa-kemampuan-nyata.edit');
+      // Route::get('{user_id}/sisa-kemampuan-nyata/edit', [SisaKemampuanNyataController::class, 'edit'])->name('sisa-kemampuan-nyata.edit');
 
-      Route::get('{user_id}/lampiran-kualifikasi/edit', [LampiranKualifikasiController::class, 'edit'])->name('lampiran-kualifikasi.edit');
+      // Route::get('{user_id}/lampiran-kualifikasi/edit', [LampiranKualifikasiController::class, 'edit'])->name('lampiran-kualifikasi.edit');
     });
   });
 
@@ -381,7 +409,7 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
 
       Route::put('profile-perusahaan/{id}', [ProfilePerusahaan2Controller::class, 'update'])->name('profile-perusahaan.update');
 
-      Route::get('dokumen', [DokumenController::class, 'index'])->name('dokumen');
+      Route::get('{user_id}/dokumen', [DokumenController::class, 'index'])->name('dokumen');
       
       Route::post('post-akta-pendirian', [AktaPendirianController::class, 'postAktaPendirian'])->name('post-akta-pendirian');
       Route::put('put-akta-pendirian/{id}', [AktaPendirianController::class, 'putAktaPendirian'])->name('put-akta-pendirian');
@@ -398,8 +426,38 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::post('post-nomor-induk-berusaha', [NomorIndukBerusahaController::class, 'postNomorIndukBerusaha'])->name('post-nomor-induk-berusaha');
       Route::put('put-nomor-induk-berusaha/{id}', [NomorIndukBerusahaController::class, 'putNomorIndukBerusaha'])->name('put-nomor-induk-berusaha');
       Route::delete('delete-nomor-induk-berusaha/{id}', [NomorIndukBerusahaController::class, 'deleteNomorIndukBerusaha'])->name('delete-nomor-induk-berusaha');
+
+      Route::post('post-nomor-pokok-wajib-pajak', [NomorPokokWajibPajakController::class, 'postNomorPokokWajibPajak'])->name('post-nomor-pokok-wajib-pajak');
+      Route::put('put-nomor-pokok-wajib-pajak/{id}', [NomorPokokWajibPajakController::class, 'putNomorPokokWajibPajak'])->name('put-nomor-pokok-wajib-pajak');
+      Route::delete('delete-nomor-pokok-wajib-pajak/{id}', [NomorPokokWajibPajakController::class, 'deleteNomorPokokWajibPajak'])->name('delete-nomor-pokok-wajib-pajak');
       
-      Route::get('pengalaman-perusahaan', [PengalamanPerusahaanController::class, 'index'])->name('index-pengalaman-perusahaan');
+      Route::post('post-surat-pengukuhan-perusahaan-kena-pajak', [SuratPengukuhanPerusahaanKenaPajakController::class, 'postSuratPengukuhanPerusahaanKenaPajak'])->name('post-surat-pengukuhan-perusahaan-kena-pajak');
+      Route::put('put-surat-pengukuhan-perusahaan-kena-pajak/{id}', [SuratPengukuhanPerusahaanKenaPajakController::class, 'putSuratPengukuhanPerusahaanKenaPajak'])->name('put-surat-pengukuhan-perusahaan-kena-pajak');
+      Route::delete('delete-surat-pengukuhan-perusahaan-kena-pajak/{id}', [SuratPengukuhanPerusahaanKenaPajakController::class, 'deleteSuratPengukuhanPerusahaanKenaPajak'])->name('delete-surat-pengukuhan-perusahaan-kena-pajak');
+
+      Route::post('post-surat-izin-operasional', [SuratIzinOperasionalController::class, 'postSuratIzinOperasional'])->name('post-surat-izin-operasional');
+      Route::put('put-surat-izin-operasional/{id}', [SuratIzinOperasionalController::class, 'putSuratIzinOperasional'])->name('put-surat-izin-operasional');
+      Route::delete('delete-surat-izin-operasional/{id}', [SuratIzinOperasionalController::class, 'deleteSuratIzinOperasional'])->name('delete-surat-izin-operasional');
+
+      Route::get('{user_id}/akun-bank', [AkunBankController::class, 'akunBank'])->name('akun-bank');
+      Route::post('{user_id}/post-akun-bank', [AkunBankController::class, 'postAkunBank'])->name('post-akun-bank');
+      Route::put('{user_id}/put-akun-bank/{id}', [AkunBankController::class, 'putAkunBank'])->name('put-akun-bank');
+      Route::delete('{user_id}/delete-akun-bank/{id}', [AkunBankController::class, 'deleteAkunBank'])->name('delete-akun-bank');
+
+      Route::get('{user_id}/pengalaman', [PengalamanController::class, 'pengalaman'])->name('pengalaman');
+      Route::post('{user_id}/post-pengalaman', [PengalamanController::class, 'postPengalaman'])->name('post-pengalaman');
+      Route::put('{user_id}/put-pengalaman/{id}', [PengalamanController::class, 'putPengalaman'])->name('put-pengalaman');
+      Route::delete('{user_id}/delete-pengalaman/{id}', [PengalamanController::class, 'deletePengalaman'])->name('delete-pengalaman');
+
+      Route::get('{user_id}/struktur-organisasi', [StrukturOrganisasiController::class, 'strukturOrganisasi'])->name('struktur-organisasi');
+      Route::post('{user_id}/post-struktur-organisasi', [StrukturOrganisasiController::class, 'postStrukturOrganisasi'])->name('post-struktur-organisasi');
+      Route::put('{user_id}/put-struktur-organisasi/{id}', [StrukturOrganisasiController::class, 'putStrukturOrganisasi'])->name('put-struktur-organisasi');
+      Route::delete('{user_id}/delete-struktur-organisasi/{id}', [StrukturOrganisasiController::class, 'deleteStrukturOrganisasi'])->name('delete-struktur-organisasi');
+
+      Route::get('{user_id}/gambar-perusahaan', [GambarPerusahaanController::class, 'gambarPerusahaan'])->name('gambar-perusahaan');
+      Route::post('{user_id}/post-gambar-perusahaan', [GambarPerusahaanController::class, 'postGambarPerusahaan'])->name('post-gambar-perusahaan');
+      Route::put('{user_id}/put-gambar-perusahaan/{id}', [GambarPerusahaanController::class, 'putGambarPerusahaan'])->name('put-gambar-perusahaan');
+      Route::delete('{user_id}/delete-gambar-perusahaan/{id}', [GambarPerusahaanController::class, 'deleteGambarPerusahaan'])->name('delete-gambar-perusahaan');
     });
   });
 });
