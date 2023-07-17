@@ -17,7 +17,7 @@ class SuratIzinUsahaPerdagangan extends Model
     protected $fillable = [
         'id',
         'user_id',
-        'no_dokumen',
+        'kode_dokumen',
         'no_siup',
         'tanggal_terbit',
         'tanggal_jatuh_tempo',

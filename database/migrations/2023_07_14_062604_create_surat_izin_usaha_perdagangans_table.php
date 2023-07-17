@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('surat_izin_usaha_perdagangans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('no_dokumen');
-            $table->string('no_siup')->nullable();
-            $table->date('tanggal_terbit')->nullable();
-            $table->string('tanggal_jatuh_tempo')->nullable();
-            $table->string('siup')->nullable();
+            $table->string('kode_dokumen');
+            $table->string('no_siup');
+            $table->date('tanggal_terbit');
+            $table->string('tanggal_jatuh_tempo');
+            $table->string('siup');
             $table->timestamps();
         });
     }
