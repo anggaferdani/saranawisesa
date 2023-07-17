@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('surat_keterangan_domisili_perusahaans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('no_dokumen');
-            $table->string('no_skdp')->nullable();
-            $table->date('tanggal_terbit')->nullable();
-            $table->string('tanggal_jatuh_tempo')->nullable();
-            $table->string('skdp')->nullable();
+            $table->string('kode_dokumen');
+            $table->string('no_skdp');
+            $table->date('tanggal_terbit');
+            $table->string('tanggal_jatuh_tempo');
+            $table->string('skdp');
             $table->timestamps();
         });
     }

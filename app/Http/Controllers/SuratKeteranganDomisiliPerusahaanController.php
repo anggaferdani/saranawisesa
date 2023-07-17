@@ -21,11 +21,11 @@ class SuratKeteranganDomisiliPerusahaanController extends Controller
             'skdp' => 'required',
         ]);
 
-        $no_dokumen = hash('crc32', $this->generateNumber());
+        $kode_dokumen = hash('crc32', $this->generateNumber());
 
         $array = array(
             'user_id' => $user->id,
-            'no_dokumen' => $no_dokumen,
+            'kode_dokumen' => $kode_dokumen,
             'no_skdp' => $request['no_skdp'],
             'tanggal_terbit' => $request['tanggal_terbit'],
             'tanggal_jatuh_tempo' => $request['tanggal_jatuh_tempo'],
@@ -77,9 +77,9 @@ class SuratKeteranganDomisiliPerusahaanController extends Controller
 
     public function generateNumber(){
         do{
-            $no_dokumen = mt_rand(999999999, 9999999999);
-        }while(SuratKeteranganDomisiliPerusahaan::where("no_dokumen", "=", $no_dokumen)->first());
+            $kode_dokumen = mt_rand(999999999, 9999999999);
+        }while(SuratKeteranganDomisiliPerusahaan::where("kode_dokumen", "=", $kode_dokumen)->first());
 
-        return $no_dokumen;
+        return $kode_dokumen;
     }
 }

@@ -4,24 +4,32 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Lelang;
+use App\Models\AkunBank;
 use App\Models\Lampiran;
+use App\Models\Pengalaman;
 use App\Models\Perusahaan;
 use App\Models\VerifyEmail;
 use App\Models\Administrasi;
 use App\Models\AktaPendirian;
 use App\Models\DataFasilitas;
 use App\Models\DataPersonalia;
+use App\Models\GambarPerusahaan;
 use App\Models\TandaDaftarUsaha;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\NomorIndukBerusaha;
 use App\Models\PengurusBadanUsaha;
+use App\Models\StrukturOrganisasi;
 use App\Models\LampiranKualifikasi;
+use App\Models\NomorPokokWajibPajak;
 use App\Models\PengalamanPerusahaan;
+use App\Models\SuratIzinOperasional;
 use Illuminate\Support\Facades\Auth;
 use App\Models\AktaPendirianPerusahaan;
 use App\Models\SusunanKepemilikanSaham;
 use Illuminate\Notifications\Notifiable;
 use App\Models\SuratIzinUsahaPerdagangan;
 use App\Models\SuratKeteranganDomisiliPerusahaan;
+use App\Models\SuratPengukuhanPerusahaanKenaPajak;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -92,10 +100,7 @@ class User extends Authenticatable
 
 
 
-
-
-
-
+    
     public function akta_pendirians(){
         return $this->hasMany(AktaPendirian::class);
     }
@@ -105,28 +110,28 @@ class User extends Authenticatable
     public function surat_izin_usaha_perdagangans(){
         return $this->hasMany(SuratIzinUsahaPerdagangan::class);
     }
-    public function tanda_daftar_usahas(){
-        return $this->hasMany(TandaDaftarUsaha::class);
+    public function nomor_induk_berusahas(){
+        return $this->hasMany(NomorIndukBerusaha::class);
     }
-    public function susunan_kepemilikan_sahams(){
-        return $this->hasMany(SusunanKepemilikanSaham::class);
+    public function nomor_pokok_wajib_pajaks(){
+        return $this->hasMany(NomorPokokWajibPajak::class);
     }
-    public function data_personalias(){
-        return $this->hasMany(DataPersonalia::class);
+    public function surat_pengukuhan_perusahaan_kena_pajaks(){
+        return $this->hasMany(SuratPengukuhanPerusahaanKenaPajak::class);
     }
-    public function data_fasilitas(){
-        return $this->hasMany(DataFasilitas::class);
+    public function surat_izin_operasionals(){
+        return $this->hasMany(SuratIzinOperasional::class);
     }
-    public function pengalaman_perusahaans(){
-        return $this->hasMany(PengalamanPerusahaan::class);
+    public function akun_banks(){
+        return $this->hasMany(AkunBank::class);
     }
-    public function pekerjaan_yang_sedang_dilaksanakans(){
-        return $this->hasMany(PengalamanPerusahaan::class);
+    public function pengalamans(){
+        return $this->hasMany(Pengalaman::class);
     }
-    public function sisa_kemampuan_nyatas(){
-        return $this->hasMany(SisaKemampuanNyata::class);
+    public function struktur_organisasis(){
+        return $this->hasMany(StrukturOrganisasi::class);
     }
-    public function lampiran_kualifikasis(){
-        return $this->hasMany(LampiranKualifikasi::class);
+    public function gambar_perusahaans(){
+        return $this->hasMany(GambarPerusahaan::class);
     }
 }

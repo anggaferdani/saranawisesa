@@ -17,7 +17,7 @@ class SuratKeteranganDomisiliPerusahaan extends Model
     protected $fillable = [
         'id',
         'user_id',
-        'no_dokumen',
+        'kode_dokumen',
         'no_skdp',
         'tanggal_terbit',
         'tanggal_jatuh_tempo',
