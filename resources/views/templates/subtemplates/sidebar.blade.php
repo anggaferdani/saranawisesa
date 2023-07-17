@@ -50,102 +50,30 @@
         @if(auth()->user()->level == 'superadmin')
           <li class="menu-header">Menu</li>
           <li class="{{ str_contains(Route::currentRouteName(), 'eproc.superadmin.dashboard') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.superadmin.dashboard') }}"><i class="fas fa-quote-right"></i><span>Dashboard</span></a></li>
-          <li class="{{ str_contains(Route::currentRouteName(), 'eproc.superadmin.akun') ||
-          str_contains(Route::currentRouteName(), 'eproc.superadmin.perusahaan') ||
-          str_contains(Route::currentRouteName(), 'eproc.superadmin.administrasi') ||
-          str_contains(Route::currentRouteName(), 'eproc.superadmin.akta-pendirian-perusahaan') ||
-          str_contains(Route::currentRouteName(), 'eproc.superadmin.pengurus-badan-usaha') ||
-          str_contains(Route::currentRouteName(), 'eproc.superadmin.tanda-daftar-usaha') ||
-          str_contains(Route::currentRouteName(), 'eproc.superadmin.susunan-kepemilikan-saham') ||
-          str_contains(Route::currentRouteName(), 'eproc.superadmin.data-personalia') ||
-          str_contains(Route::currentRouteName(), 'eproc.superadmin.data-fasilitas') ||
-          str_contains(Route::currentRouteName(), 'eproc.superadmin.pengalaman-perusahaan') ||
-          str_contains(Route::currentRouteName(), 'eproc.superadmin.pekerjaan-yang-sedang-dilaksanakan') ||
-          str_contains(Route::currentRouteName(), 'eproc.superadmin.sisa-kemampuan-nyata') ||
-          str_contains(Route::currentRouteName(), 'eproc.superadmin.lampiran-kualifikasi') ? 'active' : '' }}" class="dropdown">
-            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-user"></i><span>Akun</span></a>
-            <ul class="dropdown-menu" style="display: block;">
-              <li class="{{ str_contains(Route::currentRouteName(), 'eproc.superadmin.akun') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.superadmin.akun.index') }}"><span>Admin</span></a></li>
-              <li class="{{ str_contains(Route::currentRouteName(), 'eproc.superadmin.perusahaan') ||
-              str_contains(Route::currentRouteName(), 'eproc.superadmin.administrasi') ||
-              str_contains(Route::currentRouteName(), 'eproc.superadmin.akta-pendirian-perusahaan') ||
-              str_contains(Route::currentRouteName(), 'eproc.superadmin.pengurus-badan-usaha') ||
-              str_contains(Route::currentRouteName(), 'eproc.superadmin.tanda-daftar-usaha') ||
-              str_contains(Route::currentRouteName(), 'eproc.superadmin.susunan-kepemilikan-saham') ||
-              str_contains(Route::currentRouteName(), 'eproc.superadmin.data-personalia') ||
-              str_contains(Route::currentRouteName(), 'eproc.superadmin.data-fasilitas') ||
-              str_contains(Route::currentRouteName(), 'eproc.superadmin.pengalaman-perusahaan') ||
-              str_contains(Route::currentRouteName(), 'eproc.superadmin.pekerjaan-yang-sedang-dilaksanakan') ||
-              str_contains(Route::currentRouteName(), 'eproc.superadmin.sisa-kemampuan-nyata') ||
-              str_contains(Route::currentRouteName(), 'eproc.superadmin.lampiran-kualifikasi') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.superadmin.perusahaan.index') }}"><span>Perusahaan</span></a></li>
-            </ul>
-          </li>
+          <li class="{{ str_contains(Route::currentRouteName(), 'eproc.superadmin.akun') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.superadmin.akun.index') }}"><i class="fas fa-user-cog"></i><span>Admin</span></a></li>
+          <li class="{{ str_contains(Route::currentRouteName(), 'eproc.superadmin.perusahaan') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.superadmin.perusahaan.index') }}"><i class="fas fa-user"></i><span>Admin</span></a></li>
           <li class="{{ str_contains(Route::currentRouteName(), 'eproc.superadmin.berita') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.superadmin.berita.index') }}"><i class="fas fa-quote-left"></i><span>Berita</span></a></li>
-          <li class="{{ str_contains(Route::currentRouteName(), 'eproc.superadmin.jenis-pengadaan') || str_contains(Route::currentRouteName(), 'eproc.superadmin.lelang') || str_contains(Route::currentRouteName(), 'eproc.superadmin.penunjukan-langsung') ? 'active' : '' }}" class="dropdown">
-            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-tag"></i><span>Pengadaan</span></a>
-            <ul class="dropdown-menu" style="display: block;">
-              <li class="{{ str_contains(Route::currentRouteName(), 'eproc.superadmin.jenis-pengadaan') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.superadmin.jenis-pengadaan.index') }}">Jenis Pengadaan</a></li>
-              <li class="{{ str_contains(Route::currentRouteName(), 'eproc.superadmin.lelang') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.superadmin.lelang.index') }}">Lelang</a></li>
-              <li class="{{ str_contains(Route::currentRouteName(), 'eproc.superadmin.penunjukan-langsung') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.superadmin.penunjukan-langsung.index') }}">Penunjukan Langsung</a></li>
-            </ul>
-          </li>
+          <li class="{{ str_contains(Route::currentRouteName(), 'eproc.superadmin.jenis-pengadaan') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.superadmin.jenis-pengadaan.index') }}"><i class="fas fa-tag"></i><span>Jenis Pengadaan</span></a></li>
+          <li class="{{ str_contains(Route::currentRouteName(), 'eproc.superadmin.lelang') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.superadmin.lelang.index') }}"><i class="fas fa-box"></i><span>Lelang</span></a></li>
+          <li class="{{ str_contains(Route::currentRouteName(), 'eproc.superadmin.penunjukan-langsung') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.superadmin.penunjukan-langsung.index') }}"><i class="fas fa-box-open"></i><span>Penunjukan Langsung</span></a></li>
         @endif
         @if(auth()->user()->level == 'admin')
           <li class="menu-header">Menu</li>
           <li class="{{ str_contains(Route::currentRouteName(), 'eproc.admin.dashboard') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.admin.dashboard') }}"><i class="fas fa-quote-right"></i><span>Dashboard</span></a></li>
-          <li class="{{ str_contains(Route::currentRouteName(), 'eproc.admin.perusahaan') ||
-          str_contains(Route::currentRouteName(), 'eproc.admin.administrasi') ||
-          str_contains(Route::currentRouteName(), 'eproc.admin.akta-pendirian-perusahaan') ||
-          str_contains(Route::currentRouteName(), 'eproc.admin.pengurus-badan-usaha') ||
-          str_contains(Route::currentRouteName(), 'eproc.admin.tanda-daftar-usaha') ||
-          str_contains(Route::currentRouteName(), 'eproc.admin.susunan-kepemilikan-saham') ||
-          str_contains(Route::currentRouteName(), 'eproc.admin.data-personalia') ||
-          str_contains(Route::currentRouteName(), 'eproc.admin.data-fasilitas') ||
-          str_contains(Route::currentRouteName(), 'eproc.admin.pengalaman-perusahaan') ||
-          str_contains(Route::currentRouteName(), 'eproc.admin.pekerjaan-yang-sedang-dilaksanakan') ||
-          str_contains(Route::currentRouteName(), 'eproc.admin.sisa-kemampuan-nyata') ||
-          str_contains(Route::currentRouteName(), 'eproc.admin.lampiran-kualifikasi') ? 'active' : '' }}" class="dropdown">
-            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-user"></i><span>Akun</span></a>
-            <ul class="dropdown-menu" style="display: block;">
-              <li class="{{ str_contains(Route::currentRouteName(), 'eproc.admin.perusahaan') ||
-              str_contains(Route::currentRouteName(), 'eproc.admin.administrasi') ||
-              str_contains(Route::currentRouteName(), 'eproc.admin.akta-pendirian-perusahaan') ||
-              str_contains(Route::currentRouteName(), 'eproc.admin.pengurus-badan-usaha') ||
-              str_contains(Route::currentRouteName(), 'eproc.admin.tanda-daftar-usaha') ||
-              str_contains(Route::currentRouteName(), 'eproc.admin.susunan-kepemilikan-saham') ||
-              str_contains(Route::currentRouteName(), 'eproc.admin.data-personalia') ||
-              str_contains(Route::currentRouteName(), 'eproc.admin.data-fasilitas') ||
-              str_contains(Route::currentRouteName(), 'eproc.admin.pengalaman-perusahaan') ||
-              str_contains(Route::currentRouteName(), 'eproc.admin.pekerjaan-yang-sedang-dilaksanakan') ||
-              str_contains(Route::currentRouteName(), 'eproc.admin.sisa-kemampuan-nyata') ||
-              str_contains(Route::currentRouteName(), 'eproc.admin.lampiran-kualifikasi') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.admin.perusahaan.index') }}"><span>Perusahaan</span></a></li>
-            </ul>
-          </li>
+          <li class="{{ str_contains(Route::currentRouteName(), 'eproc.admin.perusahaan') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.admin.perusahaan.index') }}"><i class="fas fa-user"></i><span>Admin</span></a></li>
           <li class="{{ str_contains(Route::currentRouteName(), 'eproc.admin.berita') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.admin.berita.index') }}"><i class="fas fa-quote-left"></i><span>Berita</span></a></li>
-          <li class="{{ str_contains(Route::currentRouteName(), 'eproc.admin.jenis-pengadaan') || str_contains(Route::currentRouteName(), 'eproc.admin.lelang') || str_contains(Route::currentRouteName(), 'eproc.admin.penunjukan-langsung') ? 'active' : '' }} class="dropdown">
-            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-tag"></i><span>Pengadaan</span></a>
-            <ul class="dropdown-menu" style="display: block;">
-              <li class="{{ str_contains(Route::currentRouteName(), 'eproc.admin.jenis-pengadaan') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.admin.jenis-pengadaan.index') }}">Jenis Pengadaan</a></li>
-              <li class="{{ str_contains(Route::currentRouteName(), 'eproc.admin.lelang') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.admin.lelang.index') }}">Lelang</a></li>
-              <li class="{{ str_contains(Route::currentRouteName(), 'eproc.admin.penunjukan-langsung') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.admin.penunjukan-langsung.index') }}">Penunjukan Langsung</a></li>
-            </ul>
-          </li>
+          <li class="{{ str_contains(Route::currentRouteName(), 'eproc.admin.jenis-pengadaan') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.admin.jenis-pengadaan.index') }}"><i class="fas fa-tag"></i><span>Jenis Pengadaan</span></a></li>
+          <li class="{{ str_contains(Route::currentRouteName(), 'eproc.admin.lelang') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.admin.lelang.index') }}"><i class="fas fa-box"></i><span>Lelang</span></a></li>
+          <li class="{{ str_contains(Route::currentRouteName(), 'eproc.admin.penunjukan-langsung') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.admin.penunjukan-langsung.index') }}"><i class="fas fa-box-open"></i><span>Penunjukan Langsung</span></a></li>
         @endif
         @if(auth()->user()->level == 'perusahaan')
           <li class="menu-header">Menu</li>
           <li class="{{ str_contains(Route::currentRouteName(), 'eproc.perusahaan.dashboard') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.perusahaan.dashboard') }}"><i class="fas fa-quote-right"></i><span>Dashboard</span></a></li>
           <li class="{{ str_contains(Route::currentRouteName(), 'eproc.perusahaan.dokumen') ||
-          str_contains(Route::currentRouteName(), 'eproc.perusahaan.administrasi') ||
-          str_contains(Route::currentRouteName(), 'eproc.perusahaan.akta-pendirian-perusahaan') ||
-          str_contains(Route::currentRouteName(), 'eproc.perusahaan.pengurus-badan-usaha') ||
-          str_contains(Route::currentRouteName(), 'eproc.perusahaan.tanda-daftar-usaha') ||
-          str_contains(Route::currentRouteName(), 'eproc.perusahaan.susunan-kepemilikan-saham') ||
-          str_contains(Route::currentRouteName(), 'eproc.perusahaan.data-personalia') ||
-          str_contains(Route::currentRouteName(), 'eproc.perusahaan.data-fasilitas') ||
-          str_contains(Route::currentRouteName(), 'eproc.perusahaan.pengalaman-perusahaan') ||
-          str_contains(Route::currentRouteName(), 'eproc.perusahaan.pekerjaan-yang-sedang-dilaksanakan') ||
-          str_contains(Route::currentRouteName(), 'eproc.perusahaan.sisa-kemampuan-nyata') ||
-          str_contains(Route::currentRouteName(), 'eproc.perusahaan.lampiran-kualifikasi') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.perusahaan.dokumen', ['user_id' => Crypt::encrypt(Auth::id())]) }}"><i class="fas fa-user"></i><span>Kualifikasi</span></a></li>
+          str_contains(Route::currentRouteName(), 'eproc.perusahaan.akun-bank') ||
+          str_contains(Route::currentRouteName(), 'eproc.perusahaan.pengalaman') ||
+          str_contains(Route::currentRouteName(), 'eproc.perusahaan.struktur-organisasi') ||
+          str_contains(Route::currentRouteName(), 'eproc.perusahaan.gambar-perusahaan') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.perusahaan.dokumen', ['user_id' => Crypt::encrypt(Auth::id())]) }}"><i class="fas fa-user"></i><span>Data Perusahaan</span></a></li>
           <li class="{{ str_contains(Route::currentRouteName(), 'eproc.perusahaan.pengadaan') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.perusahaan.pengadaan.index') }}"><i class="fas fa-tag"></i><span>Pengadaan</span></a></li>
         @endif
       @endif
