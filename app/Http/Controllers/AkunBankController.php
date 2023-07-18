@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AkunBank;
 use App\Models\User;
+use App\Models\AkunBank;
+use App\Models\Pelayanan;
 use App\Models\Perusahaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,10 +15,13 @@ class AkunBankController extends Controller
     public function AkunBank($user_id){
         $user = User::find(Crypt::decrypt($user_id));
         $perusahaan = Perusahaan::where('user_id', Crypt::decrypt($user_id))->first();
+        $pelayanan_id = $perusahaan->pelayanans->pluck('id');
+        $pelayanans = Pelayanan::select('id', 'pelayanan')->where('status_aktif', 'Aktif')->get();
         $akun_banks = AkunBank::where('user_id', Crypt::decrypt($user_id))->latest()->paginate(10);
         return view('eproc.akun-bank', compact(
             'user',
             'perusahaan',
+            'pelayanans',
             'akun_banks',
         ));
     }

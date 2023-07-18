@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Pelayanan;
 use App\Models\Perusahaan;
 use Illuminate\Http\Request;
 use App\Models\GambarPerusahaan;
@@ -14,10 +15,13 @@ class GambarPerusahaanController extends Controller
     public function gambarPerusahaan($user_id){
         $user = User::find(Crypt::decrypt($user_id));
         $perusahaan = Perusahaan::where('user_id', Crypt::decrypt($user_id))->first();
+        $pelayanan_id = $perusahaan->pelayanans->pluck('id');
+        $pelayanans = Pelayanan::select('id', 'pelayanan')->where('status_aktif', 'Aktif')->get();
         $gambar_perusahaans = GambarPerusahaan::where('user_id', Crypt::decrypt($user_id))->latest()->paginate(10);
         return view('eproc.gambar-perusahaan', compact(
-            'perusahaan',
             'user',
+            'perusahaan',
+            'pelayanans',
             'gambar_perusahaans',
         ));
     }

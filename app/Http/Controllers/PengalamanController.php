@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Pelayanan;
 use App\Models\Pengalaman;
 use App\Models\Perusahaan;
 use Illuminate\Http\Request;
@@ -14,10 +15,13 @@ class PengalamanController extends Controller
     public function Pengalaman($user_id){
         $user = User::find(Crypt::decrypt($user_id));
         $perusahaan = Perusahaan::where('user_id', Crypt::decrypt($user_id))->first();
+        $pelayanan_id = $perusahaan->pelayanans->pluck('id');
+        $pelayanans = Pelayanan::select('id', 'pelayanan')->where('status_aktif', 'Aktif')->get();
         $pengalamans = Pengalaman::where('user_id', Crypt::decrypt($user_id))->latest()->paginate(10);
         return view('eproc.pengalaman', compact(
-            'perusahaan',
             'user',
+            'perusahaan',
+            'pelayanans',
             'pengalamans',
         ));
     }
