@@ -19,7 +19,7 @@
   <div class="container py-5">
     <div class="row g-2 g-md-4 align-items-center">
       <div class="col-md-6 position-relative">
-        <img class="orang position-relative" src="{{ asset('img/index3.jpg') }}" alt="orang" style="width: 100%; height: auto;">
+        <img class="orang position-relative" src="{{ asset('img/index3.jpg') }}" alt="orang" style="width: 100%; height: 350px;">
         <div class="puzzle position-absolute top-0">
             <div class="puzzle-border">
                 <div class="info d-flex justify-content-center align-items-center fs-1 m-0 fw-bold">Tentang Kami</div>

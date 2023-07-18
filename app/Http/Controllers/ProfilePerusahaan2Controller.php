@@ -31,7 +31,9 @@ class ProfilePerusahaan2Controller extends Controller
             'email_badan_usaha' => $request['email_badan_usaha'],
             'alamat_badan_usaha' => $request['alamat_badan_usaha'],
         ]);
+
+        $perusahaan->pelayanans()->sync($request->pelayanan);
         
-        return back()->with('success', 'Data has been updated at '.$perusahaan->updated_at);
+        return back()->with('success2', 'Data has been updated at '.$perusahaan->updated_at);
     }
 }
