@@ -51,21 +51,21 @@ class EprocController extends Controller
                 return $request->next;
             }elseif(!session()->has('compro')){
                 if(auth()->user()->status_aktif == 'aktif'){
-                    if(auth()->user()->level == 'superadmin'){
-                        $request->session()->put('eproc', $credentials);
-                        return redirect()->route('eproc.superadmin.dashboard');
-                    }elseif(auth()->user()->level == 'admin'){
-                        $request->session()->put('eproc', $credentials);
-                        return redirect()->route('eproc.admin.dashboard');
-                    }elseif(auth()->user()->level == 'perusahaan'){
-                        $request->session()->put('eproc', $credentials);
-                        if(auth()->user()->status_verifikasi == 'terverifikasi'){
+                    if(auth()->user()->status_verifikasi == 'terverifikasi'){
+                        if(auth()->user()->level == 'superadmin'){
+                            $request->session()->put('eproc', $credentials);
+                            return redirect()->route('eproc.superadmin.dashboard');
+                        }elseif(auth()->user()->level == 'admin'){
+                            $request->session()->put('eproc', $credentials);
+                            return redirect()->route('eproc.admin.dashboard');
+                        }elseif(auth()->user()->level == 'perusahaan'){
+                            $request->session()->put('eproc', $credentials);
                             return redirect()->route('eproc.perusahaan.dashboard');
                         }else{
-                            return redirect()->back()->with('fail', 'The account used has not been verified. Wait a few moments until the admin verifies the account used. A verification notification will be sent via email');
+                            return redirect()->route('eproc.login')->with('fail', 'The account level used for login does not match');
                         }
                     }else{
-                        return redirect()->route('eproc.login')->with('fail', 'The account level used for login does not match');
+                        return redirect()->back()->with('fail', 'The account used has not been verified. Wait a few moments until the admin verifies the account used. A verification notification will be sent via email');
                     }
                 }elseif(auth()->user()->status_aktif == 'tidak aktif'){
                     if(session()->has('compro')){
