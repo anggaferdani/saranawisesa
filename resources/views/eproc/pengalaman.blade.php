@@ -7,6 +7,10 @@
 <div class="row">
   <div class="col-12">
 
+    @if(Session::get('success2'))
+      <div class="alert alert-primary">{{ Session::get('success2') }}</div>
+    @endif
+
     <div class="card">
       @include('eproc.profile')
     </div>

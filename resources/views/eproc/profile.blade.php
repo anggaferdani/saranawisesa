@@ -15,9 +15,15 @@
       <i class="fas fa-map-marker-alt" style="font-size: 20px; margin-right: 15px; color: #830000;"></i>
       <div class="mb-0" style="color: #830000;">{{ $perusahaan->alamat_badan_usaha }}</div>
     </div>
-    <div class="d-flex">
+    <div class="d-flex mb-3">
       <i class="fas fa-th-large" style="font-size: 20px; margin-right: 15px; color: #830000;"></i>
       <div class="mb-0 lh-sm" style="color: #830000;">{{ $perusahaan->deskripsi }}</div>
+    </div>
+    <div class="d-flex">
+      <i class="fas fa-th-list" style="font-size: 20px; margin-right: 15px; color: #830000;"></i>
+      <div class="mb-0 lh-sm" style="color: #830000;">@foreach($perusahaan->pelayanans as $pelayanan)
+        {{ $pelayanan->pelayanan }},
+      @endforeach</div>
     </div>
   </div>
 </div>
@@ -47,6 +53,19 @@
           <div class="form-group">
             <label>Deskripsi</label>
             <textarea class="form-control" name="deskripsi">{{ $perusahaan->deskripsi }}</textarea>
+          </div>
+          <div class="form-group">
+            <label for="">Pelayanan</label>
+            <select class="form-control select2" style="width: 100% !important;" name="pelayanan[]" multiple>
+              @foreach($pelayanans as $pelayanan)
+                <option value="{{ $pelayanan->id }}"
+                @foreach($perusahaan->pelayanans as $pelayanan2)
+                  @if($pelayanan2->id == $pelayanan->id)@selected(true)@endif
+                @endforeach
+                >{{ $pelayanan->pelayanan }}</option>
+              @endforeach
+            </select>
+            @error('pelayanan[]')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           <div class="form-group">
             <label>Email Badan Usaha</label>

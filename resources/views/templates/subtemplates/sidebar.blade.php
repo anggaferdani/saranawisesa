@@ -56,6 +56,7 @@
           <li class="{{ str_contains(Route::currentRouteName(), 'eproc.superadmin.jenis-pengadaan') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.superadmin.jenis-pengadaan.index') }}"><i class="fas fa-tag"></i><span>Jenis Pengadaan</span></a></li>
           <li class="{{ str_contains(Route::currentRouteName(), 'eproc.superadmin.lelang') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.superadmin.lelang.index') }}"><i class="fas fa-box"></i><span>Lelang</span></a></li>
           <li class="{{ str_contains(Route::currentRouteName(), 'eproc.superadmin.penunjukan-langsung') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.superadmin.penunjukan-langsung.index') }}"><i class="fas fa-box-open"></i><span>Penunjukan Langsung</span></a></li>
+          <li class="{{ str_contains(Route::currentRouteName(), 'eproc.superadmin.pelayanan') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.superadmin.pelayanan.index') }}"><i class="fas fa-th-large"></i><span>Kategori Pelayanan</span></a></li>
         @endif
         @if(auth()->user()->level == 'admin')
           <li class="menu-header">Menu</li>
@@ -65,6 +66,7 @@
           <li class="{{ str_contains(Route::currentRouteName(), 'eproc.admin.jenis-pengadaan') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.admin.jenis-pengadaan.index') }}"><i class="fas fa-tag"></i><span>Jenis Pengadaan</span></a></li>
           <li class="{{ str_contains(Route::currentRouteName(), 'eproc.admin.lelang') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.admin.lelang.index') }}"><i class="fas fa-box"></i><span>Lelang</span></a></li>
           <li class="{{ str_contains(Route::currentRouteName(), 'eproc.admin.penunjukan-langsung') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.admin.penunjukan-langsung.index') }}"><i class="fas fa-box-open"></i><span>Penunjukan Langsung</span></a></li>
+          <li class="{{ str_contains(Route::currentRouteName(), 'eproc.admin.pelayanan') ? 'active' : '' }}"><a class="nav-link" href="{{ route('eproc.admin.pelayanan.index') }}"><i class="fas fa-th-large"></i><span>Kategori Pelayanan</span></a></li>
         @endif
         @if(auth()->user()->level == 'perusahaan')
           <li class="menu-header">Menu</li>

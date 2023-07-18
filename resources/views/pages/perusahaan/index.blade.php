@@ -12,7 +12,7 @@
     @endif
 
     @if(Session::get('fail'))
-      <div class="alert alert-danger">{{ Session::get('fail') }}</div>
+      <div class="alert alert-primary">{{ Session::get('fail') }}</div>
     @endif
 
     <div class="card">
@@ -64,16 +64,16 @@
                           @csrf
                           @method('GET')
                           <a href="{{ route('eproc.superadmin.dokumen', ['user_id' => Crypt::encrypt($user->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                          <a href="{{ route('eproc.superadmin.perusahaan.pdf', ['id' => Crypt::encrypt($user->id)]) }}" class="btn btn-icon btn-danger"><i class="fas fa-share"></i></a>
-                          <button type="button" class="btn btn-icon btn-danger batalkanVerifikasi"><i class="fas fa-times"></i></button>
+                          {{-- <a href="{{ route('eproc.superadmin.perusahaan.pdf', ['id' => Crypt::encrypt($user->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-share"></i></a> --}}
+                          <button type="button" class="btn btn-icon btn-primary batalkanVerifikasi"><i class="fas fa-times"></i></button>
                         </form>
                       @else
                         <form action="{{ route('eproc.superadmin.perusahaan.destroy', Crypt::encrypt($user->id)) }}" method="POST">
                           @csrf
                           @method('DELETE')
                           <a href="{{ route('eproc.superadmin.dokumen', ['user_id' => Crypt::encrypt($user->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                          <a href="{{ route('eproc.superadmin.perusahaan.pdf', ['id' => Crypt::encrypt($user->id)]) }}" class="btn btn-icon btn-danger"><i class="fas fa-share"></i></a>
-                          <button type="button" class="btn btn-icon btn-danger verifikasi"><i class="fas fa-check"></i></button>
+                          {{-- <a href="{{ route('eproc.superadmin.perusahaan.pdf', ['id' => Crypt::encrypt($user->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-share"></i></a> --}}
+                          <button type="button" class="btn btn-icon btn-primary verifikasi"><i class="fas fa-check"></i></button>
                         </form>
                       @endif
                     @endif
@@ -83,16 +83,16 @@
                           @csrf
                           @method('GET')
                           <a href="{{ route('eproc.admin.dokumen', ['user_id' => Crypt::encrypt($user->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                          <a href="{{ route('eproc.admin.perusahaan.pdf', ['id' => Crypt::encrypt($user->id)]) }}" class="btn btn-icon btn-danger"><i class="fas fa-share"></i></a>
-                          <button type="button" class="btn btn-icon btn-danger batalkanVerifikasi"><i class="fas fa-times"></i></button>
+                          <a href="{{ route('eproc.admin.perusahaan.pdf', ['id' => Crypt::encrypt($user->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-share"></i></a>
+                          <button type="button" class="btn btn-icon btn-primary batalkanVerifikasi"><i class="fas fa-times"></i></button>
                         </form>
                       @else
                         <form action="{{ route('eproc.admin.perusahaan.destroy', Crypt::encrypt($user->id)) }}" method="POST">
                           @csrf
                           @method('DELETE')
                           <a href="{{ route('eproc.admin.dokumen', ['user_id' => Crypt::encrypt($user->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                          <a href="{{ route('eproc.admin.perusahaan.pdf', ['id' => Crypt::encrypt($user->id)]) }}" class="btn btn-icon btn-danger"><i class="fas fa-share"></i></a>
-                          <button type="button" class="btn btn-icon btn-danger verifikasi"><i class="fas fa-check"></i></button>
+                          <a href="{{ route('eproc.admin.perusahaan.pdf', ['id' => Crypt::encrypt($user->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-share"></i></a>
+                          <button type="button" class="btn btn-icon btn-primary verifikasi"><i class="fas fa-check"></i></button>
                         </form>
                       @endif
                     @endif

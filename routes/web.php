@@ -18,6 +18,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\AkunBankController;
 use App\Http\Controllers\KomisarisController;
 use App\Http\Controllers\NewComproController;
+use App\Http\Controllers\PelayananController;
 use App\Http\Controllers\PengalamanController;
 use App\Http\Controllers\PerusahaanController;
 use App\Http\Controllers\PortofolioController;
@@ -203,6 +204,7 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
 
       Route::resource('akun', AkunController::class);
       Route::resource('perusahaan', PerusahaanController::class);
+      Route::resource('pelayanan', PelayananController::class);
       Route::get('perusahaan/batalkan-verifikasi/{id}', [PerusahaanController::class, 'batalkanVerifikasi'])->name('perusahaan.batalkan-verifikasi');
       Route::get('perusahaan/pdf/{id}', [PerusahaanController::class, 'pdf'])->name('perusahaan.pdf');
 
@@ -274,6 +276,7 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
 
       Route::resource('perusahaan', PerusahaanController::class);
+      Route::resource('pelayanan', PelayananController::class);
       Route::get('perusahaan/batalkan-verifikasi/{id}', [PerusahaanController::class, 'batalkanVerifikasi'])->name('perusahaan.batalkan-verifikasi');
       Route::get('perusahaan/pdf/{id}', [PerusahaanController::class, 'pdf'])->name('perusahaan.pdf');
       
