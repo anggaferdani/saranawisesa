@@ -85,14 +85,14 @@
     grid-area: info;
     background: #920000;
     color: white;
-    font-size: 40px;
-    font-weight: bold;
+    height: 90%;
   }
   
   .tag {
     border-bottom: 15px solid white;
     grid-area: tag;
     background: transparent;
+    height: 90%;
   }
   
   .comment {
