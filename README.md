@@ -1,3 +1,3 @@
-<p align="center"><a href="" target="_blank"><img src="https://github.com/anggaferdani/saranawisesa/blob/main/public/compro/img/logo.png" width="400" alt=""></a></p>
+<p align="center"><a href="" target="_blank"><img src="https://github.com/anggaferdani/saranawisesa/blob/main/public/compro/img/logo.png" width="200" alt=""></a></p>
 <h2>SARANAWISESA PROPERINDO</h2>
 <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus amet dolore ex saepe, incidunt accusamus distinctio voluptatum esse recusandae. Beatae dicta tempora culpa libero suscipit quam vero ad, corporis soluta. Natus amet dolore ex saepe, incidunt accusamus distinctio voluptatum esse recusandae. Beatae dicta tempora culpa libero suscipit quam vero ad, corporis soluta. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus amet dolore ex saepe, incidunt accusamus distinctio voluptatum esse recusandae. Beatae dicta tempora culpa libero suscipit quam vero ad, corporis soluta.</p>
