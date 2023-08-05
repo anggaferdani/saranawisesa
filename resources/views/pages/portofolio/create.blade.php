@@ -25,9 +25,7 @@
           </div>
           <div class="form-group">
             <label>Images</label>
-            <input type="file" class="form-control" name="images[]" onchange="file(event)" accept="image/*" multiple>
-            <div><img src="" class="image" width="200px" alt=""></div>
-            @error('images[]')<div class="text-danger">{{ $message }}</div>@enderror
+            <div class="input-images"></div>
           </div>
           <div class="form-group">
             <label>Alamat</label>

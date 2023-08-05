@@ -19,14 +19,12 @@
             @error('judul')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           <div class="form-group">
-            <label>Images</label>
-            <input disabled type="file" class="form-control" name="images[]" onchange="file(event)" accept="image/*" multiple>
-            <div>
-              @foreach ($portofolio->portofolio_images as $portofolio_image)
-              <div style="width: 200px; height: 150px; background: url({{ asset('compro/portofolio/image/'.$portofolio_image["image"]) }}); background-size: cover; background-repeat: no-repeat;"></div>
-              @endforeach
-            </div>
-            @error('images[]')<div class="text-danger">{{ $message }}</div>@enderror
+            <label for="">Images</label>
+            <input disabled type="file" class="form-control" id="image2" name="images[]" accept="image/*" multiple>
+            @foreach($portofolio->portofolio_images as $image)
+              <div class="image2"><img src="{{ asset('compro/portofolio/image/'.$image["image"]) }}" alt="" class="image3"></div>
+            @endforeach
+            @error('image[]')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           <div class="form-group">
             <label>Alamat</label>

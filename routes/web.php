@@ -98,6 +98,7 @@ Route::prefix('compro')->name('compro.')->group(function(){
       Route::get('profile-perusahaan/{id}/edit', [ProfilePerusahaanController::class, 'edit'])->name('profile-perusahaan.edit');
       Route::put('profile-perusahaan/{id}', [ProfilePerusahaanController::class, 'update'])->name('profile-perusahaan.update');
       Route::resource('portofolio', PortofolioController::class);
+      Route::get('portofolio/delete-image/{id}', [PortofolioController::class, 'deleteImage'])->name('portofolio.delete-image');
       Route::resource('artikel', ArtikelController::class);
       Route::get('export', [ArtikelController::class, 'export'])->name('export');
       Route::post('import', [ArtikelController::class, 'import'])->name('import');
@@ -127,6 +128,7 @@ Route::prefix('compro')->name('compro.')->group(function(){
       Route::get('profile-perusahaan/{id}/edit', [ProfilePerusahaanController::class, 'edit'])->name('profile-perusahaan.edit');
       Route::put('profile-perusahaan/{id}', [ProfilePerusahaanController::class, 'update'])->name('profile-perusahaan.update');
       Route::resource('portofolio', PortofolioController::class);
+      Route::get('portofolio/delete-image/{id}', [PortofolioController::class, 'deleteImage'])->name('portofolio.delete-image');
       Route::resource('artikel', ArtikelController::class);
       Route::get('export', [ArtikelController::class, 'export'])->name('export');
       Route::post('import', [ArtikelController::class, 'import'])->name('import');

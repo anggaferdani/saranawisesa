@@ -8,7 +8,10 @@
   <!-- General CSS Files -->
   <link rel="stylesheet" href="{{ asset('assets/modules/bootstrap/css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/modules/fontawesome/css/all.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('dist/image-uploader.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/modules/select2/dist/css/select2.min.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" integrity="sha512-wR4oNhLBHf7smjy0K4oqzdWumd+r5/+6QO/vDda76MW5iug4PT7v86FoEkySIJft3XA0Ae6axhIvHrqwm793Nw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css" integrity="sha512-6lLUdeQ5uheMFbWm3CP271l14RsX1xtx+J5x2yeIDkkiBpeVTNhTqijME7GgRKKi6hCqovwCoBTlRBEC20M8Mg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- CSS Libraries -->
 
@@ -27,6 +30,18 @@
 <!-- /END GA --></head>
 
 <style>
+  .preview-area{ 
+    display: flex;
+    flex-wrap: wrap;
+}
+.preview-area img{
+    width: 24%;
+    margin: 0 0 10px;
+    object-fit: contain;
+}
+.preview-area img:not(:nth-child(4n)){
+    margin-right: 1.333%;
+}
   body.sidebar-mini .main-sidebar .sidebar-menu > li.active > a{
     background-color: #920000;
     color: white !important;
@@ -40,6 +55,24 @@
     box-shadow: none;
     border: none;
   }
+  .image2{
+    display: block;
+    width: 250px;
+    height: 200px;
+    margin-bottom: 1%;
+  }
+  .card2 .slick-list{
+    margin: 0 -5px !important;
+  }
+  .card2 .slick-slide > div{
+    margin: 0 5px !important;
+  }
+  .image3{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      cursor: pointer;
+    }
   .btn.btn-primary:hover{
     background-color: #720000 !important;
     box-shadow: none;
@@ -115,6 +148,39 @@
   <script src="{{ asset('assets/modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
   <script src="{{ asset('assets/modules/moment.min.js') }}"></script>
   <script src="{{ asset('assets/js/stisla.js') }}"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js" integrity="sha512-WNZwVebQjhSxEzwbettGuQgWxbpYdoLf7mH+25A7sfQbbxKeS5SQ9QBf97zOY4nOlwtksgDA/czSTmfj4DUEiQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript" src="{{ asset('dist/image-uploader.min.js') }}"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('.input-images').imageUploader();
+    });
+  </script>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      if(window.File && window.FileList && window.FileReader){
+        $("#image2").on("change", function(e){
+          var files = e.target.files,
+          filesLength = files.length;
+          for(var i = 0; i < filesLength; i++){
+            var f = files[i]
+            var fileReader = new FileReader();
+            fileReader.onload = (function(e){
+              var file = e.target;
+              $("<span class=\"image2\">" + "<img class=\"image3\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" + "</span>").insertAfter("#image2");
+            });
+            fileReader.readAsDataURL(f);
+          }
+        });
+      }else{
+        alert("Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus amet dolore ex saepe, incidunt accusamus distinctio voluptatum esse recusandae. Beatae dicta tempora culpa libero suscipit quam vero ad, corporis soluta.");
+      }
+    });
+  </script>
   
   <!-- JS Libraies -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -213,6 +279,58 @@
   <script type="text/javascript">
     $(document).ready(function(){
       $('.select2').select2({});
+    });
+  </script>
+
+  <script type="text/javascript">
+    function preview(elem, output = '') {
+      Array.from(elem.files).map((file) => {
+          const blobUrl = window.URL.createObjectURL(file)
+          output+=`<img src=${blobUrl}>`
+      })   
+      elem.nextElementSibling.innerHTML = output
+    }
+  </script>
+
+  <script type="text/javascript">
+    $('.card2').slick({
+      arrows: false,
+      dots: true,
+      autoplay: true,
+      autoplaySpeed: 3000,
+      infinite: true,
+      speed: 300,
+      slidesToShow: 3,
+      slidesToScroll: 3,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            infinite: true,
+            arrows: false,
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            infinite: true,
+            arrows: false,
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            infinite: true,
+            arrows: false,
+          }
+        }
+      ]
     });
   </script>
 

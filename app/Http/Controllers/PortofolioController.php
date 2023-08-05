@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Portofolio;
 use Illuminate\Http\Request;
 use App\Models\PortofolioImages;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Crypt;
 
 class PortofolioController extends Controller
@@ -57,12 +59,12 @@ class PortofolioController extends Controller
     }
 
     public function edit($id){
-        $portofolio = Portofolio::find(Crypt::decrypt($id));
+        $portofolio = Portofolio::with('portofolio_images')->find(Crypt::decrypt($id));
         return view('pages.portofolio.edit', compact('portofolio'));
     }
 
     public function update(Request $request, $id){
-        $portofolio = Portofolio::find(Crypt::decrypt($id));
+        $portofolio = Portofolio::with('portofolio_images')->find(Crypt::decrypt($id));
 
         $request->validate([
             'judul' => 'required',
@@ -75,6 +77,17 @@ class PortofolioController extends Controller
             'alamat' => $request->alamat,
             'isi' => $request->isi,
         ]);
+
+        if($request->has('images')){
+            foreach($request->file('images') as $image){
+                $image0002 = date('YmdHis').rand(999999999, 9999999999).$image->getClientOriginalName();
+                $image->move(public_path('compro/portofolio/image/'), $image0002);
+                PortofolioImages::create([
+                    'portofolio_id' => $portofolio->id,
+                    'image' => $image0002,
+                ]);
+            }
+        }
         
         if(auth()->user()->level == 'superadmin'){
             return redirect()->route('compro.superadmin.portofolio.index')->with('success', 'Data has been updated at '.$portofolio->created_at);
@@ -95,5 +108,17 @@ class PortofolioController extends Controller
         }elseif(auth()->user()->level == 'admin'){
             return redirect()->route('compro.admin.portofolio.index')->with('success', 'Data has been deleted at '.$portofolio->created_at);
         }
+    }
+
+    public function deleteImage($id){
+        $image = PortofolioImages::find(Crypt::decrypt($id));
+        
+        if(file_exists(public_path("compro/portofolio/image/".$image->image))){
+            File::delete("compro/portofolio/image/".$image->image);
+        }
+
+        $image->delete();
+        
+        return back()->with('success', 'Data has been deleted at '.Carbon::now()->toDateTimeString());
     }
 }
