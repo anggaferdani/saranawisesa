@@ -35,7 +35,7 @@
                 @foreach($portofolio->portofolio_images as $image)
                   <div class="uploaded-image">
                     <img src="{{ asset('compro/portofolio/image/'.$image["image"]) }}" alt="">
-                    <div class="delete-image"><a href="{{ route('compro.superadmin.portofolio.delete-image', Crypt::encrypt($image->id)) }}"><div class="iui-close text-white"></div></a></div>
+                    <a href="{{ route('compro.superadmin.portofolio.delete-image', Crypt::encrypt($image->id)) }}" class="delete-image" style="text-decoration: none"><i class="iui-close text-white"></i></a>
                   </div>
                 @endforeach
               </div>

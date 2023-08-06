@@ -156,7 +156,9 @@
 
   <script type="text/javascript">
     $(document).ready(function(){
-      $('.input-images').imageUploader();
+      $('.input-images').imageUploader({
+        imagesInputName: 'images',
+      });
     });
   </script>
 
