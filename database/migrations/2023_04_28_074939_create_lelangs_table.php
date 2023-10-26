@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('jenis_kontrak');
             $table->string('lokasi_pekerjaan');
             $table->bigInteger('hps');
-            $table->string('syarat_kualifikasi');
+            $table->longText('syarat_kualifikasi');
             $table->enum('lampiran_pengadaan', ['penawaran', 'konsep', 'penawaran dan konsep']);
             $table->enum('status_pengadaan', ['lelang', 'penunjukan langsung']);
             $table->enum('status_pengadaan2', ['buka', 'tutup', 'selesai'])->default('buka');

@@ -19,7 +19,7 @@
        <div class="row text-white" id="header__content" style="background-color: #830000;">
            <div class="col-md-7">
                <h1>Lorem ipsum dolor sit amet consectetur.</h1>
-               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt at eum quas unde reprehenderit illum officia vitae saepe architecto nemo!</p>
+               <p>Dapatkan informasi terbaru mengenai proses pengadaan, lelang, dan penawaran yang sedang berlangsung. Temukan rincian tentang bagaimana pengadaan dilakukan dan siapa yang berpartisipasi.</p>
            </div>
            <div class="col-md-5">
                <img src="{{ asset('eproc/img/Subtract.png') }}" alt="">

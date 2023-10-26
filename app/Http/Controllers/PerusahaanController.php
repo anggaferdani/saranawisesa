@@ -34,8 +34,38 @@ class PerusahaanController extends Controller
         $user = User::find(Crypt::decrypt($id));
 
         $user->update([
+            'status_aktif' => 'tidak aktif',
+        ]);
+
+        if(auth()->user()->level == 'superadmin'){
+            return redirect()->route('eproc.superadmin.perusahaan.index')->with('success', 'Data has been deleted at '.$user->created_at);
+        }elseif(auth()->user()->level == 'admin'){
+            return redirect()->route('eproc.admin.perusahaan.index')->with('success', 'Data has been deleted at '.$user->created_at);
+        }
+    }
+
+    public function verifikasi($id){
+        $user = User::find(Crypt::decrypt($id));
+
+        $user->update([
             'status_verifikasi2' => 'terverifikasi',
         ]);
+
+        $message = 'Anda telah berhasil diverifikasi. Sekarang Anda dapat mengakses semua fitur dan layanan kami';
+
+        $mail_data = [
+            'recipient' => $user->email,
+            'from_email' => 'saranawisesa@gmail.com',
+            'from_nama' => 'SARANAWISESA PROPERINDO',
+            'subject' => 'Akun Anda telah berhasil diverifikasi.',
+            'body' => $message,
+        ];
+
+        Mail::send('eproc.email.verifikasi2', $mail_data, function($message) use ($mail_data){
+            $message->to($mail_data['recipient'])
+            ->from($mail_data['from_email'], $mail_data['from_nama'])
+            ->subject($mail_data['subject']);
+        });
 
         if(auth()->user()->level == 'superadmin'){
             return redirect()->route('eproc.superadmin.perusahaan.index')->with('success', 'Data has been verified at '.$user->created_at);
@@ -52,9 +82,9 @@ class PerusahaanController extends Controller
         ]);
 
         if(auth()->user()->level == 'superadmin'){
-            return redirect()->route('eproc.superadmin.perusahaan.index')->with('success', 'Data has been verified at '.$user->created_at);
+            return redirect()->route('eproc.superadmin.perusahaan.index')->with('success', 'Data has been unverified at '.$user->created_at);
         }elseif(auth()->user()->level == 'admin'){
-            return redirect()->route('eproc.admin.perusahaan.index')->with('success', 'Data has been verified at '.$user->created_at);
+            return redirect()->route('eproc.admin.perusahaan.index')->with('success', 'Data has been unverified at '.$user->created_at);
         }
     }
 

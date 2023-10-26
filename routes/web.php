@@ -186,7 +186,7 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
     Route::get('/logout', [EprocController::class, 'logout'])->name('logout');
     Route::get('/register', [EprocController::class, 'register'])->name('register');
     Route::post('/post-register', [EprocController::class, 'postRegister'])->name('post-register');
-    Route::get('/verifikasi', [EprocController::class, 'verifikasi'])->name('verifikasi');
+    Route::get('/verifikasi/{id}', [EprocController::class, 'verifikasi'])->name('verifikasi');
 
     Route::get('/index', [EprocController::class, 'index'])->name('index');
     Route::get('/pengadaan', [EprocController::class, 'pengadaan'])->name('pengadaan');
@@ -207,6 +207,7 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::resource('akun', AkunController::class);
       Route::resource('perusahaan', PerusahaanController::class);
       Route::resource('pelayanan', PelayananController::class);
+      Route::get('perusahaan/verifikasi/{id}', [PerusahaanController::class, 'verifikasi'])->name('perusahaan.verifikasi');
       Route::get('perusahaan/batalkan-verifikasi/{id}', [PerusahaanController::class, 'batalkanVerifikasi'])->name('perusahaan.batalkan-verifikasi');
       Route::get('perusahaan/pdf/{id}', [PerusahaanController::class, 'pdf'])->name('perusahaan.pdf');
 
@@ -279,6 +280,7 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
 
       Route::resource('perusahaan', PerusahaanController::class);
       Route::resource('pelayanan', PelayananController::class);
+      Route::get('perusahaan/verifikasi/{id}', [PerusahaanController::class, 'verifikasi'])->name('perusahaan.verifikasi');
       Route::get('perusahaan/batalkan-verifikasi/{id}', [PerusahaanController::class, 'batalkanVerifikasi'])->name('perusahaan.batalkan-verifikasi');
       Route::get('perusahaan/pdf/{id}', [PerusahaanController::class, 'pdf'])->name('perusahaan.pdf');
       

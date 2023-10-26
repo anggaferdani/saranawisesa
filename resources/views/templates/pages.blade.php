@@ -190,7 +190,7 @@
     $('.delete').click(function(){
       Swal.fire({
         title: "Are you sure?",
-        text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus amet dolore ex saepe, incidunt accusamus distinctio voluptatum esse recusandae. Beatae dicta tempora culpa libero suscipit quam vero ad, corporis soluta.",
+        text: "Are you sure you want to delete this item?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
@@ -236,7 +236,7 @@
     $('.batalkanVerifikasi').click(function(){
       Swal.fire({
         title: "Are you sure?",
-        text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus amet dolore ex saepe, incidunt accusamus distinctio voluptatum esse recusandae. Beatae dicta tempora culpa libero suscipit quam vero ad, corporis soluta.",
+        text: "Pembatalan verifikasi akun akan mengakibatkan fitur-fitur terbatas pada akun Anda. Apakah Anda yakin ingin membatalkan verifikasi akun?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
@@ -247,7 +247,7 @@
           $(this).closest("form").submit();
           Swal.fire(
             'Batal Terverifikasi',
-            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus amet dolore ex saepe, incidunt accusamus distinctio voluptatum esse recusandae. Beatae dicta tempora culpa libero suscipit quam vero ad, corporis soluta.',
+            'Berhasil membatalkan verifikasi akun. Akun Anda sekarang tidak lagi diverifikasi.',
             'success',
           );
         }

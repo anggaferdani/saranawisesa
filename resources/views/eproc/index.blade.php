@@ -5,8 +5,8 @@
   <div class="container h-100">
     <div class="row py-4 h-100 align-items-center justify-content-center">
       <div class="col-md-6 order-2 order-md-1">
-        <h2 class="fw-normal lh-sm"><span class="fw-bold">SARANAWISESA</span> adalah Tempat Pengadaan Barang dan Jasa <span class="fw-bold">No.1 di INDONESIA</span></h2>
-        <p class="lh-sm mt-2 fs-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius nostrum culpa nobis dicta perferendis porro cumque inventore</p>
+        <h2 class="fw-normal lh-sm">Sistem Pengadaan Berbasis Digital Milik <span class="fw-bold">Saranawisesa</span></h2>
+        <p class="lh-sm mt-2 fs-5">Mendekonstruksi Proses Pengadaan dengan Teknologi Terkini. Menghadirkan Efisiensi, Transparansi, dan Kepuasan  Pelayanan Berkualitas Tinggi</p>
         <div class="mt-4">
           <a href="{{ route('profile-perusahaan') }}" class="btn text-white" style="background-color: #830000;">Profile Perusahaan</a>
           @if(Session::has('eproc') && auth()->user()->level == 'perusahaan')
@@ -69,8 +69,8 @@
       <div class="col-md-6 pt-4">
         <p class="m-0 fs-5">Tentang</p>
         <h2 class="fw-light"><span class="fw-bold" style="color: #830000;">SARANAWISESA</span> PENGADAAN</h2>
-        <p class="fw-light p-0 lh-sm fs-5">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi aliquid architecto illum iure accusamus quam quae quas dolorum. Ipsam asperiores provident ratione, assumenda voluptate esse consectetur eos odit consequatur labore. Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio enim itaque architecto culpa voluptates optio, dolore nostrum, adipisci corporis ipsum sed doloribus nobis eaque, aut commodi delectus. Corrupti, cum similique.</p>
-        <a href="" class="text-decoration-none fs-5" style="color: #830000;">selengkapnya</a>
+        <p class="fw-light p-0 lh-sm fs-5">Sistem Pengadaan Berbasis Digital Saranawisesa adalah solusi inovatif untuk e-procurement. Memungkinkan organisasi mengotomatisasi, mengoptimalkan, dan menyederhanakan seluruh proses pengadaan barang dan jasa secara elektronik. Dengan antarmuka intuitif dan teknologi canggih, Saranawisesa membantu perusahaan dan instansi pemerintah mengelola tawaran, vendor, negosiasi, dan kontrak dengan efisiensi dan transparansi tinggi.</p>
+        <a href="{{ route('eproc.berita-tentang-pengadaan') }}" class="text-decoration-none fs-5" style="color: #830000;">selengkapnya</a>
       </div>
     </div>
   </div>
@@ -81,7 +81,7 @@
     <div class="row">
       <div class="col-12 col-md-8 m-auto">
         <h2 class="fw-light text-center">CARA UNTUK <span class="fw-bold" style="color: #830000;">PENGADAAN BARANG</span></h2>
-        <p class="text-center fs-5 lh-sm">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis inventore vel, animi sunt autem odit fugit beatae eius veritatis natus ex perferendis adipisci consequatur nostrum atque, cum laboriosam laborum quo.</p>
+        <p class="text-center fs-5 lh-sm">Pengadaan barang adalah proses yang penting dalam bisnis dan organisasi untuk memenuhi kebutuhan akan produk, peralatan, atau layanan yang diperlukan. Berikut adalah beberapa langkah umum dalam proses pengadaan :</p>
       </div>
     </div>
     <div class="row row-cols-1 row-cols-md-3 w-100 mt-4 px-0 px-md-5 g-3 mx-auto">

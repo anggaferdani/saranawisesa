@@ -13,9 +13,15 @@ use Illuminate\Support\Facades\Crypt;
 class Pengadaan0002Controller extends Controller
 {
     public function index(){
-        $user = User::find(Auth::id());
-        $lelangs = $user->lelangs()->paginate(10);
-        // dd($lelangs);
+        $authUserId = auth()->user()->id;
+
+        $lelangs = Lelang::with('users')
+        ->whereHas('users', function ($query) use ($authUserId) {
+            $query->where('users.id', $authUserId);
+        })
+        ->latest()
+        ->paginate(10);
+        
         return view('eproc.pengadaan0002.index', compact('lelangs'));
     }
 

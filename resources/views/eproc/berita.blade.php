@@ -8,8 +8,8 @@
     </div>
     <div class="row mx-0 mt-2 p-md-4 align-items-lg-center align-items-end" style="height: 50vh; background: #830000;">
       <div class="col-md-8 text-white">
-        <h1 class="fw-bold title m-0">Lorem ipsum dolor</h1>
-        <p class="fw-light lh-sm fs-5">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, dolores! Ad eum laborum unde harum vitae, ducimus labore exercitationem, aut dicta ab consequuntur eveniet eligendi dolorum odio dignissimos. Sapiente, accusamus!</p>
+        <h1 class="fw-bold title m-0">Berita terbaru</h1>
+        <p class="fw-light lh-sm fs-5">Dapatkan informasi terbaru mengenai proses pengadaan, lelang, dan penawaran yang sedang berlangsung. Temukan rincian tentang bagaimana pengadaan dilakukan dan siapa yang berpartisipasi.</p>
       </div>
     </div>
     <img src="{{ asset('eproc/img/ball.png') }}" class="position-absolute ball" alt="">

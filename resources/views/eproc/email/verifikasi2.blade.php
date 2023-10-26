@@ -16,6 +16,14 @@
        <td align="center" height="25" style="height:25px; font-size: 0;">&nbsp;</td>
       </tr>
       <tr>
+       <td align="center" valign="bottom" style="font-size: 11px; font-family: Helvetica, Arial, sans-serif; color: #2C3E50;">
+        SARANAWISESA PROPERINDO
+       </td>
+      </tr>
+      <tr>
+       <td align="center" height="25" style="height:25px; font-size: 0;">&nbsp;</td>
+      </tr>
+      <tr>
        <td align="center">
         <a href="http://www.htmlemailcheck.com" title="Replace with your logo" target="_blank">
          <img src="{{ asset('eproc/img/logo.png') }}" width="100" height="100" alt="Replace with your logo" style="display: block; border:0; width:66px; height:79px;" border="0">
@@ -41,8 +49,8 @@
              <td align="center" height="25" style="height:25px; font-size: 0;">&nbsp;</td>
             </tr>
             <tr>
-             <td align="center">
-              <h1 style="font-family: Helvetica, Arial, sans-serif; font-size: 28px; font-weight: bold; color: #2C3E50; margin:0; mso-line-height-rule:exactly;">{!! $subject !!}</h1>
+             <td align="left">
+              <h1 style="font-family: Helvetica, Arial, sans-serif; font-size: 28px; font-weight:normal; color: #2C3E50; margin:0; mso-line-height-rule:exactly;">{!! $subject !!}</h1>
              </td>
             </tr>
             <tr>
@@ -51,26 +59,6 @@
             <tr>
              <td align="left" style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; line-height: 25px; color: #2C3E50;">
               {!! $body !!}
-             </td>
-            </tr>
-           </table>
-          </td>
-         </tr>
-         <tr>
-          <td align="center" height="25" style="height:25px; font-size: 0;">&nbsp;</td>
-         </tr>
-         <tr>
-          <td align="center">
-           <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-             <td align="center">
-              <table role="presentation" border="0" cellspacing="0" cellpadding="0" class="mobile-btn-container">
-               <tr>
-                <td align="center" style="border-radius: 3px;" bgcolor="#000000">
-                 <a href="{{ $action_link }}" title="Read more" target="_blank" style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 3px; padding: 15px 25px; border: 1px solid #000000; display: inline-block;" class="mobile-btn">Verification</a>
-                </td>
-               </tr>
-              </table>
              </td>
             </tr>
            </table>

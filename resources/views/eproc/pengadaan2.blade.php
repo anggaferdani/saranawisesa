@@ -99,7 +99,7 @@
                   <button type="submit" class="btn btn-primary" style="background-color: #0458B8;">Submit</button>
                 </form>
               @else
-                <div class="alert alert-primary">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni quaerat vel beatae fugit quas molestiae eos! Est nemo quibusdam, alias placeat, eos aspernatur incidunt, aliquid eveniet illo. <a href="{{ route('eproc.perusahaan.dashboard') }}">DASHBOARD</a></div>
+                <div class="alert alert-primary">Pengajuan Anda telah berhasil dikirim. Anda dapat mengakses dan melacak status pengajuan Anda pada dashboard pribadi Anda. Dalam dashboard ini, Anda dapat dengan mudah melihat semua detail pengajuan Anda, termasuk tanggal pengiriman, status saat ini, dan catatan terkait. <a href="{{ route('eproc.perusahaan.pengadaan.show', Crypt::encrypt($lelang->id)) }}">CEK PENGADAAN</a></div>
               @endif
             @endif
           @endif

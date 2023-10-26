@@ -112,33 +112,33 @@ class EprocController extends Controller
             'email_badan_usaha' => $perusahaan->email,
         ]);
 
-        Administrasi::create([
-            'user_id' => $perusahaan->id,
-            'nama_badan_usaha' => $perusahaan->nama_panjang,
-        ]);
+        // Administrasi::create([
+        //     'user_id' => $perusahaan->id,
+        //     'nama_badan_usaha' => $perusahaan->nama_panjang,
+        // ]);
 
-        TandaDaftarUsaha::create([
-            'user_id' => $perusahaan->id,
-        ]);
+        // TandaDaftarUsaha::create([
+        //     'user_id' => $perusahaan->id,
+        // ]);
 
-        SisaKemampuanNyata::create([
-            'user_id' => $perusahaan->id,
-        ]);
+        // SisaKemampuanNyata::create([
+        //     'user_id' => $perusahaan->id,
+        // ]);
 
-        LampiranKualifikasi::create([
-            'user_id' => $perusahaan->id,
-        ]);
+        // LampiranKualifikasi::create([
+        //     'user_id' => $perusahaan->id,
+        // ]);
 
-        $verifiy_url = route('eproc.verifikasi', ['service' => 'email_verification', 'user_id' => $perusahaan->id]);
+        $verifiy_url = route('eproc.verifikasi', $perusahaan->id);
 
         $message = 'To '.$request->nama_panjang;
-        $message = 'Thank you for signing up. We only need you to verify your email address to finish setting up your account';
+        $message = 'Tolong verifikasi alamat email Anda untuk memastikan keamanan akun Anda. Kami perlu memastikan bahwa alamat email yang Anda gunakan adalah yang sah. Terima kasih atas kerja samanya.';
 
         $mail_data = [
             'recipient' => $request->email,
             'from_email' => 'saranawisesa@gmail.com',
             'from_nama' => 'SARANAWISESA PROPERINDO',
-            'subject' => 'Please confirm your email address',
+            'subject' => 'Mohon Verifikasi Alamat Email Anda',
             'body' => $message,
             'action_link' => $verifiy_url,
         ];
@@ -164,18 +164,17 @@ class EprocController extends Controller
         }
     }
 
-    public function verifikasi(Request $request){
-        $token = $request->token;
-        $user_id = $request->user_id;
-
-        $status_verifikasi = User::where('id', $user_id);
-
-        $status_verifikasi->update([
-            'status_verifikasi' => 'terverifikasi',
-        ]);
-
-        if($status_verifikasi){
-            return redirect()->route('eproc.perusahaan.dashboard');
+    public function verifikasi(Request $request, $id){
+        $statusVerifikasi = User::find($id);
+    
+        if($statusVerifikasi->status_verifikasi == 'belum terverifikasi'){
+            $statusVerifikasi->update([
+                'status_verifikasi' => 'terverifikasi',
+            ]);
+    
+            return redirect()->route('eproc.login')->with('success', 'Akun Anda telah berhasil diverifikasi. Silakan login untuk mengakses layanan kami.');
+        } else {
+            return redirect()->route('eproc.login')->with('success', 'Akun ini telah berhasil diverifikasi sebelumnya. Silakan login untuk mengakses layanan kami.');
         }
     }
 
@@ -210,8 +209,10 @@ class EprocController extends Controller
 
     public function pengadaan2($id){
         $lelang = Lelang::with('jadwal_lelangs')->find(Crypt::decrypt($id));
-        $ikuti_lelang = UserLelang::where('lelang_id', $lelang->id)->where('user_id', Auth::id())->first();
+        $ikuti_lelang = UserLelang::where('lelang_id', Crypt::decrypt($id))->where('user_id', Auth::id())->first();
         $lampiran = Lampiran::where('lelang_id', $lelang->id)->where('user_id', Auth::id())->first();
+        $profile_perusahaan = ProfilePerusahaan::first();
+        $setting = Setting::all();
 
         if($lelang->status_pengadaan == 'penunjukan langsung'){
             $user_lelang = UserLelang::where('lelang_id', $lelang->id)->first();
@@ -219,18 +220,20 @@ class EprocController extends Controller
             return view('eproc.pengadaan2', compact(
                 'lelang',
                 'user',
+                'lampiran',
+                'profile_perusahaan',
+                'setting',
+            ));
+        }else{
+            return view('eproc.pengadaan2', compact(
+                'lelang',
+                'ikuti_lelang',
+                'lampiran',
+                'profile_perusahaan',
+                'setting',
             ));
         }
 
-        $profile_perusahaan = ProfilePerusahaan::first();
-        $setting = Setting::all();
-        return view('eproc.pengadaan2', compact(
-            'lelang',
-            'ikuti_lelang',
-            'lampiran',
-            'profile_perusahaan',
-            'setting',
-        ));
 
     }
 
@@ -242,7 +245,7 @@ class EprocController extends Controller
 
         UserLelang::create($array2);
 
-        return redirect()->back()->with('success', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, omnis laborum in quidem consequuntur at nostrum saepe atque, deserunt non sequi sit totam iure dolores eos ipsam fugit aperiam odio.');
+        return redirect()->back()->with('success', 'Kami telah berhasil mengikuti proses pengadaan yang telah diselenggarakan.');
     }
 
     public function postLampiran(Request $request){
