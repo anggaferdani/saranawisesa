@@ -66,8 +66,8 @@
              <td align="center">
               <table role="presentation" border="0" cellspacing="0" cellpadding="0" class="mobile-btn-container">
                <tr>
-                <td align="center" style="border-radius: 3px;" bgcolor="#000000">
-                 <a href="{{ $action_link }}" title="Read more" target="_blank" style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 3px; padding: 15px 25px; border: 1px solid #000000; display: inline-block;" class="mobile-btn">Verification</a>
+                <td align="center" style="border-radius: 25px;" bgcolor="#000000">
+                 <a href="{{ $action_link }}" title="Read more" target="_blank" style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 3px; padding: 15px 25px; display: inline-block;" class="mobile-btn">Verification</a>
                 </td>
                </tr>
               </table>
