@@ -22,8 +22,8 @@ class AktaPendirianController extends Controller
             'akta' => 'required',
             'no_sk' => 'required',
             'tanggal_sk' => 'required',
-            'akta' => 'required',
-            'sk' => 'required',
+            'akta' => 'required|file|max:5120',
+            'sk' => 'required|file|max:5120',
         ]);
 
         $kode_dokumen = hash('crc32', $this->generateNumber());

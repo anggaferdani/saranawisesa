@@ -69,7 +69,7 @@
                       <a href="{{ route('eproc.superadmin.peserta.show', ['id' => Crypt::encrypt($user->id), 'lelang_id' => Crypt::encrypt($lelang->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
                     @endif
                     @if(auth()->user()->level == 'admin')
-                      <a href="{{ route('eproc.admin.peserta.show', ['id' => Crypt::encrypt($user->id), 'lelang_id' => $lelang->id]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                      <a href="{{ route('eproc.admin.peserta.show', ['id' => Crypt::encrypt($user->id), 'lelang_id' => Crypt::encrypt($lelang->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
                     @endif
                   </td>
                 </tr>

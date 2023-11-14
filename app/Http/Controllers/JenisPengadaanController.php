@@ -65,8 +65,12 @@ class JenisPengadaanController extends Controller
 
     public function destroy($id){
         $jenis_pengadaan = JenisPengadaan::find(Crypt::decrypt($id));
-        
+
         $jenis_pengadaan->update([
+            'status_aktif' => 'tidak_aktif',
+        ]);
+
+        $jenis_pengadaan->lelangs()->update([
             'status_aktif' => 'tidak aktif',
         ]);
 

@@ -19,6 +19,7 @@ class Pengadaan0002Controller extends Controller
         ->whereHas('users', function ($query) use ($authUserId) {
             $query->where('users.id', $authUserId);
         })
+        ->where('status_aktif', 'aktif')
         ->latest()
         ->paginate(10);
         
