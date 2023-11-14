@@ -328,41 +328,41 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method="POST" action="{{ route('eproc.perusahaan.post-akta-pendirian') }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
+      <form id="postAktaPendirian" method="POST" action="{{ route('eproc.perusahaan.post-akta-pendirian') }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
         @csrf
         <div class="modal-body">
           <div class="form-group">
             <label>No. Akta</label>
-            <input type="text" class="form-control" name="no_akta">
+            <input type="text" class="form-control" name="no_akta" required>
           </div>
           <div class="form-group">
             <label>Tanggal Akta</label>
-            <input type="date" class="form-control" name="tanggal_akta">
+            <input type="date" class="form-control" name="tanggal_akta" required>
           </div>
           <div class="form-group">
             <label>Nama Notaris</label>
-            <input type="text" class="form-control" name="nama_notaris">
+            <input type="text" class="form-control" name="nama_notaris" required>
           </div>
           <div class="form-group">
             <label>No. SK</label>
-            <input type="text" class="form-control" name="no_sk">
+            <input type="text" class="form-control" name="no_sk" required>
           </div>
           <div class="form-group">
             <label>Tanggal SK</label>
-            <input type="date" class="form-control" name="tanggal_sk">
+            <input type="date" class="form-control" name="tanggal_sk" required>
           </div>
           <div class="form-group">
             <label>Upload Akta</label>
-            <input type="file" class="form-control" name="akta">
+            <input type="file" class="form-control" name="akta" required>
           </div>
           <div class="form-group">
             <label>Upload SK</label>
-            <input type="file" class="form-control" name="sk">
+            <input type="file" class="form-control" name="sk" required>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-primary" onclick="submitPostAktaPendirian()">Submit</button>
         </div>
       </form>
     </div>
@@ -379,44 +379,46 @@
         </button>
       </div>
       @if(!empty($akta_pendirian))
-        <form method="POST" action="{{ route('eproc.perusahaan.put-akta-pendirian', ['user_id' => Crypt::encrypt($user->id), 'id' => Crypt::encrypt($akta_pendirian->id)]) }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
+        <form id="putAktaPendirian" method="POST" action="{{ route('eproc.perusahaan.put-akta-pendirian', ['user_id' => Crypt::encrypt($user->id), 'id' => Crypt::encrypt($akta_pendirian->id)]) }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
           @csrf
           @method('PUT')
           <div class="modal-body">
             <div class="form-group">
               <label>No. Akta</label>
-              <input type="text" class="form-control" name="no_akta" value="{{ $akta_pendirian->no_akta }}">
+              <input type="text" class="form-control" name="no_akta" value="{{ $akta_pendirian->no_akta }}" required>
             </div>
             <div class="form-group">
               <label>Tanggal Akta</label>
-              <input type="date" class="form-control" name="tanggal_akta" value="{{ $akta_pendirian->tanggal_akta }}">
+              <input type="date" class="form-control" name="tanggal_akta" value="{{ $akta_pendirian->tanggal_akta }}" required>
             </div>
             <div class="form-group">
               <label>Nama Notaris</label>
-              <input type="text" class="form-control" name="nama_notaris" value="{{ $akta_pendirian->nama_notaris }}">
+              <input type="text" class="form-control" name="nama_notaris" value="{{ $akta_pendirian->nama_notaris }}" required>
             </div>
             <div class="form-group">
               <label>No. SK</label>
-              <input type="text" class="form-control" name="no_sk" value="{{ $akta_pendirian->no_sk }}">
+              <input type="text" class="form-control" name="no_sk" value="{{ $akta_pendirian->no_sk }}" required>
             </div>
             <div class="form-group">
               <label>Tanggal SK</label>
-              <input type="date" class="form-control" name="tanggal_sk" value="{{ $akta_pendirian->tanggal_sk }}">
+              <input type="date" class="form-control" name="tanggal_sk" value="{{ $akta_pendirian->tanggal_sk }}" required>
             </div>
             <div class="form-group">
               <label>Upload Akta</label>
               <input type="file" class="form-control" name="akta" value="{{ $akta_pendirian->akta }}">
+              <input type="hidden" class="form-control" name="akta" value="{{ $akta_pendirian->akta }}" required>
               <div><a href="{{ asset('eproc/akta-pendirian/akta/'.$akta_pendirian["akta"]) }}" target="_blank">{{ $akta_pendirian->akta }}</a></div>
             </div>
             <div class="form-group">
               <label>Upload SK</label>
               <input type="file" class="form-control" name="sk" value="{{ $akta_pendirian->sk }}">
+              <input type="hidden" class="form-control" name="sk" value="{{ $akta_pendirian->sk }}" required>
               <div><a href="{{ asset('eproc/akta-pendirian/sk/'.$akta_pendirian["sk"]) }}" target="_blank">{{ $akta_pendirian->sk }}</a></div>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-primary" onclick="submitPutAktaPendirian()">Submit</button>
           </div>
         </form>
       @endif
@@ -486,29 +488,29 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method="POST" action="{{ route('eproc.perusahaan.post-surat-keterangan-domisili-perusahaan') }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
+      <form id="postSKDP" method="POST" action="{{ route('eproc.perusahaan.post-surat-keterangan-domisili-perusahaan') }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
         @csrf
         <div class="modal-body">
           <div class="form-group">
             <label>No. SKDP</label>
-            <input type="text" class="form-control" name="no_skdp" value="">
+            <input type="text" class="form-control" name="no_skdp" value="" required>
           </div>
           <div class="form-group">
             <label>Tanggal Terbit</label>
-            <input type="date" class="form-control" name="tanggal_terbit" value="">
+            <input type="date" class="form-control" name="tanggal_terbit" value="" required>
           </div>
           <div class="form-group">
             <label>Tanggal Jatuh Tempo</label>
-            <input type="date" class="form-control" name="tanggal_jatuh_tempo" value="">
+            <input type="date" class="form-control" name="tanggal_jatuh_tempo" value="" required>
           </div>
           <div class="form-group">
             <label>Upload SKDP</label>
-            <input type="file" class="form-control" name="skdp" value="">
+            <input type="file" class="form-control" name="skdp" value="" required>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-primary" onclick="submitPostSKDP()">Submit</button>
         </div>
       </form>
     </div>
@@ -525,31 +527,32 @@
         </button>
       </div>
       @if(!empty($surat_keterangan_domisili_perusahaan))
-        <form method="POST" action="{{ route('eproc.perusahaan.put-surat-keterangan-domisili-perusahaan', ['user_id' => Crypt::encrypt($user->id), 'id' => Crypt::encrypt($surat_keterangan_domisili_perusahaan->id)]) }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
+        <form id="putSKDP" method="POST" action="{{ route('eproc.perusahaan.put-surat-keterangan-domisili-perusahaan', ['user_id' => Crypt::encrypt($user->id), 'id' => Crypt::encrypt($surat_keterangan_domisili_perusahaan->id)]) }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
           @csrf
           @method('PUT')
           <div class="modal-body">
             <div class="form-group">
               <label>No. SKDP</label>
-              <input type="text" class="form-control" name="no_skdp" value="{{ $surat_keterangan_domisili_perusahaan->no_skdp }}">
+              <input type="text" class="form-control" name="no_skdp" value="{{ $surat_keterangan_domisili_perusahaan->no_skdp }}" required>
             </div>
             <div class="form-group">
               <label>Tanggal Terbit</label>
-              <input type="date" class="form-control" name="tanggal_terbit" value="{{ $surat_keterangan_domisili_perusahaan->tanggal_terbit }}">
+              <input type="date" class="form-control" name="tanggal_terbit" value="{{ $surat_keterangan_domisili_perusahaan->tanggal_terbit }}" required>
             </div>
             <div class="form-group">
               <label>Tanggal Jatuh Tempo</label>
-              <input type="date" class="form-control" name="tanggal_jatuh_tempo" value="{{ $surat_keterangan_domisili_perusahaan->tanggal_jatuh_tempo }}">
+              <input type="date" class="form-control" name="tanggal_jatuh_tempo" value="{{ $surat_keterangan_domisili_perusahaan->tanggal_jatuh_tempo }}" required>
             </div>
             <div class="form-group">
               <label>Upload SKDP</label>
               <input type="file" class="form-control" name="skdp" value="{{ $surat_keterangan_domisili_perusahaan->skdp }}">
+              <input type="hidden" class="form-control" name="skdp" value="{{ $surat_keterangan_domisili_perusahaan->skdp }}" required>
               <div><a href="{{ asset('eproc/surat-keterangan-domisili-perusahaan/'.$surat_keterangan_domisili_perusahaan["skdp"]) }}" target="_blank">{{ $surat_keterangan_domisili_perusahaan->skdp }}</a></div>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-primary" onclick="submitPutSKDP()">Submit</button>
           </div>
         </form>
       @endif
@@ -606,29 +609,29 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method="POST" action="{{ route('eproc.perusahaan.post-surat-izin-usaha-perdagangan') }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
+      <form id="postSIUP" method="POST" action="{{ route('eproc.perusahaan.post-surat-izin-usaha-perdagangan') }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
         @csrf
         <div class="modal-body">
           <div class="form-group">
             <label>No. SIUP</label>
-            <input type="text" class="form-control" name="no_siup" value="">
+            <input type="text" class="form-control" name="no_siup" value="" required>
           </div>
           <div class="form-group">
             <label>Tanggal Terbit</label>
-            <input type="date" class="form-control" name="tanggal_terbit" value="">
+            <input type="date" class="form-control" name="tanggal_terbit" value="" required>
           </div>
           <div class="form-group">
             <label>Tanggal Jatuh Tempo</label>
-            <input type="date" class="form-control" name="tanggal_jatuh_tempo" value="">
+            <input type="date" class="form-control" name="tanggal_jatuh_tempo" value="" required>
           </div>
           <div class="form-group">
             <label>Upload SIUP</label>
-            <input type="file" class="form-control" name="siup" value="">
+            <input type="file" class="form-control" name="siup" value="" required>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-primary" onclick="submitPostSIUP()">Submit</button>
         </div>
       </form>
     </div>
@@ -645,31 +648,32 @@
         </button>
       </div>
       @if(!empty($surat_izin_usaha_perdagangan))
-        <form method="POST" action="{{ route('eproc.perusahaan.put-surat-izin-usaha-perdagangan', ['user_id' => Crypt::encrypt($user->id), 'id' => Crypt::encrypt($surat_izin_usaha_perdagangan->id)]) }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
+        <form id="putSIUP" method="POST" action="{{ route('eproc.perusahaan.put-surat-izin-usaha-perdagangan', ['user_id' => Crypt::encrypt($user->id), 'id' => Crypt::encrypt($surat_izin_usaha_perdagangan->id)]) }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
           @csrf
           @method('PUT')
           <div class="modal-body">
             <div class="form-group">
               <label>No. SIUP</label>
-              <input type="text" class="form-control" name="no_siup" value="{{ $surat_izin_usaha_perdagangan->no_siup }}">
+              <input type="text" class="form-control" name="no_siup" value="{{ $surat_izin_usaha_perdagangan->no_siup }}" required>
             </div>
             <div class="form-group">
               <label>Tanggal Terbit</label>
-              <input type="date" class="form-control" name="tanggal_terbit" value="{{ $surat_izin_usaha_perdagangan->tanggal_terbit }}">
+              <input type="date" class="form-control" name="tanggal_terbit" value="{{ $surat_izin_usaha_perdagangan->tanggal_terbit }}" required>
             </div>
             <div class="form-group">
               <label>Tanggal Jatuh Tempo</label>
-              <input type="date" class="form-control" name="tanggal_jatuh_tempo" value="{{ $surat_izin_usaha_perdagangan->tanggal_jatuh_tempo }}">
+              <input type="date" class="form-control" name="tanggal_jatuh_tempo" value="{{ $surat_izin_usaha_perdagangan->tanggal_jatuh_tempo }}" required>
             </div>
             <div class="form-group">
               <label>Upload SIUP</label>
               <input type="file" class="form-control" name="siup" value="{{ $surat_izin_usaha_perdagangan->siup }}">
+              <input type="hidden" class="form-control" name="siup" value="{{ $surat_izin_usaha_perdagangan->siup }}" required>
               <div><a href="{{ asset('eproc/surat-izin-usaha-perdagangan/'.$surat_izin_usaha_perdagangan["siup"]) }}" target="_blank">{{ $surat_izin_usaha_perdagangan->siup }}</a></div>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-primary" onclick="submitPutSIUP()">Submit</button>
           </div>
         </form>
       @endif
@@ -726,21 +730,21 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method="POST" action="{{ route('eproc.perusahaan.post-nomor-induk-berusaha') }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
+      <form id="postNIB" method="POST" action="{{ route('eproc.perusahaan.post-nomor-induk-berusaha') }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
         @csrf
         <div class="modal-body">
           <div class="form-group">
             <label>Tanggal Terbit</label>
-            <input type="date" class="form-control" name="tanggal_terbit" value="">
+            <input type="date" class="form-control" name="tanggal_terbit" value="" required>
           </div>
           <div class="form-group">
             <label>Upload NIB</label>
-            <input type="file" class="form-control" name="nib" value="">
+            <input type="file" class="form-control" name="nib" value="" required>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-primary" onclick="submitPostNIB()">Submit</button>
         </div>
       </form>
     </div>
@@ -757,23 +761,24 @@
         </button>
       </div>
       @if(!empty($nomor_induk_berusaha))
-        <form method="POST" action="{{ route('eproc.perusahaan.put-nomor-induk-berusaha', ['user_id' => Crypt::encrypt($user->id), 'id' => Crypt::encrypt($nomor_induk_berusaha->id)]) }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
+        <form id="putNIB" method="POST" action="{{ route('eproc.perusahaan.put-nomor-induk-berusaha', ['user_id' => Crypt::encrypt($user->id), 'id' => Crypt::encrypt($nomor_induk_berusaha->id)]) }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
           @csrf
           @method('PUT')
           <div class="modal-body">
             <div class="form-group">
               <label>Tanggal Terbit</label>
-              <input type="date" class="form-control" name="tanggal_terbit" value="{{ $nomor_induk_berusaha->tanggal_terbit }}">
+              <input type="date" class="form-control" name="tanggal_terbit" value="{{ $nomor_induk_berusaha->tanggal_terbit }}" required>
             </div>
             <div class="form-group">
               <label>Upload NIB</label>
               <input type="file" class="form-control" name="nib" value="{{ $nomor_induk_berusaha->nib }}">
+              <input type="hidden" class="form-control" name="nib" value="{{ $nomor_induk_berusaha->nib }}" required>
               <div><a href="{{ asset('eproc/nomor-induk-berusaha/'.$nomor_induk_berusaha["nib"]) }}" target="_blank">{{ $nomor_induk_berusaha->nib }}</a></div>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-primary" onclick="submitPutNIB()">Submit</button>
           </div>
         </form>
       @endif
@@ -822,17 +827,17 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method="POST" action="{{ route('eproc.perusahaan.post-nomor-pokok-wajib-pajak') }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
+      <form id="postNPWP" method="POST" action="{{ route('eproc.perusahaan.post-nomor-pokok-wajib-pajak') }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
         @csrf
         <div class="modal-body">
           <div class="form-group">
             <label>Upload NPWP</label>
-            <input type="file" class="form-control" name="npwp" value="">
+            <input type="file" class="form-control" name="npwp" value="" required>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-primary" onclick="submitPostNPWP()">Submit</button>
         </div>
       </form>
     </div>
@@ -849,19 +854,20 @@
         </button>
       </div>
       @if(!empty($nomor_pokok_wajib_pajak))
-        <form method="POST" action="{{ route('eproc.perusahaan.put-nomor-pokok-wajib-pajak', ['user_id' => Crypt::encrypt($user->id), 'id' => Crypt::encrypt($nomor_pokok_wajib_pajak->id)]) }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
+        <form id="putNPWP" method="POST" action="{{ route('eproc.perusahaan.put-nomor-pokok-wajib-pajak', ['user_id' => Crypt::encrypt($user->id), 'id' => Crypt::encrypt($nomor_pokok_wajib_pajak->id)]) }}" class="needs-validation" enctype="multipart/form-data" novalidate="">
           @csrf
           @method('PUT')
           <div class="modal-body">
             <div class="form-group">
               <label>Upload NPWP</label>
               <input type="file" class="form-control" name="npwp" value="{{ $nomor_pokok_wajib_pajak->npwp }}">
+              <input type="hidden" class="form-control" name="npwp" value="{{ $nomor_pokok_wajib_pajak->npwp }}" required>
               <div><a href="{{ asset('eproc/nomor-pokok-wajib-pajak/'.$nomor_pokok_wajib_pajak["npwp"]) }}" target="_blank">{{ $nomor_pokok_wajib_pajak->npwp }}</a></div>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-primary" onclick="submitPutNPWP()">Submit</button>
           </div>
         </form>
       @endif
@@ -911,15 +917,15 @@
         <div class="modal-body">
           <div class="form-group">
             <label>No. SPPKP</label>
-            <input type="text" class="form-control" name="no_sppkp" value="">
+            <input type="text" class="form-control" name="no_sppkp" value="" required>
           </div>
           <div class="form-group">
             <label>Tanggal Terbit</label>
-            <input type="date" class="form-control" name="tanggal_terbit" value="">
+            <input type="date" class="form-control" name="tanggal_terbit" value="" required>
           </div>
           <div class="form-group">
             <label>Upload SPPKP</label>
-            <input type="file" class="form-control" name="sppkp" value="">
+            <input type="file" class="form-control" name="sppkp" value="" required>
           </div>
         </div>
         <div class="modal-footer">
@@ -1147,4 +1153,121 @@
     </div>
   </div>
 </div>
+
+<script>
+function submitPostAktaPendirian() {
+  var form = document.getElementById('postAktaPendirian');
+
+  if (form.checkValidity()) {
+    form.submit();
+    
+    $('#akta-pendirian').modal('hide');
+  } else {
+    form.reportValidity();
+  }
+}
+function submitPutAktaPendirian() {
+  var form = document.getElementById('putAktaPendirian');
+
+  if (form.checkValidity()) {
+    form.submit();
+    
+    $('#akta-pendirian2').modal('hide');
+  } else {
+    form.reportValidity();
+  }
+}
+
+function submitPostSKDP() {
+  var form = document.getElementById('postSKDP');
+
+  if (form.checkValidity()) {
+    form.submit();
+    
+    $('#surat-keterangan-domisili-perusahaan').modal('hide');
+  } else {
+    form.reportValidity();
+  }
+}
+function submitPutSKDP() {
+  var form = document.getElementById('putSKDP');
+
+  if (form.checkValidity()) {
+    form.submit();
+    
+    $('#surat-keterangan-domisili-perusahaan2').modal('hide');
+  } else {
+    form.reportValidity();
+  }
+}
+
+function submitPostSIUP() {
+  var form = document.getElementById('postSIUP');
+
+  if (form.checkValidity()) {
+    form.submit();
+    
+    $('#surat-izin-usaha-perdagangan').modal('hide');
+  } else {
+    form.reportValidity();
+  }
+}
+function submitPutSIUP() {
+  var form = document.getElementById('putSIUP');
+
+  if (form.checkValidity()) {
+    form.submit();
+    
+    $('#surat-izin-usaha-perdagangan2').modal('hide');
+  } else {
+    form.reportValidity();
+  }
+}
+
+function submitPostNIB() {
+  var form = document.getElementById('postNIB');
+
+  if (form.checkValidity()) {
+    form.submit();
+    
+    $('#nomor-induk-berusaha').modal('hide');
+  } else {
+    form.reportValidity();
+  }
+}
+function submitPutNIB() {
+  var form = document.getElementById('putNIB');
+
+  if (form.checkValidity()) {
+    form.submit();
+    
+    $('#nomor-induk-berusaha2').modal('hide');
+  } else {
+    form.reportValidity();
+  }
+}
+
+function submitPostNPWP() {
+  var form = document.getElementById('postNPWP');
+
+  if (form.checkValidity()) {
+    form.submit();
+    
+    $('#surat-pengukuhan-perusahaan-kena-pajak').modal('hide');
+  } else {
+    form.reportValidity();
+  }
+}
+function submitPutNPWP() {
+  var form = document.getElementById('putNPWP');
+
+  if (form.checkValidity()) {
+    form.submit();
+    
+    $('#surat-pengukuhan-perusahaan-kena-pajak2').modal('hide');
+  } else {
+    form.reportValidity();
+  }
+}
+</script>
 @endsection
