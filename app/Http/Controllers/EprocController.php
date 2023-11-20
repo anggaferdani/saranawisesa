@@ -245,7 +245,7 @@ class EprocController extends Controller
 
         UserLelang::create($array2);
 
-        return redirect()->back()->with('success', 'Kami telah berhasil mengikuti proses pengadaan yang telah diselenggarakan.');
+        return redirect()->back()->with('success', 'Kamu telah berhasil mengikuti proses pengadaan yang telah diselenggarakan.');
     }
 
     public function postLampiran(Request $request){
@@ -285,7 +285,7 @@ class EprocController extends Controller
 
         $lampiran = Lampiran::create($array);
 
-        return redirect()->back()->with('success', 'Data has been created at '.$lampiran->created_at.' Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, omnis laborum in quidem consequuntur at nostrum saepe atque, deserunt non sequi sit totam iure dolores eos ipsam fugit aperiam odio.');
+        return redirect()->back()->with('success', 'Data has been created at '.$lampiran->created_at.'  Berkas yang Anda lampirkan berhasil disimpan.');
     }
 
     public function berita_tentang_pengadaan(){

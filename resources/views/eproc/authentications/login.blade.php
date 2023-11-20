@@ -17,7 +17,7 @@
       </div>
     @endif
 
-    <form action="{{ route('eproc.post-login') }}" method="POST" class="needs-validation" novalidate="#">
+    <form method="POST" action="{{ route('eproc.post-login') }}" class="needs-validation" novalidate="#">
       @csrf
       <div class="form-group">
         <label for="email">Email</label>
@@ -29,12 +29,14 @@
         <label for="password" class="control-label">Password</label>
         <input id="password" type="password" class="form-control" name="password">
         @error('password')<div class="text-danger">{{ $message }}</div>@enderror
+        <div class="text-muted"><a href="{{ route('eproc.password.forgot') }}">Forgot Password?</a></div>
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-primary btn-lg btn-block">
           Login
         </button>
       </div>
+      <div class="text-center">Belum punya akun? <a href="{{ route('eproc.register') }}">Register</a></div>
     </form>
   </div>
 </div>

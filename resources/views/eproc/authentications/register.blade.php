@@ -39,6 +39,7 @@
           Register
         </button>
       </div>
+      <div class="text-center">Sudah punya akun? <a href="{{ route('eproc.login') }}">Login</a></div>
     </form>
   </div>
 </div>
