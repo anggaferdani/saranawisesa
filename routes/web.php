@@ -16,6 +16,7 @@ use App\Http\Controllers\DokumenController;
 use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\AkunBankController;
+use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\KomisarisController;
 use App\Http\Controllers\NewComproController;
 use App\Http\Controllers\PelayananController;
@@ -181,6 +182,10 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
     Route::middleware(['loggedIn'])->group(function(){
       Route::get('/login', [EprocController::class, 'login'])->name('login');
       Route::post('/post-login', [EprocController::class, 'postLogin'])->name('post-login');
+      Route::get('/password/forgot', [PasswordController::class, 'forgot'])->name('password.forgot');
+      Route::post('/post/password/forgot', [PasswordController::class, 'postForgot'])->name('post.password.forgot');
+      Route::get('/password/reset/{token}', [PasswordController::class, 'reset'])->name('password.reset');
+      Route::post('/post/password/reset', [PasswordController::class, 'postReset'])->name('post.password.reset');
     });
 
     Route::get('/logout', [EprocController::class, 'logout'])->name('logout');
