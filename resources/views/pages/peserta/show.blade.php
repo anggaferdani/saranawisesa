@@ -16,7 +16,7 @@
           @if(!$lelang->user_id)
           @else
             @if($lelang->user_id == $user->id)
-              <div class="alert alert-primary">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti cupiditate aspernatur repellendus eligendi labore molestias necessitatibus ipsum praesentium? Deleniti nulla delectus debitis cumque aliquid ad? Quibusdam distinctio animi alias consectetur.</div>
+              <div class="alert alert-primary">Dengan senang hati kami umumkan bahwa setelah proses penilaian yang cermat, peserta berikut telah berhasil ditunjuk sebagai pemenang dalam lelang kami</div>
             @endif
           @endif
           <div class="form-group">

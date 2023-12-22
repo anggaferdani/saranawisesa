@@ -150,7 +150,6 @@
   <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js" integrity="sha512-WNZwVebQjhSxEzwbettGuQgWxbpYdoLf7mH+25A7sfQbbxKeS5SQ9QBf97zOY4nOlwtksgDA/czSTmfj4DUEiQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script type="text/javascript" src="{{ asset('dist/image-uploader.min.js') }}"></script>
 
@@ -277,6 +276,36 @@
       });
     });
   </script>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#hapusPemenang').click(function (event) {
+      event.preventDefault();
+
+      var clickedLink = $(this);
+
+      Swal.fire({
+        title: "Are you sure?",
+        text: "Dengan berat hati, kami sampaikan bahwa keputusan telah diambil untuk membatalkan kemenangan. Keputusan ini diambil setelah melalui pertimbangan yang matang dan sesuai dengan ketentuan yang berlaku.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Yes",
+        closeOnConfirm: false
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = clickedLink.attr('href');
+
+          Swal.fire(
+            'Success',
+            'Perusahaan ini dinyatakan sebagai pemenang',
+            'success',
+          );
+        }
+      });
+    });
+  });
+</script>
 
   <script type="text/javascript">
     $(document).ready(function(){

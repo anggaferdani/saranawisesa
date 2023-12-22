@@ -100,7 +100,11 @@
                   <button type="submit" class="btn btn-primary" style="background-color: #0458B8;">Submit</button>
                 </form>
               @else
-                <div class="alert alert-primary">Pengajuan Anda telah berhasil dikirim. Anda dapat mengakses dan melacak status pengajuan Anda pada dashboard pribadi Anda. Dalam dashboard ini, Anda dapat dengan mudah melihat semua detail pengajuan Anda, termasuk tanggal pengiriman, status saat ini, dan catatan terkait. <a href="{{ route('eproc.perusahaan.pengadaan.show', Crypt::encrypt($lelang->id)) }}">CEK PENGADAAN</a></div>
+                @if($lelang->user_id == auth()->user()->id)
+                  <div class="alert alert-primary">Dengan senang hati kami umumkan bahwa setelah proses penilaian yang cermat, anda telah ditunjuk sebagai pemenang dalam lelang kami.</div>
+                @else
+                  <div class="alert alert-primary">Pengajuan Anda telah berhasil dikirim. Anda dapat mengakses dan melacak status pengajuan Anda pada dashboard pribadi Anda. Dalam dashboard ini, Anda dapat dengan mudah melihat semua detail pengajuan Anda, termasuk tanggal pengiriman, status saat ini, dan catatan terkait. <a href="{{ route('eproc.perusahaan.pengadaan.show', Crypt::encrypt($lelang->id)) }}">CEK PENGADAAN</a></div>
+                @endif
               @endif
             @endif
           @endif

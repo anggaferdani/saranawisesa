@@ -234,6 +234,7 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::get('{lelang_id}/peserta', [PesertaController::class, 'index'])->name('peserta.index');
       Route::get('{lelang_id}/peserta/{id}', [PesertaController::class, 'show'])->name('peserta.show');
       Route::put('{lelang_id}/peserta/{id}', [PesertaController::class, 'pemenang'])->name('peserta.pemenang');
+      Route::get('{lelang_id}/hapus-pemenang/{id}', [PesertaController::class, 'hapusPemenang'])->name('peserta.hapus-pemenang');
 
 
       Route::get('{user_id}/dokumen', [DokumenController::class, 'index'])->name('dokumen');
@@ -307,6 +308,7 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::get('{lelang_id}/peserta', [PesertaController::class, 'index'])->name('peserta.index');
       Route::get('{lelang_id}/peserta/{id}', [PesertaController::class, 'show'])->name('peserta.show');
       Route::put('{lelang_id}/peserta/{id}', [PesertaController::class, 'pemenang'])->name('peserta.pemenang');
+      Route::get('{lelang_id}/hapus-pemenang/{id}', [PesertaController::class, 'hapusPemenang'])->name('peserta.hapus-pemenang');
 
       Route::get('{user_id}/dokumen', [DokumenController::class, 'index'])->name('dokumen');
 

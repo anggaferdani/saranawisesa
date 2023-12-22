@@ -67,9 +67,15 @@
                   <td style="white-space: nowrap">
                     @if(auth()->user()->level == 'superadmin')
                       <a href="{{ route('eproc.superadmin.peserta.show', ['id' => Crypt::encrypt($user->id), 'lelang_id' => Crypt::encrypt($lelang->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                      @if($lelang->user_id == $user->id)
+                        <a href="{{ route('eproc.superadmin.peserta.hapus-pemenang', ['id' => Crypt::encrypt($user->id), 'lelang_id' => Crypt::encrypt($lelang->id)]) }}" class="btn btn-icon btn-primary" id="hapusPemenang"><i class="fas fa-times"></i></a>
+                      @endif
                     @endif
                     @if(auth()->user()->level == 'admin')
                       <a href="{{ route('eproc.admin.peserta.show', ['id' => Crypt::encrypt($user->id), 'lelang_id' => Crypt::encrypt($lelang->id)]) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
+                      @if($lelang->user_id == $user->id)
+                        <a href="{{ route('eproc.admin.peserta.hapus-pemenang', ['id' => Crypt::encrypt($user->id), 'lelang_id' => Crypt::encrypt($lelang->id)]) }}" class="btn btn-icon btn-primary" id="hapusPemenang"><i class="fas fa-times"></i></a>
+                      @endif
                     @endif
                   </td>
                 </tr>

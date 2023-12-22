@@ -41,6 +41,7 @@
                 <td>Kode Pengadaan</td>
                 <td>Nama Lelang</td>
                 <td>Status Pengadaan</td>
+                <td>Status</td>
                 <td>Action</td>
               </tr>
               <?php $id = 0; ?>
@@ -50,6 +51,13 @@
                 <td>{{ $id }}</td>
                 <td>{{ $lelang->kode_lelang }}</td>
                 <td>{{ $lelang->nama_lelang }}</td>
+                <td>
+                  @if($lelang->user_id == auth()->user()->id)
+                  <span class="badge badge-danger">Pemenang</span>
+                  @else
+                  <span class="badge badge-primary">Peserta</span>
+                  @endif
+                </td>
                 <td>
                   @if($lelang->status_pengadaan == 'lelang')
                     Lelang
