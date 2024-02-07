@@ -15,11 +15,11 @@ class BeritaImport implements ToModel
     public function model(array $row)
     {
         return new Berita([
-            'judul_berita' => $row[1],
+            'judul_berita' => $row[0],
             'thumbnail' => 'null',
             'tanggal_publikasi' => date('Y-m-d'),
-            'isi_berita' => $row[2],
-            'created_by' => $row[3],
+            'isi_berita' => $row[1],
+            'created_by' => $row[2] ?? 1,
         ]);
     }
 }

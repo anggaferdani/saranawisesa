@@ -188,8 +188,8 @@ class EprocController extends Controller
     }
 
     public function pengadaan(){
-        $jenis_pengadaans_group_by_lelang = JenisPengadaan::with(["lelangs" => function($query){ $query->where("status_pengadaan", "lelang"); }])->whereHas("lelangs", function($query){ $query->where("status_pengadaan", "lelang")->where('status_aktif', 'aktif'); })->where('status_aktif', 'aktif')->get();
-        $jenis_pengadaans_group_by_penunjukan_langsung = JenisPengadaan::with(["lelangs" => function($query){ $query->where("status_pengadaan", "penunjukan langsung"); }])->whereHas("lelangs", function($query){ $query->where("status_pengadaan", "penunjukan langsung")->where('status_aktif', 'aktif'); })->where('status_aktif', 'aktif')->get();
+        $jenis_pengadaans_group_by_lelang = JenisPengadaan::with(["lelangs" => function($query){ $query->where("status_pengadaan", "lelang")->where('status_aktif', 'aktif'); }])->whereHas("lelangs", function($query){ $query->where("status_pengadaan", "lelang")->where('status_aktif', 'aktif'); })->where('status_aktif', 'aktif')->get();
+        $jenis_pengadaans_group_by_penunjukan_langsung = JenisPengadaan::with(["lelangs" => function($query){ $query->where("status_pengadaan", "penunjukan langsung")->where('status_aktif', 'aktif'); }])->whereHas("lelangs", function($query){ $query->where("status_pengadaan", "penunjukan langsung")->where('status_aktif', 'aktif'); })->where('status_aktif', 'aktif')->get();
         $jenis_pengadaans = JenisPengadaan::with('lelangs')->whereHas("lelangs", function($query){ $query->where("id", "!=", null); })->get();
         $status_pengadaan = Lelang::select('status_pengadaan')->get();
         $lelangs = Str::contains($status_pengadaan, 'lelang');

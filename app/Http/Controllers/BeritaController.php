@@ -18,7 +18,7 @@ class BeritaController extends Controller
     public function import(Request $request){
         $file = $request->file('file');
         $nama_file = $file->getClientOriginalName();
-        $file->move('berita/import', $nama_file);
+        $file->move('eproc/berita/import/', $nama_file);
 
         Excel::import(new BeritaImport, public_path('eproc/berita/import/'.$nama_file));
         

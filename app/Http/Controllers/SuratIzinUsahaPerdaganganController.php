@@ -32,7 +32,7 @@ class SuratIzinUsahaPerdaganganController extends Controller
         );
 
         if($siup = $request->file('siup')){
-            $destination_path = 'eproc/surat-keterangan-domisili-perusahaan/';
+            $destination_path = 'eproc/surat-izin-usaha-perdagangan/';
             $siup2 = date('YmdHis').$siup->getClientOriginalName();
             $siup->move($destination_path, $siup2);
             $array['siup'] = $siup2;
@@ -53,7 +53,7 @@ class SuratIzinUsahaPerdaganganController extends Controller
         $surat_keterangan_domisili_perusahaan = SuratIzinUsahaPerdagangan::find(Crypt::decrypt($id));
 
         if($siup = $request->file('siup')){
-            $destination_path = 'eproc/surat-keterangan-domisili-perusahaan/';
+            $destination_path = 'eproc/surat-izin-usaha-perdagangan/';
             $siup2 = date('YmdHis').$siup->getClientOriginalName();
             $siup->move($destination_path, $siup2);
             $surat_keterangan_domisili_perusahaan['siup'] = $siup2;
